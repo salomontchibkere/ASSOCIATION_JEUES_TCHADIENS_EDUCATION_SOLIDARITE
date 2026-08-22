@@ -45,7 +45,80 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, navig
 
   return (
     <header className="navbar-header">
-      {/* Main Unified Navigation Bar */}
+      {/* Top Utility Bar (Subtle, Clean & Organized) */}
+      <div className="top-bar">
+        <div className="top-bar-container">
+          <div className="top-left-group">
+            <span className="slogan-badge">
+              AJTES TCHAD — Éducation & Solidarité
+            </span>
+          </div>
+
+          <div className="top-actions-group">
+            {/* WhatsApp Link */}
+            <a
+              href={WHATSAPP_GROUP_LINK}
+              target="_blank"
+              rel="noreferrer"
+              className="btn btn-whatsapp btn-sm"
+              title="Rejoindre le Groupe WhatsApp Officiel AJTES"
+            >
+              WhatsApp Officiel
+            </a>
+
+            {/* Language Selector Dropdown */}
+            <div className="lang-select-box">
+              <select
+                className="lang-select-dropdown"
+                value={language}
+                onChange={e => setLanguage(e.target.value as Language)}
+                aria-label="Sélectionner la langue"
+              >
+                <option value="fr">FR</option>
+                <option value="en">EN</option>
+                <option value="ar">AR</option>
+              </select>
+            </div>
+
+            {/* Auth Control Group */}
+            {isLoggedIn ? (
+              <div className="user-control-group">
+                <span className="user-name" title={currentUser?.name}>{currentUser?.name}</span>
+                {isAdmin && (
+                  <button
+                    className="btn btn-admin btn-sm"
+                    onClick={() => handleNavClick('admin')}
+                    title="Accéder au Tableau de Bord Administration"
+                  >
+                    Admin
+                  </button>
+                )}
+                <button
+                  className="btn btn-primary btn-sm"
+                  onClick={() => handleNavClick('member')}
+                  title="Mon Espace Membre"
+                >
+                  Espace Membre
+                </button>
+                <button className="btn btn-secondary btn-sm logout-btn" onClick={logout} title="Déconnexion">
+                  Déconnexion
+                </button>
+              </div>
+            ) : (
+              <div className="auth-buttons-minimal">
+                <button className="btn btn-secondary btn-sm" onClick={() => handleAuthClick('login')}>
+                  Se connecter
+                </button>
+                <button className="btn btn-primary btn-sm" onClick={() => handleAuthClick('register')}>
+                  S'inscrire
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* Main Navigation Bar */}
       <div className="main-nav">
         <div className="main-nav-container">
           {/* Logo */}
@@ -70,69 +143,8 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, navig
             ))}
           </nav>
 
-          {/* Integrated Actions Group (Same Line Level) */}
-          <div className="cta-actions">
-            {/* WhatsApp Group Link */}
-            <a
-              href={WHATSAPP_GROUP_LINK}
-              target="_blank"
-              rel="noreferrer"
-              className="btn btn-whatsapp"
-              title="Rejoindre le Groupe WhatsApp Officiel AJTES"
-            >
-              WhatsApp
-            </a>
-
-            {/* Language Selector Dropdown */}
-            <div className="lang-select-box">
-              <select
-                className="lang-select-dropdown"
-                value={language}
-                onChange={e => setLanguage(e.target.value as Language)}
-                aria-label="Sélectionner la langue"
-              >
-                <option value="fr">FR</option>
-                <option value="en">EN</option>
-                <option value="ar">AR</option>
-              </select>
-            </div>
-
-            {/* Auth Buttons */}
-            {isLoggedIn ? (
-              <div className="user-control-group">
-                <span className="user-name" title={currentUser?.name}>{currentUser?.name}</span>
-                {isAdmin && (
-                  <button
-                    className="btn btn-admin btn-sm"
-                    onClick={() => handleNavClick('admin')}
-                    title="Accéder au Tableau de Bord Administration"
-                  >
-                    Admin
-                  </button>
-                )}
-                <button
-                  className="btn btn-primary btn-sm"
-                  onClick={() => handleNavClick('member')}
-                  title="Mon Espace Membre"
-                >
-                  Mon Espace
-                </button>
-                <button className="btn btn-secondary btn-sm logout-btn" onClick={logout} title="Déconnexion">
-                  Déconnexion
-                </button>
-              </div>
-            ) : (
-              <div className="auth-buttons-minimal">
-                <button className="btn btn-secondary btn-sm" onClick={() => handleAuthClick('login')}>
-                  Se connecter
-                </button>
-                <button className="btn btn-primary btn-sm" onClick={() => handleAuthClick('register')}>
-                  S'inscrire
-                </button>
-              </div>
-            )}
-
-            {/* Donate Button */}
+          {/* Primary CTA */}
+          <div className="main-cta-group">
             <button className="btn btn-gold btn-sm" onClick={() => handleNavClick('donate')}>
               Faire un Don
             </button>
@@ -219,18 +231,119 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, navig
           border-bottom: 1px solid var(--neutral-border);
         }
 
-        .main-nav {
-          padding: 0.65rem 1.25rem;
-          background: #FFFFFF;
+        .top-bar {
+          background-color: #F8FAFC;
+          color: var(--neutral-heading);
+          font-size: 0.82rem;
+          padding: 0.35rem 1.5rem;
+          border-bottom: 1px solid var(--neutral-border);
         }
 
-        .main-nav-container {
-          max-width: 1440px;
+        .top-bar-container {
+          max-width: 1280px;
           margin: 0 auto;
           display: flex;
           align-items: center;
           justify-content: space-between;
-          gap: 0.75rem;
+          flex-wrap: wrap;
+          gap: 0.5rem;
+        }
+
+        .top-left-group {
+          display: flex;
+          align-items: center;
+        }
+
+        .slogan-badge {
+          background: var(--primary-emerald-light);
+          color: var(--primary-emerald-text);
+          font-weight: 700;
+          font-size: 0.78rem;
+          padding: 0.2rem 0.65rem;
+          border-radius: var(--radius-pill);
+          border: 1px solid rgba(0, 122, 61, 0.15);
+        }
+
+        .top-actions-group {
+          display: flex;
+          align-items: center;
+          gap: 0.6rem;
+        }
+
+        .btn-whatsapp {
+          background-color: #25D366;
+          color: #FFFFFF;
+          font-weight: 700;
+          border-radius: var(--radius-pill);
+          font-size: 0.78rem;
+          padding: 0.25rem 0.65rem;
+          text-decoration: none;
+          display: inline-flex;
+          align-items: center;
+          gap: 0.3rem;
+          transition: opacity 0.2s;
+        }
+
+        .btn-whatsapp:hover {
+          opacity: 0.9;
+          color: #FFFFFF;
+        }
+
+        .lang-select-box {
+          display: flex;
+          align-items: center;
+          background: #FFFFFF;
+          border: 1px solid var(--neutral-border);
+          padding: 0.15rem 0.4rem;
+          border-radius: var(--radius-pill);
+          box-shadow: var(--shadow-sm);
+        }
+
+        .lang-select-dropdown {
+          background: transparent;
+          border: none;
+          color: var(--neutral-heading);
+          font-size: 0.78rem;
+          font-weight: 700;
+          font-family: var(--font-main);
+          cursor: pointer;
+          outline: none;
+        }
+
+        .user-control-group {
+          display: flex;
+          align-items: center;
+          gap: 0.35rem;
+        }
+
+        .user-name {
+          font-weight: 700;
+          font-size: 0.8rem;
+          color: var(--neutral-heading);
+          max-width: 100px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+
+        .auth-buttons-minimal {
+          display: flex;
+          align-items: center;
+          gap: 0.35rem;
+        }
+
+        .main-nav {
+          padding: 0.6rem 1.5rem;
+          background: #FFFFFF;
+        }
+
+        .main-nav-container {
+          max-width: 1280px;
+          margin: 0 auto;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 1rem;
         }
 
         .logo-brand {
@@ -268,7 +381,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, navig
         .desktop-links {
           display: flex;
           align-items: center;
-          gap: 0.25rem;
+          gap: 0.2rem;
           flex-wrap: nowrap;
         }
 
@@ -276,7 +389,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, navig
           background: none;
           border: none;
           padding: 0.45rem 0.65rem;
-          font-size: 0.85rem;
+          font-size: 0.86rem;
           font-weight: 700;
           color: var(--neutral-heading);
           cursor: pointer;
@@ -290,78 +403,10 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, navig
           background-color: var(--primary-emerald-light);
         }
 
-        .cta-actions {
+        .main-cta-group {
           display: flex;
           align-items: center;
-          gap: 0.45rem;
           flex-shrink: 0;
-        }
-
-        .btn-whatsapp {
-          background-color: #25D366;
-          color: #FFFFFF;
-          font-weight: 700;
-          border-radius: var(--radius-pill);
-          font-size: 0.78rem;
-          padding: 0.35rem 0.7rem;
-          text-decoration: none;
-          display: inline-flex;
-          align-items: center;
-          gap: 0.3rem;
-          transition: opacity 0.2s;
-        }
-
-        .btn-whatsapp:hover {
-          opacity: 0.9;
-          color: #FFFFFF;
-        }
-
-        .lang-select-box {
-          display: flex;
-          align-items: center;
-          background: #FFFFFF;
-          border: 1px solid var(--neutral-border);
-          padding: 0.2rem 0.4rem;
-          border-radius: var(--radius-pill);
-          box-shadow: var(--shadow-sm);
-        }
-
-        .lang-select-dropdown {
-          background: transparent;
-          border: none;
-          color: var(--neutral-heading);
-          font-size: 0.78rem;
-          font-weight: 700;
-          font-family: var(--font-main);
-          cursor: pointer;
-          outline: none;
-        }
-
-        .auth-control-pill {
-          display: flex;
-          align-items: center;
-        }
-
-        .user-control-group {
-          display: flex;
-          align-items: center;
-          gap: 0.35rem;
-        }
-
-        .user-name {
-          font-weight: 700;
-          font-size: 0.8rem;
-          color: var(--neutral-heading);
-          max-width: 100px;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          white-space: nowrap;
-        }
-
-        .auth-buttons-minimal {
-          display: flex;
-          align-items: center;
-          gap: 0.35rem;
         }
 
         .mobile-hamburger {
@@ -411,13 +456,15 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, navig
 
         .margin-top-sm { margin-top: 0.5rem; }
 
-        @media (max-width: 1240px) {
+        @media (max-width: 1120px) {
+          .top-bar { display: none; }
           .desktop-links { display: none; }
-          .cta-actions { display: none; }
+          .main-cta-group { display: none; }
           .mobile-hamburger { display: block; }
         }
       `}</style>
     </header>
+
 
   );
 };
