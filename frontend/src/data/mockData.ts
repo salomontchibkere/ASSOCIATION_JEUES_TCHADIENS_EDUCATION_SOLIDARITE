@@ -26,7 +26,7 @@ export const initialProjects: Project[] = [
     raisedBudget: 6500000,
     beneficiariesCount: 450,
     status: 'realise',
-    imageUrl: '/images/IMG-20260813-WA0106.jpg',
+    imageUrl: './images/IMG-20260813-WA0106.jpg',
     results: {
       fr: "Bâtiment livré et inauguré avec succès. Deux bureaux équipés pour l'administration du collège.",
       en: "Building successfully delivered and inaugurated. Two fully equipped offices for school administration.",
@@ -60,7 +60,7 @@ export const initialProjects: Project[] = [
     raisedBudget: 2500000,
     beneficiariesCount: 320,
     status: 'realise',
-    imageUrl: '/images/IMG-20260813-WA0142.jpg',
+    imageUrl: './images/IMG-20260813-WA0142.jpg',
     results: {
       fr: "320 élèves équipés en kits scolaires pour toute l'année académique 2023-2024.",
       en: "320 students equipped with school supplies for the full academic year 2023-2024.",
@@ -94,7 +94,7 @@ export const initialProjects: Project[] = [
     raisedBudget: 2800000,
     beneficiariesCount: 1500,
     status: 'en_cours',
-    imageUrl: '/images/IMG-20260813-WA0113.jpg',
+    imageUrl: './images/IMG-20260813-WA0113.jpg',
     featured: true,
     year: 2026
   },
@@ -123,7 +123,7 @@ export const initialProjects: Project[] = [
     raisedBudget: 1200000,
     beneficiariesCount: 800,
     status: 'en_projet',
-    imageUrl: '/images/IMG-20260813-WA0129.jpg',
+    imageUrl: './images/IMG-20260813-WA0129.jpg',
     featured: false,
     year: 2026
   }
@@ -150,7 +150,7 @@ export const initialNews: NewsArticle[] = [
     category: 'education',
     author: 'Bureau de Communication AJTES',
     publishDate: '2026-08-01',
-    imageUrl: '/images/IMG-20260813-WA0083.jpg',
+    imageUrl: './images/IMG-20260813-WA0083.jpg',
     featured: true
   },
   {
@@ -173,7 +173,7 @@ export const initialNews: NewsArticle[] = [
     category: 'communique',
     author: 'Salomon - Resp. Technique',
     publishDate: '2026-07-20',
-    imageUrl: '/images/IMG-20260813-WA0123.jpg',
+    imageUrl: './images/IMG-20260813-WA0123.jpg',
     featured: true
   }
 ];
@@ -195,7 +195,7 @@ export const initialEvents: Event[] = [
     time: '09:00 - 16:30',
     location: 'Palais des Arts et de la Culture, N\'Djamena',
     organizer: 'Bureau National AJTES',
-    imageUrl: '/images/IMG-20260813-WA0130.jpg',
+    imageUrl: './images/IMG-20260813-WA0130.jpg',
     maxAttendees: 200,
     registeredCount: 84
   },
@@ -215,7 +215,7 @@ export const initialEvents: Event[] = [
     time: '07:30 - 12:00',
     location: 'Quartier Nangassou & CEG, Tchad',
     organizer: 'Commission Environnement AJTES',
-    imageUrl: '/images/IMG-20260813-WA0132.jpg',
+    imageUrl: './images/IMG-20260813-WA0132.jpg',
     maxAttendees: 100,
     registeredCount: 62
   }
@@ -235,7 +235,7 @@ export const initialOfficialDocuments: OfficialDocument[] = [
       en: "Official founding document establishing the creation in 2022, objectives, governance structure, and operating rules of AJTES.",
       ar: "الوثيقة التأسيسية الرسمية التي تحدد التأسيس في 2022 والأهداف والأجهزة الإدارية وقواعد عمل الجمعية."
     },
-    downloadUrl: '/documents/statuts_AJTES.pdf',
+    downloadUrl: './documents/statuts_AJTES.pdf',
     lastUpdated: '2022-04-12',
     contentMarkdown: {
       fr: `### STATUTS DE L'ASSOCIATION DES JEUNES TCHADIENS POUR L’ÉDUCATION ET LA SOLIDARITÉ (AJTES)
@@ -278,7 +278,7 @@ export const initialOfficialDocuments: OfficialDocument[] = [
       en: "Detailed rules for internal operation, member rights and duties, voting procedures, and financial management.",
       ar: "القواعد التفصيلية للعمل الداخلي وحقوق وواجبات الأعضاء والإجراءات المالية والإنضباطية."
     },
-    downloadUrl: '/documents/reglement_interieur_AJTES.pdf',
+    downloadUrl: './documents/reglement_interieur_AJTES.pdf',
     lastUpdated: '2022-05-01',
     contentMarkdown: {
       fr: `### RÈGLEMENT INTÉRIEUR DE L'AJTES
@@ -317,8 +317,8 @@ export const initialMedia: MediaItem[] = [
       ar: "الشرح الرسمي للموقع واستخدامه (تقديم سالومون - المسؤول التقني)"
     },
     type: 'video',
-    url: '/images/tutoriel_demo_salomon_ajtes.gif',
-    thumbnailUrl: '/images/IMG_20250119_163228_691.jpg',
+    url: './images/tutoriel_demo_salomon_ajtes.gif',
+    thumbnailUrl: './images/IMG_20250119_163228_691.jpg',
     year: 2026,
     category: 'Tutoriels & Démonstrations',
     location: "N'Djamena"
@@ -331,7 +331,7 @@ export const initialMedia: MediaItem[] = [
       ar: "Cérémonie officielle d'inauguration du bureau administratif"
     },
     type: 'photo',
-    url: '/images/IMG-20260813-WA0083.jpg',
+    url: './images/IMG-20260813-WA0083.jpg',
     year: 2026,
     category: 'Photos Officielles',
     location: "Nangassou"
@@ -344,7 +344,7 @@ export const initialMedia: MediaItem[] = [
       ar: "Vue du chantier et maçonnerie du bureau du CEG"
     },
     type: 'photo',
-    url: '/images/IMG-20260813-WA0085.jpg',
+    url: './images/IMG-20260813-WA0085.jpg',
     year: 2026,
     category: 'Photos Officielles',
     location: "Nangassou"
@@ -357,7 +357,7 @@ export const initialMedia: MediaItem[] = [
       ar: "Remise d'équipements et mobilier de bureau aux responsables scolaires"
     },
     type: 'photo',
-    url: '/images/IMG-20260813-WA0086.jpg',
+    url: './images/IMG-20260813-WA0086.jpg',
     year: 2026,
     category: 'Photos Officielles',
     location: "Nangassou"
@@ -370,7 +370,7 @@ export const initialMedia: MediaItem[] = [
       ar: "Contrôle technique et suivi de chantier par l'équipe AJTES"
     },
     type: 'photo',
-    url: '/images/IMG-20260813-WA0088.jpg',
+    url: './images/IMG-20260813-WA0088.jpg',
     year: 2026,
     category: 'Photos Officielles',
     location: "Nangassou"
@@ -383,7 +383,7 @@ export const initialMedia: MediaItem[] = [
       ar: "Inspection des finitions des deux bureaux du CEG"
     },
     type: 'photo',
-    url: '/images/IMG-20260813-WA0092.jpg',
+    url: './images/IMG-20260813-WA0092.jpg',
     year: 2026,
     category: 'Photos Officielles',
     location: "Nangassou"
@@ -396,7 +396,7 @@ export const initialMedia: MediaItem[] = [
       ar: "Remise symbolique des clés du bâtiment au proviseur du CEG"
     },
     type: 'photo',
-    url: '/images/IMG-20260813-WA0093.jpg',
+    url: './images/IMG-20260813-WA0093.jpg',
     year: 2026,
     category: 'Photos Officielles',
     location: "Nangassou"
@@ -409,7 +409,7 @@ export const initialMedia: MediaItem[] = [
       ar: "Bâtiment administratif achevé du CEG de Nangassou (Projet phare 2026)"
     },
     type: 'photo',
-    url: '/images/IMG-20260813-WA0106.jpg',
+    url: './images/IMG-20260813-WA0106.jpg',
     year: 2026,
     category: 'Photos Officielles',
     location: "Nangassou"
@@ -422,7 +422,7 @@ export const initialMedia: MediaItem[] = [
       ar: "Campagne d'éco-citoyenneté et reboisement de la cour du collège"
     },
     type: 'photo',
-    url: '/images/IMG-20260813-WA0113.jpg',
+    url: './images/IMG-20260813-WA0113.jpg',
     year: 2026,
     category: 'Photos Officielles',
     location: "Nangassou"
@@ -435,7 +435,7 @@ export const initialMedia: MediaItem[] = [
       ar: "Photo officielle des membres du Bureau National de l'AJTES"
     },
     type: 'photo',
-    url: '/images/IMG-20260813-WA0123.jpg',
+    url: './images/IMG-20260813-WA0123.jpg',
     year: 2026,
     category: 'Photos Officielles',
     location: "N'Djamena"
@@ -448,7 +448,7 @@ export const initialMedia: MediaItem[] = [
       ar: "Mobilisation des jeunes volontaires et bénévoles AJTES"
     },
     type: 'photo',
-    url: '/images/IMG-20260813-WA0125.jpg',
+    url: './images/IMG-20260813-WA0125.jpg',
     year: 2026,
     category: 'Photos Officielles',
     location: "N'Djamena"
@@ -461,7 +461,7 @@ export const initialMedia: MediaItem[] = [
       ar: "Atelier d'orientation académique et soutien aux élèves"
     },
     type: 'photo',
-    url: '/images/IMG-20260813-WA0129.jpg',
+    url: './images/IMG-20260813-WA0129.jpg',
     year: 2026,
     category: 'Photos Officielles',
     location: "N'Djamena"
@@ -474,7 +474,7 @@ export const initialMedia: MediaItem[] = [
       ar: "Assemblée Générale annuelle des adhérents et sympathisants"
     },
     type: 'photo',
-    url: '/images/IMG-20260813-WA0130.jpg',
+    url: './images/IMG-20260813-WA0130.jpg',
     year: 2026,
     category: 'Photos Officielles',
     location: "N'Djamena"
@@ -487,7 +487,7 @@ export const initialMedia: MediaItem[] = [
       ar: "Journée citoyenne de salubrité et assainissement public"
     },
     type: 'photo',
-    url: '/images/IMG-20260813-WA0132.jpg',
+    url: './images/IMG-20260813-WA0132.jpg',
     year: 2026,
     category: 'Photos Officielles',
     location: "Nangassou"
@@ -500,7 +500,7 @@ export const initialMedia: MediaItem[] = [
       ar: "Cérémonie de remise de fournitures et récompenses aux élèves (2023)"
     },
     type: 'photo',
-    url: '/images/IMG-20260813-WA0140.jpg',
+    url: './images/IMG-20260813-WA0140.jpg',
     year: 2023,
     category: 'Photos Officielles',
     location: "Nangassou"
@@ -513,7 +513,7 @@ export const initialMedia: MediaItem[] = [
       ar: "Distribution de kits scolaires complets aux élèves vulnérables"
     },
     type: 'photo',
-    url: '/images/IMG-20260813-WA0142.jpg',
+    url: './images/IMG-20260813-WA0142.jpg',
     year: 2023,
     category: 'Photos Officielles',
     location: "Nangassou"
@@ -526,7 +526,7 @@ export const initialMedia: MediaItem[] = [
       ar: "Concertation avec le corps enseignant du CEG de Nangassou"
     },
     type: 'photo',
-    url: '/images/IMG-20260813-WA0143.jpg',
+    url: './images/IMG-20260813-WA0143.jpg',
     year: 2023,
     category: 'Photos Officielles',
     location: "Nangassou"
@@ -539,7 +539,7 @@ export const initialMedia: MediaItem[] = [
       ar: "Séance de sensibilisation des familles sur l'importance de l'éducation"
     },
     type: 'photo',
-    url: '/images/IMG-20260813-WA0146.jpg',
+    url: './images/IMG-20260813-WA0146.jpg',
     year: 2023,
     category: 'Photos Officielles',
     location: "Nangassou"
@@ -552,7 +552,7 @@ export const initialMedia: MediaItem[] = [
       ar: "Photo de clôture d'action de terrain des bénévoles locaux"
     },
     type: 'photo',
-    url: '/images/IMG-20260813-WA0151.jpg',
+    url: './images/IMG-20260813-WA0151.jpg',
     year: 2023,
     category: 'Photos Officielles',
     location: "Nangassou"
@@ -565,7 +565,7 @@ export const initialMedia: MediaItem[] = [
       ar: "Séance d'entraide et soutien éducatif aux élèves de Nangassou"
     },
     type: 'photo',
-    url: '/images/IMG-20260816-WA0051.jpg',
+    url: './images/IMG-20260816-WA0051.jpg',
     year: 2026,
     category: 'Photos Officielles',
     location: "Nangassou"
@@ -578,7 +578,7 @@ export const initialMedia: MediaItem[] = [
       ar: "Rencontre et échanges avec les comités régionaux AJTES"
     },
     type: 'photo',
-    url: '/images/IMG-20260816-WA0058.jpg',
+    url: './images/IMG-20260816-WA0058.jpg',
     year: 2026,
     category: 'Photos Officielles',
     location: "N'Djamena"
@@ -591,7 +591,7 @@ export const initialMedia: MediaItem[] = [
       ar: "Atelier de sensibilisation environnementale en milieu scolaire"
     },
     type: 'photo',
-    url: '/images/IMG-20260816-WA0068.jpg',
+    url: './images/IMG-20260816-WA0068.jpg',
     year: 2026,
     category: 'Photos Officielles',
     location: "Nangassou"
@@ -604,7 +604,7 @@ export const initialMedia: MediaItem[] = [
       ar: "Concertation avec les responsables communautaires et locaux"
     },
     type: 'photo',
-    url: '/images/IMG-20260816-WA0072.jpg',
+    url: './images/IMG-20260816-WA0072.jpg',
     year: 2026,
     category: 'Photos Officielles',
     location: "Nangassou"
@@ -617,7 +617,7 @@ export const initialMedia: MediaItem[] = [
       ar: "Réunion de planification stratégique du bureau exécutif"
     },
     type: 'photo',
-    url: '/images/IMG-20260819-WA0144.jpg',
+    url: './images/IMG-20260819-WA0144.jpg',
     year: 2026,
     category: 'Photos Officielles',
     location: "N'Djamena"
@@ -630,7 +630,7 @@ export const initialMedia: MediaItem[] = [
       ar: "Action de solidarité et accompagnement sur le terrain"
     },
     type: 'photo',
-    url: '/images/IMG-20260819-WA0156.jpg',
+    url: './images/IMG-20260819-WA0156.jpg',
     year: 2026,
     category: 'Photos Officielles',
     location: "Nangassou"
@@ -643,7 +643,7 @@ export const initialMedia: MediaItem[] = [
       ar: "Mobilisation citoyenne des jeunes pour la rentrée scolaire"
     },
     type: 'photo',
-    url: '/images/IMG-20260819-WA0189.jpg',
+    url: './images/IMG-20260819-WA0189.jpg',
     year: 2026,
     category: 'Photos Officielles',
     location: "Nangassou"
@@ -656,7 +656,7 @@ export const initialMedia: MediaItem[] = [
       ar: "Distribution de matériel et équipements pédagogiques aux écoles"
     },
     type: 'photo',
-    url: '/images/IMG-20260819-WA0196.jpg',
+    url: './images/IMG-20260819-WA0196.jpg',
     year: 2026,
     category: 'Photos Officielles',
     location: "Nangassou"
@@ -669,7 +669,7 @@ export const initialMedia: MediaItem[] = [
       ar: "Rassemblement et fraternité des membres actifs AJTES"
     },
     type: 'photo',
-    url: '/images/IMG-20260819-WA0213.jpg',
+    url: './images/IMG-20260819-WA0213.jpg',
     year: 2026,
     category: 'Photos Officielles',
     location: "N'Djamena"
@@ -682,7 +682,7 @@ export const initialMedia: MediaItem[] = [
       ar: "Session de travail de l'équipe technique et maintenance"
     },
     type: 'photo',
-    url: '/images/IMG-20260819-WA0237.jpg',
+    url: './images/IMG-20260819-WA0237.jpg',
     year: 2026,
     category: 'Photos Officielles',
     location: "N'Djamena"
@@ -695,7 +695,7 @@ export const initialMedia: MediaItem[] = [
       ar: "Événement culturel et festif de la jeunesse AJTES"
     },
     type: 'photo',
-    url: '/images/IMG-20260819-WA0246.jpg',
+    url: './images/IMG-20260819-WA0246.jpg',
     year: 2026,
     category: 'Photos Officielles',
     location: "N'Djamena"
@@ -708,7 +708,7 @@ export const initialMedia: MediaItem[] = [
       ar: "Mission solidaire et écoute des besoins communautaires"
     },
     type: 'photo',
-    url: '/images/IMG_20250119_163228_691.jpg',
+    url: './images/IMG_20250119_163228_691.jpg',
     year: 2025,
     category: 'Photos Officielles',
     location: "Nangassou"
@@ -721,7 +721,7 @@ export const initialMedia: MediaItem[] = [
       ar: "Échanges participatifs pour le plan d'action de développement"
     },
     type: 'photo',
-    url: '/images/IMG_20250119_163253_600.jpg',
+    url: './images/IMG_20250119_163253_600.jpg',
     year: 2025,
     category: 'Photos Officielles',
     location: "Nangassou"
@@ -734,7 +734,7 @@ export const initialMedia: MediaItem[] = [
       ar: "Soutien éducatif et animation culturelle avec les jeunes"
     },
     type: 'photo',
-    url: '/images/IMG_20250119_163312_501.jpg',
+    url: './images/IMG_20250119_163312_501.jpg',
     year: 2025,
     category: 'Photos Officielles',
     location: "Nangassou"
@@ -747,7 +747,7 @@ export const initialMedia: MediaItem[] = [
       ar: "Réunion de travail du comité technique sur les infrastructures"
     },
     type: 'photo',
-    url: '/images/IMG_20250119_163314_691.jpg',
+    url: './images/IMG_20250119_163314_691.jpg',
     year: 2025,
     category: 'Photos Officielles',
     location: "N'Djamena"
@@ -760,7 +760,7 @@ export const initialMedia: MediaItem[] = [
       ar: "Grand forum des jeunes engagés pour la solidarité"
     },
     type: 'photo',
-    url: '/images/IMG_20250119_163339_512.jpg',
+    url: './images/IMG_20250119_163339_512.jpg',
     year: 2025,
     category: 'Photos Officielles',
     location: "N'Djamena"
@@ -773,7 +773,7 @@ export const initialMedia: MediaItem[] = [
       ar: "Rassemblement et bilan annuel des activités de l'AJTES"
     },
     type: 'photo',
-    url: '/images/IMG_20250119_163427_776.jpg',
+    url: './images/IMG_20250119_163427_776.jpg',
     year: 2025,
     category: 'Photos Officielles',
     location: "N'Djamena"
@@ -786,8 +786,8 @@ export const initialMedia: MediaItem[] = [
       ar: "Vidéo — Évolution des travaux de fondation et maçonnerie du bureau"
     },
     type: 'video',
-    url: '/videos/Demonstration_Complete_AJTES_3min_Salomon.mp4',
-    thumbnailUrl: '/images/IMG-20260813-WA0085.jpg',
+    url: './videos/Demonstration_Complete_AJTES_3min_Salomon.mp4',
+    thumbnailUrl: './images/IMG-20260813-WA0085.jpg',
     year: 2026,
     category: 'Vidéos Officielles',
     location: "Nangassou"
@@ -800,8 +800,8 @@ export const initialMedia: MediaItem[] = [
       ar: "Vidéo — Synthèse audiovisuelle des actions et projets de l'AJTES"
     },
     type: 'video',
-    url: '/videos/TUTORIEL_AJTES_SALOMON_3MIN.mp4',
-    thumbnailUrl: '/images/IMG-20260813-WA0123.jpg',
+    url: './videos/TUTORIEL_AJTES_SALOMON_3MIN.mp4',
+    thumbnailUrl: './images/IMG-20260813-WA0123.jpg',
     year: 2026,
     category: 'Vidéos Officielles',
     location: "N'Djamena"
@@ -814,8 +814,8 @@ export const initialMedia: MediaItem[] = [
       ar: "Vidéo — Témoignages des élèves, enseignants et responsables du collège"
     },
     type: 'video',
-    url: '/videos/VID-20260726-WA0093.mp4',
-    thumbnailUrl: '/images/IMG-20260813-WA0093.jpg',
+    url: './videos/VID-20260726-WA0093.mp4',
+    thumbnailUrl: './images/IMG-20260813-WA0093.jpg',
     year: 2026,
     category: 'Vidéos Officielles',
     location: "Nangassou"
@@ -828,8 +828,8 @@ export const initialMedia: MediaItem[] = [
       ar: "Vidéo — Rapport de chantier : Construction du bureau du CEG de Nangassou"
     },
     type: 'video',
-    url: '/videos/VID-20260813-WA0152.mp4',
-    thumbnailUrl: '/images/IMG-20260813-WA0106.jpg',
+    url: './videos/VID-20260813-WA0152.mp4',
+    thumbnailUrl: './images/IMG-20260813-WA0106.jpg',
     year: 2026,
     category: 'Vidéos Officielles',
     location: "Nangassou"
@@ -842,8 +842,8 @@ export const initialMedia: MediaItem[] = [
       ar: "Vidéo — Cérémonie d'inauguration & Allocutions officielles du Bureau AJTES"
     },
     type: 'video',
-    url: '/videos/VID-20260813-WA0153.mp4',
-    thumbnailUrl: '/images/IMG-20260813-WA0083.jpg',
+    url: './videos/VID-20260813-WA0153.mp4',
+    thumbnailUrl: './images/IMG-20260813-WA0083.jpg',
     year: 2026,
     category: 'Vidéos Officielles',
     location: "Nangassou"
@@ -856,8 +856,8 @@ export const initialMedia: MediaItem[] = [
       ar: "Vidéo — Reportage terrain : Activités et engagements de la jeunesse AJTES"
     },
     type: 'video',
-    url: '/videos/VID-20260816-WA0077.mp4',
-    thumbnailUrl: '/images/IMG-20260816-WA0058.jpg',
+    url: './videos/VID-20260816-WA0077.mp4',
+    thumbnailUrl: './images/IMG-20260816-WA0058.jpg',
     year: 2026,
     category: 'Vidéos Officielles',
     location: "Nangassou"
@@ -870,8 +870,8 @@ export const initialMedia: MediaItem[] = [
       ar: "Vidéo — Immersion terrain : Campagne de reboisement et salubrité"
     },
     type: 'video',
-    url: '/videos/VID_20250928_145845.mp4',
-    thumbnailUrl: '/images/IMG-20260813-WA0113.jpg',
+    url: './videos/VID_20250928_145845.mp4',
+    thumbnailUrl: './images/IMG-20260813-WA0113.jpg',
     year: 2025,
     category: 'Vidéos Officielles',
     location: "Nangassou"
@@ -884,8 +884,8 @@ export const initialMedia: MediaItem[] = [
       ar: "Vidéo — Présentation générale de la plateforme web AJTES"
     },
     type: 'video',
-    url: '/videos/Demonstration_Complete_AJTES_3min_Salomon.mp4',
-    thumbnailUrl: '/images/IMG-20260813-WA0142.jpg',
+    url: './videos/Demonstration_Complete_AJTES_3min_Salomon.mp4',
+    thumbnailUrl: './images/IMG-20260813-WA0142.jpg',
     year: 2026,
     category: 'Vidéos Officielles',
     location: "N'Djamena"
@@ -908,7 +908,7 @@ export const initialCommittees: Committee[] = [
     leader: "Présidence AJTES",
     membersCount: 7,
     region: "N'Djamena (Siège)",
-    imageUrl: '/images/IMG-20260813-WA0123.jpg'
+    imageUrl: './images/IMG-20260813-WA0123.jpg'
   },
   {
     id: 'com-2',
@@ -925,7 +925,7 @@ export const initialCommittees: Committee[] = [
     leader: "Responsable Commission Éducation",
     membersCount: 12,
     region: "Nangassou & Logone",
-    imageUrl: '/images/IMG-20260813-WA0106.jpg'
+    imageUrl: './images/IMG-20260813-WA0106.jpg'
   },
   {
     id: 'com-3',
@@ -942,7 +942,7 @@ export const initialCommittees: Committee[] = [
     leader: "Responsable Environnement",
     membersCount: 15,
     region: "Multi-régions",
-    imageUrl: '/images/IMG-20260813-WA0113.jpg'
+    imageUrl: './images/IMG-20260813-WA0113.jpg'
   }
 ];
 
@@ -951,7 +951,7 @@ export const initialPartners: Partner[] = [
     id: 'part-1',
     name: "Inspection Départementale de l'Éducation Nationale",
     type: 'institution',
-    logoUrl: '/images/IMG-20260813-WA0143.jpg',
+    logoUrl: './images/IMG-20260813-WA0143.jpg',
     description: {
       fr: "Partenaire institutionnel public accompagnant les projets scolaires au niveau local.",
       en: "Public institutional partner supporting local school infrastructure projects.",
@@ -962,7 +962,7 @@ export const initialPartners: Partner[] = [
     id: 'part-2',
     name: "Association Nangassou Solidarité",
     type: 'ong',
-    logoUrl: '/images/IMG-20260813-WA0151.jpg',
+    logoUrl: './images/IMG-20260813-WA0151.jpg',
     description: {
       fr: "ONG partenaire pour le développement local et la mobilisation communautaire.",
       en: "Partner NGO for local development and community engagement.",
@@ -1007,7 +1007,7 @@ export const initialUsers: User[] = [
     profession: 'Responsable Technique & Maintenance',
     phone: '+235 60 00 00 00',
     city: 'N\'Djamena',
-    avatarUrl: '/images/IMG_20250119_163228_691.jpg',
+    avatarUrl: './images/IMG_20250119_163228_691.jpg',
     memberType: 'actif',
     membershipStatus: 'actif',
     dateJoined: '2022-01-15'

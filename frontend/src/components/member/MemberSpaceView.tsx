@@ -251,8 +251,8 @@ export const MemberSpaceView: React.FC<MemberSpaceViewProps> = ({ initialMode = 
                 <div className="doc-links">
                   {isAdmin ? (
                     <>
-                      <a href="/documents/statuts_AJTES.pdf" download target="_blank" rel="noopener noreferrer" className="doc-link">Statuts AJTES (PDF Admin)</a>
-                      <a href="/documents/reglement_interieur_AJTES.pdf" download target="_blank" rel="noopener noreferrer" className="doc-link">Règlement Intérieur (PDF Admin)</a>
+                      <a href="./documents/statuts_AJTES.pdf" download target="_blank" rel="noopener noreferrer" className="doc-link">Statuts AJTES (PDF Admin)</a>
+                      <a href="./documents/reglement_interieur_AJTES.pdf" download target="_blank" rel="noopener noreferrer" className="doc-link">Règlement Intérieur (PDF Admin)</a>
                     </>
                   ) : (
                     <>

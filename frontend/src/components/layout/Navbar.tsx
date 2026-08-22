@@ -123,7 +123,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, navig
         <div className="main-nav-container">
           {/* Logo */}
           <div className="logo-brand" onClick={() => handleNavClick('home')}>
-            <img src="/logo_ajtes.jpeg" alt="Logo AJTES TCHAD" className="official-logo-img" />
+            <img src="./logo_ajtes.jpeg" alt="Logo AJTES TCHAD" className="official-logo-img" />
             <div className="logo-text">
               <span className="logo-title">AJTES TCHAD</span>
               <span className="logo-sub">Éducation & Solidarité</span>

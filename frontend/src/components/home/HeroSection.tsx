@@ -15,7 +15,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ setCurrentTab }) => {
       <div className="hero-content-wrapper">
         {/* Animated Badge citing Statutes & Official Logo */}
         <div className="hero-badge animated-pulse-badge">
-          <img src="/logo_ajtes.jpeg" alt="Logo AJTES" className="hero-badge-logo" />
+          <img src="./logo_ajtes.jpeg" alt="Logo AJTES" className="hero-badge-logo" />
           <span>ASSOCIATION CRÉÉE EN 2022 • STATUTS & RÈGLEMENT INTÉRIEUR OFFICIELS</span>
         </div>
 
@@ -94,8 +94,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ setCurrentTab }) => {
                   <p>Présenté par <strong>Salomon</strong> — Responsable Technique & Maintenance Informatique de l'AJTES Tchad</p>
                 </div>
                 <img
-                  src="/images/tutoriel_demo_salomon_ajtes.gif"
-                  alt="Démonstration de la plateforme par Salomon"
+                  src="./images/tutoriel_demo_salomon_ajtes.gif"
+                  alt="Aperçu vidéo AJTES Tchad"
                   className="hero-video-player"
                   style={{ objectFit: 'contain', background: '#0F172A' }}
                 />

@@ -34,7 +34,7 @@ export const Footer: React.FC<FooterProps> = ({ setCurrentTab }) => {
           {/* Brand Info */}
           <div className="footer-col brand-col">
             <div className="footer-logo">
-              <img src="/logo_ajtes.jpeg" alt="Logo AJTES TCHAD" className="official-footer-logo-img" />
+              <img src="./logo_ajtes.jpeg" alt="Logo AJTES TCHAD" className="official-footer-logo-img" />
               <span className="logo-name">AJTES TCHAD</span>
             </div>
             <p className="footer-bio">
