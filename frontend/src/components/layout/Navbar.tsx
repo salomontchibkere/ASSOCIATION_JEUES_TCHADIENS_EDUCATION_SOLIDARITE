@@ -45,25 +45,104 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, navig
 
   return (
     <header className="navbar-header">
-      {/* Top Utility Bar (Subtle, Clean & Organized) */}
-      <div className="top-bar">
-        <div className="top-bar-container">
-          <div className="top-left-group">
-            <span className="slogan-badge">
-              AJTES TCHAD — Éducation & Solidarité
-            </span>
+      {/* Single Unique Navigation Bar */}
+      <div className="main-nav">
+        <div className="main-nav-container">
+          {/* Brand Logo */}
+          <div className="logo-brand" onClick={() => handleNavClick('home')}>
+            <img src="./logo_ajtes.jpeg" alt="Logo AJTES TCHAD" className="official-logo-img" />
+            <div className="logo-text">
+              <span className="logo-title">AJTES TCHAD</span>
+              <span className="logo-sub">Éducation & Solidarité</span>
+            </div>
           </div>
 
-          <div className="top-actions-group">
+          {/* Desktop Links with Grouped Dropdown Menus */}
+          <nav className="desktop-links">
+            <button
+              className={`nav-link ${currentTab === 'home' ? 'active' : ''}`}
+              onClick={() => handleNavClick('home')}
+            >
+              {t('navHome')}
+            </button>
+
+            {/* Dropdown 1: L'Association */}
+            <div className="nav-dropdown-wrapper">
+              <button
+                className={`nav-link dropdown-trigger ${['about', 'documents', 'committees'].includes(currentTab) ? 'active' : ''}`}
+              >
+                L'Association <span className="dropdown-arrow">▾</span>
+              </button>
+              <div className="dropdown-menu">
+                <button
+                  className={`dropdown-item ${currentTab === 'about' ? 'active' : ''}`}
+                  onClick={() => handleNavClick('about')}
+                >
+                  Qui sommes-nous ?
+                </button>
+                <button
+                  className={`dropdown-item ${currentTab === 'documents' ? 'active' : ''}`}
+                  onClick={() => handleNavClick('documents')}
+                >
+                  Statuts & Règlement Intérieur
+                </button>
+                <button
+                  className={`dropdown-item ${currentTab === 'committees' ? 'active' : ''}`}
+                  onClick={() => handleNavClick('committees')}
+                >
+                  Organes & Commissions
+                </button>
+              </div>
+            </div>
+
+            {/* Dropdown 2: Projets & Médias */}
+            <div className="nav-dropdown-wrapper">
+              <button
+                className={`nav-link dropdown-trigger ${['projects', 'news', 'gallery'].includes(currentTab) ? 'active' : ''}`}
+              >
+                Projets & Médias <span className="dropdown-arrow">▾</span>
+              </button>
+              <div className="dropdown-menu">
+                <button
+                  className={`dropdown-item ${currentTab === 'projects' ? 'active' : ''}`}
+                  onClick={() => handleNavClick('projects')}
+                >
+                  Nos Projets & Réalisations
+                </button>
+                <button
+                  className={`dropdown-item ${currentTab === 'news' ? 'active' : ''}`}
+                  onClick={() => handleNavClick('news')}
+                >
+                  Actualités & Événements
+                </button>
+                <button
+                  className={`dropdown-item ${currentTab === 'gallery' ? 'active' : ''}`}
+                  onClick={() => handleNavClick('gallery')}
+                >
+                  Galerie Photos & Vidéos
+                </button>
+              </div>
+            </div>
+
+            <button
+              className={`nav-link ${currentTab === 'contact' ? 'active' : ''}`}
+              onClick={() => handleNavClick('contact')}
+            >
+              {t('navContact')}
+            </button>
+          </nav>
+
+          {/* Integrated Actions Group on the SAME Single Line */}
+          <div className="cta-actions">
             {/* WhatsApp Link */}
             <a
               href={WHATSAPP_GROUP_LINK}
               target="_blank"
               rel="noreferrer"
-              className="btn btn-whatsapp btn-sm"
+              className="btn btn-whatsapp"
               title="Rejoindre le Groupe WhatsApp Officiel AJTES"
             >
-              WhatsApp Officiel
+              WhatsApp
             </a>
 
             {/* Language Selector Dropdown */}
@@ -80,7 +159,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, navig
               </select>
             </div>
 
-            {/* Auth Control Group */}
+            {/* Auth Buttons */}
             {isLoggedIn ? (
               <div className="user-control-group">
                 <span className="user-name" title={currentUser?.name}>{currentUser?.name}</span>
@@ -98,7 +177,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, navig
                   onClick={() => handleNavClick('member')}
                   title="Mon Espace Membre"
                 >
-                  Espace Membre
+                  Mon Espace
                 </button>
                 <button className="btn btn-secondary btn-sm logout-btn" onClick={logout} title="Déconnexion">
                   Déconnexion
@@ -114,37 +193,8 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, navig
                 </button>
               </div>
             )}
-          </div>
-        </div>
-      </div>
 
-      {/* Main Navigation Bar */}
-      <div className="main-nav">
-        <div className="main-nav-container">
-          {/* Logo */}
-          <div className="logo-brand" onClick={() => handleNavClick('home')}>
-            <img src="./logo_ajtes.jpeg" alt="Logo AJTES TCHAD" className="official-logo-img" />
-            <div className="logo-text">
-              <span className="logo-title">AJTES TCHAD</span>
-              <span className="logo-sub">Éducation & Solidarité</span>
-            </div>
-          </div>
-
-          {/* Desktop Links */}
-          <nav className="desktop-links">
-            {navItems.map(item => (
-              <button
-                key={item.id}
-                className={`nav-link ${currentTab === item.id ? 'active' : ''}`}
-                onClick={() => handleNavClick(item.id)}
-              >
-                {item.label}
-              </button>
-            ))}
-          </nav>
-
-          {/* Primary CTA */}
-          <div className="main-cta-group">
+            {/* Donate CTA Button */}
             <button className="btn btn-gold btn-sm" onClick={() => handleNavClick('donate')}>
               Faire un Don
             </button>
@@ -220,7 +270,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, navig
         </div>
       )}
 
-      {/* Inline styles for Navbar */}
+      {/* Inline styles for Single-Line Navbar with Dropdowns */}
       <style>{`
         .navbar-header {
           position: sticky;
@@ -231,119 +281,18 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, navig
           border-bottom: 1px solid var(--neutral-border);
         }
 
-        .top-bar {
-          background-color: #F8FAFC;
-          color: var(--neutral-heading);
-          font-size: 0.82rem;
-          padding: 0.35rem 1.5rem;
-          border-bottom: 1px solid var(--neutral-border);
-        }
-
-        .top-bar-container {
-          max-width: 1280px;
-          margin: 0 auto;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          flex-wrap: wrap;
-          gap: 0.5rem;
-        }
-
-        .top-left-group {
-          display: flex;
-          align-items: center;
-        }
-
-        .slogan-badge {
-          background: var(--primary-emerald-light);
-          color: var(--primary-emerald-text);
-          font-weight: 700;
-          font-size: 0.78rem;
-          padding: 0.2rem 0.65rem;
-          border-radius: var(--radius-pill);
-          border: 1px solid rgba(0, 122, 61, 0.15);
-        }
-
-        .top-actions-group {
-          display: flex;
-          align-items: center;
-          gap: 0.6rem;
-        }
-
-        .btn-whatsapp {
-          background-color: #25D366;
-          color: #FFFFFF;
-          font-weight: 700;
-          border-radius: var(--radius-pill);
-          font-size: 0.78rem;
-          padding: 0.25rem 0.65rem;
-          text-decoration: none;
-          display: inline-flex;
-          align-items: center;
-          gap: 0.3rem;
-          transition: opacity 0.2s;
-        }
-
-        .btn-whatsapp:hover {
-          opacity: 0.9;
-          color: #FFFFFF;
-        }
-
-        .lang-select-box {
-          display: flex;
-          align-items: center;
-          background: #FFFFFF;
-          border: 1px solid var(--neutral-border);
-          padding: 0.15rem 0.4rem;
-          border-radius: var(--radius-pill);
-          box-shadow: var(--shadow-sm);
-        }
-
-        .lang-select-dropdown {
-          background: transparent;
-          border: none;
-          color: var(--neutral-heading);
-          font-size: 0.78rem;
-          font-weight: 700;
-          font-family: var(--font-main);
-          cursor: pointer;
-          outline: none;
-        }
-
-        .user-control-group {
-          display: flex;
-          align-items: center;
-          gap: 0.35rem;
-        }
-
-        .user-name {
-          font-weight: 700;
-          font-size: 0.8rem;
-          color: var(--neutral-heading);
-          max-width: 100px;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          white-space: nowrap;
-        }
-
-        .auth-buttons-minimal {
-          display: flex;
-          align-items: center;
-          gap: 0.35rem;
-        }
-
         .main-nav {
-          padding: 0.6rem 1.5rem;
+          padding: 0.65rem 1.25rem;
           background: #FFFFFF;
         }
 
         .main-nav-container {
-          max-width: 1280px;
+          max-width: 1440px;
           margin: 0 auto;
           display: flex;
           align-items: center;
           justify-content: space-between;
-          gap: 1rem;
+          gap: 0.75rem;
         }
 
         .logo-brand {
@@ -381,15 +330,15 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, navig
         .desktop-links {
           display: flex;
           align-items: center;
-          gap: 0.2rem;
+          gap: 0.35rem;
           flex-wrap: nowrap;
         }
 
         .nav-link {
           background: none;
           border: none;
-          padding: 0.45rem 0.65rem;
-          font-size: 0.86rem;
+          padding: 0.45rem 0.75rem;
+          font-size: 0.88rem;
           font-weight: 700;
           color: var(--neutral-heading);
           cursor: pointer;
@@ -403,10 +352,138 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, navig
           background-color: var(--primary-emerald-light);
         }
 
-        .main-cta-group {
+        /* Dropdown Styling */
+        .nav-dropdown-wrapper {
+          position: relative;
+          display: inline-block;
+        }
+
+        .dropdown-trigger {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.25rem;
+        }
+
+        .dropdown-arrow {
+          font-size: 0.75rem;
+          transition: transform 0.2s ease;
+        }
+
+        .nav-dropdown-wrapper:hover .dropdown-arrow {
+          transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+          position: absolute;
+          top: 100%;
+          left: 0;
+          min-width: 220px;
+          background: #FFFFFF;
+          border-radius: var(--radius-md);
+          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+          border: 1px solid var(--neutral-border);
+          padding: 0.4rem 0;
+          margin-top: 0.3rem;
+          opacity: 0;
+          visibility: hidden;
+          transform: translateY(8px);
+          transition: all 0.2s ease;
+          z-index: 1000;
+        }
+
+        .nav-dropdown-wrapper:hover .dropdown-menu,
+        .nav-dropdown-wrapper:focus-within .dropdown-menu {
+          opacity: 1;
+          visibility: visible;
+          transform: translateY(0);
+        }
+
+        .dropdown-item {
+          width: 100%;
+          text-align: left;
+          background: none;
+          border: none;
+          padding: 0.6rem 1.1rem;
+          font-size: 0.86rem;
+          font-weight: 600;
+          color: var(--neutral-heading);
+          cursor: pointer;
+          transition: background 0.15s, color 0.15s;
+          white-space: nowrap;
+        }
+
+        .dropdown-item:hover, .dropdown-item.active {
+          background-color: var(--primary-emerald-light);
+          color: var(--primary-emerald-text);
+        }
+
+        .cta-actions {
           display: flex;
           align-items: center;
+          gap: 0.45rem;
           flex-shrink: 0;
+        }
+
+        .btn-whatsapp {
+          background-color: #25D366;
+          color: #FFFFFF;
+          font-weight: 700;
+          border-radius: var(--radius-pill);
+          font-size: 0.78rem;
+          padding: 0.35rem 0.7rem;
+          text-decoration: none;
+          display: inline-flex;
+          align-items: center;
+          gap: 0.3rem;
+          transition: opacity 0.2s;
+        }
+
+        .btn-whatsapp:hover {
+          opacity: 0.9;
+          color: #FFFFFF;
+        }
+
+        .lang-select-box {
+          display: flex;
+          align-items: center;
+          background: #FFFFFF;
+          border: 1px solid var(--neutral-border);
+          padding: 0.2rem 0.4rem;
+          border-radius: var(--radius-pill);
+          box-shadow: var(--shadow-sm);
+        }
+
+        .lang-select-dropdown {
+          background: transparent;
+          border: none;
+          color: var(--neutral-heading);
+          font-size: 0.78rem;
+          font-weight: 700;
+          font-family: var(--font-main);
+          cursor: pointer;
+          outline: none;
+        }
+
+        .user-control-group {
+          display: flex;
+          align-items: center;
+          gap: 0.35rem;
+        }
+
+        .user-name {
+          font-weight: 700;
+          font-size: 0.8rem;
+          color: var(--neutral-heading);
+          max-width: 100px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+
+        .auth-buttons-minimal {
+          display: flex;
+          align-items: center;
+          gap: 0.35rem;
         }
 
         .mobile-hamburger {
@@ -456,14 +533,14 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, navig
 
         .margin-top-sm { margin-top: 0.5rem; }
 
-        @media (max-width: 1120px) {
-          .top-bar { display: none; }
+        @media (max-width: 1180px) {
           .desktop-links { display: none; }
-          .main-cta-group { display: none; }
+          .cta-actions { display: none; }
           .mobile-hamburger { display: block; }
         }
       `}</style>
     </header>
+
 
 
   );
