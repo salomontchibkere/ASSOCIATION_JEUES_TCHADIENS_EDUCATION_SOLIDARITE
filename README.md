@@ -49,35 +49,34 @@ La plateforme web AJTES est une application web complète comprenant :
 
 ```
 ASSOCIATION/
-├── README.md                      # Documentation officielle principale
-├── CAHIER DES CHARGES.pdf          # Cahier des charges institutionnel
-├── Guide_Prerequis_Client_AJTES.pdf # Guide client et prérequis
-├── houni.sh                       # Script bash de démarrage rapide
-├── backend/                       # Application API REST Backend
+├── README.md                                  # Documentation officielle du dépôt GitHub
+├── DOCUMENTATION_COMPLETE_PROJET_AJTES_2026.pdf # Documentation PDF complète institutionnelle
+├── CAHIER DES CHARGES.pdf                      # Cahier des charges officiel
+├── Images/                                    # Stockage des 35 photos HD d'origine
+├── videos/                                    # Stockage des 8 vidéos MP4 d'origine
+├── LOGO/                                      # Logos originaux de l'AJTES Tchad
+├── backend/                                   # Application API REST Backend (Express + Prisma + SQLite)
 │   ├── prisma/
-│   │   ├── schema.prisma          # Schéma de base de données Prisma
-│   │   └── seed.ts                # Seeding de la base de données
+│   │   ├── schema.prisma                      # Schéma de base de données Prisma
+│   │   └── seed.ts                            # Seeding de la base de données
 │   ├── src/
-│   │   ├── app.ts                 # Configuration Express
-│   │   ├── server.ts              # Point d'entrée HTTP (Port 5000)
-│   │   ├── controllers/           # Contrôleurs métier (auth, members, projects, etc.)
-│   │   ├── middlewares/           # Middlewares (auth, rôles, erreurs)
-│   │   ├── routes/                # Définition des routes de l'API
-│   │   ├── services/              # Logique métier et requêtes Prisma
-│   │   └── utils/                 # Helpers (hachage, tokens JWT, notifications)
+│   │   ├── app.ts                             # Configuration Express API
+│   │   ├── server.ts                          # Point d'entrée HTTP (Port 5000)
+│   │   ├── controllers/                       # Contrôleurs métier (auth, members, projects, etc.)
+│   │   ├── middlewares/                       # Middlewares (auth JWT, rôles, erreurs)
+│   │   ├── routes/                            # Définition des routes de l'API
+│   │   └── services/                          # Logique métier et requêtes Prisma
 │   └── package.json
-├── frontend/                      # Application Web Client React
+├── frontend/                                  # Application Web Client React (React 19 + TypeScript + Vite)
 │   ├── index.html
 │   ├── src/
-│   │   ├── main.tsx               # Point d'entrée React
-│   │   ├── App.tsx                # Structure principale & Routeur
-│   │   ├── components/            # Composants UI (layout, home, admin, news, member, etc.)
-│   │   ├── context/               # AuthContext, DataContext, LanguageContext
-│   │   ├── data/                  # Données dynamiques / Mocks
-│   │   └── types/                 # Interfaces TypeScript globales
+│   │   ├── main.tsx                           # Point d'entrée React
+│   │   ├── App.tsx                            # Structure principale & Routeur
+│   │   ├── components/                        # Composants UI (layout, home, gallery, admin, etc.)
+│   │   ├── context/                           # AuthContext, DataContext, LanguageContext
+│   │   └── data/                              # Données dynamiques / mockData.ts (35 photos + 8 vidéos)
 │   └── package.json
-├── doc/                           # Statuts, Règlements et Médias tutoriels
-└── videos/                        # Séquences vidéo promotionnelles et institutionnelles
+└── doc/                                       # Statuts et Règlements intérieurs officiels AJTES
 ```
 
 ---
@@ -94,7 +93,7 @@ Le schéma Prisma (`backend/prisma/schema.prisma`) modélise les entités princi
 | **`Event`** | Événements et campagnes sur le terrain. |
 | **`Project`** | Projets communautaires (Budget, Année, Localisation, Avancement). |
 | **`Donation`** | Dons enregistrés (Airtel Money, Moov Africa, Carte, Espèces) avec référence de transaction. |
-| **`ContactMessage`** | Messages envoyés via le formulaire de contact du site. |
+| **`ContactMessage`** | Messages envoyés via le formulaire de contact du site (`association.ajtes.@gmail.com`). |
 | **`Committee`** | Comités d'action de l'AJTES (Éducation, Santé, Environnement, Droits des Jeunes). |
 
 ---
@@ -169,19 +168,9 @@ npm run dev
    - Accèdent à leur espace membre personnel, statut de cotisation et attestation d'adhésion.
 
 3. **Administrateurs (`ADMIN` / `SUPER_ADMIN`)** :
-   - Accès au panneau d'administration via la connexion sécurisée (`contact@ajtes.td`).
+   - Accès au panneau d'administration via la connexion sécurisée (`contact@ajtes.td` / `association.ajtes.@gmail.com`).
    - Gestion globale du site, validation des adhésions et suivi des dons.
 
 ---
 
-## 8. Script de Lancement Rapide
-
-Vous pouvez lancer l'application en exécutant le script shell `houni.sh` à la racine :
-
-```bash
-chmod +x houni.sh
-./houni.sh
-```
-
----
-*Documentation générée officiellement pour l'AJTES Tchad — 2026.*
+*Documentation technique développée par **Salomon** pour l'**AJTES Tchad** (Contact : `association.ajtes.@gmail.com`) — 2026.*

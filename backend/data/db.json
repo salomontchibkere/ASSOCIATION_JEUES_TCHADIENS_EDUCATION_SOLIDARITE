@@ -1,0 +1,121 @@
+{
+  "users": [
+    {
+      "id": "444c08e0-ea75-4ac6-8fe6-710393d3c942",
+      "email": "contact@ajtes.td",
+      "password": "$2a$10$dVqAZkbOtUOMEpVX5NrKj.5iLmymjMHOixpaZR9uhC.2fgRNY8.bS",
+      "fullName": "SALOMON (Admin AJTES)",
+      "role": "ADMIN",
+      "phone": "+235 60 00 00 00",
+      "isActive": true,
+      "createdAt": "2026-08-15T15:27:02.126Z",
+      "updatedAt": "2026-08-15T15:27:02.126Z",
+      "memberProfile": {
+        "id": "a4d800de-0d8e-4e94-8931-6dbe4ddb610e",
+        "userId": "444c08e0-ea75-4ac6-8fe6-710393d3c942",
+        "profession": "Responsable Technique & Maintenance",
+        "city": "N'Djamena",
+        "country": "Tchad",
+        "bio": "Responsable technique et administrateur du site officiel AJTES.",
+        "status": "APPROVED",
+        "createdAt": "2026-08-15T15:27:02.126Z",
+        "updatedAt": "2026-08-15T15:27:02.126Z"
+      }
+    }
+  ],
+  "memberProfiles": [
+    {
+      "id": "a4d800de-0d8e-4e94-8931-6dbe4ddb610e",
+      "userId": "444c08e0-ea75-4ac6-8fe6-710393d3c942",
+      "profession": "Responsable Technique & Maintenance",
+      "city": "N'Djamena",
+      "country": "Tchad",
+      "bio": "Responsable technique et administrateur du site officiel AJTES.",
+      "status": "APPROVED",
+      "createdAt": "2026-08-15T15:27:02.126Z",
+      "updatedAt": "2026-08-15T15:27:02.126Z"
+    }
+  ],
+  "news": [
+    {
+      "id": "c3c61659-94bb-4a04-90a8-d6c619ca0d53",
+      "titleFr": "Inauguration officielle du bureau administratif du CEG de Nangassou",
+      "contentFr": "L'Association des Jeunes Tchadiens pour l'Éducation et la Solidarité (AJTES) annonce la finalisation et l'inauguration du nouveau bureau administratif de deux chambres au CEG de Nangassou. Un grand pas vers de meilleures conditions d'apprentissage !",
+      "category": "ACTUALITE",
+      "published": true,
+      "authorId": "444c08e0-ea75-4ac6-8fe6-710393d3c942",
+      "createdAt": "2026-08-15T15:27:02.126Z",
+      "updatedAt": "2026-08-15T15:27:02.126Z"
+    },
+    {
+      "id": "8b83e489-caa8-4c81-8dd4-ddb994811244",
+      "titleFr": "Ouverture de la plateforme numérique officielle AJTES",
+      "contentFr": "Découvrez notre nouvelle vitrine interactive ! Vous pouvez désormais adhérer en ligne, soutenir nos projets éducatifs par des dons ou contacter directement nos équipes.",
+      "category": "ANNONCE",
+      "published": true,
+      "authorId": "444c08e0-ea75-4ac6-8fe6-710393d3c942",
+      "createdAt": "2026-08-15T15:27:02.126Z",
+      "updatedAt": "2026-08-15T15:27:02.126Z"
+    }
+  ],
+  "events": [],
+  "projects": [
+    {
+      "id": "e589846e-76b3-4a88-8830-3b713336b7c8",
+      "titleFr": "Construction du bureau administratif du CEG de Nangassou",
+      "summaryFr": "Construction d'un bureau administratif de deux chambres au niveau du CEG de Nangassou.",
+      "descriptionFr": "En 2026, l'AJTES a réalisé la construction d'un bâtiment administratif moderne de deux pièces pour équiper le Collège d'Enseignement Général (CEG) de Nangassou, offrant de meilleures conditions de travail au corps enseignant.",
+      "status": "COMPLETED",
+      "year": 2026,
+      "location": "Nangassou, Tchad",
+      "budget": 3500000,
+      "createdAt": "2026-08-15T15:27:02.126Z",
+      "updatedAt": "2026-08-15T15:27:02.126Z"
+    },
+    {
+      "id": "f98d4230-ee07-44d1-8e5e-c8a7b58b2e08",
+      "titleFr": "Distribution de fournitures scolaires aux élèves du CEG de Nangassou",
+      "summaryFr": "Distribution gratuite de kits scolaires complets aux élèves du CEG de Nangassou.",
+      "descriptionFr": "Actions de solidarité menées en 2023 pour encourager la scolarisation des jeunes ruraux à travers la dotation de cahiers, stylos et manuels pédagogiques.",
+      "status": "COMPLETED",
+      "year": 2023,
+      "location": "Nangassou, Tchad",
+      "budget": 1200000,
+      "createdAt": "2026-08-15T15:27:02.126Z",
+      "updatedAt": "2026-08-15T15:27:02.126Z"
+    },
+    {
+      "id": "22b597c4-3ab4-45ae-9dd9-9014bd3e1198",
+      "titleFr": "Lancement des activités fondatrices d'éducation et de solidarité",
+      "summaryFr": "Création de l'association et lancement des premières activités de sensibilisation.",
+      "descriptionFr": "Activités fondatrices démarrées dès la création de l'association en 2022 pour impliquer la jeunesse tchadienne dans la protection de son cadre de vie et la promotion de l'éducation.",
+      "status": "COMPLETED",
+      "year": 2022,
+      "location": "Tchad",
+      "budget": 800000,
+      "createdAt": "2026-08-15T15:27:02.126Z",
+      "updatedAt": "2026-08-15T15:27:02.126Z"
+    }
+  ],
+  "donations": [],
+  "contactMessages": [],
+  "committees": [
+    {
+      "id": "5e004efd-f21c-4deb-821d-9520bbcd0e2f",
+      "nameFr": "Comité Éducation & Soutien Pédagogique",
+      "descriptionFr": "Supervise la distribution des fournitures, le soutien aux écoles et les initiatives d'accompagnement scolaire.",
+      "leaderName": "Bureau Exécutif",
+      "leaderRole": "Coordinateur Éducation",
+      "createdAt": "2026-08-15T15:27:02.126Z"
+    },
+    {
+      "id": "6fec2403-7f1d-43f0-89a1-bf2d57e063e8",
+      "nameFr": "Comité Solidarité & Action Sociale",
+      "descriptionFr": "Gère les projets humanitaires, l'aide d'urgence et l'engagement auprès des communautés vulnérables.",
+      "leaderName": "Bureau Exécutif",
+      "leaderRole": "Coordinateur Social",
+      "createdAt": "2026-08-15T15:27:02.126Z"
+    }
+  ],
+  "partners": []
+}

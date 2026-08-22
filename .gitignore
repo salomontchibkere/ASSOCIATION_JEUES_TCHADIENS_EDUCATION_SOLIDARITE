@@ -1,0 +1,23 @@
+# Node dependencies
+node_modules/
+backend/node_modules/
+frontend/node_modules/
+
+# Build folders
+dist/
+frontend/dist/
+backend/dist/
+
+# Raw video backup folder at root (large source footage)
+videos/
+Images/
+
+# OS and Temp files
+.DS_Store
+*.log
+*.sqlite
+*.db
+
+# Environment files
+.env
+.env.local

@@ -1,0 +1,139 @@
+// Schema Prisma pour AJTES Backend
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String         @id @default(uuid())
+  email         String         @unique
+  password      String
+  fullName      String
+  role          String         @default("MEMBER") // ADMIN, MEMBER, TREASURER, PROJECT_MANAGER
+  phone         String?
+  avatar        String?
+  isActive      Boolean        @default(true)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  memberProfile MemberProfile?
+  news          News[]
+}
+
+model MemberProfile {
+  id         String   @id @default(uuid())
+  userId     String   @unique
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  profession String?
+  city       String?
+  country    String?  @default("Tchad")
+  bio        String?
+  status     String   @default("PENDING") // PENDING, APPROVED, REJECTED
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model News {
+  id          String   @id @default(uuid())
+  titleFr     String
+  titleEn     String?
+  titleAr     String?
+  contentFr   String
+  contentEn   String?
+  contentAr   String?
+  category    String   @default("ACTUALITE") // ACTUALITE, EVENT, ANNONCE
+  image       String?
+  published   Boolean  @default(true)
+  authorId    String?
+  author      User?    @relation(fields: [authorId], references: [id], onDelete: SetNull)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Event {
+  id            String   @id @default(uuid())
+  titleFr       String
+  titleEn       String?
+  titleAr       String?
+  descriptionFr String
+  descriptionEn String?
+  descriptionAr String?
+  location      String
+  eventDate     DateTime
+  image         String?
+  status        String   @default("UPCOMING") // UPCOMING, PASSED, CANCELLED
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Project {
+  id            String   @id @default(uuid())
+  titleFr       String
+  titleEn       String?
+  titleAr       String?
+  summaryFr     String
+  summaryEn     String?
+  summaryAr     String?
+  descriptionFr String
+  descriptionEn String?
+  descriptionAr String?
+  status        String   @default("COMPLETED") // COMPLETED, IN_PROGRESS, PLANNED
+  budget        Float?
+  year          Int
+  location      String
+  image         String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Donation {
+  id             String   @id @default(uuid())
+  donorName      String
+  donorEmail     String
+  donorPhone     String?
+  amount         Float
+  currency       String   @default("XAF")
+  paymentMethod  String   @default("AIRTEL_MONEY") // AIRTEL_MONEY, MOOV_AFRICA, CARD, CASH
+  status         String   @default("SUCCESS") // PENDING, SUCCESS, FAILED
+  transactionRef String   @unique @default(uuid())
+  notes          String?
+  createdAt      DateTime @default(now())
+}
+
+model ContactMessage {
+  id        String   @id @default(uuid())
+  name      String
+  email     String
+  phone     String?
+  subject   String
+  message   String
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model Committee {
+  id            String   @id @default(uuid())
+  nameFr        String
+  nameEn        String?
+  nameAr        String?
+  descriptionFr String
+  descriptionEn String?
+  descriptionAr String?
+  leaderName    String?
+  leaderRole    String?
+  image         String?
+  createdAt     DateTime @default(now())
+}
+
+model Partner {
+  id        String   @id @default(uuid())
+  name      String
+  logo      String?
+  type      String   @default("ONG") // ONG, INSTITUTION, ENTERPRISE, ASSOCIATION
+  website   String?
+  createdAt DateTime @default(now())
+}
