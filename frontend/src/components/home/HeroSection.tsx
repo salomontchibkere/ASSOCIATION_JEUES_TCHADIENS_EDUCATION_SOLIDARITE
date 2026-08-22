@@ -91,7 +91,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ setCurrentTab }) => {
               <div className="video-modal-body">
                 <div className="video-header-info">
                   <h3>Guide Officiel de Navigation & Démonstration du Site AJTES</h3>
-                  <p>Présenté par <strong>Salomon</strong> — Responsable Technique & Maintenance Informatique de l'AJTES Tchad</p>
+                  <p>Guide officiel de démonstration et d'utilisation de la plateforme AJTES Tchad</p>
                 </div>
                 <img
                   src="./images/tutoriel_demo_salomon_ajtes.gif"

@@ -12,12 +12,6 @@ export const AboutView: React.FC = () => {
     { title: 'Protection de l\'Environnement', desc: 'Sensibilisation aux enjeux écologiques et campagnes de reboisement.' }
   ];
 
-  const team = [
-    { name: 'Mahamat Hassan', role: 'Président du Bureau National', bio: 'Engagé depuis la création en 2022 pour la promotion de l\'éducation.', img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80' },
-    { name: 'Fatimé Zara', role: 'Vice-Présidente', bio: 'Supervise les actions de solidarité et le réseau des bénévoles.', img: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80' },
-    { name: 'SALOMON', role: 'Responsable Technique & Maintenance', bio: 'Gestion de l\'infrastructure numérique, du site web officiel et du suivi des projets.', img: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80' },
-    { name: 'Djibrine Ahmat', role: 'Trésorier Général', bio: 'Responsable de la transparence financière, des dons et des rapports financiers.', img: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=300&q=80' }
-  ];
 
   return (
     <div className="about-page">
@@ -83,27 +77,6 @@ export const AboutView: React.FC = () => {
 
       {/* Official Documents Viewer Section */}
       <OfficialDocuments />
-
-      {/* Team Section */}
-      <section className="section bg-slate">
-        <div className="section-title-container">
-          <span className="section-badge">Gouvernance</span>
-          <h2 className="section-title">L'Équipe Dirigeante & Responsables</h2>
-        </div>
-
-        <div className="grid-4">
-          {team.map((t, i) => (
-            <div key={i} className="team-card card">
-              <img src={t.img} alt={t.name} className="team-img" />
-              <div className="team-body">
-                <h3>{t.name}</h3>
-                <span className="team-role">{t.role}</span>
-                <p className="team-bio">{t.bio}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
 
       <style>{`
         .about-banner {

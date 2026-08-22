@@ -36,7 +36,7 @@ export const CommitteesView: React.FC<CommitteesViewProps> = ({ setCurrentTab })
               <p className="region-badge">📍 {c.region}</p>
               <p className="comm-desc">{c.description[language] || c.description['fr']}</p>
               <div className="comm-footer">
-                <span>👤 Resp: {c.leader}</span>
+                <span>📍 {c.region}</span>
                 <span>👥 {c.membersCount} Membres</span>
               </div>
             </div>
