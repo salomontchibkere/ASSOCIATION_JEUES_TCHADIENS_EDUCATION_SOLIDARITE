@@ -45,80 +45,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, navig
 
   return (
     <header className="navbar-header">
-      {/* Top Utility Bar with Organized Actions */}
-      <div className="top-bar">
-        <div className="top-bar-container">
-          <div className="top-left-group">
-            <span className="slogan-badge animated-pulse-badge">
-              AJTES TCHAD — Éducation & Solidarité (Statuts 2022)
-            </span>
-            <a
-              href={WHATSAPP_GROUP_LINK}
-              target="_blank"
-              rel="noreferrer"
-              className="btn btn-whatsapp btn-sm"
-              title="Rejoindre le Groupe WhatsApp Officiel AJTES"
-            >
-              WhatsApp Officiel
-            </a>
-          </div>
-
-          <div className="top-actions-group">
-            {/* Language Selector Dropdown */}
-            <div className="lang-select-box">
-              <select
-                className="lang-select-dropdown"
-                value={language}
-                onChange={e => setLanguage(e.target.value as Language)}
-                aria-label="Sélectionner la langue"
-              >
-                <option value="fr">FR - Français</option>
-                <option value="en">EN - English</option>
-                <option value="ar">AR - العربية</option>
-              </select>
-            </div>
-
-            {/* Auth / Admin Control Bar */}
-            <div className="auth-control-pill">
-              {isLoggedIn ? (
-                <div className="user-control-group">
-                  <span className="user-name">{currentUser?.name}</span>
-                  {isAdmin && (
-                    <button
-                      className="btn btn-admin btn-sm"
-                      onClick={() => handleNavClick('admin')}
-                      title="Accéder au Tableau de Bord Administration"
-                    >
-                      Administration
-                    </button>
-                  )}
-                  <button
-                    className="btn btn-primary btn-sm"
-                    onClick={() => handleNavClick('member')}
-                    title="Mon Espace Membre"
-                  >
-                    Espace Membre
-                  </button>
-                  <button className="btn btn-secondary btn-sm logout-btn" onClick={logout} title="Déconnexion">
-                    Déconnexion
-                  </button>
-                </div>
-              ) : (
-                <div className="auth-buttons-minimal">
-                  <button className="btn btn-secondary btn-sm" onClick={() => handleAuthClick('login')}>
-                    Se connecter
-                  </button>
-                  <button className="btn btn-primary btn-sm" onClick={() => handleAuthClick('register')}>
-                    S'inscrire
-                  </button>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Main Navigation Bar */}
+      {/* Main Unified Navigation Bar */}
       <div className="main-nav">
         <div className="main-nav-container">
           {/* Logo */}
@@ -143,13 +70,71 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, navig
             ))}
           </nav>
 
-          {/* Clean Main CTAs (Only 2 Main Buttons) */}
+          {/* Integrated Actions Group (Same Line Level) */}
           <div className="cta-actions">
+            {/* WhatsApp Group Link */}
+            <a
+              href={WHATSAPP_GROUP_LINK}
+              target="_blank"
+              rel="noreferrer"
+              className="btn btn-whatsapp"
+              title="Rejoindre le Groupe WhatsApp Officiel AJTES"
+            >
+              WhatsApp
+            </a>
+
+            {/* Language Selector Dropdown */}
+            <div className="lang-select-box">
+              <select
+                className="lang-select-dropdown"
+                value={language}
+                onChange={e => setLanguage(e.target.value as Language)}
+                aria-label="Sélectionner la langue"
+              >
+                <option value="fr">FR</option>
+                <option value="en">EN</option>
+                <option value="ar">AR</option>
+              </select>
+            </div>
+
+            {/* Auth Buttons */}
+            {isLoggedIn ? (
+              <div className="user-control-group">
+                <span className="user-name" title={currentUser?.name}>{currentUser?.name}</span>
+                {isAdmin && (
+                  <button
+                    className="btn btn-admin btn-sm"
+                    onClick={() => handleNavClick('admin')}
+                    title="Accéder au Tableau de Bord Administration"
+                  >
+                    Admin
+                  </button>
+                )}
+                <button
+                  className="btn btn-primary btn-sm"
+                  onClick={() => handleNavClick('member')}
+                  title="Mon Espace Membre"
+                >
+                  Mon Espace
+                </button>
+                <button className="btn btn-secondary btn-sm logout-btn" onClick={logout} title="Déconnexion">
+                  Déconnexion
+                </button>
+              </div>
+            ) : (
+              <div className="auth-buttons-minimal">
+                <button className="btn btn-secondary btn-sm" onClick={() => handleAuthClick('login')}>
+                  Se connecter
+                </button>
+                <button className="btn btn-primary btn-sm" onClick={() => handleAuthClick('register')}>
+                  S'inscrire
+                </button>
+              </div>
+            )}
+
+            {/* Donate Button */}
             <button className="btn btn-gold btn-sm" onClick={() => handleNavClick('donate')}>
               Faire un Don
-            </button>
-            <button className="btn btn-primary btn-sm" onClick={() => handleNavClick('member')}>
-              Espace Membre
             </button>
           </div>
 
@@ -177,6 +162,19 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, navig
                 {item.label}
               </button>
             ))}
+
+            <div className="mobile-lang-row">
+              <span style={{ fontSize: '0.85rem', fontWeight: 600 }}>Langue:</span>
+              <select
+                className="lang-select-dropdown"
+                value={language}
+                onChange={e => setLanguage(e.target.value as Language)}
+              >
+                <option value="fr">Français (FR)</option>
+                <option value="en">English (EN)</option>
+                <option value="ar">العربية (AR)</option>
+              </select>
+            </div>
 
             <a
               href={WHATSAPP_GROUP_LINK}
@@ -221,53 +219,109 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, navig
           border-bottom: 1px solid var(--neutral-border);
         }
 
-        .top-bar {
-          background-color: #F8FAFC;
-          color: var(--neutral-heading);
-          font-size: 0.85rem;
-          padding: 0.45rem 1.5rem;
-          border-bottom: 1px solid var(--neutral-border);
+        .main-nav {
+          padding: 0.65rem 1.25rem;
+          background: #FFFFFF;
         }
 
-        .top-bar-container {
-          max-width: 1280px;
+        .main-nav-container {
+          max-width: 1440px;
           margin: 0 auto;
           display: flex;
           align-items: center;
           justify-content: space-between;
-          flex-wrap: wrap;
           gap: 0.75rem;
         }
 
-        .top-left-group {
+        .logo-brand {
           display: flex;
           align-items: center;
-          gap: 0.85rem;
+          gap: 0.65rem;
+          cursor: pointer;
+          flex-shrink: 0;
         }
 
-        .slogan-badge {
-          background: var(--primary-emerald-light);
+        .official-logo-img {
+          width: 44px;
+          height: 44px;
+          object-fit: cover;
+          border-radius: 50%;
+          border: 2px solid var(--primary-emerald);
+          box-shadow: 0 3px 8px rgba(0, 122, 61, 0.2);
+        }
+
+        .logo-title {
+          font-weight: 800;
+          font-size: 1.15rem;
+          color: var(--neutral-heading);
+          display: block;
+          line-height: 1.1;
+        }
+
+        .logo-sub {
+          font-size: 0.72rem;
           color: var(--primary-emerald-text);
           font-weight: 700;
-          font-size: 0.8rem;
-          padding: 0.25rem 0.75rem;
-          border-radius: var(--radius-pill);
-          border: 1px solid rgba(0, 122, 61, 0.2);
+          letter-spacing: 0.04em;
         }
 
-        .top-actions-group {
+        .desktop-links {
           display: flex;
           align-items: center;
-          gap: 0.85rem;
+          gap: 0.25rem;
+          flex-wrap: nowrap;
+        }
+
+        .nav-link {
+          background: none;
+          border: none;
+          padding: 0.45rem 0.65rem;
+          font-size: 0.85rem;
+          font-weight: 700;
+          color: var(--neutral-heading);
+          cursor: pointer;
+          border-radius: var(--radius-pill);
+          transition: all 0.2s;
+          white-space: nowrap;
+        }
+
+        .nav-link:hover, .nav-link.active {
+          color: var(--primary-emerald-text);
+          background-color: var(--primary-emerald-light);
+        }
+
+        .cta-actions {
+          display: flex;
+          align-items: center;
+          gap: 0.45rem;
+          flex-shrink: 0;
+        }
+
+        .btn-whatsapp {
+          background-color: #25D366;
+          color: #FFFFFF;
+          font-weight: 700;
+          border-radius: var(--radius-pill);
+          font-size: 0.78rem;
+          padding: 0.35rem 0.7rem;
+          text-decoration: none;
+          display: inline-flex;
+          align-items: center;
+          gap: 0.3rem;
+          transition: opacity 0.2s;
+        }
+
+        .btn-whatsapp:hover {
+          opacity: 0.9;
+          color: #FFFFFF;
         }
 
         .lang-select-box {
           display: flex;
           align-items: center;
-          gap: 0.3rem;
           background: #FFFFFF;
           border: 1px solid var(--neutral-border);
-          padding: 0.2rem 0.6rem;
+          padding: 0.2rem 0.4rem;
           border-radius: var(--radius-pill);
           box-shadow: var(--shadow-sm);
         }
@@ -276,7 +330,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, navig
           background: transparent;
           border: none;
           color: var(--neutral-heading);
-          font-size: 0.82rem;
+          font-size: 0.78rem;
           font-weight: 700;
           font-family: var(--font-main);
           cursor: pointer;
@@ -291,107 +345,23 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, navig
         .user-control-group {
           display: flex;
           align-items: center;
-          gap: 0.5rem;
+          gap: 0.35rem;
         }
 
         .user-name {
           font-weight: 700;
-          font-size: 0.82rem;
+          font-size: 0.8rem;
           color: var(--neutral-heading);
-          margin-right: 0.25rem;
+          max-width: 100px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
         }
 
         .auth-buttons-minimal {
           display: flex;
           align-items: center;
-          gap: 0.4rem;
-        }
-
-        .main-nav {
-          padding: 0.8rem 1.5rem;
-          background: #FFFFFF;
-        }
-
-        .main-nav-container {
-          max-width: 1280px;
-          margin: 0 auto;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-        }
-
-        .logo-brand {
-          display: flex;
-          align-items: center;
-          gap: 0.75rem;
-          cursor: pointer;
-        }
-
-        .official-logo-img {
-          width: 48px;
-          height: 48px;
-          object-fit: cover;
-          border-radius: 50%;
-          border: 2px solid var(--primary-emerald);
-          box-shadow: 0 4px 10px rgba(0, 122, 61, 0.25);
-        }
-
-        .logo-icon {
-          width: 44px;
-          height: 44px;
-          background: linear-gradient(135deg, var(--primary-emerald), var(--accent-gold));
-          color: #FFF;
-          font-weight: 800;
-          font-size: 1.1rem;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          border-radius: 12px;
-          box-shadow: 0 4px 10px rgba(0, 122, 61, 0.25);
-        }
-
-        .logo-title {
-          font-weight: 800;
-          font-size: 1.25rem;
-          color: var(--neutral-heading);
-          display: block;
-          line-height: 1.1;
-        }
-
-        .logo-sub {
-          font-size: 0.75rem;
-          color: var(--primary-emerald-text);
-          font-weight: 700;
-          letter-spacing: 0.05em;
-        }
-
-        .desktop-links {
-          display: flex;
-          align-items: center;
           gap: 0.35rem;
-        }
-
-        .nav-link {
-          background: none;
-          border: none;
-          padding: 0.5rem 0.8rem;
-          font-size: 0.9rem;
-          font-weight: 700;
-          color: var(--neutral-heading);
-          cursor: pointer;
-          border-radius: var(--radius-pill);
-          transition: all 0.2s;
-        }
-
-        .nav-link:hover, .nav-link.active {
-          color: var(--primary-emerald-text);
-          background-color: var(--primary-emerald-light);
-        }
-
-        .cta-actions {
-          display: flex;
-          align-items: center;
-          gap: 0.6rem;
         }
 
         .mobile-hamburger {
@@ -430,14 +400,24 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, navig
           text-decoration: none;
         }
 
+        .mobile-lang-row {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 0.5rem 1rem;
+          background: var(--neutral-light-bg);
+          border-radius: var(--radius-sm);
+        }
+
         .margin-top-sm { margin-top: 0.5rem; }
 
-        @media (max-width: 1080px) {
+        @media (max-width: 1240px) {
           .desktop-links { display: none; }
           .cta-actions { display: none; }
           .mobile-hamburger { display: block; }
         }
       `}</style>
     </header>
+
   );
 };

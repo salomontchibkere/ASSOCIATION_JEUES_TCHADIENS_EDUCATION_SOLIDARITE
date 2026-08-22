@@ -92,15 +92,27 @@ export const MemberSpaceView: React.FC<MemberSpaceViewProps> = ({ initialMode = 
 
                   <div className="grid-2">
                     <div className="form-group">
-                      <label>Profession / Études *</label>
-                      <input
-                        type="text"
+                      <label>Profession / Statut *</label>
+                      <select
                         required
-                        placeholder="Ex: Étudiant, Enseignant, Indépendant"
                         value={profession}
                         onChange={e => setProfession(e.target.value)}
                         className="form-control"
-                      />
+                      >
+                        <option value="" disabled>-- Sélectionner votre profession --</option>
+                        <option value="Élève / Étudiant(e)">Élève / Étudiant(e)</option>
+                        <option value="Enseignant(e) / Formateur(trice)">Enseignant(e) / Formateur(trice)</option>
+                        <option value="Ingénieur(e) / Technicien(ne)">Ingénieur(e) / Technicien(ne)</option>
+                        <option value="Fonctionnaire / Agent de l'État">Fonctionnaire / Agent de l'État</option>
+                        <option value="Commerçant(e) / Entrepreneur(e)">Commerçant(e) / Entrepreneur(e)</option>
+                        <option value="Professionnel(le) de Santé / Médecin">Professionnel(le) de Santé / Médecin</option>
+                        <option value="Juriste / Avocat(e)">Juriste / Avocat(e)</option>
+                        <option value="Artisan(e) / Ouvrier(ère)">Artisan(e) / Ouvrier(ère)</option>
+                        <option value="Agriculteur(trice) / Éleveur(euse)">Agriculteur(trice) / Éleveur(euse)</option>
+                        <option value="Consultant(e) / Indépendant(e)">Consultant(e) / Indépendant(e)</option>
+                        <option value="Sans emploi / En recherche">Sans emploi / En recherche d'emploi</option>
+                        <option value="Autre profession">Autre profession</option>
+                      </select>
                     </div>
                     <div className="form-group">
                       <label>Téléphone / WhatsApp *</label>
