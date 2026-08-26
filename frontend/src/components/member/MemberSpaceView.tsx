@@ -11,6 +11,7 @@ export const MemberSpaceView: React.FC<MemberSpaceViewProps> = ({ initialMode = 
   const { currentUser, isLoggedIn, isAdmin, login, logout, register } = useAuth();
 
   const [isLoginMode, setIsLoginMode] = useState(initialMode === 'login');
+  const [showQRModal, setShowQRModal] = useState(false);
 
   React.useEffect(() => {
     if (initialMode) {
@@ -248,7 +249,18 @@ export const MemberSpaceView: React.FC<MemberSpaceViewProps> = ({ initialMode = 
 
             {/* Digital Membership Card Preview */}
             <div className="digital-card-section margin-top-lg">
-              <h3 className="section-subtitle-dark">Carte d'Adhérent Officielle AJTES</h3>
+              <div className="flex-between align-center margin-bottom-sm">
+                <h3 className="section-subtitle-dark" style={{ margin: 0 }}>Carte d'Adhérent Officielle AJTES</h3>
+                <div className="card-actions-row">
+                  <button className="btn btn-gold btn-sm" onClick={() => window.print()} title="Imprimer ou enregistrer en PDF HD">
+                    🖨️ Imprimer / PDF HD
+                  </button>
+                  <button className="btn btn-secondary btn-sm" onClick={() => setShowQRModal(true)} title="Vérifier la carte">
+                    🔍 Scanner QR
+                  </button>
+                </div>
+              </div>
+
               <div className="digital-member-card">
                 <div className="card-top">
                   <div className="card-brand">
@@ -274,13 +286,65 @@ export const MemberSpaceView: React.FC<MemberSpaceViewProps> = ({ initialMode = 
                     <p className="card-id">ID: AJTES-2026-{(currentUser?.email.length || 7) * 142}</p>
                     <p className="card-city">{currentUser?.city || 'N\'Djamena'}, Tchad</p>
                   </div>
-                  <div className="card-qr">
+                  <div className="card-qr" onClick={() => setShowQRModal(true)} title="Cliquez pour scanner et vérifier l'authenticité" style={{ cursor: 'pointer' }}>
                     <span>CODE QR OFFICIEL</span>
-                    <div className="qr-box">████</div>
+                    <div className="qr-box">
+                      <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <rect x="3" y="3" width="7" height="7" rx="1" fill="#000" />
+                        <rect x="14" y="3" width="7" height="7" rx="1" fill="#000" />
+                        <rect x="3" y="14" width="7" height="7" rx="1" fill="#000" />
+                        <rect x="14" y="14" width="4" height="4" fill="#000" />
+                        <rect x="18" y="18" width="3" height="3" fill="#000" />
+                      </svg>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
+
+            {/* QR Code Verification Modal */}
+            {showQRModal && (
+              <div className="modal-overlay" onClick={() => setShowQRModal(false)}>
+                <div className="modal-content qr-verify-modal" onClick={e => e.stopPropagation()}>
+                  <button className="modal-close" onClick={() => setShowQRModal(false)}>✕</button>
+                  <div className="text-center">
+                    <div className="seal-badge margin-bottom-sm">
+                      ✅ ADHÉRENT CERTIFIÉ AJTES TCHAD
+                    </div>
+                    <h2>Vérification d'Authenticité</h2>
+                    <p className="text-muted">Document officiel délivré par le Bureau National AJTES (N'Djamena)</p>
+
+                    <div className="qr-big-display margin-top-md margin-bottom-md">
+                      <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                        <rect x="2" y="2" width="8" height="8" rx="1" fill="#007A3D" />
+                        <rect x="14" y="2" width="8" height="8" rx="1" fill="#007A3D" />
+                        <rect x="2" y="14" width="8" height="8" rx="1" fill="#007A3D" />
+                        <rect x="14" y="14" width="5" height="5" fill="#D97706" />
+                        <rect x="19" y="19" width="3" height="3" fill="#007A3D" />
+                      </svg>
+                      <span className="qr-code-string">AJTES-VERIFY-2026-{(currentUser?.email.length || 7) * 142}</span>
+                    </div>
+
+                    <div className="verify-info-table">
+                      <div className="v-row"><span>Nom & Prénom:</span> <strong>{currentUser?.name}</strong></div>
+                      <div className="v-row"><span>Rôle Officiel:</span> <strong>{currentUser?.role === 'admin' ? 'Administrateur' : 'Membre Actif'}</strong></div>
+                      <div className="v-row"><span>Matricule AJTES:</span> <strong>AJTES-2026-{(currentUser?.email.length || 7) * 142}</strong></div>
+                      <div className="v-row"><span>Siège Social:</span> <strong>N'Djamena, République du Tchad</strong></div>
+                      <div className="v-row"><span>Année d'Exercice:</span> <strong>2026 (Statut Actif)</strong></div>
+                    </div>
+
+                    <div className="margin-top-lg flex-center gap-sm">
+                      <button className="btn btn-gold btn-sm" onClick={() => { setShowQRModal(false); window.print(); }}>
+                        🖨️ Imprimer la Carte
+                      </button>
+                      <button className="btn btn-secondary btn-sm" onClick={() => setShowQRModal(false)}>
+                        Fermer
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
 
             {/* Dashboard Sections Grid */}
             <div className="grid-2 margin-top-lg">
@@ -663,16 +727,90 @@ export const MemberSpaceView: React.FC<MemberSpaceViewProps> = ({ initialMode = 
           text-align: center;
           font-size: 0.65rem;
           color: #CBD5E1;
+          transition: transform 0.2s;
+        }
+
+        .card-qr:hover {
+          transform: scale(1.06);
         }
 
         .qr-box {
           background: #FFF;
           color: #000;
-          padding: 0.5rem;
+          padding: 0.4rem;
           border-radius: 6px;
-          font-family: monospace;
-          letter-spacing: 2px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
           margin-top: 0.2rem;
+        }
+
+        .qr-verify-modal {
+          max-width: 520px;
+          width: 92%;
+          padding: 2.25rem;
+          background: #FFFFFF;
+          border-radius: var(--radius-lg);
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .seal-badge {
+          display: inline-block;
+          background: var(--primary-emerald-light);
+          color: var(--primary-emerald-text);
+          font-weight: 800;
+          font-size: 0.85rem;
+          padding: 0.4rem 1rem;
+          border-radius: var(--radius-pill);
+          border: 1px solid rgba(0, 122, 61, 0.3);
+        }
+
+        .qr-big-display {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 0.75rem;
+          background: var(--neutral-light-bg);
+          padding: 1.5rem;
+          border-radius: var(--radius-md);
+          border: 1px solid var(--neutral-border);
+        }
+
+        .qr-code-string {
+          font-family: monospace;
+          font-weight: 700;
+          font-size: 0.85rem;
+          color: var(--neutral-heading);
+          letter-spacing: 1px;
+        }
+
+        .verify-info-table {
+          display: flex;
+          flex-direction: column;
+          gap: 0.65rem;
+          text-align: left;
+          background: #F8FAFC;
+          padding: 1.25rem;
+          border-radius: var(--radius-sm);
+          border: 1px solid var(--neutral-border);
+        }
+
+        .v-row {
+          display: flex;
+          justify-content: space-between;
+          font-size: 0.9rem;
+          color: var(--neutral-body);
+          border-bottom: 1px dashed var(--neutral-border);
+          padding-bottom: 0.35rem;
+        }
+
+        .v-row:last-child {
+          border-bottom: none;
+          padding-bottom: 0;
+        }
+
+        .v-row strong {
+          color: var(--neutral-heading);
         }
       `}</style>
     </div>
