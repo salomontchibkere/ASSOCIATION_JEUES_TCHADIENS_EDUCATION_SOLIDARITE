@@ -61,7 +61,7 @@ export async function sendWelcomeEmail(toEmail: string, fullName: string): Promi
       </div>
 
       <div style="text-align: center; margin-top: 15px; color: #718096; font-size: 12px;">
-        <p>© 2026 AJTES Tchad — Siège Officiel N'Djamena & Nangassou</p>
+        <p>© 2026 AJTES Tchad — Siège Officiel N'Djamena</p>
       </div>
     </div>
   `;
@@ -82,6 +82,66 @@ export async function sendWelcomeEmail(toEmail: string, fullName: string): Promi
     return true;
   } catch (error: any) {
     console.error(`❌ [EMAIL SERVICE ERROR] Échec de l'envoi de l'email de bienvenue: ${error.message}`);
+    return false;
+  }
+}
+
+/**
+ * Send Login Security Notification Email to a Member
+ */
+export async function sendLoginNotificationEmail(
+  toEmail: string,
+  fullName: string,
+  loginTime: string = new Date().toLocaleString('fr-FR')
+): Promise<boolean> {
+  const subject = `🔐 Notification de Connexion — AJTES Tchad`;
+
+  const html = `
+    <div style="font-family: 'Plus Jakarta Sans', Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #F8FAFC; padding: 20px; border-radius: 12px;">
+      <div style="background: linear-gradient(135deg, #092014, #007A3D); color: #ffffff; padding: 25px; border-radius: 10px; text-align: center;">
+        <h1 style="margin: 0; font-size: 24px;">AJTES TCHAD</h1>
+        <p style="margin: 5px 0 0 0; color: #F5A623; font-weight: bold;">ALERTE DE SÉCURITÉ & CONNEXION</p>
+      </div>
+
+      <div style="background-color: #ffffff; padding: 25px; border-radius: 10px; margin-top: 15px; border: 1px solid #E2E8F0;">
+        <h2 style="color: #1C2836; font-size: 18px;">Bonjour ${fullName},</h2>
+        <p style="color: #4A5568; line-height: 1.6;">
+          Une connexion à votre espace membre <strong>AJTES Tchad</strong> vient d'être effectuée avec succès.
+        </p>
+
+        <div style="background-color: #F1F5F9; border-left: 4px solid #007A3D; padding: 15px; border-radius: 6px; margin: 20px 0; font-size: 14px;">
+          <p style="margin: 0 0 8px 0;"><strong>📧 Compte:</strong> ${toEmail}</p>
+          <p style="margin: 0 0 8px 0;"><strong>🕒 Date et Heure:</strong> ${loginTime}</p>
+          <p style="margin: 0;"><strong>✅ Statut:</strong> Authentification Réussie</p>
+        </div>
+
+        <p style="color: #718096; font-size: 13px;">
+          Si vous êtes à l'origine de cette connexion, aucune action n'est requise. Si vous n'êtes pas à l'origine de cette action, veuillez immédiatement modifier votre mot de passe et contacter le bureau de l'AJTES.
+        </p>
+      </div>
+
+      <div style="text-align: center; margin-top: 15px; color: #718096; font-size: 12px;">
+        <p>© 2026 AJTES Tchad — Espace Membre Sécurisé</p>
+      </div>
+    </div>
+  `;
+
+  if (!isEmailConfigured()) {
+    console.log(`\n📧 [EMAIL SERVICE - DEV MODE] Notification de connexion simulée pour: ${toEmail} (${fullName}) à ${loginTime}`);
+    return true;
+  }
+
+  try {
+    await transporter.sendMail({
+      from: EMAIL_FROM,
+      to: toEmail,
+      subject,
+      html,
+    });
+    console.log(`✅ [EMAIL SERVICE] Notification de connexion transmise avec succès à: ${toEmail}`);
+    return true;
+  } catch (error: any) {
+    console.error(`❌ [EMAIL SERVICE ERROR] Échec de l'envoi de la notification de connexion: ${error.message}`);
     return false;
   }
 }

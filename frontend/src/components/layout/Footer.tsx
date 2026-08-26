@@ -83,7 +83,7 @@ export const Footer: React.FC<FooterProps> = ({ setCurrentTab }) => {
           {/* Contact Details & Newsletter */}
           <div className="footer-col contact-col">
             <h4>Contact & Siège</h4>
-            <p>N'Djamena & Nangassou, République du Tchad</p>
+            <p>N'Djamena, République du Tchad</p>
             <p>Airtel Money: +235 66 43 95 02 / +235 68 90 23 47</p>
             <p>Email: association.ajtes@gmail.com</p>
             

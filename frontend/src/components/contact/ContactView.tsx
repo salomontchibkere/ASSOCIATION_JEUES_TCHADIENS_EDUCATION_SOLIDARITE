@@ -47,13 +47,13 @@ export const ContactView: React.FC = () => {
           {/* Contact Details & Social Links */}
           <div className="contact-info-card card">
             <h2>Nos Coordonnées Officielles</h2>
-            <p className="subtitle">L'association est à votre écoute à N'Djamena et Nangassou.</p>
+            <p className="subtitle">L'association est à votre écoute à N'Djamena.</p>
 
             <div className="info-items">
               <div className="info-item">
                 <div>
                   <strong>Adresse du Siège & Bureaux</strong>
-                  <p>N'Djamena & Nangassou, République du Tchad</p>
+                  <p>N'Djamena, République du Tchad</p>
                 </div>
               </div>
 

@@ -187,6 +187,33 @@ export const MemberSpaceView: React.FC<MemberSpaceViewProps> = ({ initialMode = 
         ) : (
           /* LOGGED IN MEMBER DASHBOARD */
           <div className="dashboard-container">
+            {/* Login & Security Notification Notice */}
+            <div className="notification-toast-alert" style={{
+              backgroundColor: '#E6F4EA',
+              border: '1px solid #34A853',
+              borderRadius: '12px',
+              padding: '1rem 1.25rem',
+              marginBottom: '1.5rem',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              gap: '1rem',
+              boxShadow: '0 4px 12px rgba(52, 168, 83, 0.12)'
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                <span style={{ fontSize: '1.5rem' }}>📧</span>
+                <div>
+                  <strong style={{ color: '#0F5132', fontSize: '0.95rem', display: 'block' }}>
+                    Notification de Connexion Envoyée à {currentUser?.email}
+                  </strong>
+                  <span style={{ color: '#146C43', fontSize: '0.85rem' }}>
+                    Le service backend a généré une notification de sécurité pour cette session. 
+                    <em> (Note : En mode local, configurez SMTP_PASS dans le fichier backend/.env pour délivrer l'email dans la boîte de réception réelle).</em>
+                  </span>
+                </div>
+              </div>
+            </div>
+
             {/* Header Profile */}
             <div className="profile-header-card card">
               <div className="profile-info">

@@ -223,6 +223,57 @@ export const initialEvents: Event[] = [
 
 export const initialOfficialDocuments: OfficialDocument[] = [
   {
+    id: 'doc-config-acces',
+    title: {
+      fr: "Fiche de Configuration d'Accès & Gestion (5 Membres)",
+      en: "Access & Management Setup Form (5 Members)",
+      ar: "استمارة إعداد الوصول والإدارة (5 أعضاء)"
+    },
+    type: 'autre',
+    description: {
+      fr: "Fiche de collecte des identifiants et des privilèges pour les 5 gestionnaires du site : Salomon et Marc (Accès Complet 100%), Banakolong (Président), Valentin (SG) et Boikoussigue (Chargé de Com).",
+      en: "Credential and privilege collection sheet for the 5 website managers: Salomon & Marc (Full Access), Banakolong (President), Valentin (SG), and Boikoussigue (Comm Lead).",
+      ar: "استمارة جمع بيانات الدخول والصلاحيات لـ 5 مدراء: سالومون ومارك (وصول كامل)، باناكولونغ (الرئيس)، فالنتين (الأمين العام)، وبويكوسيغي (مسؤول الإعلام)."
+    },
+    downloadUrl: './documents/Fiche_Configuration_Acces_AJTES.pdf',
+    lastUpdated: '2026-08-26',
+    contentMarkdown: {
+      fr: `### FICHE DE CONFIGURATION DU SITE WEB ET LA GESTION (AJTES)
+
+**COLLECTE DES IDENTIFIANTS & DÉFINITION DES RÔLES OFFICIELS**
+
+1. **SALOMON** — Développeur Principal & Technicien Chef du Site Web
+   - **Rôle Technique :** \`SUPER_ADMIN\` (Accès Complet 100%)
+   - **Attributions :** Contrôle total du code, base de données, infrastructure cloud, sécurité et déploiements.
+
+2. **MARC** — Administrateur Principal & Co-Gestionnaire du Site Web
+   - **Rôle Technique :** \`ADMIN_FULL\` (Accès Complet 100%)
+   - **Attributions :** Administration globale du site, validation des contenus, gestion des accès et supervision générale.
+
+3. **BANAKOLONG** — Président de l'Association AJTES
+   - **Rôle Technique :** \`ADMIN_PRESIDENT\` (Accès Restreint)
+   - **Attributions :** Supervision stratégique, consultation des rapports et validation finale des adhésions.
+
+4. **VALENTIN** — Secrétaire Général (SG) de l'Association AJTES
+   - **Rôle Technique :** \`ADMIN_MEMBERS\` (Accès Restreint)
+   - **Attributions :** Gestion du registre des membres, étude des dossiers de candidatures et procès-verbaux.
+
+5. **BOIKOUSSIGUE** — Chargé de Communication de l'Association AJTES
+   - **Rôle Technique :** \`ADMIN_CONTENT\` (Accès Restreint)
+   - **Attributions :** Rédaction, édition et publication des articles, actualités, photos et vidéos.`,
+      en: `### WEBSITE ACCESS SETUP & MANAGEMENT FORM (AJTES)
+- **Salomon & Marc:** Full Site Access (100%)
+- **Banakolong (President):** Limited Access (Supervision & Admission)
+- **Valentin (Secretary General):** Limited Access (Member Registry & Secretarial)
+- **Boikoussigue (Comm Lead):** Limited Access (Content & Media Publication)`,
+      ar: `### استمارة إعداد الوصول والإدارة لموقع تأجتس
+- **سالومون ومارك:** وصول كامل للموقع (100%)
+- **باناكولونغ (الرئيس):** وصول محدود (الإشراف والموافقات)
+- **فالنتين (الأمين العام):** وصول محدود (إدارة السجل والأعضاء)
+- **بويكوسيغي (مسؤول الإعلام):** وصول محدود (إدارة المحتوى والإعلام)`
+    }
+  },
+  {
     id: 'doc-statuts',
     title: {
       fr: "Statuts de l'Association AJTES",

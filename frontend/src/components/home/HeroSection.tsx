@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { useLanguage } from '../../context/LanguageContext';
 
 interface HeroSectionProps {
-  setCurrentTab: (tab: string) => void;
+  setCurrentTab?: (tab: string) => void;
 }
 
-export const HeroSection: React.FC<HeroSectionProps> = ({ setCurrentTab }) => {
+export const HeroSection: React.FC<HeroSectionProps> = ({ setCurrentTab: _setCurrentTab }) => {
   const { t } = useLanguage();
   const [showVideoModal, setShowVideoModal] = useState(false);
   const [videoTab, setVideoTab] = useState<'tutorial' | 'ceg'>('tutorial');
@@ -24,31 +24,17 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ setCurrentTab }) => {
           Éduquer, Solidariser & <span className="animated-gradient-text">Construire le Tchad</span>
         </h1>
         <p className="hero-subtitle">
-          {t('heroSubtitle')} — Une organisation citoyenne au service de la scolarisation, de la jeunesse et du développement local (N'Djamena & Nangassou).
+          {t('heroSubtitle')} — Une organisation citoyenne au service de la scolarisation, de la jeunesse et du développement local (N'Djamena, Tchad).
         </p>
 
-        {/* REORGANIZED BUTTON GROUP — 3 Distinct Color-Coded Text Buttons */}
+        {/* Video Preview Action */}
         <div className="hero-actions-clean">
-          <button
-            className="btn btn-gold btn-lg animated-float"
-            onClick={() => setCurrentTab('donate')}
-            title="Soutenir les projets scolaires et faire un don"
-          >
-            Faire un Don
-          </button>
-          <button
-            className="btn btn-primary btn-lg"
-            onClick={() => setCurrentTab('member')}
-            title="Adhérer à l'association en tant que membre actif"
-          >
-            Rejoindre l'AJTES (Adhésion)
-          </button>
           <button
             className="btn btn-blue btn-lg"
             onClick={() => { setVideoTab('tutorial'); setShowVideoModal(true); }}
             title="Visionner le tutoriel vidéo et les reportages de l'association"
           >
-            Découvrir nos Vidéos
+            Découvrir nos Vidéos Officielles
           </button>
         </div>
 

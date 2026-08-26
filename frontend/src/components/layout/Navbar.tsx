@@ -193,11 +193,6 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, navig
                 </button>
               </div>
             )}
-
-            {/* Donate CTA Button */}
-            <button className="btn btn-gold btn-sm" onClick={() => handleNavClick('donate')}>
-              Faire un Don
-            </button>
           </div>
 
           {/* Mobile Hamburger Button */}
@@ -248,9 +243,6 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, navig
             </a>
 
             <div className="mobile-drawer-ctas">
-              <button className="btn btn-gold w-full" onClick={() => handleNavClick('donate')}>
-                Faire un Don
-              </button>
               {!isLoggedIn ? (
                 <div className="grid-2 gap-sm">
                   <button className="btn btn-primary w-full" onClick={() => handleAuthClick('register')}>

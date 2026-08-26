@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 import { db, User, MemberProfile } from '../db.js';
 import { AuthRequest } from '../middlewares/auth.middleware.js';
 import { cryptoUUID } from '../utils/uuid.js';
-import { sendWelcomeEmail } from '../services/email.service.js';
+import { sendWelcomeEmail, sendLoginNotificationEmail } from '../services/email.service.js';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'ajtes_secret_key_2026_salomon_secure_token';
 
@@ -95,6 +95,11 @@ export const login = async (req: Request, res: Response) => {
 
     const token = jwt.sign({ id: user.id, email: user.email, role: user.role }, JWT_SECRET, {
       expiresIn: '7d',
+    });
+
+    // Trigger login notification email asynchronously
+    sendLoginNotificationEmail(user.email, user.fullName).catch(err => {
+      console.error('Erreur lors de l\'envoi de la notification de connexion:', err);
     });
 
     const { password: _, ...userWithoutPassword } = user;
