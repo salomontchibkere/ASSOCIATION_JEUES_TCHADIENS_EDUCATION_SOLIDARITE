@@ -223,6 +223,58 @@ export const initialEvents: Event[] = [
 
 export const initialOfficialDocuments: OfficialDocument[] = [
   {
+    id: 'doc-security-report',
+    title: {
+      fr: "Rapport Officiel de Sécurité & Architecture Informatique (2026)",
+      en: "Official Security & Architecture Report (2026)",
+      ar: "التقرير الرسمي للأمن البنيوي وتكنولوجيا المعلومات (2026)"
+    },
+    type: 'autre',
+    description: {
+      fr: "Synthèse technique complète récapitulant point par point les 9 couches de sécurité intégrées : hachage bcrypt, jetons JWT, contrôle d'accès RBAC, rate-limiting anti-brute force, alertes email et protection contre l'injection SQL.",
+      en: "Comprehensive technical synthesis detailing the 9 security layers: bcrypt hashing, JWT tokens, RBAC access control, rate-limiting, email alerts, and SQLi protection.",
+      ar: "تقرير فني شامل يوضح طبقات الأمان التسع: تشفير bcrypt، رموز JWT، التحكم في الوصول RBAC، والحماية من الهجمات."
+    },
+    downloadUrl: './documents/Rapport_Securite_Plateforme_AJTES.pdf',
+    lastUpdated: '2026-08-27',
+    contentMarkdown: {
+      fr: `### RAPPORT OFFICIEL DE SÉCURITÉ INFORMATIQUE (AJTES)
+
+**SYNTHÈSE DES 9 DISPOSITIFS DE SÉCURITÉ & PROTECTION DES DONNÉES**
+
+1. **Hachage Irréversible des Mots de Passe (\`bcryptjs\` - Cost 10)**
+   - Aucun mot de passe n'est stocké en clair. Tout est chiffré de manière irréversible.
+
+2. **Authentification par Jetons Cryptographiques (\`jsonwebtoken\` - JWT)**
+   - Protection stateless avec signature secrète et expiration automatique des sessions.
+
+3. **Contrôle d'Accès Basé sur les Rôles (RBAC)**
+   - Inaccessible aux tiers : privilèges stricts pour Membres, Admins et Super Admin (Salomon).
+
+4. **Protection Anti-Brute Force (Rate Limiting)**
+   - Blocage automatique à 15 tentatives max par 15 minutes par adresse IP.
+
+5. **Alertes de Connexion Instantanées par E-mail**
+   - Notification de sécurité envoyée à chaque connexion réussie avec horodatage.
+
+6. **Protection contre l'Injection SQL (\`Prisma ORM\` & Requêtes Paramétrées)**
+   - Neutralisation totale des risques d'injection de code dans la base de données.
+
+7. **Filtrage des Origines Réseau (\`CORS Policy\`)**
+   - Protection contre le piratage cross-site et les attaques par falsification de requêtes.
+
+8. **Validation Strict des Formulaires (\`Zod Schemas\` & TypeScript)**
+   - Contrôle rigoureux de tous les types et formats de données reçus par le serveur.
+
+9. **Isolation des Clés Secrètes (\`.env\` & \`.gitignore\`)**
+   - Protection des secrets d'infrastructures hors des dépôts publics.`,
+      en: `### OFFICIAL SECURITY REPORT (AJTES)
+- 9 Security Layers active and verified by Tech Lead (Salomon).`,
+      ar: `### التقرير الرسمي للأمن البنيوي (AJTES)
+- 9 طبقات حماية مفعّلة ومفحوصة بواسطة المسؤول التقني.`
+    }
+  },
+  {
     id: 'doc-config-acces',
     title: {
       fr: "Fiche de Configuration d'Accès & Gestion (5 Membres)",

@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Rapport de Sécurité Informatique — AJTES Tchad</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 20mm 15mm 20mm 15mm;
+    }
+    body {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      color: #1E293B;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      background-color: #FFFFFF;
+    }
+    .header {
+      border-bottom: 3px solid #007A3D;
+      padding-bottom: 15px;
+      margin-bottom: 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .header-title h1 {
+      color: #007A3D;
+      font-size: 22pt;
+      margin: 0 0 5px 0;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .header-title p {
+      color: #64748B;
+      font-size: 11pt;
+      margin: 0;
+      font-weight: 600;
+    }
+    .badge-date {
+      background-color: #FEF3C7;
+      color: #92400E;
+      border: 1px solid #F59E0B;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-weight: bold;
+      font-size: 9pt;
+      text-align: right;
+    }
+    .meta-box {
+      background-color: #F8FAFC;
+      border-left: 4px solid #D97706;
+      padding: 12px 18px;
+      margin-bottom: 25px;
+      border-radius: 0 8px 8px 0;
+    }
+    .meta-box p {
+      margin: 3px 0;
+      font-size: 10pt;
+    }
+    .meta-box strong {
+      color: #0F172A;
+    }
+    h2 {
+      color: #007A3D;
+      font-size: 14pt;
+      border-bottom: 1.5px solid #E2E8F0;
+      padding-bottom: 6px;
+      margin-top: 25px;
+      margin-bottom: 12px;
+    }
+    .sec-card {
+      background-color: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-bottom: 14px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    }
+    .sec-card-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 6px;
+    }
+    .sec-number {
+      background-color: #007A3D;
+      color: #FFFFFF;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 10pt;
+    }
+    .sec-title {
+      font-size: 12pt;
+      font-weight: bold;
+      color: #0F172A;
+    }
+    .sec-tech {
+      background-color: #F1F5F9;
+      color: #475569;
+      font-family: monospace;
+      font-size: 8.5pt;
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-left: 8px;
+    }
+    .sec-desc {
+      font-size: 9.5pt;
+      color: #334155;
+      margin: 4px 0 0 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      margin-bottom: 25px;
+      font-size: 9.5pt;
+    }
+    th, td {
+      border: 1px solid #CBD5E1;
+      padding: 9px 12px;
+      text-align: left;
+    }
+    th {
+      background-color: #007A3D;
+      color: #FFFFFF;
+      font-weight: bold;
+      text-transform: uppercase;
+      font-size: 8.5pt;
+      letter-spacing: 0.5px;
+    }
+    tr:nth-child(even) {
+      background-color: #F8FAFC;
+    }
+    .footer-doc {
+      margin-top: 40px;
+      border-top: 1px solid #E2E8F0;
+      padding-top: 12px;
+      text-align: center;
+      font-size: 8.5pt;
+      color: #94A3B8;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="header-title">
+      <h1>AJTES TCHAD — SÉCURITÉ INFORMATIQUE</h1>
+      <p>Rapport d'Architecture & Protection des Données de la Plateforme Web</p>
+    </div>
+    <div class="badge-date">
+      VERSION OFFICIELLE 2026<br>
+      Siège Social N'Djamena
+    </div>
+  </div>
+
+  <div class="meta-box">
+    <p><strong>Organisation :</strong> Association des Jeunes Tchadiens pour l'Éducation et la Solidarité (AJTES)</p>
+    <p><strong>Responsable Technique & Maintenance :</strong> SALOMON (Super Admin)</p>
+    <p><strong>Périmètre d'Audit :</strong> API Backend (Node.js/Express) & Application Frontend (React/TypeScript)</p>
+    <p><strong>Statut de Conformité :</strong> 100% Fonctionnel & Sécurisé</p>
+  </div>
+
+  <h2>1. AUDIT DÉTAILLÉ DES DISPOSITIFS DE SÉCURITÉ</h2>
+
+  <div class="sec-card">
+    <div class="sec-card-header">
+      <span class="sec-number">1</span>
+      <span class="sec-title">Hachage Irréversible des Mots de Passe</span>
+      <span class="sec-tech">bcryptjs (Cost 10)</span>
+    </div>
+    <p class="sec-desc">
+      Aucun mot de passe n'est stocké en texte clair. Chaque mot de passe est haché de manière irréversible avec un sel aléatoire. Même en cas d'accès non autorisé à la base de données, la récupération des mots de passe originaux est mathématiquement impossible.
+    </p>
+  </div>
+
+  <div class="sec-card">
+    <div class="sec-card-header">
+      <span class="sec-number">2</span>
+      <span class="sec-title">Authentification Sécurisée par Tokens Chiffrés</span>
+      <span class="sec-tech">jsonwebtoken (JWT)</span>
+    </div>
+    <p class="sec-desc">
+      L'authentification utilise des jetons cryptographiques signés avec une clé secrète (<code>JWT_SECRET</code>). Le middleware de vérification contrôle chaque requête protégée. Tout jeton modifié ou expiré est rejeté immédiatement.
+    </p>
+  </div>
+
+  <div class="sec-card">
+    <div class="sec-card-header">
+      <span class="sec-number">3</span>
+      <span class="sec-title">Contrôle d'Accès Basé sur les Rôles (RBAC)</span>
+      <span class="sec-tech">role.middleware.ts</span>
+    </div>
+    <p class="sec-desc">
+      Séparation stricte des privilèges : les fonctions d'administration (gestion des membres, validation d'adhésion, modification de projets) sont protégées par le middleware de rôle et réservées exclusivement aux comptes <code>admin</code> et <code>super_admin</code>.
+    </p>
+  </div>
+
+  <div class="sec-card">
+    <div class="sec-card-header">
+      <span class="sec-number">4</span>
+      <span class="sec-title">Protection Anti-Brute Force (Rate Limiting)</span>
+      <span class="sec-tech">rateLimit.middleware.ts</span>
+    </div>
+    <p class="sec-desc">
+      Limitation automatique des tentatives de connexion et d'inscription à <strong>15 requêtes maximum par tranche de 15 minutes</strong> par adresse IP. Protège l'application contre le piratage par dictionnaire et le déni de service.
+    </p>
+  </div>
+
+  <div class="sec-card">
+    <div class="sec-card-header">
+      <span class="sec-number">5</span>
+      <span class="sec-title">Alertes de Connexion en Temps Réel</span>
+      <span class="sec-tech">email.service.ts</span>
+    </div>
+    <p class="sec-desc">
+      Un e-mail de sécurité est automatiquement envoyé à l'utilisateur lors de chaque connexion réussie, mentionnant la date et l'horodatage exacts, lui permettant de réagir immédiatement en cas d'activité suspecte.
+    </p>
+  </div>
+
+  <div class="sec-card">
+    <div class="sec-card-header">
+      <span class="sec-number">6</span>
+      <span class="sec-title">Protection contre les Injections SQL</span>
+      <span class="sec-tech">Prisma ORM & SQLite</span>
+    </div>
+    <p class="sec-desc">
+      Toutes les requêtes de base de données passent par l'ORM Prisma avec des requêtes paramétrées, ce qui neutralise à 100% les attaques par injection SQL (SQLi).
+    </p>
+  </div>
+
+  <div class="sec-card">
+    <div class="sec-card-header">
+      <span class="sec-number">7</span>
+      <span class="sec-title">Filtrage des Origines Réseau</span>
+      <span class="sec-tech">CORS Policy</span>
+    </div>
+    <p class="sec-desc">
+      Le serveur Backend rejette les requêtes provenant de domaines non autorisés. Seul le domaine frontend officiel de l'association est autorisé à communiquer avec l'API.
+    </p>
+  </div>
+
+  <div class="sec-card">
+    <div class="sec-card-header">
+      <span class="sec-number">8</span>
+      <span class="sec-title">Validation Strict des Formulaires</span>
+      <span class="sec-tech">Zod Schemas</span>
+    </div>
+    <p class="sec-desc">
+      Validation rigoureuse du type et du format de chaque donnée transmise (format e-mail, longueur de texte, types numériques) avant tout traitement par le serveur.
+    </p>
+  </div>
+
+  <div class="sec-card">
+    <div class="sec-card-header">
+      <span class="sec-number">9</span>
+      <span class="sec-title">Isolation des Clés Secrètes</span>
+      <span class="sec-tech">.env & .gitignore</span>
+    </div>
+    <p class="sec-desc">
+      Les secrets d'infrastructures (clés JWT, mots de passe SMTP, URLs de base de données) sont conservés hors du code source et ne sont jamais publiés sur le dépôt GitHub public.
+    </p>
+  </div>
+
+  <h2>2. MATRICE SYNTHÉTIQUE DE SÉCURITÉ</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Domaine de Sécurité</th>
+        <th>Technologie / Fichier</th>
+        <th>Niveau de Protection</th>
+        <th>Risque Contré</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Stockage Mots de Passe</strong></td>
+        <td><code>bcryptjs</code></td>
+        <td>Élevé (Cost 10)</td>
+        <td>Vol de mots de passe en clair</td>
+      </tr>
+      <tr>
+        <td><strong>Authentification API</strong></td>
+        <td><code>jsonwebtoken</code> / <code>auth.middleware.ts</code></td>
+        <td>Élevé (Signature secrète)</td>
+        <td>Usurpation d'identité & Vol de session</td>
+      </tr>
+      <tr>
+        <td><strong>Gestion des Droits</strong></td>
+        <td><code>role.middleware.ts</code></td>
+        <td>Élevé (RBAC)</td>
+        <td>Accès non autorisé aux fonctions admin</td>
+      </tr>
+      <tr>
+        <td><strong>Attaques Réseau</strong></td>
+        <td><code>rateLimit.middleware.ts</code></td>
+        <td>Élevé (15 req / 15 min)</td>
+        <td>Attaques Brute-Force & Déni de service</td>
+      </tr>
+      <tr>
+        <td><strong>Base de Données</strong></td>
+        <td><code>Prisma ORM</code></td>
+        <td>Maximal (Requêtes paramétrées)</td>
+        <td>Injections SQL (SQLi)</td>
+      </tr>
+      <tr>
+        <td><strong>Contrôle d'Origine</strong></td>
+        <td><code>cors</code></td>
+        <td>Élevé (Origine restreinte)</td>
+        <td>Attaques Cross-Site Request Forgery</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="footer-doc">
+    <p>© 2026 Association des Jeunes Tchadiens pour l'Éducation et la Solidarité (AJTES) — Siège Social N'Djamena, Tchad</p>
+    <p>Document Technique Officiel rédigé et validé par SALOMON — Responsable Technique & Maintenance</p>
+  </div>
+
+</body>
+</html>
