@@ -500,7 +500,66 @@
     </div>
   </div>
 
-  <h2>🔴 CHAPITRE 5 : GUIDE DE DÉPANNAGE FACILE (RÉSOLUTIONS DE BOGUES)</h2>
+  <h2>🚀 CHAPITRE 5 : GUIDE DE MISE EN PRODUCTION & MAINTENANCES FUTURES (LES 5 ÉTAPES CLÉS)</h2>
+
+  <div class="guide-box-blue">
+    <div class="guide-title" style="color: #1E40AF;">🌐 ÉTAPE 1 : Déploiement du Site en Ligne (Vercel / Netlify & Render)</div>
+    <div class="guide-step">
+      <strong>Pourquoi c'est vital :</strong> Votre site n'est accessible que sur votre ordinateur local. Pour le rendre accessible au public 24h/24 :<br>
+      <strong>Comment appliquer :</strong><br>
+      1. Créez un compte gratuit sur <span class="code-inline">Vercel.com</span> ou <span class="code-inline">Netlify.com</span>.<br>
+      2. Importez votre dépôt GitHub <span class="code-inline">ASSOCIATION_JEUES_TCHADIENS_EDUCATION_SOLIDARITE</span>.<br>
+      3. Définissez le dossier racine du build sur <span class="code-inline">frontend</span> (Commande: <code>npm run build</code>).<br>
+      4. Pour le backend, créez un service web gratuit sur <span class="code-inline">Render.com</span> et renseignez les variables de <span class="code-inline">backend/.env</span>.
+    </div>
+  </div>
+
+  <div class="guide-box-green">
+    <div class="guide-title" style="color: #166534;">💾 ÉTAPE 2 : Sauvegarde Automatique de la Base de Données (Backups)</div>
+    <div class="guide-step">
+      <strong>Pourquoi c'est vital :</strong> Éviter la perte définitive des inscrits et des dons enregistrés dans <span class="code-inline">backend/data/db.json</span> en cas de panne de serveur.<br>
+      <strong>Comment appliquer :</strong><br>
+      1. Créez une tâche automatisée (Cron Job) sur votre serveur Linux qui copie le fichier quotidiennement :
+      <span class="code-box">cp backend/data/db.json backend/data/backups/db_$(date +%Y%m%d).json</span>
+      2. Ou configurez un script Node.js qui envoie une copie hebdomadaire du fichier JSON sur votre boîte Gmail ou Google Drive.
+    </div>
+  </div>
+
+  <div class="guide-box-blue">
+    <div class="guide-title" style="color: #0369A1;">🔒 ÉTAPE 3 : Sécurisation du Cadenas HTTPS (Certificat SSL Let's Encrypt)</div>
+    <div class="guide-step">
+      <strong>Pourquoi c'est vital :</strong> Sans HTTPS, Chrome affiche un avertissement "Site non sécurisé" et les visiteurs n'oseront pas faire de dons.<br>
+      <strong>Comment appliquer :</strong><br>
+      1. Vercel et Netlify génèrent un certificat SSL 100% gratuit et automatique pour votre nom de domaine.<br>
+      2. Si vous utilisez un VPS Linux personnalisé, installez Certbot et lancez :
+      <span class="code-box">sudo certbot --nginx -d ajtes.org -d www.ajtes.org</span>
+    </div>
+  </div>
+
+  <div class="guide-box-green">
+    <div class="guide-title" style="color: #166534;">💳 ÉTAPE 4 : Intégration Réelle du Paiement Mobile Money (Airtel / Moov)</div>
+    <div class="guide-step">
+      <strong>Pourquoi c'est vital :</strong> Remplacer le système actuel de simulation par une réception réelle d'argent sur le compte de l'association.<br>
+      <strong>Comment appliquer :</strong><br>
+      1. Ouvrez un compte marchand chez Airtel Money Tchad, Moov Africa ou un agrégateur comme **Flutterwave** / **PayDunya**.<br>
+      2. Récupérez vos clés d'API (<code>PUBLIC_KEY</code> et <code>SECRET_KEY</code>) et ajoutez-les dans <span class="code-inline">backend/.env</span>.<br>
+      3. Interconnectez la route <span class="code-inline">backend/src/controllers/donations.controller.ts</span> avec le Webhook officiel du fournisseur.
+    </div>
+  </div>
+
+  <div class="guide-box-blue">
+    <div class="guide-title" style="color: #1E40AF;">🔑 ÉTAPE 5 : Procédure "Mot de Passe Oublié" par E-mail</div>
+    <div class="guide-step">
+      <strong>Pourquoi c'est vital :</strong> Permettre aux utilisateurs et administrateurs de réinitialiser leur accès en toute autonomie s'ils oublient leur mot de passe.<br>
+      <strong>Comment appliquer :</strong><br>
+      1. Ajoutez la route POST <span class="code-inline">/auth/forgot-password</span> dans le backend.<br>
+      2. Générez un jeton temporaire JWT (valide 15 min) et envoyez-le par e-mail avec <span class="code-inline">email.service.ts</span>.<br>
+      3. Créez la page React de réinitialisation qui valide le jeton et met à jour le mot de passe hashé dans <span class="code-inline">db.json</span>.
+    </div>
+  </div>
+
+  <h2>🔴 CHAPITRE 6 : GUIDE DE DÉPANNAGE FACILE (RÉSOLUTIONS DE BOGUES)</h2>
+
 
 
 
@@ -539,7 +598,7 @@
     </div>
   </div>
 
-  <h2>🔵 CHAPITRE 6 : LE PENSE-BÊTE DES COMMANDES À RETENIR</h2>
+  <h2>🔵 CHAPITRE 7 : LE PENSE-BÊTE DES COMMANDES À RETENIR</h2>
 
   <table>
     <thead>
