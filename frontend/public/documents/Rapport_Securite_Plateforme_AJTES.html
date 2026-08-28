@@ -6,34 +6,34 @@
   <style>
     @page {
       size: A4;
-      margin: 20mm 15mm 20mm 15mm;
+      margin: 18mm 15mm 18mm 15mm;
     }
     body {
       font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
       color: #1E293B;
-      line-height: 1.6;
+      line-height: 1.5;
       margin: 0;
       padding: 0;
       background-color: #FFFFFF;
     }
     .header {
       border-bottom: 3px solid #007A3D;
-      padding-bottom: 15px;
-      margin-bottom: 25px;
+      padding-bottom: 12px;
+      margin-bottom: 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
     .header-title h1 {
       color: #007A3D;
-      font-size: 22pt;
-      margin: 0 0 5px 0;
+      font-size: 20pt;
+      margin: 0 0 4px 0;
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
     .header-title p {
       color: #64748B;
-      font-size: 11pt;
+      font-size: 10pt;
       margin: 0;
       font-weight: 600;
     }
@@ -41,62 +41,61 @@
       background-color: #FEF3C7;
       color: #92400E;
       border: 1px solid #F59E0B;
-      padding: 6px 14px;
+      padding: 5px 12px;
       border-radius: 20px;
       font-weight: bold;
-      font-size: 9pt;
+      font-size: 8.5pt;
       text-align: right;
     }
     .meta-box {
       background-color: #F8FAFC;
       border-left: 4px solid #D97706;
-      padding: 12px 18px;
-      margin-bottom: 25px;
+      padding: 10px 16px;
+      margin-bottom: 20px;
       border-radius: 0 8px 8px 0;
     }
     .meta-box p {
-      margin: 3px 0;
-      font-size: 10pt;
+      margin: 2px 0;
+      font-size: 9.5pt;
     }
     .meta-box strong {
       color: #0F172A;
     }
     h2 {
       color: #007A3D;
-      font-size: 14pt;
+      font-size: 13pt;
       border-bottom: 1.5px solid #E2E8F0;
-      padding-bottom: 6px;
-      margin-top: 25px;
-      margin-bottom: 12px;
+      padding-bottom: 5px;
+      margin-top: 22px;
+      margin-bottom: 10px;
     }
     .sec-card {
       background-color: #FFFFFF;
       border: 1px solid #E2E8F0;
-      border-radius: 8px;
-      padding: 14px 18px;
-      margin-bottom: 14px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+      border-radius: 6px;
+      padding: 10px 14px;
+      margin-bottom: 10px;
     }
     .sec-card-header {
       display: flex;
       align-items: center;
-      gap: 10px;
-      margin-bottom: 6px;
+      gap: 8px;
+      margin-bottom: 4px;
     }
     .sec-number {
       background-color: #007A3D;
       color: #FFFFFF;
-      width: 24px;
-      height: 24px;
+      width: 22px;
+      height: 22px;
       border-radius: 50%;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       font-weight: bold;
-      font-size: 10pt;
+      font-size: 9.5pt;
     }
     .sec-title {
-      font-size: 12pt;
+      font-size: 11pt;
       font-weight: bold;
       color: #0F172A;
     }
@@ -104,26 +103,54 @@
       background-color: #F1F5F9;
       color: #475569;
       font-family: monospace;
-      font-size: 8.5pt;
+      font-size: 8pt;
       padding: 2px 6px;
       border-radius: 4px;
-      margin-left: 8px;
+      margin-left: 6px;
     }
     .sec-desc {
-      font-size: 9.5pt;
+      font-size: 9pt;
       color: #334155;
-      margin: 4px 0 0 0;
+      margin: 3px 0 0 0;
+    }
+    .admin-guide-box {
+      background-color: #F0FDF4;
+      border: 1px solid #86EFAC;
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-top: 15px;
+    }
+    .admin-guide-box h3 {
+      color: #166534;
+      margin-top: 0;
+      margin-bottom: 10px;
+      font-size: 11.5pt;
+    }
+    .guide-step {
+      margin-bottom: 10px;
+      font-size: 9pt;
+    }
+    .guide-step strong {
+      color: #0F172A;
+    }
+    .code-inline {
+      background-color: #E2E8F0;
+      color: #0F172A;
+      font-family: monospace;
+      padding: 2px 5px;
+      border-radius: 4px;
+      font-size: 8.5pt;
     }
     table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 20px;
-      margin-bottom: 25px;
-      font-size: 9.5pt;
+      margin-top: 15px;
+      margin-bottom: 20px;
+      font-size: 9pt;
     }
     th, td {
       border: 1px solid #CBD5E1;
-      padding: 9px 12px;
+      padding: 8px 10px;
       text-align: left;
     }
     th {
@@ -131,18 +158,18 @@
       color: #FFFFFF;
       font-weight: bold;
       text-transform: uppercase;
-      font-size: 8.5pt;
+      font-size: 8pt;
       letter-spacing: 0.5px;
     }
     tr:nth-child(even) {
       background-color: #F8FAFC;
     }
     .footer-doc {
-      margin-top: 40px;
+      margin-top: 30px;
       border-top: 1px solid #E2E8F0;
-      padding-top: 12px;
+      padding-top: 10px;
       text-align: center;
-      font-size: 8.5pt;
+      font-size: 8pt;
       color: #94A3B8;
     }
   </style>
@@ -152,7 +179,7 @@
   <div class="header">
     <div class="header-title">
       <h1>AJTES TCHAD — SÉCURITÉ INFORMATIQUE</h1>
-      <p>Rapport d'Architecture & Protection des Données de la Plateforme Web</p>
+      <p>Rapport d'Architecture, Protection des Données & Guide d'Administration</p>
     </div>
     <div class="badge-date">
       VERSION OFFICIELLE 2026<br>
@@ -162,7 +189,7 @@
 
   <div class="meta-box">
     <p><strong>Organisation :</strong> Association des Jeunes Tchadiens pour l'Éducation et la Solidarité (AJTES)</p>
-    <p><strong>Responsable Technique & Maintenance :</strong> SALOMON (Super Admin)</p>
+    <p><strong>Responsable Technique & Maintenance :</strong> SALOMON (Super Admin - Contrôle 100%)</p>
     <p><strong>Périmètre d'Audit :</strong> API Backend (Node.js/Express) & Application Frontend (React/TypeScript)</p>
     <p><strong>Statut de Conformité :</strong> 100% Fonctionnel & Sécurisé</p>
   </div>
@@ -268,7 +295,38 @@
     </p>
   </div>
 
-  <h2>2. MATRICE SYNTHÉTIQUE DE SÉCURITÉ</h2>
+  <h2>2. GUIDE PRATIQUE DE CONFIGURATION PAR SALOMON (SUPER ADMIN)</h2>
+
+  <div class="admin-guide-box">
+    <h3>⚙️ Comment modifier et contrôler la sécurité à votre niveau :</h3>
+
+    <div class="guide-step">
+      <strong>1. Changer la Clé Secrète JWT (Chiffrement des Jetons) :</strong><br>
+      Éditez le fichier <span class="code-inline">backend/.env</span> et modifiez la ligne <span class="code-inline">JWT_SECRET=VOTRE_CLÉ_PERSONNALISÉE</span>.
+    </div>
+
+    <div class="guide-step">
+      <strong>2. Ajuster le Seuil Anti-Brute Force (Rate Limiting) :</strong><br>
+      Dans <span class="code-inline">backend/src/middlewares/rateLimit.middleware.ts</span>, modifiez le paramètre <span class="code-inline">max: 15</span> pour ajuster le nombre d'essais de connexion autorisés.
+    </div>
+
+    <div class="guide-step">
+      <strong>3. Configurer l'Expédition Réelle des E-mails de Sécurité :</strong><br>
+      Dans <span class="code-inline">backend/.env</span>, renseignez vos identifiants Gmail <span class="code-inline">SMTP_USER=association.ajtes@gmail.com</span> et le mot de passe d'application <span class="code-inline">SMTP_PASS</span>.
+    </div>
+
+    <div class="guide-step">
+      <strong>4. Restreindre le Domaine Autorisé en Production (CORS) :</strong><br>
+      Dans <span class="code-inline">backend/.env</span>, définissez <span class="code-inline">CORS_ORIGIN=https://salomontchibkere.github.io</span> pour bloquer tout autre serveur.
+    </div>
+
+    <div class="guide-step">
+      <strong>5. Gérer les Rôles et Privilèges Administrateurs :</strong><br>
+      Directement depuis le code (<span class="code-inline">backend/src/seed.ts</span>) ou via le <strong>Tableau de Bord Administration</strong> sur le site.
+    </div>
+  </div>
+
+  <h2>3. MATRICE SYNTHÉTIQUE DE SÉCURITÉ</h2>
 
   <table>
     <thead>
@@ -321,7 +379,7 @@
 
   <div class="footer-doc">
     <p>© 2026 Association des Jeunes Tchadiens pour l'Éducation et la Solidarité (AJTES) — Siège Social N'Djamena, Tchad</p>
-    <p>Document Technique Officiel rédigé et validé par SALOMON — Responsable Technique & Maintenance</p>
+    <p>Document Technique Officiel rédigé et validé par SALOMON — Responsable Technique & Maintenance (Super Admin)</p>
   </div>
 
 </body>
