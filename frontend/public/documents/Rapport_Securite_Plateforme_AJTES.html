@@ -458,7 +458,50 @@
     </div>
   </div>
 
-  <h2>🔴 CHAPITRE 4 : GUIDE DE DÉPANNAGE FACILE (RÉSOLUTIONS DE BOGUES)</h2>
+  <h2>⚠️ CHAPITRE 4 : AUDIT DE SÉCURITÉ — FAILLES DÉTECTÉES & VULNÉRABILITÉS À SURVEILLER</h2>
+
+  <div class="guide-box-red">
+    <div class="guide-title" style="color: #991B1B;">🚨 FAILLE 1 : Élévation de Privilèges Automatique sur l'Email (Risque Majeur)</div>
+    <div class="guide-step">
+      <strong>Location :</strong> <span class="code-inline">frontend/src/context/AuthContext.tsx</span> (Ligne 32)<br>
+      <strong>Description :</strong> L'instruction <code>cleanEmail.includes('admin')</code> attribue le rôle <code>super_admin</code> à toute adresse e-mail qui contient le terme <em>"admin"</em> (ex: <code>badadmin@gmail.com</code>).<br>
+      <strong>Impact :</strong> Un utilisateur malveillant peut s'octroyer des privilèges administrateur complets sur l'interface frontend sans mot de passe admin.<br>
+      <strong>Recommandation :</strong> Supprimer la vérification générique <code>.includes('admin')</code> et s'appuyer uniquement sur l'authentification serveur.
+    </div>
+  </div>
+
+  <div class="guide-box-red">
+    <div class="guide-title" style="color: #991B1B;">🔑 FAILLE 2 : Exposition des Identifiants Réels en Clair (Risque Critique)</div>
+    <div class="guide-step">
+      <strong>Location :</strong> <span class="code-inline">frontend/public/documents/Rapport_Securite_Plateforme_AJTES.html</span><br>
+      <strong>Description :</strong> Le mot de passe réel (<code>SALOMON123@#</code>) et l'e-mail officiel (<code>salomontchibkere@gmail.com</code>) sont écrits en texte brut dans un fichier accessible publiquement.<br>
+      <strong>Impact :</strong> Si le site est déployé en ligne (Netlify, Vercel, GitHub Pages), n'importe quel robot web peut lire la fiche d'identifiants et prendre possession du compte Super Admin.<br>
+      <strong>Recommandation :</strong> Remplacer le mot de passe réel par une valeur générique d'exemple lors de la mise en production.
+    </div>
+  </div>
+
+  <div class="guide-box-red">
+    <div class="guide-title" style="color: #991B1B;">🔐 FAILLE 3 : Clé Secrète JWT en Fallback Hardcodée (Risque Moyen / Élevé)</div>
+    <div class="guide-step">
+      <strong>Location :</strong> <span class="code-inline">backend/src/controllers/auth.controller.ts</span> (L9) & <span class="code-inline">backend/src/middlewares/auth.middleware.ts</span> (L12)<br>
+      <strong>Description :</strong> Si la variable d'environnement <code>JWT_SECRET</code> n'est pas définie dans <span class="code-inline">.env</span>, le serveur utilise par défaut la valeur <code>ajtes_secret_key_2026_salomon_secure_token</code>.<br>
+      <strong>Impact :</strong> Un hacker connaissant cette clé par défaut peut forger un faux jeton d'accès JWT administrateur.<br>
+      <strong>Recommandation :</strong> Bloquer le démarrage du serveur backend si <code>JWT_SECRET</code> n'est pas configuré.
+    </div>
+  </div>
+
+  <div class="guide-box-red">
+    <div class="guide-title" style="color: #991B1B;">⚡ FAILLE 4 : Concurrence d'Écriture BDD & Stockage Mémoire des IP (Risque Faible / Moyen)</div>
+    <div class="guide-step">
+      <strong>Location :</strong> <span class="code-inline">backend/src/db.ts</span> & <span class="code-inline">backend/src/middlewares/rateLimit.middleware.ts</span><br>
+      <strong>Description :</strong> La méthode <code>fs.writeFileSync()</code> réécrit <span class="code-inline">db.json</span> sans verrouillage (risque de concurrence en cas de requêtes simultanées). De plus, le dictionnaire d'IP en mémoire vive ne nettoie pas les clés expirées.<br>
+      <strong>Impact :</strong> Risque de fuite mémoire progressive à long terme et risque de perte de données en cas d'inscriptions simultanées.<br>
+      <strong>Recommandation :</strong> Prévoir des sauvegardes régulières de <span class="code-inline">db.json</span> ou migrer vers SQLite/Prisma et ajouter une boucle d'assainissement de la mémoire.
+    </div>
+  </div>
+
+  <h2>🔴 CHAPITRE 5 : GUIDE DE DÉPANNAGE FACILE (RÉSOLUTIONS DE BOGUES)</h2>
+
 
 
   <div class="guide-box-red">
@@ -496,7 +539,7 @@
     </div>
   </div>
 
-  <h2>🔵 CHAPITRE 5 : LE PENSE-BÊTE DES COMMANDES À RETENIR</h2>
+  <h2>🔵 CHAPITRE 6 : LE PENSE-BÊTE DES COMMANDES À RETENIR</h2>
 
   <table>
     <thead>
