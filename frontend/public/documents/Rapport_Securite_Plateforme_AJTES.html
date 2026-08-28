@@ -2,50 +2,50 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Rapport Confidentiel de Sécurité & Dépannage — Salomon (AJTES)</title>
+  <title>Guide du Développeur Apprenant & Rapport de Sécurité — Salomon (AJTES)</title>
   <style>
     @page {
       size: A4;
-      margin: 16mm 14mm 16mm 14mm;
+      margin: 14mm 12mm 14mm 12mm;
     }
     body {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       color: #1E293B;
-      line-height: 1.45;
+      line-height: 1.5;
       margin: 0;
       padding: 0;
       background-color: #FFFFFF;
     }
     .confidential-banner {
-      background-color: #7F1D1D;
+      background: linear-gradient(90deg, #7F1D1D 0%, #B91C1C 100%);
       color: #FFFFFF;
       text-align: center;
       padding: 6px 12px;
-      font-weight: bold;
-      font-size: 9pt;
+      font-weight: 800;
+      font-size: 8.5pt;
       letter-spacing: 1px;
       border-radius: 4px;
-      margin-bottom: 15px;
+      margin-bottom: 12px;
       text-transform: uppercase;
     }
     .header {
       border-bottom: 3px solid #007A3D;
       padding-bottom: 10px;
-      margin-bottom: 15px;
+      margin-bottom: 14px;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
     .header-title h1 {
       color: #007A3D;
-      font-size: 18pt;
+      font-size: 16pt;
       margin: 0 0 3px 0;
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
     .header-title p {
-      color: #64748B;
-      font-size: 9.5pt;
+      color: #475569;
+      font-size: 9pt;
       margin: 0;
       font-weight: 600;
     }
@@ -54,125 +54,137 @@
       color: #92400E;
       border: 1px solid #F59E0B;
       padding: 4px 10px;
-      border-radius: 20px;
+      border-radius: 15px;
       font-weight: bold;
       font-size: 8pt;
       text-align: right;
     }
     .meta-box {
       background-color: #F8FAFC;
-      border-left: 4px solid #D97706;
-      padding: 8px 14px;
-      margin-bottom: 15px;
+      border-left: 4px solid #007A3D;
+      padding: 8px 12px;
+      margin-bottom: 14px;
       border-radius: 0 6px 6px 0;
     }
     .meta-box p {
       margin: 2px 0;
-      font-size: 9pt;
+      font-size: 8.5pt;
     }
     .meta-box strong {
       color: #0F172A;
     }
     h2 {
       color: #007A3D;
-      font-size: 12pt;
-      border-bottom: 1.5px solid #E2E8F0;
+      font-size: 11pt;
+      border-bottom: 1.5px solid #CBD5E1;
       padding-bottom: 4px;
-      margin-top: 18px;
+      margin-top: 16px;
       margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .chap-intro {
+      font-size: 8.5pt;
+      color: #475569;
+      margin-bottom: 8px;
+      font-style: italic;
     }
     .sec-card {
       background-color: #FFFFFF;
       border: 1px solid #E2E8F0;
       border-radius: 6px;
-      padding: 8px 12px;
-      margin-bottom: 8px;
+      padding: 7px 10px;
+      margin-bottom: 6px;
     }
     .sec-card-header {
       display: flex;
       align-items: center;
       gap: 6px;
-      margin-bottom: 3px;
+      margin-bottom: 2px;
     }
     .sec-number {
       background-color: #007A3D;
       color: #FFFFFF;
-      width: 20px;
-      height: 20px;
+      width: 18px;
+      height: 18px;
       border-radius: 50%;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       font-weight: bold;
-      font-size: 8.5pt;
+      font-size: 8pt;
     }
     .sec-title {
-      font-size: 10pt;
+      font-size: 9.5pt;
       font-weight: bold;
       color: #0F172A;
     }
     .sec-tech {
       background-color: #F1F5F9;
-      color: #475569;
+      color: #007A3D;
       font-family: monospace;
       font-size: 7.5pt;
-      padding: 1px 5px;
-      border-radius: 4px;
+      padding: 1px 4px;
+      border-radius: 3px;
       margin-left: 4px;
+      font-weight: bold;
     }
     .sec-desc {
-      font-size: 8.5pt;
+      font-size: 8pt;
       color: #334155;
       margin: 2px 0 0 0;
     }
-    .admin-guide-box {
+    .guide-box-green {
       background-color: #F0FDF4;
       border: 1px solid #86EFAC;
       border-radius: 6px;
-      padding: 10px 14px;
-      margin-top: 10px;
-      margin-bottom: 15px;
+      padding: 9px 12px;
+      margin-top: 8px;
+      margin-bottom: 12px;
     }
-    .admin-guide-box h3 {
-      color: #166534;
+    .guide-box-blue {
+      background-color: #EFF6FF;
+      border: 1px solid #93C5FD;
+      border-radius: 6px;
+      padding: 9px 12px;
+      margin-top: 8px;
+      margin-bottom: 12px;
+    }
+    .guide-box-red {
+      background-color: #FEF2F2;
+      border: 1px solid #FCA5A5;
+      border-radius: 6px;
+      padding: 9px 12px;
+      margin-top: 8px;
+      margin-bottom: 12px;
+    }
+    .guide-title {
+      font-weight: bold;
+      font-size: 9.5pt;
       margin-top: 0;
       margin-bottom: 6px;
-      font-size: 10.5pt;
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
     .guide-step {
-      margin-bottom: 8px;
-      font-size: 8.5pt;
+      margin-bottom: 6px;
+      font-size: 8pt;
+      line-height: 1.4;
     }
     .guide-step strong {
       color: #0F172A;
     }
-    .trouble-box {
-      background-color: #FEF2F2;
-      border: 1px solid #FCA5A5;
-      border-radius: 6px;
-      padding: 10px 14px;
-      margin-top: 10px;
-      margin-bottom: 15px;
-    }
-    .trouble-box h3 {
-      color: #991B1B;
-      margin-top: 0;
-      margin-bottom: 8px;
-      font-size: 10.5pt;
-    }
-    .trouble-item {
-      margin-bottom: 8px;
-      font-size: 8.5pt;
-      border-bottom: 1px dashed #FECACA;
-      padding-bottom: 6px;
-    }
-    .trouble-item:last-child {
-      border-bottom: none;
-      padding-bottom: 0;
-    }
-    .trouble-title {
-      font-weight: bold;
-      color: #7F1D1D;
+    .code-box {
+      background-color: #1E293B;
+      color: #38BDF8;
+      font-family: 'Courier New', Courier, monospace;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 8pt;
+      margin: 3px 0;
+      display: block;
+      white-space: pre-wrap;
     }
     .code-inline {
       background-color: #E2E8F0;
@@ -180,18 +192,19 @@
       font-family: monospace;
       padding: 1px 4px;
       border-radius: 3px;
-      font-size: 8pt;
+      font-size: 7.5pt;
+      font-weight: bold;
     }
     table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 10px;
-      margin-bottom: 15px;
-      font-size: 8.5pt;
+      margin-top: 8px;
+      margin-bottom: 12px;
+      font-size: 8pt;
     }
     th, td {
       border: 1px solid #CBD5E1;
-      padding: 6px 8px;
+      padding: 5px 7px;
       text-align: left;
     }
     th {
@@ -200,193 +213,276 @@
       font-weight: bold;
       text-transform: uppercase;
       font-size: 7.5pt;
-      letter-spacing: 0.5px;
     }
     tr:nth-child(even) {
       background-color: #F8FAFC;
     }
     .footer-doc {
-      margin-top: 20px;
+      margin-top: 15px;
       border-top: 1px solid #E2E8F0;
-      padding-top: 8px;
+      padding-top: 6px;
       text-align: center;
       font-size: 7.5pt;
-      color: #94A3B8;
+      color: #64748B;
     }
   </style>
 </head>
 <body>
 
   <div class="confidential-banner">
-    🔒 DOCUMENT STRICTEMENT CONFIDENTIAL — USAGE EXCLUSIF DU SUPER ADMINISTRATEUR (SALOMON)
+    🔒 DOCUMENT CONFIDENTIEL — MANUEL D'APPRENTISSAGE & DÉPANNAGE POUR SALOMON (SUPER ADMIN)
   </div>
 
   <div class="header">
     <div class="header-title">
-      <h1>AJTES TCHAD — SÉCURITÉ, MISE À JOUR & DÉPANNAGE</h1>
-      <p>Manuel Technique Officiel & Guide d'Administration (Confidentiel)</p>
+      <h1>MANUEL DU DÉVELOPPEUR APPRENANT — AJTES</h1>
+      <p>Guide Pas à Pas : Sécurité, Mises à Jour & Résolution Facile des Problèmes</p>
     </div>
     <div class="badge-date">
-      DOCUMENT PRIVÉ 2026<br>
+      VERSION APPRENANT 2026<br>
       Siège Social N'Djamena
     </div>
   </div>
 
   <div class="meta-box">
-    <p><strong>Organisation :</strong> Association des Jeunes Tchadiens pour l'Éducation et la Solidarité (AJTES)</p>
-    <p><strong>Destinataire Unique :</strong> SALOMON (Développeur Principal & Super Admin - Accès 100%)</p>
-    <p><strong>Périmètre :</strong> Architecture Sécurité, Protocoles de Mise à Jour & Résolution de Soucis Techniques</p>
-    <p><strong>Niveau de Confidentialité :</strong> Strictement Confidentiel — Ne pas diffuser aux tiers</p>
+    <p><strong>Destinataire :</strong> SALOMON (Développeur en Apprentissage & Super Admin)</p>
+    <p><strong>Objectif du Manuel :</strong> Vous guider étape par étape avec des instructions simples et des commandes prêtes à copier-coller.</p>
+    <p><strong>Statut de Confidentialité :</strong> Strictement réservé à votre usage personnel.</p>
   </div>
 
-  <h2>1. AUDIT TECHNIQUE DES 9 DISPOSITIFS DE SÉCURITÉ</h2>
+  <h2>🟢 CHAPITRE 1 : COMPRENDRE LA SÉCURITÉ DE VOTRE SITE (EXPLIQUÉE SIMPLEMENT)</h2>
+  <p class="chap-intro">Voici les 9 protections de votre site expliquées avec des images simples pour bien retenir :</p>
 
   <div class="sec-card">
     <div class="sec-card-header">
       <span class="sec-number">1</span>
-      <span class="sec-title">Hachage des Mots de Passe</span>
-      <span class="sec-tech">bcryptjs (Cost 10)</span>
+      <span class="sec-title">Le Coffre-Fort des Mots de Passe</span>
+      <span class="sec-tech">bcryptjs</span>
     </div>
-    <p class="sec-desc">Mots de passe chiffrés de manière irréversible. Aucun mot de passe en clair dans la base de données.</p>
+    <p class="sec-desc"><strong>Explication simple :</strong> Vos mots de passe ne sont pas écrits en lisible. Le système les transforme en un code secret indéchiffrable. Même si un pirate volait la base de données, il ne pourrait pas lire votre mot de passe.</p>
   </div>
 
   <div class="sec-card">
     <div class="sec-card-header">
       <span class="sec-number">2</span>
-      <span class="sec-title">Tokens Cryptographiques</span>
-      <span class="sec-tech">jsonwebtoken (JWT)</span>
+      <span class="sec-title">Le Badge Numérique d'Accès</span>
+      <span class="sec-tech">JWT (Tokens)</span>
     </div>
-    <p class="sec-desc">Authentification par jetons signés avec <code>JWT_SECRET</code>. Expiration et vérification automatique à chaque requête.</p>
+    <p class="sec-desc"><strong>Explication simple :</strong> Quand vous vous connectez, le site vous donne un badge électronique temporaire. À chaque clic, votre navigateur montre ce badge pour prouver que c'est bien vous.</p>
   </div>
 
   <div class="sec-card">
     <div class="sec-card-header">
       <span class="sec-number">3</span>
-      <span class="sec-title">Contrôle d'Accès par Rôles</span>
-      <span class="sec-tech">role.middleware.ts</span>
+      <span class="sec-title">Le Contrôle des Portes d'Accès</span>
+      <span class="sec-tech">RBAC (Rôles)</span>
     </div>
-    <p class="sec-desc">Fonctions sensibles réservées exclusivement aux rôles <code>admin</code> et <code>super_admin</code>.</p>
+    <p class="sec-desc"><strong>Explication simple :</strong> Les visiteurs simples ont accès aux pages publiques. Seul votre compte (Salomon Admin) possède la clé pour ouvrir la porte de l'Espace Administration.</p>
   </div>
 
   <div class="sec-card">
     <div class="sec-card-header">
       <span class="sec-number">4</span>
-      <span class="sec-title">Protection Anti-Brute Force</span>
-      <span class="sec-tech">rateLimit.middleware.ts</span>
+      <span class="sec-title">L'Alarme Anti-Intrusion (Blocage Automatique)</span>
+      <span class="sec-tech">Rate Limiting</span>
     </div>
-    <p class="sec-desc">Limitation stricte à 15 tentatives max par 15 minutes par adresse IP sur la connexion et l'inscription.</p>
+    <p class="sec-desc"><strong>Explication simple :</strong> Si quelqu'un essaie de deviner votre mot de passe plus de 15 fois en 15 minutes, l'alarme sonne et bloque cette personne pendant 15 minutes.</p>
   </div>
 
   <div class="sec-card">
     <div class="sec-card-header">
       <span class="sec-number">5</span>
-      <span class="sec-title">Alertes de Connexion E-mail</span>
+      <span class="sec-title">L'Alerte E-mail Instantanée</span>
       <span class="sec-tech">email.service.ts</span>
     </div>
-    <p class="sec-desc">Notification instantanée envoyée par e-mail lors de chaque connexion réussie avec horodatage précis.</p>
+    <p class="sec-desc"><strong>Explication simple :</strong> À chaque fois qu'un admin se connecte, le site vous envoie immédiatement un e-mail pour vous avertir avec l'heure exacte.</p>
   </div>
 
   <div class="sec-card">
     <div class="sec-card-header">
       <span class="sec-number">6</span>
-      <span class="sec-title">Protection Anti-Injection SQL</span>
+      <span class="sec-title">Le Mur Anti-Code Malveillant</span>
       <span class="sec-tech">Prisma ORM</span>
     </div>
-    <p class="sec-desc">Requêtes de base de données 100% paramétrées neutralisant toutes les injections SQL (SQLi).</p>
+    <p class="sec-desc"><strong>Explication simple :</strong> Empêche les pirates d'injecter du faux code SQL dans la base de données à travers les formulaires.</p>
   </div>
 
   <div class="sec-card">
     <div class="sec-card-header">
       <span class="sec-number">7</span>
-      <span class="sec-title">Filtrage des Origines Réseau</span>
+      <span class="sec-title">La Barrière de Domaine</span>
       <span class="sec-tech">CORS Policy</span>
     </div>
-    <p class="sec-desc">Rejet systématique des requêtes provenant de domaines non autorisés.</p>
+    <p class="sec-desc"><strong>Explication simple :</strong> Seul votre site web officiel a le droit d'envoyer des demandes à votre serveur. Les sites étrangers sont refusés.</p>
   </div>
 
   <div class="sec-card">
     <div class="sec-card-header">
       <span class="sec-number">8</span>
-      <span class="sec-title">Validation des Données</span>
+      <span class="sec-title">Le Contrôleur des Formulaires</span>
       <span class="sec-tech">Zod Schemas</span>
     </div>
-    <p class="sec-desc">Validation stricte des types, formats et longueurs de données avant tout traitement serveur.</p>
+    <p class="sec-desc"><strong>Explication simple :</strong> Vérifie que chaque case remplie par un utilisateur contient des données valides (e-mail correct, texte propre).</p>
   </div>
 
   <div class="sec-card">
     <div class="sec-card-header">
       <span class="sec-number">9</span>
-      <span class="sec-title">Isolation des Secrets</span>
-      <span class="sec-tech">.env & .gitignore</span>
+      <span class="sec-title">Le Fichier Secret Cache-Clés</span>
+      <span class="sec-tech">.env</span>
     </div>
-    <p class="sec-desc">Stockage étanche des variables d'environnement hors des dépôts publics GitHub.</p>
+    <p class="sec-desc"><strong>Explication simple :</strong> Toutes vos clés et mots de passe secrets restent enfermés dans un fichier cache `.env` qui n'est jamais publié sur GitHub.</p>
   </div>
 
-  <h2>2. GUIDE PRATIQUE DE GESTION PAR SALOMON (SUPER ADMIN)</h2>
+  <h2>🟡 CHAPITRE 2 : COMMENT FAIRE UNE MISE À JOUR DU SITE (PAS À PAS)</h2>
+  <p class="chap-intro">Suivez exactement ces 4 étapes simples lorsque vous voulez modifier quelque chose sur le site :</p>
 
-  <div class="admin-guide-box">
-    <h3>⚙️ Personnalisation des paramètres de sécurité :</h3>
-    <div class="guide-step">
-      <strong>1. Clé Secrète JWT :</strong> Modifiez <span class="code-inline">JWT_SECRET</span> dans <span class="code-inline">backend/.env</span>.
+  <div class="guide-box-blue">
+    <div class="guide-title" style="color: #1E40AF;">
+      <span>💻 ÉTAPE 1 : Lancer le projet sur votre ordinateur pour tester</span>
     </div>
     <div class="guide-step">
-      <strong>2. Anti-Brute Force :</strong> Ajustez <span class="code-inline">max: 15</span> dans <span class="code-inline">backend/src/middlewares/rateLimit.middleware.ts</span>.
-    </div>
-    <div class="guide-step">
-      <strong>3. Envois d'E-mails SMTP :</strong> Configurez <span class="code-inline">SMTP_USER</span> et <span class="code-inline">SMTP_PASS</span> dans <span class="code-inline">backend/.env</span>.
-    </div>
-    <div class="guide-step">
-      <strong>4. Origine CORS Réseau :</strong> Restreignez <span class="code-inline">CORS_ORIGIN</span> dans <span class="code-inline">backend/.env</span>.
-    </div>
-  </div>
-
-  <h2>3. PROCÉDURE DE MISE À JOUR & DÉPANNAGE (RÉSOLUTIONS DE SOUCIS)</h2>
-
-  <div class="admin-guide-box" style="background-color: #EFF6FF; border-color: #93C5FD;">
-    <h3 style="color: #1E40AF;">🚀 Procédure officielle pour effectuer une mise à jour du site :</h3>
-    <div class="guide-step">
-      <strong>Étape 1 (Tests locaux) :</strong> Lancez <span class="code-inline">npm run dev --prefix backend</span> (port 5000) et <span class="code-inline">npm run dev --prefix frontend</span> (port 5173).
-    </div>
-    <div class="guide-step">
-      <strong>Étape 2 (Vérification build) :</strong> Vérifiez la compilation sans erreur avec <span class="code-inline">npm run build --prefix backend</span> et <span class="code-inline">npm run build --prefix frontend</span>.
-    </div>
-    <div class="guide-step">
-      <strong>Étape 3 (Push GitHub) :</strong> Exécutez <span class="code-inline">git add .</span> ➔ <span class="code-inline">git commit -m "Description"</span> ➔ <span class="code-inline">git push origin main</span>. Le site en ligne sera automatiquement mis à jour.
+      Ouvrez le terminal dans VS Code et tapez ces 2 commandes pour voir vos modifications en direct :
+      <span class="code-box">npm run dev --prefix backend</span>
+      <em>(Dans un 2ème terminal) :</em>
+      <span class="code-box">npm run dev --prefix frontend</span>
+      Ouvrez ensuite votre navigateur sur : <code>http://localhost:5173</code>
     </div>
   </div>
 
-  <div class="trouble-box">
-    <h3>🛠️ Guide de Résolution des 5 Soucis Techniques Fréquents :</h3>
-
-    <div class="trouble-item">
-      <span class="trouble-title"> Souci 1 : E-mails de bienvenue ou de connexion non reçus</span><br>
-      <strong>Solution :</strong> Vérifiez dans <span class="code-inline">backend/.env</span> que <span class="code-inline">SMTP_USER</span> contient votre e-mail et que <span class="code-inline">SMTP_PASS</span> contient le mot de passe d'application Gmail à 16 caractères (sans espaces).
+  <div class="guide-box-blue">
+    <div class="guide-title" style="color: #1E40AF;">
+      <span>🔍 ÉTAPE 2 : Vérifier que le code n'a pas d'erreur</span>
     </div>
-
-    <div class="trouble-item">
-      <span class="trouble-title"> Souci 2 : Erreur 401 Unauthorized ou perte d'accès Admin</span><br>
-      <strong>Solution :</strong> Le jeton JWT a expiré. Cliquez sur Déconnexion dans l'Espace Membre puis reconnectez-vous avec le compte admin <span class="code-inline">salomon.admin@ajtes.td</span> pour régénérer un token frais.
-    </div>
-
-    <div class="trouble-item">
-      <span class="trouble-title"> Souci 3 : Les nouvelles modifications du site ne s'affichent pas</span><br>
-      <strong>Solution :</strong> Le navigateur a gardé l'ancien cache. Faites un rafraîchissement forcé avec les touches <span class="code-inline">CTRL + SHIFT + R</span> (ou <span class="code-inline">CTRL + F5</span>).
-    </div>
-
-    <div class="trouble-item">
-      <span class="trouble-title"> Souci 4 : Erreur 429 Too Many Requests</span><br>
-      <strong>Solution :</strong> Blocage automatique anti-brute force déclenché. Le déblocage s'effectue automatiquement après 15 minutes d'attente.
-    </div>
-
-    <div class="trouble-item">
-      <span class="trouble-title"> Souci 5 : Erreur lors du git push (Demande de mot de passe GitHub)</span><br>
-      <strong>Solution :</strong> GitHub exige un Personal Access Token (PAT). Générez-le dans GitHub ➔ Settings ➔ Developer Settings ➔ Personal Access Tokens (classic) avec la coche <span class="code-inline">repo</span>, et utilisez-le comme mot de passe.
+    <div class="guide-step">
+      Avant d'envoyer votre travail en ligne, vérifiez que tout compile proprement avec :
+      <span class="code-box">npm run build --prefix backend</span>
+      <span class="code-box">npm run build --prefix frontend</span>
+      <em>Si le terminal affiche "built in X.XXs", cela veut dire que votre code est parfait !</em>
     </div>
   </div>
+
+  <div class="guide-box-green">
+    <div class="guide-title" style="color: #166534;">
+      <span>🚀 ÉTAPE 3 : Envoyer les modifications sur GitHub (En ligne)</span>
+    </div>
+    <div class="guide-step">
+      Tapez exactement ces 3 commandes dans le terminal l'une après l'autre :
+      <span class="code-box">git add .</span>
+      <span class="code-box">git commit -m "Mise à jour : votre message ici"</span>
+      <span class="code-box">git push origin main</span>
+      <em>Félicitations ! Vos modifications sont automatiquement publiées sur Internet.</em>
+    </div>
+  </div>
+
+  <h2>🔴 CHAPITRE 3 : GUIDE DE DÉPANNAGE FACILE (EN CAS DE PROBLÈME)</h2>
+  <p class="chap-intro">Si un bogue survient, gardez votre calme et suivez la solution correspondante ci-dessous :</p>
+
+  <div class="guide-box-red">
+    <div class="guide-title" style="color: #991B1B;">
+      <span>❌ Cas 1 : "Je ne reçois pas les e-mails de notification sur mon Gmail"</span>
+    </div>
+    <div class="guide-step">
+      <strong>Solution Pas à Pas :</strong>
+      1. Ouvrez le fichier <span class="code-inline">backend/.env</span>.<br>
+      2. Mettez votre e-mail : <span class="code-inline">SMTP_USER=association.ajtes@gmail.com</span>.<br>
+      3. Créez un <strong>Mot de passe d'application Gmail</strong> (16 lettres) dans votre compte Google ➔ Sécurité.<br>
+      4. Collez ce code dans <span class="code-inline">SMTP_PASS=votre_code_16_lettres</span>.<br>
+      5. Redémarrez le serveur backend.
+    </div>
+  </div>
+
+  <div class="guide-box-red">
+    <div class="guide-title" style="color: #991B1B;">
+      <span>❌ Cas 2 : "Je n'arrive plus à cliquer sur les boutons Admin (Erreur 401)"</span>
+    </div>
+    <div class="guide-step">
+      <strong>Explication :</strong> Votre badge numérique (token JWT) a expiré pour votre sécurité.<br>
+      <strong>Solution Pas à Pas :</strong><br>
+      1. Cliquez sur le bouton <strong>Déconnexion</strong> sur le site.<br>
+      2. Reconnectez-vous avec votre adresse admin (<span class="code-inline">salomon.admin@ajtes.td</span>).<br>
+      3. Vous aurez immédiatement un nouveau badge valide pour travailler.
+    </div>
+  </div>
+
+  <div class="guide-box-red">
+    <div class="guide-title" style="color: #991B1B;">
+      <span>❌ Cas 3 : "J'ai modifié le code mais rien ne change sur mon écran !"</span>
+    </div>
+    <div class="guide-step">
+      <strong>Explication :</strong> Le navigateur a gardé l'ancienne version en mémoire cache.<br>
+      <strong>Solution Pas à Pas :</strong><br>
+      Sur votre clavier, appuyez en même temps sur : <span class="code-inline">CTRL + SHIFT + R</span> (ou <span class="code-inline">CTRL + F5</span>). La page se rafraîchira avec la nouvelle version.
+    </div>
+  </div>
+
+  <div class="guide-box-red">
+    <div class="guide-title" style="color: #991B1B;">
+      <span>❌ Cas 4 : "Le site m'affiche Erreur 429 Trop de requêtes !"</span>
+    </div>
+    <div class="guide-step">
+      <strong>Explication :</strong> L'alarme anti-brute force a détecté trop de clics/connexions rapides.<br>
+      <strong>Solution Pas à Pas :</strong><br>
+      Attendez 15 minutes sans toucher à rien. Le système vous débloquera automatiquement.
+    </div>
+  </div>
+
+  <div class="guide-box-red">
+    <div class="guide-title" style="color: #991B1B;">
+      <span>❌ Cas 5 : "Git refuse mon git push et me demande un mot de passe !"</span>
+    </div>
+    <div class="guide-step">
+      <strong>Explication :</strong> GitHub n'accepte plus les mots de passe de compte simples.<br>
+      <strong>Solution Pas à Pas :</strong><br>
+      1. Allez sur GitHub.com ➔ Votre photo ➔ Settings ➔ Developer Settings.<br>
+      2. Personal Access Tokens ➔ Tokens (classic) ➔ Generate new token.<br>
+      3. Cochez la case <span class="code-inline">repo</span> et copiez la clé.<br>
+      4. Collez cette clé dans le terminal quand il vous demande le mot de passe.
+    </div>
+  </div>
+
+  <h2>🔵 CHAPITRE 4 : LE PENSE-BÊTE DES COMMANDES À RETENIR</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Action à réaliser</th>
+        <th>Commande à taper dans le Terminal</th>
+        <th>Quand l'utiliser ?</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Tester le site en local</strong></td>
+        <td><code>npm run dev --prefix frontend</code></td>
+        <td>Avant de modifier le code</td>
+      </tr>
+      <tr>
+        <td><strong>Vérifier les erreurs</strong></td>
+        <td><code>npm run build --prefix frontend</code></td>
+        <td>Après avoir fini vos modifications</td>
+      </tr>
+      <tr>
+        <td><strong>Sélectionner les fichiers</strong></td>
+        <td><code>git add .</code></td>
+        <td>1ère étape pour publier sur GitHub</td>
+      </tr>
+      <tr>
+        <td><strong>Enregistrer le travail</strong></td>
+        <td><code>git commit -m "Description"</code></td>
+        <td>2ème étape pour publier sur GitHub</td>
+      </tr>
+      <tr>
+        <td><strong>Publier en ligne</strong></td>
+        <td><code>git push origin main</code></td>
+        <td>Dernière étape de publication</td>
+      </tr>
+    </tbody>
+  </table>
 
   <div class="footer-doc">
     <p>© 2026 Association des Jeunes Tchadiens pour l'Éducation et la Solidarité (AJTES) — Siège Social N'Djamena, Tchad</p>
-    <p><strong>DOCUMENT CONFIDENTIEL</strong> — Strictement réservé à SALOMON (Super Admin & Technicien Chef AJTES)</p>
+    <p><strong>MANUEL D'APPRENTISSAGE CONFIDENTIEL</strong> — Dédié spécialement à SALOMON (Super Admin & Apprenant)</p>
   </div>
 
 </body>
