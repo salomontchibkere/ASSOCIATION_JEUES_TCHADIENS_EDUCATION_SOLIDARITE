@@ -1101,10 +1101,10 @@ export const initialUsers: User[] = [
   {
     id: 'usr-admin',
     name: 'Salomon',
-    email: 'salomon.admin@ajtes.td',
+    email: 'salomontchibkere@gmail.com',
     role: 'super_admin',
-    profession: 'Responsable Technique & Maintenance',
-    phone: '+235 60 00 00 00',
+    profession: 'Super Admin & Responsable Technique AJTES',
+    phone: '655136824',
     city: 'N\'Djamena',
     avatarUrl: './images/IMG_20250119_163228_691.jpg',
     memberType: 'actif',

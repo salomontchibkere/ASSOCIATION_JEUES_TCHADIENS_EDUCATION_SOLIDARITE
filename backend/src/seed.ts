@@ -12,8 +12,8 @@ export async function seedInitialData() {
 
   const now = new Date().toISOString();
 
-  // 1. Création de l'Administrateur principal
-  const adminPassword = await bcrypt.hash('AdminAJTES2026!', 10);
+  // 1. Création de l'Administrateur principal (Salomon - Super Admin)
+  const adminPassword = await bcrypt.hash('SALOMON123@#', 10);
   const adminUserId = cryptoUUID();
   const adminProfileId = cryptoUUID();
 
@@ -23,7 +23,7 @@ export async function seedInitialData() {
     profession: 'Responsable Technique & Maintenance',
     city: "N'Djamena",
     country: 'Tchad',
-    bio: 'Responsable technique et administrateur du site officiel AJTES.',
+    bio: 'Super Administrateur et Responsable Technique du site officiel AJTES.',
     status: 'APPROVED',
     createdAt: now,
     updatedAt: now,
@@ -31,11 +31,11 @@ export async function seedInitialData() {
 
   const adminUser: User = {
     id: adminUserId,
-    email: 'contact@ajtes.td',
+    email: 'salomontchibkere@gmail.com',
     password: adminPassword,
-    fullName: 'SALOMON (Admin AJTES)',
+    fullName: 'SALOMON (Super Admin AJTES)',
     role: 'ADMIN',
-    phone: '+235 60 00 00 00',
+    phone: '655136824',
     isActive: true,
     createdAt: now,
     updatedAt: now,
