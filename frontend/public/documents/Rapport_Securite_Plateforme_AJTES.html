@@ -426,7 +426,40 @@
     </div>
   </div>
 
-  <h2>🔴 CHAPITRE 3 : GUIDE DE DÉPANNAGE FACILE (RÉSOLUTIONS DE BOGUES)</h2>
+  <h2>🟣 CHAPITRE 3 : DÉMONSTRATION PRATIQUE — COMMENT MODIFIER LA BASE DE DONNÉES</h2>
+
+  <div class="guide-box-blue">
+    <div class="guide-title" style="color: #1E40AF;">🖥️ MÉTHODE 1 : Modification via l'Interface Web Admin (Recommandé)</div>
+    <div class="guide-step">
+      1. Lancez le serveur local ou ouvrez le site officiel AJTES.<br>
+      2. Connectez-vous avec votre compte Super Admin : <code>salomontchibkere@gmail.com</code> / <code>SALOMON123@#</code>.<br>
+      3. Rendez-vous dans le tableau de bord <strong>Espace Administration</strong>.<br>
+      4. Cliquez sur <strong>Valider / Rejeter</strong> pour modifier l'état d'un membre ou éditer une actualité/projet directement à l'écran.
+    </div>
+  </div>
+
+  <div class="guide-box-green">
+    <div class="guide-title" style="color: #166534;">📝 MÉTHODE 2 : Modification Directe du Fichier JSON dans VS Code</div>
+    <div class="guide-step">
+      1. Dans l'explorateur VS Code à gauche, ouvrez le fichier : <span class="code-inline">backend/data/db.json</span>.<br>
+      2. Recherchez la section à modifier (ex: <code>"users"</code>, <code>"memberProfiles"</code>, <code>"projects"</code>).<br>
+      3. Éditez directement les textes ou les statuts (ex: remplacez <code>"PENDING"</code> par <code>"APPROVED"</code>).<br>
+      4. Enregistrez les modifications avec les touches <span class="code-inline">CTRL + S</span>. Les données sont instantanément à jour !
+    </div>
+  </div>
+
+  <div class="guide-box-blue">
+    <div class="guide-title" style="color: #0369A1;">⚙️ MÉTHODE 3 : Modification de la Base SQLite / Prisma</div>
+    <div class="guide-step">
+      Si vous travaillez avec Prisma et SQLite (<span class="code-inline">backend/prisma/dev.db</span>) :<br>
+      1. Lancez l'outil visuel de base de données dans le terminal :
+      <span class="code-box">npx prisma studio --prefix backend</span>
+      2. Une interface visuelle s'ouvrira dans votre navigateur sur <code>http://localhost:5555</code> pour modifier les tables en 1 clic.
+    </div>
+  </div>
+
+  <h2>🔴 CHAPITRE 4 : GUIDE DE DÉPANNAGE FACILE (RÉSOLUTIONS DE BOGUES)</h2>
+
 
   <div class="guide-box-red">
     <div class="guide-title" style="color: #991B1B;">❌ Cas 1 : "Je ne reçois pas les e-mails de notification sur mon Gmail"</div>
@@ -463,7 +496,7 @@
     </div>
   </div>
 
-  <h2>🔵 CHAPITRE 4 : LE PENSE-BÊTE DES COMMANDES À RETENIR</h2>
+  <h2>🔵 CHAPITRE 5 : LE PENSE-BÊTE DES COMMANDES À RETENIR</h2>
 
   <table>
     <thead>
