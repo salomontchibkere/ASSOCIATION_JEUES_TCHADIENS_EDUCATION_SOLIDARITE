@@ -225,53 +225,49 @@ export const initialOfficialDocuments: OfficialDocument[] = [
   {
     id: 'doc-security-report',
     title: {
-      fr: "Rapport Officiel de Sécurité & Architecture Informatique (2026)",
-      en: "Official Security & Architecture Report (2026)",
-      ar: "التقرير الرسمي للأمن البنيوي وتكنولوجيا المعلومات (2026)"
+      fr: "🔒 Rapport Confidentiel de Sécurité, Mise à Jour & Dépannage (2026)",
+      en: "🔒 Confidential Security, Update & Troubleshooting Report (2026)",
+      ar: "🔒 التقرير السري للأمان والتحديثات وحل المشكلات (2026)"
     },
     type: 'autre',
     description: {
-      fr: "Synthèse technique complète récapitulant point par point les 9 couches de sécurité intégrées : hachage bcrypt, jetons JWT, contrôle d'accès RBAC, rate-limiting anti-brute force, alertes email et protection contre l'injection SQL.",
-      en: "Comprehensive technical synthesis detailing the 9 security layers: bcrypt hashing, JWT tokens, RBAC access control, rate-limiting, email alerts, and SQLi protection.",
-      ar: "تقرير فني شامل يوضح طبقات الأمان التسع: تشفير bcrypt، رموز JWT، التحكم في الوصول RBAC، والحماية من الهجمات."
+      fr: "🔒 DOCUMENT STRICTEMENT CONFIDENTIEL — Réservé exclusivement à SALOMON (Super Admin). Contient l'audit des 9 couches de sécurité, le guide de personnalisation et les procédures de dépannage des 5 soucis fréquents.",
+      en: "🔒 STRICTLY CONFIDENTIAL DOCUMENT — Reserved exclusively for SALOMON (Super Admin). Contains 9 security layers audit, configuration guide, and 5 troubleshooting procedures.",
+      ar: "🔒 وثيقة سرية للغاية — مخصصة حصريًا لسالومون (المدير الفائق)."
     },
     downloadUrl: './documents/Rapport_Securite_Plateforme_AJTES.pdf',
-    lastUpdated: '2026-08-27',
+    lastUpdated: '2026-08-28',
     contentMarkdown: {
-      fr: `### RAPPORT OFFICIEL DE SÉCURITÉ INFORMATIQUE (AJTES)
+      fr: `### 🔒 DOCUMENT CONFIDENTIEL — USAGE EXCLUSIF DU SUPER ADMIN (SALOMON)
 
-**SYNTHÈSE DES 9 DISPOSITIFS DE SÉCURITÉ & PROTECTION DES DONNÉES**
+**1. SYNTHÈSE DES 9 DISPOSITIFS DE SÉCURITÉ**
+1. **Hachage des Mots de Passe (\`bcryptjs\`)** : Cryptage irréversible (Cost 10).
+2. **Tokens Cryptographiques (\`jsonwebtoken\` JWT)** : Signature secrète et expiration automatique.
+3. **Contrôle d'Accès par Rôles (\`RBAC\`)** : Réservé aux administrateurs.
+4. **Protection Anti-Brute Force** : Bloqué à 15 tentatives / 15 minutes par IP.
+5. **Alertes par E-mail** : Notification instantanée à chaque connexion.
+6. **Protection Anti-SQLi** : Requêtes 100% paramétrées via Prisma ORM.
+7. **Filtrage Réseau CORS** : Domaine officiel unique autorisé.
+8. **Validation des Données** : Schémas Zod et typage TypeScript strict.
+9. **Isolation des Secrets** : Clés réservées dans \`.env\` hors de Git.
 
-1. **Hachage Irréversible des Mots de Passe (\`bcryptjs\` - Cost 10)**
-   - Aucun mot de passe n'est stocké en clair. Tout est chiffré de manière irréversible.
+---
 
-2. **Authentification par Jetons Cryptographiques (\`jsonwebtoken\` - JWT)**
-   - Protection stateless avec signature secrète et expiration automatique des sessions.
+**2. PROCÉDURE DE MISE À JOUR**
+- **Étape 1** : \`npm run dev --prefix backend\` (5000) & \`npm run dev --prefix frontend\` (5173).
+- **Étape 2** : \`npm run build --prefix backend\` & \`npm run build --prefix frontend\`.
+- **Étape 3** : \`git add .\` ➔ \`git commit -m "Message"\` ➔ \`git push origin main\`.
 
-3. **Contrôle d'Accès Basé sur les Rôles (RBAC)**
-   - Inaccessible aux tiers : privilèges stricts pour Membres, Admins et Super Admin (Salomon).
+---
 
-4. **Protection Anti-Brute Force (Rate Limiting)**
-   - Blocage automatique à 15 tentatives max par 15 minutes par adresse IP.
-
-5. **Alertes de Connexion Instantanées par E-mail**
-   - Notification de sécurité envoyée à chaque connexion réussie avec horodatage.
-
-6. **Protection contre l'Injection SQL (\`Prisma ORM\` & Requêtes Paramétrées)**
-   - Neutralisation totale des risques d'injection de code dans la base de données.
-
-7. **Filtrage des Origines Réseau (\`CORS Policy\`)**
-   - Protection contre le piratage cross-site et les attaques par falsification de requêtes.
-
-8. **Validation Strict des Formulaires (\`Zod Schemas\` & TypeScript)**
-   - Contrôle rigoureux de tous les types et formats de données reçus par le serveur.
-
-9. **Isolation des Clés Secrètes (\`.env\` & \`.gitignore\`)**
-   - Protection des secrets d'infrastructures hors des dépôts publics.`,
-      en: `### OFFICIAL SECURITY REPORT (AJTES)
-- 9 Security Layers active and verified by Tech Lead (Salomon).`,
-      ar: `### التقرير الرسمي للأمن البنيوي (AJTES)
-- 9 طبقات حماية مفعّلة ومفحوصة بواسطة المسؤول التقني.`
+**3. GUIDE DE DÉPANNAGE DES 5 SOUCIS FREQUENTS**
+- **Souci 1 (Emails non reçus)** : Renseigner le mot de passe d'application Gmail (16 caractères) dans \`backend/.env\`.
+- **Souci 2 (Erreur 401 / Perte d'accès)** : Déconnecter puis reconnecter le compte Admin pour régénérer le token JWT.
+- **Souci 3 (Nouveautés non visibles)** : Vider le cache du navigateur avec \`CTRL + SHIFT + R\`.
+- **Souci 4 (Erreur 429 Blocage)** : Attendre 15 minutes le déblocage automatique anti-brute force.
+- **Souci 5 (Erreur Git push)** : Utiliser un Personal Access Token (PAT) GitHub comme mot de passe.`,
+      en: `### 🔒 CONFIDENTIAL DOCUMENT — SALOMON ONLY`,
+      ar: `### 🔒 وثيقة سرية — لسالومون فقط`
     }
   },
   {

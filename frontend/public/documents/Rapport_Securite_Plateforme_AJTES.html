@@ -2,38 +2,50 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Rapport de Sécurité Informatique — AJTES Tchad</title>
+  <title>Rapport Confidentiel de Sécurité & Dépannage — Salomon (AJTES)</title>
   <style>
     @page {
       size: A4;
-      margin: 18mm 15mm 18mm 15mm;
+      margin: 16mm 14mm 16mm 14mm;
     }
     body {
       font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
       color: #1E293B;
-      line-height: 1.5;
+      line-height: 1.45;
       margin: 0;
       padding: 0;
       background-color: #FFFFFF;
     }
+    .confidential-banner {
+      background-color: #7F1D1D;
+      color: #FFFFFF;
+      text-align: center;
+      padding: 6px 12px;
+      font-weight: bold;
+      font-size: 9pt;
+      letter-spacing: 1px;
+      border-radius: 4px;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+    }
     .header {
       border-bottom: 3px solid #007A3D;
-      padding-bottom: 12px;
-      margin-bottom: 20px;
+      padding-bottom: 10px;
+      margin-bottom: 15px;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
     .header-title h1 {
       color: #007A3D;
-      font-size: 20pt;
-      margin: 0 0 4px 0;
+      font-size: 18pt;
+      margin: 0 0 3px 0;
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
     .header-title p {
       color: #64748B;
-      font-size: 10pt;
+      font-size: 9.5pt;
       margin: 0;
       font-weight: 600;
     }
@@ -41,61 +53,61 @@
       background-color: #FEF3C7;
       color: #92400E;
       border: 1px solid #F59E0B;
-      padding: 5px 12px;
+      padding: 4px 10px;
       border-radius: 20px;
       font-weight: bold;
-      font-size: 8.5pt;
+      font-size: 8pt;
       text-align: right;
     }
     .meta-box {
       background-color: #F8FAFC;
       border-left: 4px solid #D97706;
-      padding: 10px 16px;
-      margin-bottom: 20px;
-      border-radius: 0 8px 8px 0;
+      padding: 8px 14px;
+      margin-bottom: 15px;
+      border-radius: 0 6px 6px 0;
     }
     .meta-box p {
       margin: 2px 0;
-      font-size: 9.5pt;
+      font-size: 9pt;
     }
     .meta-box strong {
       color: #0F172A;
     }
     h2 {
       color: #007A3D;
-      font-size: 13pt;
+      font-size: 12pt;
       border-bottom: 1.5px solid #E2E8F0;
-      padding-bottom: 5px;
-      margin-top: 22px;
-      margin-bottom: 10px;
+      padding-bottom: 4px;
+      margin-top: 18px;
+      margin-bottom: 8px;
     }
     .sec-card {
       background-color: #FFFFFF;
       border: 1px solid #E2E8F0;
       border-radius: 6px;
-      padding: 10px 14px;
-      margin-bottom: 10px;
+      padding: 8px 12px;
+      margin-bottom: 8px;
     }
     .sec-card-header {
       display: flex;
       align-items: center;
-      gap: 8px;
-      margin-bottom: 4px;
+      gap: 6px;
+      margin-bottom: 3px;
     }
     .sec-number {
       background-color: #007A3D;
       color: #FFFFFF;
-      width: 22px;
-      height: 22px;
+      width: 20px;
+      height: 20px;
       border-radius: 50%;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       font-weight: bold;
-      font-size: 9.5pt;
+      font-size: 8.5pt;
     }
     .sec-title {
-      font-size: 11pt;
+      font-size: 10pt;
       font-weight: bold;
       color: #0F172A;
     }
@@ -103,54 +115,83 @@
       background-color: #F1F5F9;
       color: #475569;
       font-family: monospace;
-      font-size: 8pt;
-      padding: 2px 6px;
+      font-size: 7.5pt;
+      padding: 1px 5px;
       border-radius: 4px;
-      margin-left: 6px;
+      margin-left: 4px;
     }
     .sec-desc {
-      font-size: 9pt;
+      font-size: 8.5pt;
       color: #334155;
-      margin: 3px 0 0 0;
+      margin: 2px 0 0 0;
     }
     .admin-guide-box {
       background-color: #F0FDF4;
       border: 1px solid #86EFAC;
-      border-radius: 8px;
-      padding: 14px 18px;
-      margin-top: 15px;
+      border-radius: 6px;
+      padding: 10px 14px;
+      margin-top: 10px;
+      margin-bottom: 15px;
     }
     .admin-guide-box h3 {
       color: #166534;
       margin-top: 0;
-      margin-bottom: 10px;
-      font-size: 11.5pt;
+      margin-bottom: 6px;
+      font-size: 10.5pt;
     }
     .guide-step {
-      margin-bottom: 10px;
-      font-size: 9pt;
+      margin-bottom: 8px;
+      font-size: 8.5pt;
     }
     .guide-step strong {
       color: #0F172A;
+    }
+    .trouble-box {
+      background-color: #FEF2F2;
+      border: 1px solid #FCA5A5;
+      border-radius: 6px;
+      padding: 10px 14px;
+      margin-top: 10px;
+      margin-bottom: 15px;
+    }
+    .trouble-box h3 {
+      color: #991B1B;
+      margin-top: 0;
+      margin-bottom: 8px;
+      font-size: 10.5pt;
+    }
+    .trouble-item {
+      margin-bottom: 8px;
+      font-size: 8.5pt;
+      border-bottom: 1px dashed #FECACA;
+      padding-bottom: 6px;
+    }
+    .trouble-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+    .trouble-title {
+      font-weight: bold;
+      color: #7F1D1D;
     }
     .code-inline {
       background-color: #E2E8F0;
       color: #0F172A;
       font-family: monospace;
-      padding: 2px 5px;
-      border-radius: 4px;
-      font-size: 8.5pt;
+      padding: 1px 4px;
+      border-radius: 3px;
+      font-size: 8pt;
     }
     table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 15px;
-      margin-bottom: 20px;
-      font-size: 9pt;
+      margin-top: 10px;
+      margin-bottom: 15px;
+      font-size: 8.5pt;
     }
     th, td {
       border: 1px solid #CBD5E1;
-      padding: 8px 10px;
+      padding: 6px 8px;
       text-align: left;
     }
     th {
@@ -158,108 +199,100 @@
       color: #FFFFFF;
       font-weight: bold;
       text-transform: uppercase;
-      font-size: 8pt;
+      font-size: 7.5pt;
       letter-spacing: 0.5px;
     }
     tr:nth-child(even) {
       background-color: #F8FAFC;
     }
     .footer-doc {
-      margin-top: 30px;
+      margin-top: 20px;
       border-top: 1px solid #E2E8F0;
-      padding-top: 10px;
+      padding-top: 8px;
       text-align: center;
-      font-size: 8pt;
+      font-size: 7.5pt;
       color: #94A3B8;
     }
   </style>
 </head>
 <body>
 
+  <div class="confidential-banner">
+    🔒 DOCUMENT STRICTEMENT CONFIDENTIAL — USAGE EXCLUSIF DU SUPER ADMINISTRATEUR (SALOMON)
+  </div>
+
   <div class="header">
     <div class="header-title">
-      <h1>AJTES TCHAD — SÉCURITÉ INFORMATIQUE</h1>
-      <p>Rapport d'Architecture, Protection des Données & Guide d'Administration</p>
+      <h1>AJTES TCHAD — SÉCURITÉ, MISE À JOUR & DÉPANNAGE</h1>
+      <p>Manuel Technique Officiel & Guide d'Administration (Confidentiel)</p>
     </div>
     <div class="badge-date">
-      VERSION OFFICIELLE 2026<br>
+      DOCUMENT PRIVÉ 2026<br>
       Siège Social N'Djamena
     </div>
   </div>
 
   <div class="meta-box">
     <p><strong>Organisation :</strong> Association des Jeunes Tchadiens pour l'Éducation et la Solidarité (AJTES)</p>
-    <p><strong>Responsable Technique & Maintenance :</strong> SALOMON (Super Admin - Contrôle 100%)</p>
-    <p><strong>Périmètre d'Audit :</strong> API Backend (Node.js/Express) & Application Frontend (React/TypeScript)</p>
-    <p><strong>Statut de Conformité :</strong> 100% Fonctionnel & Sécurisé</p>
+    <p><strong>Destinataire Unique :</strong> SALOMON (Développeur Principal & Super Admin - Accès 100%)</p>
+    <p><strong>Périmètre :</strong> Architecture Sécurité, Protocoles de Mise à Jour & Résolution de Soucis Techniques</p>
+    <p><strong>Niveau de Confidentialité :</strong> Strictement Confidentiel — Ne pas diffuser aux tiers</p>
   </div>
 
-  <h2>1. AUDIT DÉTAILLÉ DES DISPOSITIFS DE SÉCURITÉ</h2>
+  <h2>1. AUDIT TECHNIQUE DES 9 DISPOSITIFS DE SÉCURITÉ</h2>
 
   <div class="sec-card">
     <div class="sec-card-header">
       <span class="sec-number">1</span>
-      <span class="sec-title">Hachage Irréversible des Mots de Passe</span>
+      <span class="sec-title">Hachage des Mots de Passe</span>
       <span class="sec-tech">bcryptjs (Cost 10)</span>
     </div>
-    <p class="sec-desc">
-      Aucun mot de passe n'est stocké en texte clair. Chaque mot de passe est haché de manière irréversible avec un sel aléatoire. Même en cas d'accès non autorisé à la base de données, la récupération des mots de passe originaux est mathématiquement impossible.
-    </p>
+    <p class="sec-desc">Mots de passe chiffrés de manière irréversible. Aucun mot de passe en clair dans la base de données.</p>
   </div>
 
   <div class="sec-card">
     <div class="sec-card-header">
       <span class="sec-number">2</span>
-      <span class="sec-title">Authentification Sécurisée par Tokens Chiffrés</span>
+      <span class="sec-title">Tokens Cryptographiques</span>
       <span class="sec-tech">jsonwebtoken (JWT)</span>
     </div>
-    <p class="sec-desc">
-      L'authentification utilise des jetons cryptographiques signés avec une clé secrète (<code>JWT_SECRET</code>). Le middleware de vérification contrôle chaque requête protégée. Tout jeton modifié ou expiré est rejeté immédiatement.
-    </p>
+    <p class="sec-desc">Authentification par jetons signés avec <code>JWT_SECRET</code>. Expiration et vérification automatique à chaque requête.</p>
   </div>
 
   <div class="sec-card">
     <div class="sec-card-header">
       <span class="sec-number">3</span>
-      <span class="sec-title">Contrôle d'Accès Basé sur les Rôles (RBAC)</span>
+      <span class="sec-title">Contrôle d'Accès par Rôles</span>
       <span class="sec-tech">role.middleware.ts</span>
     </div>
-    <p class="sec-desc">
-      Séparation stricte des privilèges : les fonctions d'administration (gestion des membres, validation d'adhésion, modification de projets) sont protégées par le middleware de rôle et réservées exclusivement aux comptes <code>admin</code> et <code>super_admin</code>.
-    </p>
+    <p class="sec-desc">Fonctions sensibles réservées exclusivement aux rôles <code>admin</code> et <code>super_admin</code>.</p>
   </div>
 
   <div class="sec-card">
     <div class="sec-card-header">
       <span class="sec-number">4</span>
-      <span class="sec-title">Protection Anti-Brute Force (Rate Limiting)</span>
+      <span class="sec-title">Protection Anti-Brute Force</span>
       <span class="sec-tech">rateLimit.middleware.ts</span>
     </div>
-    <p class="sec-desc">
-      Limitation automatique des tentatives de connexion et d'inscription à <strong>15 requêtes maximum par tranche de 15 minutes</strong> par adresse IP. Protège l'application contre le piratage par dictionnaire et le déni de service.
-    </p>
+    <p class="sec-desc">Limitation stricte à 15 tentatives max par 15 minutes par adresse IP sur la connexion et l'inscription.</p>
   </div>
 
   <div class="sec-card">
     <div class="sec-card-header">
       <span class="sec-number">5</span>
-      <span class="sec-title">Alertes de Connexion en Temps Réel</span>
+      <span class="sec-title">Alertes de Connexion E-mail</span>
       <span class="sec-tech">email.service.ts</span>
     </div>
-    <p class="sec-desc">
-      Un e-mail de sécurité est automatiquement envoyé à l'utilisateur lors de chaque connexion réussie, mentionnant la date et l'horodatage exacts, lui permettant de réagir immédiatement en cas d'activité suspecte.
-    </p>
+    <p class="sec-desc">Notification instantanée envoyée par e-mail lors de chaque connexion réussie avec horodatage précis.</p>
   </div>
 
   <div class="sec-card">
     <div class="sec-card-header">
       <span class="sec-number">6</span>
-      <span class="sec-title">Protection contre les Injections SQL</span>
-      <span class="sec-tech">Prisma ORM & SQLite</span>
+      <span class="sec-title">Protection Anti-Injection SQL</span>
+      <span class="sec-tech">Prisma ORM</span>
     </div>
-    <p class="sec-desc">
-      Toutes les requêtes de base de données passent par l'ORM Prisma avec des requêtes paramétrées, ce qui neutralise à 100% les attaques par injection SQL (SQLi).
-    </p>
+    <p class="sec-desc">Requêtes de base de données 100% paramétrées neutralisant toutes les injections SQL (SQLi).</p>
   </div>
 
   <div class="sec-card">
@@ -268,118 +301,92 @@
       <span class="sec-title">Filtrage des Origines Réseau</span>
       <span class="sec-tech">CORS Policy</span>
     </div>
-    <p class="sec-desc">
-      Le serveur Backend rejette les requêtes provenant de domaines non autorisés. Seul le domaine frontend officiel de l'association est autorisé à communiquer avec l'API.
-    </p>
+    <p class="sec-desc">Rejet systématique des requêtes provenant de domaines non autorisés.</p>
   </div>
 
   <div class="sec-card">
     <div class="sec-card-header">
       <span class="sec-number">8</span>
-      <span class="sec-title">Validation Strict des Formulaires</span>
+      <span class="sec-title">Validation des Données</span>
       <span class="sec-tech">Zod Schemas</span>
     </div>
-    <p class="sec-desc">
-      Validation rigoureuse du type et du format de chaque donnée transmise (format e-mail, longueur de texte, types numériques) avant tout traitement par le serveur.
-    </p>
+    <p class="sec-desc">Validation stricte des types, formats et longueurs de données avant tout traitement serveur.</p>
   </div>
 
   <div class="sec-card">
     <div class="sec-card-header">
       <span class="sec-number">9</span>
-      <span class="sec-title">Isolation des Clés Secrètes</span>
+      <span class="sec-title">Isolation des Secrets</span>
       <span class="sec-tech">.env & .gitignore</span>
     </div>
-    <p class="sec-desc">
-      Les secrets d'infrastructures (clés JWT, mots de passe SMTP, URLs de base de données) sont conservés hors du code source et ne sont jamais publiés sur le dépôt GitHub public.
-    </p>
+    <p class="sec-desc">Stockage étanche des variables d'environnement hors des dépôts publics GitHub.</p>
   </div>
 
-  <h2>2. GUIDE PRATIQUE DE CONFIGURATION PAR SALOMON (SUPER ADMIN)</h2>
+  <h2>2. GUIDE PRATIQUE DE GESTION PAR SALOMON (SUPER ADMIN)</h2>
 
   <div class="admin-guide-box">
-    <h3>⚙️ Comment modifier et contrôler la sécurité à votre niveau :</h3>
-
+    <h3>⚙️ Personnalisation des paramètres de sécurité :</h3>
     <div class="guide-step">
-      <strong>1. Changer la Clé Secrète JWT (Chiffrement des Jetons) :</strong><br>
-      Éditez le fichier <span class="code-inline">backend/.env</span> et modifiez la ligne <span class="code-inline">JWT_SECRET=VOTRE_CLÉ_PERSONNALISÉE</span>.
+      <strong>1. Clé Secrète JWT :</strong> Modifiez <span class="code-inline">JWT_SECRET</span> dans <span class="code-inline">backend/.env</span>.
     </div>
-
     <div class="guide-step">
-      <strong>2. Ajuster le Seuil Anti-Brute Force (Rate Limiting) :</strong><br>
-      Dans <span class="code-inline">backend/src/middlewares/rateLimit.middleware.ts</span>, modifiez le paramètre <span class="code-inline">max: 15</span> pour ajuster le nombre d'essais de connexion autorisés.
+      <strong>2. Anti-Brute Force :</strong> Ajustez <span class="code-inline">max: 15</span> dans <span class="code-inline">backend/src/middlewares/rateLimit.middleware.ts</span>.
     </div>
-
     <div class="guide-step">
-      <strong>3. Configurer l'Expédition Réelle des E-mails de Sécurité :</strong><br>
-      Dans <span class="code-inline">backend/.env</span>, renseignez vos identifiants Gmail <span class="code-inline">SMTP_USER=association.ajtes@gmail.com</span> et le mot de passe d'application <span class="code-inline">SMTP_PASS</span>.
+      <strong>3. Envois d'E-mails SMTP :</strong> Configurez <span class="code-inline">SMTP_USER</span> et <span class="code-inline">SMTP_PASS</span> dans <span class="code-inline">backend/.env</span>.
     </div>
-
     <div class="guide-step">
-      <strong>4. Restreindre le Domaine Autorisé en Production (CORS) :</strong><br>
-      Dans <span class="code-inline">backend/.env</span>, définissez <span class="code-inline">CORS_ORIGIN=https://salomontchibkere.github.io</span> pour bloquer tout autre serveur.
-    </div>
-
-    <div class="guide-step">
-      <strong>5. Gérer les Rôles et Privilèges Administrateurs :</strong><br>
-      Directement depuis le code (<span class="code-inline">backend/src/seed.ts</span>) ou via le <strong>Tableau de Bord Administration</strong> sur le site.
+      <strong>4. Origine CORS Réseau :</strong> Restreignez <span class="code-inline">CORS_ORIGIN</span> dans <span class="code-inline">backend/.env</span>.
     </div>
   </div>
 
-  <h2>3. MATRICE SYNTHÉTIQUE DE SÉCURITÉ</h2>
+  <h2>3. PROCÉDURE DE MISE À JOUR & DÉPANNAGE (RÉSOLUTIONS DE SOUCIS)</h2>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Domaine de Sécurité</th>
-        <th>Technologie / Fichier</th>
-        <th>Niveau de Protection</th>
-        <th>Risque Contré</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><strong>Stockage Mots de Passe</strong></td>
-        <td><code>bcryptjs</code></td>
-        <td>Élevé (Cost 10)</td>
-        <td>Vol de mots de passe en clair</td>
-      </tr>
-      <tr>
-        <td><strong>Authentification API</strong></td>
-        <td><code>jsonwebtoken</code> / <code>auth.middleware.ts</code></td>
-        <td>Élevé (Signature secrète)</td>
-        <td>Usurpation d'identité & Vol de session</td>
-      </tr>
-      <tr>
-        <td><strong>Gestion des Droits</strong></td>
-        <td><code>role.middleware.ts</code></td>
-        <td>Élevé (RBAC)</td>
-        <td>Accès non autorisé aux fonctions admin</td>
-      </tr>
-      <tr>
-        <td><strong>Attaques Réseau</strong></td>
-        <td><code>rateLimit.middleware.ts</code></td>
-        <td>Élevé (15 req / 15 min)</td>
-        <td>Attaques Brute-Force & Déni de service</td>
-      </tr>
-      <tr>
-        <td><strong>Base de Données</strong></td>
-        <td><code>Prisma ORM</code></td>
-        <td>Maximal (Requêtes paramétrées)</td>
-        <td>Injections SQL (SQLi)</td>
-      </tr>
-      <tr>
-        <td><strong>Contrôle d'Origine</strong></td>
-        <td><code>cors</code></td>
-        <td>Élevé (Origine restreinte)</td>
-        <td>Attaques Cross-Site Request Forgery</td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="admin-guide-box" style="background-color: #EFF6FF; border-color: #93C5FD;">
+    <h3 style="color: #1E40AF;">🚀 Procédure officielle pour effectuer une mise à jour du site :</h3>
+    <div class="guide-step">
+      <strong>Étape 1 (Tests locaux) :</strong> Lancez <span class="code-inline">npm run dev --prefix backend</span> (port 5000) et <span class="code-inline">npm run dev --prefix frontend</span> (port 5173).
+    </div>
+    <div class="guide-step">
+      <strong>Étape 2 (Vérification build) :</strong> Vérifiez la compilation sans erreur avec <span class="code-inline">npm run build --prefix backend</span> et <span class="code-inline">npm run build --prefix frontend</span>.
+    </div>
+    <div class="guide-step">
+      <strong>Étape 3 (Push GitHub) :</strong> Exécutez <span class="code-inline">git add .</span> ➔ <span class="code-inline">git commit -m "Description"</span> ➔ <span class="code-inline">git push origin main</span>. Le site en ligne sera automatiquement mis à jour.
+    </div>
+  </div>
+
+  <div class="trouble-box">
+    <h3>🛠️ Guide de Résolution des 5 Soucis Techniques Fréquents :</h3>
+
+    <div class="trouble-item">
+      <span class="trouble-title"> Souci 1 : E-mails de bienvenue ou de connexion non reçus</span><br>
+      <strong>Solution :</strong> Vérifiez dans <span class="code-inline">backend/.env</span> que <span class="code-inline">SMTP_USER</span> contient votre e-mail et que <span class="code-inline">SMTP_PASS</span> contient le mot de passe d'application Gmail à 16 caractères (sans espaces).
+    </div>
+
+    <div class="trouble-item">
+      <span class="trouble-title"> Souci 2 : Erreur 401 Unauthorized ou perte d'accès Admin</span><br>
+      <strong>Solution :</strong> Le jeton JWT a expiré. Cliquez sur Déconnexion dans l'Espace Membre puis reconnectez-vous avec le compte admin <span class="code-inline">salomon.admin@ajtes.td</span> pour régénérer un token frais.
+    </div>
+
+    <div class="trouble-item">
+      <span class="trouble-title"> Souci 3 : Les nouvelles modifications du site ne s'affichent pas</span><br>
+      <strong>Solution :</strong> Le navigateur a gardé l'ancien cache. Faites un rafraîchissement forcé avec les touches <span class="code-inline">CTRL + SHIFT + R</span> (ou <span class="code-inline">CTRL + F5</span>).
+    </div>
+
+    <div class="trouble-item">
+      <span class="trouble-title"> Souci 4 : Erreur 429 Too Many Requests</span><br>
+      <strong>Solution :</strong> Blocage automatique anti-brute force déclenché. Le déblocage s'effectue automatiquement après 15 minutes d'attente.
+    </div>
+
+    <div class="trouble-item">
+      <span class="trouble-title"> Souci 5 : Erreur lors du git push (Demande de mot de passe GitHub)</span><br>
+      <strong>Solution :</strong> GitHub exige un Personal Access Token (PAT). Générez-le dans GitHub ➔ Settings ➔ Developer Settings ➔ Personal Access Tokens (classic) avec la coche <span class="code-inline">repo</span>, et utilisez-le comme mot de passe.
+    </div>
+  </div>
 
   <div class="footer-doc">
     <p>© 2026 Association des Jeunes Tchadiens pour l'Éducation et la Solidarité (AJTES) — Siège Social N'Djamena, Tchad</p>
-    <p>Document Technique Officiel rédigé et validé par SALOMON — Responsable Technique & Maintenance (Super Admin)</p>
+    <p><strong>DOCUMENT CONFIDENTIEL</strong> — Strictement réservé à SALOMON (Super Admin & Technicien Chef AJTES)</p>
   </div>
 
 </body>
