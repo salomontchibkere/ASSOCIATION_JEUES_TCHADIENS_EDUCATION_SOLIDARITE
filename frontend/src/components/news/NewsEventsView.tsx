@@ -40,13 +40,13 @@ export const NewsEventsView: React.FC = () => {
             className={`tab-btn ${activeTab === 'news' ? 'active' : ''}`}
             onClick={() => setActiveTab('news')}
           >
-            📰 Actualités ({news.length})
+            Actualités ({news.length})
           </button>
           <button
             className={`tab-btn ${activeTab === 'events' ? 'active' : ''}`}
             onClick={() => setActiveTab('events')}
           >
-            📅 Événements à Venir ({events.length})
+            Événements à Venir ({events.length})
           </button>
         </div>
 
@@ -58,13 +58,13 @@ export const NewsEventsView: React.FC = () => {
                 <img src={item.imageUrl} alt={item.title['fr']} className="news-img" />
                 <div className="news-body">
                   <div className="news-meta">
-                    <span className="news-cat">🏷️ {item.category}</span>
-                    <span className="news-date">🗓️ {item.publishDate}</span>
+                    <span className="news-cat">Catégorie : {item.category}</span>
+                    <span className="news-date">Date : {item.publishDate}</span>
                   </div>
                   <h3>{item.title[language] || item.title['fr']}</h3>
                   <p>{item.summary[language] || item.summary['fr']}</p>
                   <div className="news-footer">
-                    <span className="author">✍️ {item.author}</span>
+                    <span className="author">Auteur : {item.author}</span>
                     <button className="btn btn-outline-emerald btn-sm" onClick={() => setSelectedNews(item)}>
                       Lire la suite →
                     </button>
@@ -86,13 +86,13 @@ export const NewsEventsView: React.FC = () => {
                     <span>{evt.date}</span>
                   </div>
                   <h3>{evt.title[language] || evt.title['fr']}</h3>
-                  <p className="event-info">📍 {evt.location} • ⏰ {evt.time}</p>
+                  <p className="event-info">Lieu : {evt.location} • Heure : {evt.time}</p>
                   <p className="event-desc">{evt.description[language] || evt.description['fr']}</p>
 
                   <div className="event-footer">
-                    <span className="attendees-count">👥 {evt.registeredCount} Inscrits</span>
+                    <span className="attendees-count">{evt.registeredCount} Inscrits</span>
                     <button className="btn btn-primary btn-sm" onClick={() => setRegisterEvent(evt)}>
-                      ✍️ S'inscrire à l'événement
+                      S'inscrire à l'événement
                     </button>
                   </div>
                 </div>

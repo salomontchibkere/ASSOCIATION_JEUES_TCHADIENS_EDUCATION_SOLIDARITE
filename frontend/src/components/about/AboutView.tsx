@@ -42,14 +42,14 @@ export const AboutView: React.FC = () => {
 
           <div className="mission-vision-box card">
             <div className="mv-item">
-              <h3>🎯 Notre Mission</h3>
+              <h3>Notre Mission</h3>
               <p>
                 Contribuer au développement, à la scolarisation et à l'épanouissement de la jeunesse tchadienne à travers des projets éducatifs, sociaux, culturels et environnementaux.
               </p>
             </div>
             <div className="mv-divider"></div>
             <div className="mv-item">
-              <h3>👁️ Notre Vision</h3>
+              <h3>Notre Vision</h3>
               <p>
                 Construire une jeunesse tchadienne mieux éduquée, solidaire, responsable et pleinement actrice du développement de sa communauté et de son pays.
               </p>

@@ -31,13 +31,12 @@ export const CommitteesView: React.FC<CommitteesViewProps> = ({ setCurrentTab })
         <div className="grid-3">
           {committees.map(c => (
             <div key={c.id} className="committee-card card">
-              <div className="card-top-icon">🏛️</div>
               <h3>{c.name[language] || c.name['fr']}</h3>
-              <p className="region-badge">📍 {c.region}</p>
+              <p className="region-badge">{c.region}</p>
               <p className="comm-desc">{c.description[language] || c.description['fr']}</p>
               <div className="comm-footer">
-                <span>📍 {c.region}</span>
-                <span>👥 {c.membersCount} Membres</span>
+                <span>Région : {c.region}</span>
+                <span>{c.membersCount} Membres</span>
               </div>
             </div>
           ))}
@@ -69,7 +68,7 @@ export const CommitteesView: React.FC<CommitteesViewProps> = ({ setCurrentTab })
             Rejoignez l'AJTES pour co-financer des projets éducatifs et environnementaux sur le terrain au Tchad.
           </p>
           <button className="btn btn-gold btn-lg" onClick={() => setCurrentTab('contact')}>
-            🤝 Devenir Partenaire de l'AJTES
+            Devenir Partenaire de l'AJTES
           </button>
         </div>
       </section>

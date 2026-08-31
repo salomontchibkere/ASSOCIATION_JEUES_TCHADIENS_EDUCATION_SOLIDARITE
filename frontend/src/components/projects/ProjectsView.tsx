@@ -67,14 +67,14 @@ export const ProjectsView: React.FC<ProjectsViewProps> = ({ setCurrentTab }) => 
                 <div className="proj-img-wrap">
                   <img src={proj.imageUrl} alt={proj.title['fr']} />
                   <span className={`status-badge ${proj.status}`}>
-                    {proj.status === 'realise' ? '✅ Réalisé' : proj.status === 'en_cours' ? '⏳ En cours' : '🎯 En projet'}
+                    {proj.status === 'realise' ? 'Réalisé' : proj.status === 'en_cours' ? 'En cours' : 'En projet'}
                   </span>
                 </div>
 
                 <div className="proj-content">
                   <div className="proj-meta">
-                    <span>📍 {proj.location}</span>
-                    <span>👥 {proj.beneficiariesCount} Bénéficiaires</span>
+                    <span>Lieu : {proj.location}</span>
+                    <span>{proj.beneficiariesCount} Bénéficiaires</span>
                   </div>
 
                   <h3 className="proj-title">{proj.title[language] || proj.title['fr']}</h3>

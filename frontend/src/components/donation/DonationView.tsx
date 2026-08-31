@@ -133,7 +133,7 @@ export const DonationView: React.FC = () => {
 
               {paymentMethod === 'airtel_money' && (
                 <div className="airtel-info-box margin-top">
-                  <div className="airtel-title">📱 INSTRUCTIONS AIRTEL MONEY TCHAD (*150#)</div>
+                  <div className="airtel-title">INSTRUCTIONS AIRTEL MONEY TCHAD (*150#)</div>
                   <div className="airtel-numbers">
                     <span>Numéro 1 : <strong>+235 66 43 95 02</strong></span>
                     <span>Numéro 2 : <strong>+235 68 90 23 47</strong></span>
@@ -146,7 +146,7 @@ export const DonationView: React.FC = () => {
 
               {paymentMethod === 'moov_africa' && (
                 <div className="airtel-info-box margin-top" style={{ background: '#E0F2FE', borderColor: '#0284C7' }}>
-                  <div className="airtel-title" style={{ color: '#0369A1' }}>📱 INSTRUCTIONS MOOV AFRICA TCHAD (*800#)</div>
+                  <div className="airtel-title" style={{ color: '#0369A1' }}>INSTRUCTIONS MOOV AFRICA TCHAD (*800#)</div>
                   <div className="airtel-numbers">
                     <span>Moov Money : <strong>+235 99 00 11 22</strong></span>
                   </div>
