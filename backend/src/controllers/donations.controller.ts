@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
-import { db, Donation } from '../db.js';
-import { cryptoUUID } from '../utils/uuid.js';
+import { prisma } from '../prisma.js';
 import { sendDonationReceiptEmail } from '../services/email.service.js';
+import { generateDonationReceiptPDF } from '../services/pdf.service.js';
 
 export const createDonation = async (req: Request, res: Response) => {
   try {
@@ -11,22 +11,21 @@ export const createDonation = async (req: Request, res: Response) => {
       return res.status(400).json({ message: 'Veuillez remplir le nom, l\'email et le montant du don.' });
     }
 
-    const newDonation: Donation = {
-      id: cryptoUUID(),
-      donorName,
-      donorEmail,
-      donorPhone,
-      amount: parseFloat(amount),
-      currency: 'XAF',
-      paymentMethod: paymentMethod || 'AIRTEL_MONEY',
-      status: 'SUCCESS',
-      transactionRef: 'DON-' + Math.floor(100000 + Math.random() * 900000),
-      notes,
-      createdAt: new Date().toISOString(),
-    };
+    const transactionRef = 'DON-' + Math.floor(100000 + Math.random() * 900000);
 
-    db.donations.push(newDonation);
-    db.saveDb();
+    const newDonation = await prisma.donation.create({
+      data: {
+        donorName,
+        donorEmail,
+        donorPhone,
+        amount: parseFloat(amount),
+        currency: 'XAF',
+        paymentMethod: paymentMethod || 'AIRTEL_MONEY',
+        status: 'SUCCESS',
+        transactionRef,
+        notes,
+      },
+    });
 
     // Trigger donation receipt email asynchronously (non-blocking)
     sendDonationReceiptEmail(
@@ -50,8 +49,9 @@ export const createDonation = async (req: Request, res: Response) => {
 
 export const getDonations = async (req: Request, res: Response) => {
   try {
-    const donations = [...db.donations];
-    donations.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+    const donations = await prisma.donation.findMany({
+      orderBy: { createdAt: 'desc' },
+    });
 
     const totalAmount = donations.reduce((sum, d) => sum + d.amount, 0);
 
@@ -62,5 +62,32 @@ export const getDonations = async (req: Request, res: Response) => {
     });
   } catch (error: any) {
     res.status(500).json({ message: 'Erreur lors de la récupération des dons: ' + error.message });
+  }
+};
+
+export const downloadDonationReceiptPDF = async (req: Request, res: Response) => {
+  try {
+    const id = String(req.params.id);
+
+    const donation = await prisma.donation.findFirst({
+      where: {
+        OR: [
+          { id },
+          { transactionRef: id },
+        ],
+      },
+    });
+
+    if (!donation) {
+      return res.status(404).json({ message: 'Don non trouvé.' });
+    }
+
+    const pdfBuffer = await generateDonationReceiptPDF(donation);
+
+    res.setHeader('Content-Type', 'application/pdf');
+    res.setHeader('Content-Disposition', `attachment; filename=recu_don_ajtes_${donation.transactionRef}.pdf`);
+    res.send(pdfBuffer);
+  } catch (error: any) {
+    res.status(500).json({ message: 'Erreur de génération du reçu PDF: ' + error.message });
   }
 };

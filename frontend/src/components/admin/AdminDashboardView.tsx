@@ -79,7 +79,7 @@ export const AdminDashboardView: React.FC = () => {
       <div className="admin-page">
         <section className="admin-header-banner">
           <div className="admin-banner-container">
-            <div className="admin-badge">🔒 ESPACE RÉSERVÉ — ACCÈS ACCRÉDITÉ</div>
+            <div className="admin-badge">ESPACE RÉSERVÉ — ACCÈS ACCRÉDITÉ</div>
             <h1>Portail d'Administration AJTES</h1>
             <p>Accès restreint au Bureau National & Responsables Techniques</p>
           </div>
@@ -125,20 +125,51 @@ export const AdminDashboardView: React.FC = () => {
               </div>
 
               <button type="submit" className="btn btn-primary btn-lg w-full margin-top">
-                🔓 Connexion au Tableau de Bord
+                Connexion au Tableau de Bord
               </button>
 
               <div className="demo-admin-divider">
-                <span>OU</span>
+                <span>CONNEXION RAPIDE ACCRÉDITÉE (BUREAU EXÉCUTIF)</span>
               </div>
 
-              <button
-                type="button"
-                className="btn btn-gold w-full"
-                onClick={() => loginAsAdmin()}
-              >
-                ⚡ Connexion Administrateur Salomon (Accès Rapide 1-Clic)
-              </button>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                <button
+                  type="button"
+                  className="btn btn-gold w-full"
+                  onClick={() => login('marcallandedjim@gmail.com', 'super_admin')}
+                >
+                  Connexion Marc Allan Dedjim (Super Admin)
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-secondary w-full"
+                  onClick={() => login('soumabanakolong007@gmail.com', 'admin')}
+                >
+                  Connexion Souma Banakolong (Président)
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-secondary w-full"
+                  onClick={() => login('betoudjimbaikaravalentin@gmail.com', 'admin')}
+                >
+                  Connexion Betoudjimbaikara Valentin (Secrétaire Général)
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-secondary w-full"
+                  onClick={() => login('boikoussiguen@gmail.com', 'admin')}
+                >
+                  Connexion Boikoussigue (Chargé de Com)
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-outline w-full"
+                  style={{ marginTop: '0.25rem' }}
+                  onClick={() => loginAsAdmin()}
+                >
+                  Connexion Salomon (Tech Lead & Super Admin)
+                </button>
+              </div>
             </form>
           </div>
         </section>
@@ -206,25 +237,25 @@ export const AdminDashboardView: React.FC = () => {
             className={`admin-tab ${activeAdminTab === 'overview' ? 'active' : ''}`}
             onClick={() => setActiveAdminTab('overview')}
           >
-            📊 Vue d'Ensemble & Stats
+            Vue d'Ensemble & Stats
           </button>
           <button
             className={`admin-tab ${activeAdminTab === 'content' ? 'active' : ''}`}
             onClick={() => setActiveAdminTab('content')}
           >
-            📝 Gestion des Projets & Actus
+            Gestion des Projets & Actus
           </button>
           <button
             className={`admin-tab ${activeAdminTab === 'media' ? 'active' : ''}`}
             onClick={() => setActiveAdminTab('media')}
           >
-            🖼️ Ajout Photos & Vidéos
+            Ajout Photos & Vidéos
           </button>
           <button
             className={`admin-tab ${activeAdminTab === 'donations' ? 'active' : ''}`}
             onClick={() => setActiveAdminTab('donations')}
           >
-            💰 Historique des Dons ({donations.length})
+            Historique des Dons ({donations.length})
           </button>
         </div>
 

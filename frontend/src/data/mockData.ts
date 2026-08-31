@@ -1099,14 +1099,62 @@ export const initialDonations: Donation[] = [
 
 export const initialUsers: User[] = [
   {
-    id: 'usr-admin',
-    name: 'Salomon',
+    id: 'usr-admin-salomon',
+    name: 'Salomon (Tech Lead)',
     email: 'salomontchibkere@gmail.com',
     role: 'super_admin',
     profession: 'Super Admin & Responsable Technique AJTES',
-    phone: '655136824',
+    phone: '+237655136824',
     city: 'N\'Djamena',
     avatarUrl: './images/IMG_20250119_163228_691.jpg',
+    memberType: 'actif',
+    membershipStatus: 'actif',
+    dateJoined: '2022-01-15'
+  },
+  {
+    id: 'usr-admin-marc',
+    name: 'Marc Allan Dedjim',
+    email: 'marcallandedjim@gmail.com',
+    role: 'super_admin',
+    profession: 'Administrateur Principal (Pouvoir Complet 100%)',
+    phone: '63000484',
+    city: 'N\'Djamena',
+    memberType: 'actif',
+    membershipStatus: 'actif',
+    dateJoined: '2022-01-15'
+  },
+  {
+    id: 'usr-admin-valentin',
+    name: 'Betoudjimbaikara Valentin',
+    email: 'betoudjimbaikaravalentin@gmail.com',
+    role: 'admin',
+    profession: 'Secrétaire Général (SG)',
+    phone: '63373639',
+    city: 'N\'Djamena',
+    memberType: 'actif',
+    membershipStatus: 'actif',
+    dateJoined: '2022-01-15'
+  },
+  {
+    id: 'usr-admin-souma',
+    name: 'Souma Banakolong',
+    email: 'soumabanakolong007@gmail.com',
+    role: 'admin',
+    profession: 'Président de l\'AJTES',
+    phone: '+237690969577',
+    city: 'N\'Djamena',
+    memberType: 'actif',
+    membershipStatus: 'actif',
+    dateJoined: '2022-01-15'
+  },
+  {
+    id: 'usr-admin-boikoussigue',
+    name: 'Boikoussigue',
+    email: 'boikoussiguen@gmail.com',
+    role: 'admin',
+    profession: 'Chargé de Communication & Secrétaire',
+    phone: '65031849',
+    city: 'N\'Djamena',
     memberType: 'actif',
     membershipStatus: 'actif',
     dateJoined: '2022-01-15'

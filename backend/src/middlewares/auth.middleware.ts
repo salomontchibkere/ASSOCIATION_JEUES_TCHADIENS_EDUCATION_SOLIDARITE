@@ -12,13 +12,21 @@ export interface AuthRequest extends Request {
 const JWT_SECRET = process.env.JWT_SECRET || 'ajtes_secret_key_2026_salomon_secure_token';
 
 export const authenticate = (req: AuthRequest, res: Response, next: NextFunction) => {
-  const authHeader = req.headers.authorization;
+  let token: string | undefined;
 
-  if (!authHeader || !authHeader.startsWith('Bearer ')) {
-    return res.status(401).json({ message: 'Accès refusé. Jeton d\'authentification manquant.' });
+  // 1. Vérification du token dans les cookies HttpOnly
+  if (req.cookies && req.cookies.ajtes_token) {
+    token = req.cookies.ajtes_token;
   }
 
-  const token = authHeader.split(' ')[1];
+  // 2. Repli (fallback) : Vérification de l'en-tête Authorization Bearer
+  if (!token && req.headers.authorization && req.headers.authorization.startsWith('Bearer ')) {
+    token = req.headers.authorization.split(' ')[1];
+  }
+
+  if (!token) {
+    return res.status(401).json({ message: 'Accès refusé. Jeton d\'authentification manquant.' });
+  }
 
   try {
     const decoded = jwt.verify(token, JWT_SECRET) as { id: string; email: string; role: string };

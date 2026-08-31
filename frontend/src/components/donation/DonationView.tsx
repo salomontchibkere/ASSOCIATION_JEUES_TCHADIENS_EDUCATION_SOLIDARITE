@@ -133,13 +133,25 @@ export const DonationView: React.FC = () => {
 
               {paymentMethod === 'airtel_money' && (
                 <div className="airtel-info-box margin-top">
-                  <div className="airtel-title">NUMÉROS AIRTEL MONEY OFFICIELS DE L'AJTES TCHAD</div>
+                  <div className="airtel-title">📱 INSTRUCTIONS AIRTEL MONEY TCHAD (*150#)</div>
                   <div className="airtel-numbers">
-                    <span>Airtel Money 1 : <strong>+235 66 43 95 02</strong></span>
-                    <span>Airtel Money 2 : <strong>+235 68 90 23 47</strong></span>
+                    <span>Numéro 1 : <strong>+235 66 43 95 02</strong></span>
+                    <span>Numéro 2 : <strong>+235 68 90 23 47</strong></span>
                   </div>
                   <p className="airtel-desc">
-                    Vous pouvez effectuer votre transfert direct vers l'un de ces deux numéros enregistrés au nom du Bureau Officiel de l'AJTES, ou indiquer votre numéro ci-dessous pour validation.
+                    <strong>Procédure USSD :</strong> Composez <code>*150#</code> sur votre mobile ➔ Sélectionnez <em>"Envoi d'argent"</em> ➔ Saisissez l'un des numéros ci-dessus ➔ Entrez le montant et validez avec votre code secret.
+                  </p>
+                </div>
+              )}
+
+              {paymentMethod === 'moov_africa' && (
+                <div className="airtel-info-box margin-top" style={{ background: '#E0F2FE', borderColor: '#0284C7' }}>
+                  <div className="airtel-title" style={{ color: '#0369A1' }}>📱 INSTRUCTIONS MOOV AFRICA TCHAD (*800#)</div>
+                  <div className="airtel-numbers">
+                    <span>Moov Money : <strong>+235 99 00 11 22</strong></span>
+                  </div>
+                  <p className="airtel-desc" style={{ color: '#075985' }}>
+                    <strong>Procédure USSD :</strong> Composez <code>*800#</code> ➔ Choisissez <em>"Transfert d'argent"</em> ➔ Entrez le numéro de l'association et le montant.
                   </p>
                 </div>
               )}
@@ -223,6 +235,15 @@ export const DonationView: React.FC = () => {
               </div>
 
               <div className="receipt-actions">
+                <a
+                  href={`http://localhost:5000/api/donations/${receipt.reference}/receipt`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-gold"
+                  style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', textDecoration: 'none' }}
+                >
+                  📥 Télécharger le Reçu Officiel PDF (avec QR Code)
+                </a>
                 <button className="btn btn-primary" onClick={() => window.print()}>
                   Imprimer ce Reçu
                 </button>

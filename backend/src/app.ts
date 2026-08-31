@@ -1,5 +1,7 @@
 import express from 'express';
 import cors from 'cors';
+import helmet from 'helmet';
+import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
 import apiRoutes from './routes/index.js';
 import { errorHandler } from './middlewares/error.middleware.js';
@@ -7,6 +9,14 @@ import { errorHandler } from './middlewares/error.middleware.js';
 dotenv.config();
 
 const app = express();
+
+// Activation des en-têtes HTTP de sécurité Helmet
+app.use(helmet({
+  contentSecurityPolicy: false,
+}));
+
+// Activation du parser de cookies
+app.use(cookieParser());
 
 const corsOrigin = process.env.CORS_ORIGIN || 'http://localhost:5173';
 app.use(cors({

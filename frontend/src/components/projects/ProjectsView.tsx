@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useData } from '../../context/DataContext';
 import { useLanguage } from '../../context/LanguageContext';
+import { ShareButtons } from '../common/ShareButtons';
 import type { Project } from '../../types';
 
 interface ProjectsViewProps {
@@ -93,7 +94,9 @@ export const ProjectsView: React.FC<ProjectsViewProps> = ({ setCurrentTab }) => 
                     </div>
                   </div>
 
-                  <div className="proj-actions">
+                  <ShareButtons title={proj.title['fr']} />
+
+                  <div className="proj-actions margin-top">
                     <button
                       className="btn btn-secondary btn-sm"
                       onClick={() => setActiveModalProject(proj)}
@@ -147,6 +150,8 @@ export const ProjectsView: React.FC<ProjectsViewProps> = ({ setCurrentTab }) => 
                   <p>{activeModalProject.results[language] || activeModalProject.results['fr']}</p>
                 </div>
               )}
+
+              <ShareButtons title={activeModalProject.title['fr']} />
 
               <div className="modal-footer-actions">
                 <button className="btn btn-gold btn-lg w-full" onClick={() => { setActiveModalProject(null); setCurrentTab('donate'); }}>

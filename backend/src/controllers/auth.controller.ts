@@ -1,9 +1,8 @@
 import { Request, Response } from 'express';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import { db, User, MemberProfile } from '../db.js';
+import { prisma } from '../prisma.js';
 import { AuthRequest } from '../middlewares/auth.middleware.js';
-import { cryptoUUID } from '../utils/uuid.js';
 import { sendWelcomeEmail, sendLoginNotificationEmail } from '../services/email.service.js';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'ajtes_secret_key_2026_salomon_secure_token';
@@ -16,43 +15,38 @@ export const register = async (req: Request, res: Response) => {
       return res.status(400).json({ message: 'Veuillez remplir tous les champs obligatoires (email, mot de passe, nom).' });
     }
 
-    const existingUser = db.users.find((u) => u.email.toLowerCase() === email.toLowerCase());
+    const cleanEmail = email.toLowerCase().trim();
+
+    const existingUser = await prisma.user.findUnique({
+      where: { email: cleanEmail },
+    });
+
     if (existingUser) {
       return res.status(400).json({ message: 'Cet email est déjà utilisé par un autre compte.' });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    const userId = cryptoUUID();
-    const profileId = cryptoUUID();
-    const now = new Date().toISOString();
 
-    const newProfile: MemberProfile = {
-      id: profileId,
-      userId,
-      profession,
-      city,
-      country: country || 'Tchad',
-      status: 'PENDING',
-      createdAt: now,
-      updatedAt: now,
-    };
-
-    const newUser: User = {
-      id: userId,
-      email: email.toLowerCase(),
-      password: hashedPassword,
-      fullName,
-      phone,
-      role: 'MEMBER',
-      isActive: true,
-      createdAt: now,
-      updatedAt: now,
-      memberProfile: newProfile,
-    };
-
-    db.users.push(newUser);
-    db.memberProfiles.push(newProfile);
-    db.saveDb();
+    const newUser = await prisma.user.create({
+      data: {
+        email: cleanEmail,
+        password: hashedPassword,
+        fullName,
+        phone,
+        role: 'MEMBER',
+        memberProfile: {
+          create: {
+            profession,
+            city,
+            country: country || 'Tchad',
+            status: 'PENDING',
+          },
+        },
+      },
+      include: {
+        memberProfile: true,
+      },
+    });
 
     // Trigger welcome email asynchronously (non-blocking)
     sendWelcomeEmail(newUser.email, newUser.fullName).catch(err => {
@@ -61,6 +55,14 @@ export const register = async (req: Request, res: Response) => {
 
     const token = jwt.sign({ id: newUser.id, email: newUser.email, role: newUser.role }, JWT_SECRET, {
       expiresIn: '7d',
+    });
+
+    const isProduction = process.env.NODE_ENV === 'production';
+    res.cookie('ajtes_token', token, {
+      httpOnly: true,
+      secure: isProduction,
+      sameSite: isProduction ? 'strict' : 'lax',
+      maxAge: 7 * 24 * 3600 * 1000,
     });
 
     const { password: _, ...userWithoutPassword } = newUser;
@@ -83,7 +85,12 @@ export const login = async (req: Request, res: Response) => {
       return res.status(400).json({ message: 'Veuillez fournir un email et un mot de passe.' });
     }
 
-    const user = db.users.find((u) => u.email.toLowerCase() === email.toLowerCase());
+    const cleanEmail = email.toLowerCase().trim();
+    const user = await prisma.user.findUnique({
+      where: { email: cleanEmail },
+      include: { memberProfile: true },
+    });
+
     if (!user) {
       return res.status(401).json({ message: 'Email ou mot de passe incorrect.' });
     }
@@ -95,6 +102,14 @@ export const login = async (req: Request, res: Response) => {
 
     const token = jwt.sign({ id: user.id, email: user.email, role: user.role }, JWT_SECRET, {
       expiresIn: '7d',
+    });
+
+    const isProduction = process.env.NODE_ENV === 'production';
+    res.cookie('ajtes_token', token, {
+      httpOnly: true,
+      secure: isProduction,
+      sameSite: isProduction ? 'strict' : 'lax',
+      maxAge: 7 * 24 * 3600 * 1000,
     });
 
     // Trigger login notification email asynchronously
@@ -114,13 +129,31 @@ export const login = async (req: Request, res: Response) => {
   }
 };
 
+export const logout = async (req: Request, res: Response) => {
+  try {
+    const isProduction = process.env.NODE_ENV === 'production';
+    res.clearCookie('ajtes_token', {
+      httpOnly: true,
+      secure: isProduction,
+      sameSite: isProduction ? 'strict' : 'lax',
+    });
+    res.json({ message: 'Déconnexion réussie !' });
+  } catch (error: any) {
+    res.status(500).json({ message: 'Erreur lors de la déconnexion: ' + error.message });
+  }
+};
+
 export const getMe = async (req: AuthRequest, res: Response) => {
   try {
     if (!req.user) {
       return res.status(401).json({ message: 'Non authentifié.' });
     }
 
-    const user = db.users.find((u) => u.id === req.user?.id);
+    const user = await prisma.user.findUnique({
+      where: { id: req.user.id },
+      include: { memberProfile: true },
+    });
+
     if (!user) {
       return res.status(404).json({ message: 'Utilisateur non trouvé.' });
     }

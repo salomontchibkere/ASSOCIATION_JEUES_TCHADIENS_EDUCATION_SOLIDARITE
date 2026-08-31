@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
-import { db, ContactMessage } from '../db.js';
-import { cryptoUUID } from '../utils/uuid.js';
+import { prisma } from '../prisma.js';
 import { sendContactAlertEmail } from '../services/email.service.js';
 
 export const submitContact = async (req: Request, res: Response) => {
@@ -11,19 +10,16 @@ export const submitContact = async (req: Request, res: Response) => {
       return res.status(400).json({ message: 'Tous les champs obligatoires doivent être renseignés.' });
     }
 
-    const newMessage: ContactMessage = {
-      id: cryptoUUID(),
-      name,
-      email,
-      phone,
-      subject,
-      message,
-      isRead: false,
-      createdAt: new Date().toISOString(),
-    };
-
-    db.contactMessages.push(newMessage);
-    db.saveDb();
+    const newMessage = await prisma.contactMessage.create({
+      data: {
+        name,
+        email,
+        phone,
+        subject,
+        message,
+        isRead: false,
+      },
+    });
 
     // Trigger admin contact alert email asynchronously (non-blocking)
     sendContactAlertEmail({ name, email, phone, subject, message }).catch(err => {
@@ -41,8 +37,9 @@ export const submitContact = async (req: Request, res: Response) => {
 
 export const getMessages = async (req: Request, res: Response) => {
   try {
-    const messages = [...db.contactMessages];
-    messages.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+    const messages = await prisma.contactMessage.findMany({
+      orderBy: { createdAt: 'desc' },
+    });
 
     res.json(messages);
   } catch (error: any) {
@@ -52,17 +49,14 @@ export const getMessages = async (req: Request, res: Response) => {
 
 export const markMessageAsRead = async (req: Request, res: Response) => {
   try {
-    const { id } = req.params;
+    const id = String(req.params.id);
 
-    const msgIndex = db.contactMessages.findIndex((m) => m.id === id);
-    if (msgIndex === -1) {
-      return res.status(404).json({ message: 'Message introuvable.' });
-    }
+    const updatedMessage = await prisma.contactMessage.update({
+      where: { id },
+      data: { isRead: true },
+    });
 
-    db.contactMessages[msgIndex].isRead = true;
-    db.saveDb();
-
-    res.json(db.contactMessages[msgIndex]);
+    res.json(updatedMessage);
   } catch (error: any) {
     res.status(500).json({ message: 'Erreur: ' + error.message });
   }

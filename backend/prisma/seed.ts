@@ -6,29 +6,99 @@ const prisma = new PrismaClient();
 async function main() {
   console.log('🌱 Démarrage du remplissage (seeding) de la base de données AJTES...');
 
-  // 1. Création de l'Administrateur principal
-  const adminPassword = await bcrypt.hash('AdminAJTES2026!', 10);
-  const admin = await prisma.user.upsert({
-    where: { email: 'contact@ajtes.td' },
-    update: {},
-    create: {
+  // 1. Création des Administrateurs & Bureau Exécutif
+  const executiveUsers = [
+    {
+      email: 'salomontchibkere@gmail.com',
+      passwordRaw: 'SalomonAJTES2026!',
+      fullName: 'SALOMON (Tech Lead & Super Admin)',
+      role: 'ADMIN',
+      phone: '+237655136824',
+      profession: 'Responsable Technique & Maintenance',
+      bio: 'Responsable technique et administrateur de la plateforme numérique AJTES.',
+    },
+    {
       email: 'contact@ajtes.td',
-      password: adminPassword,
+      passwordRaw: 'AdminAJTES2026!',
       fullName: 'SALOMON (Admin AJTES)',
       role: 'ADMIN',
-      phone: '+235 60 00 00 00',
-      memberProfile: {
-        create: {
-          profession: 'Responsable Technique & Maintenance',
-          city: "N'Djamena",
-          country: 'Tchad',
-          status: 'APPROVED',
-          bio: 'Responsable technique et administrateur de la plateforme numérique AJTES.',
+      phone: '+237655136824',
+      profession: 'Administration Officielle AJTES',
+      bio: 'Compte institutionnel d\'administration AJTES.',
+    },
+    {
+      email: 'marcallandedjim@gmail.com',
+      passwordRaw: 'Marc123@#',
+      fullName: 'Marc Allan Dedjim (Super Admin)',
+      role: 'ADMIN',
+      phone: '63000484',
+      profession: 'Administrateur Principal (Pouvoir Complet)',
+      bio: 'Administrateur général de la plateforme AJTES avec privilèges complets (100%).',
+    },
+    {
+      email: 'betoudjimbaikaravalentin@gmail.com',
+      passwordRaw: 'Tchad222',
+      fullName: 'Betoudjimbaikara Valentin (Secrétaire Général)',
+      role: 'ADMIN',
+      phone: '63373639',
+      profession: 'Secrétaire Général (SG)',
+      bio: 'Secrétaire Général de l\'AJTES — Gestion des registres et de l\'administration.',
+    },
+    {
+      email: 'soumabanakolong007@gmail.com',
+      passwordRaw: 'Souma123@#',
+      fullName: 'Souma Banakolong (Président)',
+      role: 'ADMIN',
+      phone: '+237690969577',
+      profession: 'Président de l\'Association AJTES',
+      bio: 'Président de l\'AJTES — Supervision générale et validation des adhésions.',
+    },
+    {
+      email: 'boikoussiguen@gmail.com',
+      passwordRaw: 'Boikou123@#',
+      fullName: 'Boikoussigue (Chargé de Communication)',
+      role: 'ADMIN',
+      phone: '65031849',
+      profession: 'Chargé de Communication & Secrétaire',
+      bio: 'Chargé de communication — Gestion des contenus, médias et actualités.',
+    },
+  ];
+
+  let adminRefId = '';
+
+  for (const userConfig of executiveUsers) {
+    const hashedPassword = await bcrypt.hash(userConfig.passwordRaw, 10);
+    const user = await prisma.user.upsert({
+      where: { email: userConfig.email },
+      update: {
+        password: hashedPassword,
+        fullName: userConfig.fullName,
+        role: userConfig.role,
+        phone: userConfig.phone,
+      },
+      create: {
+        email: userConfig.email,
+        password: hashedPassword,
+        fullName: userConfig.fullName,
+        role: userConfig.role,
+        phone: userConfig.phone,
+        memberProfile: {
+          create: {
+            profession: userConfig.profession,
+            city: "N'Djamena",
+            country: 'Tchad',
+            status: 'APPROVED',
+            bio: userConfig.bio,
+          },
         },
       },
-    },
-  });
-  console.log('✅ Compte Administrateur initialisé:', admin.email);
+    });
+
+    if (userConfig.email === 'salomontchibkere@gmail.com' || !adminRefId) {
+      adminRefId = user.id;
+    }
+    console.log(`✅ Compte Administrateur initialisé: ${user.fullName} (${user.email})`);
+  }
 
   // 2. Création des Projets Phares de l'Association
   await prisma.project.createMany({
@@ -72,14 +142,14 @@ async function main() {
         contentFr: 'L\'Association des Jeunes Tchadiens pour l\'Éducation et la Solidarité (AJTES) a inauguré avec succès le nouveau bureau administratif de deux chambres construit pour le CEG de Nangassou. Une grande avancée pour la jeunesse locale !',
         category: 'ACTUALITE',
         published: true,
-        authorId: admin.id,
+        authorId: adminRefId,
       },
       {
         titleFr: 'Lancement du nouveau site officiel et de la plateforme membre AJTES',
         contentFr: 'Nous sommes fiers de vous présenter la vitrine numérique officielle de l\'AJTES. Rejoignez la communauté, devenez membre ou faites un don en ligne !',
         category: 'ANNONCE',
         published: true,
-        authorId: admin.id,
+        authorId: adminRefId,
       },
     ],
   });

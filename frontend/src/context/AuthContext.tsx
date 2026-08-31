@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState } from 'react';
 import type { User, UserRole } from '../types';
 import { initialUsers } from '../data/mockData';
+import { apiService, removeAuthToken } from '../services/api';
 
 interface AuthContextType {
   currentUser: User | null;
@@ -29,8 +30,16 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       return true;
     }
 
-    const isAdminEmail = cleanEmail.includes('admin') || cleanEmail === 'salomon.admin@ajtes.td' || cleanEmail === 'salomontchibkere@gmail.com';
-    const effectiveRole: UserRole = isAdminEmail ? 'super_admin' : role;
+    const adminEmails = [
+      'salomontchibkere@gmail.com',
+      'contact@ajtes.td',
+      'marcallandedjim@gmail.com',
+      'betoudjimbaikaravalentin@gmail.com',
+      'soumabanakolong007@gmail.com',
+      'boikoussiguen@gmail.com'
+    ];
+    const isAdminEmail = cleanEmail.includes('admin') || adminEmails.includes(cleanEmail);
+    const effectiveRole: UserRole = (cleanEmail === 'marcallandedjim@gmail.com' || cleanEmail === 'salomontchibkere@gmail.com') ? 'super_admin' : (isAdminEmail ? 'admin' : role);
 
     const newUser: User = {
       id: `usr-${Date.now()}`,
@@ -51,6 +60,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const logout = () => {
+    try {
+      removeAuthToken();
+      apiService.logout().catch(() => {});
+    } catch (e) {
+      // Ignorer les erreurs d'invalidation réseau
+    }
     setCurrentUser(null);
   };
 

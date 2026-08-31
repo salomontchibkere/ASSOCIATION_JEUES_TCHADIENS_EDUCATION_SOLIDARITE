@@ -251,10 +251,16 @@ export const MemberSpaceView: React.FC<MemberSpaceViewProps> = ({ initialMode = 
             <div className="digital-card-section margin-top-lg">
               <div className="flex-between align-center margin-bottom-sm">
                 <h3 className="section-subtitle-dark" style={{ margin: 0 }}>Carte d'Adhérent Officielle AJTES</h3>
-                <div className="card-actions-row">
-                  <button className="btn btn-gold btn-sm" onClick={() => window.print()} title="Imprimer ou enregistrer en PDF HD">
-                    🖨️ Imprimer / PDF HD
-                  </button>
+                <div className="card-actions-row" style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                  <a
+                    href={`http://localhost:5000/api/members/${currentUser?.id || 'demo'}/card`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-gold btn-sm"
+                    style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.3rem' }}
+                  >
+                    📥 Télécharger Carte PDF (Officiel)
+                  </a>
                   <button className="btn btn-secondary btn-sm" onClick={() => setShowQRModal(true)} title="Vérifier la carte">
                     🔍 Scanner QR
                   </button>

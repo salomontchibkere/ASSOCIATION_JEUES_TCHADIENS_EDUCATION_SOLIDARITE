@@ -1,30 +1,28 @@
 import { Request, Response } from 'express';
-import { db } from '../db.js';
+import { prisma } from '../prisma.js';
+import { generateMemberCardPDF } from '../services/pdf.service.js';
 
 export const getMembers = async (req: Request, res: Response) => {
   try {
     const { status } = req.query;
 
-    let profiles = [...db.memberProfiles];
-    if (status) {
-      profiles = profiles.filter((p) => p.status === String(status));
-    }
+    const whereCondition = status ? { status: String(status) } : {};
 
-    const members = profiles.map((profile) => {
-      const user = db.users.find((u) => u.id === profile.userId);
-      return {
-        ...profile,
-        user: user
-          ? {
-              id: user.id,
-              fullName: user.fullName,
-              email: user.email,
-              phone: user.phone,
-              role: user.role,
-              avatar: user.avatar,
-            }
-          : null,
-      };
+    const members = await prisma.memberProfile.findMany({
+      where: whereCondition,
+      include: {
+        user: {
+          select: {
+            id: true,
+            fullName: true,
+            email: true,
+            phone: true,
+            role: true,
+            avatar: true,
+          },
+        },
+      },
+      orderBy: { createdAt: 'desc' },
     });
 
     res.json(members);
@@ -35,27 +33,47 @@ export const getMembers = async (req: Request, res: Response) => {
 
 export const updateMemberStatus = async (req: Request, res: Response) => {
   try {
-    const { id } = req.params;
+    const id = String(req.params.id);
     const { status } = req.body;
 
     if (!['PENDING', 'APPROVED', 'REJECTED'].includes(status)) {
       return res.status(400).json({ message: 'Statut invalide.' });
     }
 
-    const profileIndex = db.memberProfiles.findIndex((p) => p.id === id);
-    if (profileIndex === -1) {
-      return res.status(404).json({ message: 'Profil membre non trouvé.' });
-    }
-
-    db.memberProfiles[profileIndex].status = status as 'PENDING' | 'APPROVED' | 'REJECTED';
-    db.memberProfiles[profileIndex].updatedAt = new Date().toISOString();
-    db.saveDb();
+    const updatedMember = await prisma.memberProfile.update({
+      where: { id },
+      data: { status },
+      include: { user: true },
+    });
 
     res.json({
       message: `Statut du membre mis à jour avec succès (${status}).`,
-      member: db.memberProfiles[profileIndex],
+      member: updatedMember,
     });
   } catch (error: any) {
     res.status(500).json({ message: 'Erreur mise à jour statut: ' + error.message });
+  }
+};
+
+export const downloadMemberCardPDF = async (req: Request, res: Response) => {
+  try {
+    const id = String(req.params.id);
+
+    const member = await prisma.memberProfile.findUnique({
+      where: { id },
+      include: { user: true },
+    });
+
+    if (!member) {
+      return res.status(404).json({ message: 'Membre non trouvé.' });
+    }
+
+    const pdfBuffer = await generateMemberCardPDF(member);
+
+    res.setHeader('Content-Type', 'application/pdf');
+    res.setHeader('Content-Disposition', `attachment; filename=carte_membre_ajtes_${member.id}.pdf`);
+    res.send(pdfBuffer);
+  } catch (error: any) {
+    res.status(500).json({ message: 'Erreur de génération de la carte PDF: ' + error.message });
   }
 };

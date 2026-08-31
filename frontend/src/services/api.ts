@@ -25,6 +25,7 @@ async function fetchAPI<T>(endpoint: string, options: RequestInit = {}): Promise
 
   const response = await fetch(`${API_BASE_URL}${endpoint}`, {
     ...options,
+    credentials: 'include',
     headers,
   });
 
@@ -41,6 +42,7 @@ export const apiService = {
   // Auth
   login: (credentials: any) => fetchAPI('/auth/login', { method: 'POST', body: JSON.stringify(credentials) }),
   register: (userData: any) => fetchAPI('/auth/register', { method: 'POST', body: JSON.stringify(userData) }),
+  logout: () => fetchAPI('/auth/logout', { method: 'POST' }),
   getMe: () => fetchAPI('/auth/me'),
 
   // Projects
