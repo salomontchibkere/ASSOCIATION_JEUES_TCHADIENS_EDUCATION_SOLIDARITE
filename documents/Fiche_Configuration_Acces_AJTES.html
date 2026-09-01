@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Fiche de Configuration d'Accès et de Gestion du Site Web - AJTES</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 18mm 15mm 18mm 15mm;
+    }
+    
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    
+    body {
+      font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
+      color: #0f172a;
+      line-height: 1.45;
+      font-size: 11.5px;
+      background-color: #ffffff;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* En-tête de page répété */
+    .page-header {
+      position: fixed;
+      top: -14mm;
+      left: 0;
+      right: 0;
+      height: 10mm;
+      border-bottom: 2px solid #1e3a8a;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 9.5px;
+      font-weight: 700;
+      color: #1e3a8a;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Pied de page répété */
+    .page-footer {
+      position: fixed;
+      bottom: -14mm;
+      left: 0;
+      right: 0;
+      height: 10mm;
+      border-top: 1px solid #cbd5e1;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 9.5px;
+      font-weight: 600;
+      color: #475569;
+    }
+
+    /* Bannière Principale */
+    .header-banner {
+      background: linear-gradient(135deg, #1e3a8a 0%, #0f766e 100%);
+      color: #ffffff;
+      padding: 14px 18px;
+      border-radius: 8px;
+      margin-bottom: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+
+    .main-title {
+      font-size: 17px;
+      font-weight: 800;
+      margin: 0 0 4px 0;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .main-subtitle {
+      font-size: 11.5px;
+      color: #93c5fd;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    .banner-meta {
+      text-align: right;
+      font-size: 10px;
+      color: #e2e8f0;
+      line-height: 1.35;
+    }
+
+    /* Sections */
+    h2 {
+      color: #1e3a8a;
+      font-size: 13.5px;
+      font-weight: 700;
+      border-left: 4px solid #0f766e;
+      padding-left: 8px;
+      margin-top: 14px;
+      margin-bottom: 8px;
+      page-break-after: avoid;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    p {
+      margin-top: 0;
+      margin-bottom: 6px;
+    }
+
+    /* Callout Box */
+    .box-info {
+      background-color: #f0f9ff;
+      border-left: 4px solid #0284c7;
+      padding: 9px 12px;
+      border-radius: 0 6px 6px 0;
+      margin: 10px 0;
+      font-size: 11px;
+      line-height: 1.4;
+    }
+
+    /* Cards Formulaire */
+    .user-card {
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 10px 12px;
+      margin-bottom: 10px;
+      background-color: #ffffff;
+      page-break-inside: avoid;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
+
+    .user-card-full {
+      border: 1.5px solid #1e3a8a;
+      background-color: #f8fafc;
+    }
+
+    .user-card-header {
+      font-weight: 700;
+      color: #1e3a8a;
+      font-size: 12px;
+      border-bottom: 1px solid #e2e8f0;
+      padding-bottom: 5px;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px 14px;
+    }
+
+    .form-field {
+      margin-bottom: 4px;
+    }
+
+    .form-field-full {
+      grid-column: span 2;
+    }
+
+    .label {
+      font-weight: 600;
+      font-size: 10.5px;
+      color: #334155;
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .input-line {
+      border-bottom: 1.5px dashed #94a3b8;
+      min-height: 20px;
+      font-weight: bold;
+      color: #0f172a;
+      padding-left: 4px;
+      font-size: 11px;
+      display: flex;
+      align-items: center;
+    }
+
+    .input-line-filled {
+      border-bottom: 1.5px solid #1e3a8a;
+      color: #1e3a8a;
+      background-color: #eff6ff;
+      padding: 2px 6px;
+      border-radius: 3px;
+    }
+
+    .role-options {
+      display: flex;
+      gap: 12px;
+      margin-top: 5px;
+      font-size: 10.5px;
+      flex-wrap: wrap;
+    }
+
+    .checkbox {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      border: 1.5px solid #334155;
+      border-radius: 2px;
+      margin-right: 4px;
+      vertical-align: middle;
+      background-color: #fff;
+    }
+
+    .checkbox-checked {
+      background-color: #0f766e;
+      border-color: #0f766e;
+      position: relative;
+    }
+    .checkbox-checked::after {
+      content: '✓';
+      color: white;
+      font-size: 9px;
+      position: absolute;
+      top: -2px;
+      left: 1px;
+      font-weight: bold;
+    }
+
+    /* Badges */
+    .badge {
+      display: inline-block;
+      padding: 2px 7px;
+      font-size: 9.5px;
+      font-weight: 700;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+    .badge-admin { background-color: #dbeafe; color: #1e40af; border: 1px solid #bfdbfe; }
+    .badge-president { background-color: #fef3c7; color: #92400e; border: 1px solid #fde68a; }
+    .badge-sg { background-color: #e0e7ff; color: #3730a3; border: 1px solid #c7d2fe; }
+    .badge-com { background-color: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
+
+    /* Tableaux */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 10px 0;
+      font-size: 10.5px;
+      page-break-inside: avoid;
+    }
+
+    th {
+      background-color: #1e3a8a;
+      color: #ffffff;
+      font-weight: 600;
+      text-align: left;
+      padding: 6px 8px;
+      font-size: 10.5px;
+    }
+
+    td {
+      padding: 6px 8px;
+      border: 1px solid #cbd5e1;
+      vertical-align: top;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f8fafc;
+    }
+
+    .signature-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+      margin-top: 14px;
+      page-break-inside: avoid;
+    }
+
+    .signature-box {
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 8px;
+      background-color: #f8fafc;
+      text-align: center;
+      min-height: 80px;
+    }
+
+    .signature-box-title {
+      font-weight: 700;
+      color: #1e3a8a;
+      font-size: 10px;
+      border-bottom: 1px solid #e2e8f0;
+      padding-bottom: 3px;
+      margin-bottom: 4px;
+    }
+
+    .page-break {
+      page-break-before: always;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- EN-TÊTE RÉPÉTÉ SUR TOUTES LES PAGES -->
+  <div class="page-header">
+    <span>📌 FICHE DE CONFIGURATION DE SITE WEB ET LA GESTION</span>
+    <span>PLATEFORME OFFICIELLE AJTES</span>
+  </div>
+
+  <!-- PIED DE PAGE RÉPÉTÉ SUR TOUTES LES PAGES -->
+  <div class="page-footer">
+    <span>Fiche Officielle de Collecte des Identifiants & Privilèges d'Accès</span>
+    <span>Développeur & Maintenance : Salomon (Super Admin)</span>
+  </div>
+
+  <!-- BANNIÈRE PRINCIPALE DU DOCUMENT -->
+  <div class="header-banner">
+    <div>
+      <div class="main-title">Fiche de Configuration du Site Web et la Gestion</div>
+      <div class="main-subtitle">Collecte des Identifiants & Attribution des Rôles (Salomon, Marc, Banakolong, Valentin, Boikoussigue)</div>
+    </div>
+    <div class="banner-meta">
+      <strong>Association AJTES</strong><br>
+      Fiche Technique de Collecte<br>
+      Août 2026
+    </div>
+  </div>
+
+  <div class="box-info">
+    <strong>📌 Note Officielle à l'attention de l'Équipe de Gestion :</strong><br>
+    Cette <em>Fiche de configuration de site web et la gestion</em> est établie pour collecter les données d'accès de l'équipe chargée d'administrer et piloter le site web de l'<strong>AJTES</strong>. 
+    Les privilèges sont répartis de manière stricte : <strong>SALOMON</strong> et <strong>MARC</strong> disposent d'un <strong>accès complet (100%)</strong> pour la gestion technique et globale du site. 
+    <strong>BANAKOLONG</strong> (Président), <strong>VALENTIN</strong> (SG) et <strong>BOIKOUSSIGUE</strong> (Chargé de Com) disposent d'<strong>accès restreints</strong> ciblés selon leurs fonctions administratives.
+  </div>
+
+  <!-- SECTION 1 : GESTIONNAIRES ACCÈS COMPLET -->
+  <h2>1. Gestionnaires à Accès Complet sur le Site Web (100% / Admin Total)</h2>
+
+  <!-- COMPTE 1 : SALOMON -->
+  <div class="user-card user-card-full">
+    <div class="user-card-header">
+      <span>1. SALOMON — Développeur Principal & Technicien Chef du Site Web</span>
+      <span class="badge badge-admin">SUPER_ADMIN (Accès Complet 100%)</span>
+    </div>
+    <div class="form-grid">
+      <div class="form-field">
+        <span class="label">Nom & Prénom Officiel :</span>
+        <div class="input-line input-line-filled">SALOMON (Développeur & Mainteneur Chef)</div>
+      </div>
+      <div class="form-field">
+        <span class="label">Fonction dans l'Association :</span>
+        <div class="input-line input-line-filled">Responsable Technique & Maintenance Réseau/Web</div>
+      </div>
+      <div class="form-field">
+        <span class="label">Adresse Email officielle pour connexion :</span>
+        <div class="input-line">salomon.admin@ajtes.td (ou email personnel à confirmer)</div>
+      </div>
+      <div class="form-field">
+        <span class="label">Numéro de Téléphone (WhatsApp / OTP SMS) :</span>
+        <div class="input-line">+235 60 00 00 00 / 99 ...</div>
+      </div>
+      <div class="form-field">
+        <span class="label">Nom d'utilisateur (Username) souhaité :</span>
+        <div class="input-line">salomon_admin</div>
+      </div>
+      <div class="form-field">
+        <span class="label">Mot de Passe Temporaire / Clé d'Accès :</span>
+        <div class="input-line">__________________________________________</div>
+      </div>
+    </div>
+    <div style="margin-top: 6px; font-size: 10.5px; color: #1e40af; background: #eff6ff; padding: 5px 8px; border-radius: 4px;">
+      ✔️ <strong>Périmètre d'Accès Complet :</strong> Gestion totale du code source, déploiement cloud, base de données, création/suppression des comptes d'accès, sécurité 2FA et supervision globale.
+    </div>
+  </div>
+
+  <!-- COMPTE 2 : MARC -->
+  <div class="user-card user-card-full">
+    <div class="user-card-header">
+      <span>2. MARC — Administrateur Principal & Co-Gestionnaire du Site Web</span>
+      <span class="badge badge-admin">ADMIN_FULL (Accès Complet 100%)</span>
+    </div>
+    <div class="form-grid">
+      <div class="form-field">
+        <span class="label">Nom & Prénom Officiel :</span>
+        <div class="input-line input-line-filled">MARC</div>
+      </div>
+      <div class="form-field">
+        <span class="label">Fonction dans l'Association :</span>
+        <div class="input-line input-line-filled">Co-Gestionnaire Administratif & Administrateur Web</div>
+      </div>
+      <div class="form-field">
+        <span class="label">Adresse Email officielle pour connexion :</span>
+        <div class="input-line">marc.admin@ajtes.td (à compléter)</div>
+      </div>
+      <div class="form-field">
+        <span class="label">Numéro de Téléphone (WhatsApp / OTP SMS) :</span>
+        <div class="input-line">+235 ...</div>
+      </div>
+      <div class="form-field">
+        <span class="label">Nom d'utilisateur (Username) souhaité :</span>
+        <div class="input-line">marc_admin</div>
+      </div>
+      <div class="form-field">
+        <span class="label">Mot de Passe Temporaire / Clé d'Accès :</span>
+        <div class="input-line">__________________________________________</div>
+      </div>
+    </div>
+    <div style="margin-top: 6px; font-size: 10.5px; color: #1e40af; background: #eff6ff; padding: 5px 8px; border-radius: 4px;">
+      ✔️ <strong>Périmètre d'Accès Complet :</strong> Co-administration intégrale du site, gestion des modules administratifs, validation des données, droits d'édition et supervision stratégique du système.
+    </div>
+  </div>
+
+  <!-- SECTION 2 : RESPONSABLES ACCÈS RESTREINT -->
+  <h2>2. Responsables à Accès Restreints (Privilèges Spécifiques par Fonction)</h2>
+
+  <!-- COMPTE 3 : BANAKOLONG -->
+  <div class="user-card">
+    <div class="user-card-header">
+      <span>3. BANAKOLONG — Président de l'Association AJTES</span>
+      <span class="badge badge-president">Accès Restreint (Présidence & Validation)</span>
+    </div>
+    <div class="form-grid">
+      <div class="form-field">
+        <span class="label">Nom & Prénom Officiel :</span>
+        <div class="input-line input-line-filled">BANAKOLONG</div>
+      </div>
+      <div class="form-field">
+        <span class="label">Fonction dans l'Association :</span>
+        <div class="input-line input-line-filled">Président de l'AJTES</div>
+      </div>
+      <div class="form-field">
+        <span class="label">Adresse Email officielle :</span>
+        <div class="input-line">president.banakolong@ajtes.td (à compléter)</div>
+      </div>
+      <div class="form-field">
+        <span class="label">Numéro de Téléphone (WhatsApp / SMS) :</span>
+        <div class="input-line">+235 ...</div>
+      </div>
+      <div class="form-field">
+        <span class="label">Nom d'utilisateur (Username) :</span>
+        <div class="input-line">president_banakolong</div>
+      </div>
+      <div class="form-field">
+        <span class="label">Mot de Passe Temporaire / Clé d'Accès :</span>
+        <div class="input-line">__________________________________________</div>
+      </div>
+    </div>
+    <div style="margin-top: 6px;">
+      <span class="label">Droits & Modules autorisés sur le site :</span>
+      <div class="role-options">
+        <span><span class="checkbox checkbox-checked"></span> <strong>Supervision Générale</strong> (Consultation des synthèses)</span>
+        <span><span class="checkbox checkbox-checked"></span> <strong>Validation Adhésions</strong> (Approbation finale membres)</span>
+        <span><span class="checkbox checkbox-checked"></span> <strong>Espace Membre Officiel</strong></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- COMPTE 4 : VALENTIN -->
+  <div class="user-card">
+    <div class="user-card-header">
+      <span>4. VALENTIN — Secrétaire Général (SG) de l'Association AJTES</span>
+      <span class="badge badge-sg">Accès Restreint (Secrétariat & Registre Membres)</span>
+    </div>
+    <div class="form-grid">
+      <div class="form-field">
+        <span class="label">Nom & Prénom Officiel :</span>
+        <div class="input-line input-line-filled">VALENTIN</div>
+      </div>
+      <div class="form-field">
+        <span class="label">Fonction dans l'Association :</span>
+        <div class="input-line input-line-filled">Secrétaire Général (SG) de l'AJTES</div>
+      </div>
+      <div class="form-field">
+        <span class="label">Adresse Email officielle :</span>
+        <div class="input-line">sg.valentin@ajtes.td (à compléter)</div>
+      </div>
+      <div class="form-field">
+        <span class="label">Numéro de Téléphone (WhatsApp / SMS) :</span>
+        <div class="input-line">+235 ...</div>
+      </div>
+      <div class="form-field">
+        <span class="label">Nom d'utilisateur (Username) :</span>
+        <div class="input-line">sg_valentin</div>
+      </div>
+      <div class="form-field">
+        <span class="label">Mot de Passe Temporaire / Clé d'Accès :</span>
+        <div class="input-line">__________________________________________</div>
+      </div>
+    </div>
+    <div style="margin-top: 6px;">
+      <span class="label">Droits & Modules autorisés sur le site :</span>
+      <div class="role-options">
+        <span><span class="checkbox checkbox-checked"></span> <strong>ADMIN_MEMBERS</strong> (Gestion des dossiers candidats & adhésions)</span>
+        <span><span class="checkbox checkbox-checked"></span> <strong>Documents Secrétariat</strong> (Procès-verbaux, statuts)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMPTE 5 : BOIKOUSSIGUE -->
+  <div class="user-card">
+    <div class="user-card-header">
+      <span>5. BOIKOUSSIGUE — Chargé de Communication de l'Association AJTES</span>
+      <span class="badge badge-com">Accès Restreint (Communication & Publications)</span>
+    </div>
+    <div class="form-grid">
+      <div class="form-field">
+        <span class="label">Nom & Prénom Officiel :</span>
+        <div class="input-line input-line-filled">BOIKOUSSIGUE</div>
+      </div>
+      <div class="form-field">
+        <span class="label">Fonction dans l'Association :</span>
+        <div class="input-line input-line-filled">Chargé de Communication de l'AJTES</div>
+      </div>
+      <div class="form-field">
+        <span class="label">Adresse Email officielle :</span>
+        <div class="input-line">com.boikoussigue@ajtes.td (à compléter)</div>
+      </div>
+      <div class="form-field">
+        <span class="label">Numéro de Téléphone (WhatsApp / SMS) :</span>
+        <div class="input-line">+235 ...</div>
+      </div>
+      <div class="form-field">
+        <span class="label">Nom d'utilisateur (Username) :</span>
+        <div class="input-line">com_boikoussigue</div>
+      </div>
+      <div class="form-field">
+        <span class="label">Mot de Passe Temporaire / Clé d'Accès :</span>
+        <div class="input-line">__________________________________________</div>
+      </div>
+    </div>
+    <div style="margin-top: 6px;">
+      <span class="label">Droits & Modules autorisés sur le site :</span>
+      <div class="role-options">
+        <span><span class="checkbox checkbox-checked"></span> <strong>ADMIN_CONTENT</strong> (Publication d'articles, actualités & projets)</span>
+        <span><span class="checkbox checkbox-checked"></span> <strong>Médiathèque</strong> (Gestion des photos & vidéos)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3 : MATRICE SYNTHÉTIQUE -->
+  <h2>3. Matrice Recapitulative des Rôles & Privilèges d'Accès</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Nom du Gestionnaire</th>
+        <th>Fonction AJTES</th>
+        <th>Rôle Technique</th>
+        <th>Niveau d'Accès</th>
+        <th>Périmètre & Autorisations</th>
+        <th>Restrictions Stricte</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>SALOMON</strong></td>
+        <td>Développeur & Mainteneur Chef</td>
+        <td><code>SUPER_ADMIN</code></td>
+        <td><span class="badge badge-admin">Complet (100%)</span></td>
+        <td>Contrôle total du code, BDD, utilisateurs, hébergement netlify/vercel, sécurité</td>
+        <td>Aucune restriction</td>
+      </tr>
+      <tr>
+        <td><strong>MARC</strong></td>
+        <td>Co-Gestionnaire & Admin Web</td>
+        <td><code>ADMIN_FULL</code></td>
+        <td><span class="badge badge-admin">Complet (100%)</span></td>
+        <td>Gestion administrative complète, validation de tous modules et contenus</td>
+        <td>Aucune restriction</td>
+      </tr>
+      <tr>
+        <td><strong>BANAKOLONG</strong></td>
+        <td>Président de l'AJTES</td>
+        <td><code>ADMIN_PRESIDENT</code></td>
+        <td><span class="badge badge-president">Restreint</span></td>
+        <td>Supervision générale, consultation synthétique, validation ultime adhésions</td>
+        <td>Pas de modification du code ni de la BDD</td>
+      </tr>
+      <tr>
+        <td><strong>VALENTIN</strong></td>
+        <td>Secrétaire Général (SG)</td>
+        <td><code>ADMIN_MEMBERS</code></td>
+        <td><span class="badge badge-sg">Restreint</span></td>
+        <td>Gestion de l'annuaire des membres, validation des candidatures, registres PV</td>
+        <td>Pas de modification du contenu ni du code</td>
+      </tr>
+      <tr>
+        <td><strong>BOIKOUSSIGUE</strong></td>
+        <td>Chargé de Communication</td>
+        <td><code>ADMIN_CONTENT</code></td>
+        <td><span class="badge badge-com">Restreint</span></td>
+        <td>Création et édition des articles, projets, actualités, photos et vidéos</td>
+        <td>Pas d'accès aux membres ni à la BDD</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- SECTION 4 : SIGNATURE ET VALIDATION -->
+  <h2>4. Émargement et Validation Officielle du Bureau</h2>
+  <p>En signant cette fiche, les gestionnaires désignés confirment l'exactitude de leurs coordonnées d'accès et s'engagent à respecter les règles de confidentialité et de sécurité du site web de l'AJTES.</p>
+
+  <div class="signature-grid">
+    <div class="signature-box">
+      <div class="signature-box-title">SALOMON</div>
+      <div style="font-size: 8.5px; color: #64748b;">Développeur Chef</div>
+      <div style="margin-top: 25px; border-top: 1px dashed #cbd5e1; font-size: 8px; color: #94a3b8; padding-top: 2px;">Signature & Date</div>
+    </div>
+    <div class="signature-box">
+      <div class="signature-box-title">MARC</div>
+      <div style="font-size: 8.5px; color: #64748b;">Admin Principal</div>
+      <div style="margin-top: 25px; border-top: 1px dashed #cbd5e1; font-size: 8px; color: #94a3b8; padding-top: 2px;">Signature & Date</div>
+    </div>
+    <div class="signature-box">
+      <div class="signature-box-title">BANAKOLONG</div>
+      <div style="font-size: 8.5px; color: #64748b;">Président AJTES</div>
+      <div style="margin-top: 25px; border-top: 1px dashed #cbd5e1; font-size: 8px; color: #94a3b8; padding-top: 2px;">Signature & Date</div>
+    </div>
+    <div class="signature-box">
+      <div class="signature-box-title">VALENTIN</div>
+      <div style="font-size: 8.5px; color: #64748b;">Secrétaire Général</div>
+      <div style="margin-top: 25px; border-top: 1px dashed #cbd5e1; font-size: 8px; color: #94a3b8; padding-top: 2px;">Signature & Date</div>
+    </div>
+    <div class="signature-box">
+      <div class="signature-box-title">BOIKOUSSIGUE</div>
+      <div style="font-size: 8.5px; color: #64748b;">Chargé de Com</div>
+      <div style="margin-top: 25px; border-top: 1px dashed #cbd5e1; font-size: 8px; color: #94a3b8; padding-top: 2px;">Signature & Date</div>
+    </div>
+  </div>
+
+</body>
+</html>

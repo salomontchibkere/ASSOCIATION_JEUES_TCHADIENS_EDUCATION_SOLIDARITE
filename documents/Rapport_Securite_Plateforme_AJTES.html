@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Guide du Développeur Apprenant & Manuel d'Administration — Salomon (AJTES)</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 16mm 14mm 16mm 14mm;
+    }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      color: #1E293B;
+      line-height: 1.55;
+      margin: 0;
+      padding: 0;
+      background-color: #FFFFFF;
+      font-size: 9.5pt;
+    }
+    
+    .no-break {
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    .page-break {
+      page-break-before: always;
+    }
+
+    .confidential-banner {
+      background: linear-gradient(90deg, #7F1D1D 0%, #B91C1C 100%);
+      color: #FFFFFF;
+      text-align: center;
+      padding: 8px 14px;
+      font-weight: 800;
+      font-size: 9pt;
+      letter-spacing: 1px;
+      border-radius: 6px;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      box-shadow: 0 2px 4px rgba(185, 28, 28, 0.15);
+    }
+
+    .header {
+      border-bottom: 3px solid #007A3D;
+      padding-bottom: 12px;
+      margin-bottom: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .header-title h1 {
+      color: #007A3D;
+      font-size: 16pt;
+      margin: 0 0 4px 0;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 800;
+    }
+
+    .header-title p {
+      color: #475569;
+      font-size: 9pt;
+      margin: 0;
+      font-weight: 600;
+    }
+
+    .badge-date {
+      background-color: #FEF3C7;
+      color: #92400E;
+      border: 1px solid #F59E0B;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-weight: bold;
+      font-size: 8.5pt;
+      text-align: right;
+      line-height: 1.3;
+    }
+
+    .cred-box {
+      background-color: #FEF3C7;
+      border: 2px solid #F59E0B;
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 5px rgba(245, 158, 11, 0.08);
+    }
+
+    .cred-title {
+      font-weight: 800;
+      font-size: 10.5pt;
+      color: #B45309;
+      margin-top: 0;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .cred-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 9pt;
+    }
+
+    .cred-table td {
+      padding: 6px 10px;
+      border-bottom: 1px dashed #FCD34D;
+    }
+
+    .cred-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .cred-table td:first-child {
+      font-weight: bold;
+      color: #78350F;
+      width: 38%;
+    }
+
+    h2 {
+      color: #007A3D;
+      font-size: 11.5pt;
+      border-left: 4px solid #007A3D;
+      background-color: #F0FDF4;
+      padding: 6px 12px;
+      margin-top: 20px;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-radius: 0 6px 6px 0;
+      font-weight: 800;
+    }
+
+    .sec-card {
+      background-color: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 8px;
+      padding: 10px 14px;
+      margin-bottom: 8px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+    }
+
+    .sec-card-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+
+    .sec-number {
+      background-color: #007A3D;
+      color: #FFFFFF;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 8.5pt;
+    }
+
+    .sec-title {
+      font-size: 9.5pt;
+      font-weight: bold;
+      color: #0F172A;
+    }
+
+    .sec-tech {
+      background-color: #F1F5F9;
+      color: #007A3D;
+      font-family: monospace;
+      font-size: 8pt;
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-left: 6px;
+      font-weight: bold;
+      border: 1px solid #E2E8F0;
+    }
+
+    .sec-desc {
+      font-size: 8.8pt;
+      color: #334155;
+      margin: 2px 0 0 0;
+      line-height: 1.4;
+    }
+
+    .guide-box-green {
+      background-color: #F0FDF4;
+      border-left: 4px solid #16A34A;
+      border-top: 1px solid #BBF7D0;
+      border-right: 1px solid #BBF7D0;
+      border-bottom: 1px solid #BBF7D0;
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin-top: 10px;
+      margin-bottom: 14px;
+    }
+
+    .guide-box-blue {
+      background-color: #EFF6FF;
+      border-left: 4px solid #2563EB;
+      border-top: 1px solid #BFDBFE;
+      border-right: 1px solid #BFDBFE;
+      border-bottom: 1px solid #BFDBFE;
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin-top: 10px;
+      margin-bottom: 14px;
+    }
+
+    .guide-box-red {
+      background-color: #FEF2F2;
+      border-left: 4px solid #DC2626;
+      border-top: 1px solid #FECACA;
+      border-right: 1px solid #FECACA;
+      border-bottom: 1px solid #FECACA;
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin-top: 10px;
+      margin-bottom: 14px;
+    }
+
+    .guide-title {
+      font-weight: 800;
+      font-size: 10pt;
+      margin-top: 0;
+      margin-bottom: 6px;
+    }
+
+    .guide-step {
+      font-size: 8.8pt;
+      line-height: 1.5;
+      color: #1E293B;
+    }
+
+    .code-box {
+      background-color: #0F172A;
+      color: #38BDF8;
+      font-family: 'Courier New', Courier, monospace;
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 8.5pt;
+      margin: 6px 0;
+      display: block;
+      white-space: pre-wrap;
+      border: 1px solid #1E293B;
+    }
+
+    .code-inline {
+      background-color: #E2E8F0;
+      color: #0F172A;
+      font-family: monospace;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 8.5pt;
+      font-weight: bold;
+    }
+
+    table.cmd-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      margin-bottom: 16px;
+      font-size: 8.8pt;
+    }
+
+    table.cmd-table th, table.cmd-table td {
+      border: 1px solid #CBD5E1;
+      padding: 8px 10px;
+      text-align: left;
+    }
+
+    table.cmd-table th {
+      background-color: #007A3D;
+      color: #FFFFFF;
+      font-weight: bold;
+      text-transform: uppercase;
+      font-size: 8pt;
+      letter-spacing: 0.5px;
+    }
+
+    table.cmd-table tr:nth-child(even) {
+      background-color: #F8FAFC;
+    }
+
+    .footer-doc {
+      margin-top: 24px;
+      border-top: 2px solid #E2E8F0;
+      padding-top: 10px;
+      text-align: center;
+      font-size: 8pt;
+      color: #64748B;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="confidential-banner">
+    🔒 DOCUMENT CONFIDENTIEL — MANUEL D'ADMINISTRATION & IDENTIFIANTS OFFICIELS (SALOMON)
+  </div>
+
+  <div class="header">
+    <div class="header-title">
+      <h1>MANUEL DU DÉVELOPPEUR APPRENANT — AJTES</h1>
+      <p>Identifiants de Connexion, Guide de Dépannage, Audit de Sécurité & Mise en Production</p>
+    </div>
+    <div class="badge-date">
+      VERSION OFFICIELLE 2026<br>
+      Siège Social N'Djamena
+    </div>
+  </div>
+
+  <!-- FICHE IDENTIFIANTS -->
+  <div class="cred-box no-break">
+    <div class="cred-title">🔑 FICHE D'IDENTIFIANTS OFFICIELS SUPER ADMIN (ACCÈS TOTAL 100%)</div>
+    <table class="cred-table">
+      <tr>
+        <td>Adresse E-mail Administrateur :</td>
+        <td><strong>salomontchibkere@gmail.com</strong></td>
+      </tr>
+      <tr>
+        <td>Numéro de Téléphone Officiel :</td>
+        <td><strong>655136824</strong></td>
+      </tr>
+      <tr>
+        <td>Mot de Passe de Connexion :</td>
+        <td><strong>SALOMON123@#</strong></td>
+      </tr>
+      <tr>
+        <td>Niveau d'Accès & Privilège :</td>
+        <td><strong>Super Administrateur & Responsable Technique (100% de contrôle)</strong></td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- CHEMINS BASE DE DONNEES -->
+  <div class="cred-box no-break" style="background-color: #F0F9FF; border-color: #0284C7;">
+    <div class="cred-title" style="color: #0369A1;">🗄️ EMPLACEMENT & CHEMINS DE LA BASE DE DONNÉES (AJTES)</div>
+    <table class="cred-table">
+      <tr>
+        <td style="color: #0369A1;">1. Base de Données JSON (Active) :</td>
+        <td><code>backend/data/db.json</code><br><span style="font-size: 8pt; color: #475569;">/home/salomon/Bureau/Vaccances_2026/projets/ASSOCIATION/backend/data/db.json</span></td>
+      </tr>
+      <tr>
+        <td style="color: #0369A1;">2. Fichier TypeScript BDD :</td>
+        <td><code>backend/src/db.ts</code></td>
+      </tr>
+      <tr>
+        <td style="color: #0369A1;">3. Base SQLite (Prisma ORM) :</td>
+        <td><code>backend/prisma/dev.db</code></td>
+      </tr>
+      <tr>
+        <td style="color: #0369A1;">4. Schéma de la BDD Prisma :</td>
+        <td><code>backend/prisma/schema.prisma</code></td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- CHAPITRE 1 -->
+  <h2>🟢 CHAPITRE 1 : COMPRENDRE LA SÉCURITÉ DE VOTRE SITE (EXPLIQUÉE SIMPLEMENT)</h2>
+
+  <div class="sec-card no-break">
+    <div class="sec-card-header">
+      <span class="sec-number">1</span>
+      <span class="sec-title">Le Coffre-Fort des Mots de Passe</span>
+      <span class="sec-tech">bcryptjs</span>
+    </div>
+    <p class="sec-desc">Votre mot de passe <code>SALOMON123@#</code> est transformé en un code secret indéchiffrable dans la base de données.</p>
+  </div>
+
+  <div class="sec-card no-break">
+    <div class="sec-card-header">
+      <span class="sec-number">2</span>
+      <span class="sec-title">Le Badge Numérique d'Accès</span>
+      <span class="sec-tech">JWT (Tokens)</span>
+    </div>
+    <p class="sec-desc">À la connexion, un badge temporaire sécurisé est délivré à votre navigateur pour valider votre session.</p>
+  </div>
+
+  <div class="sec-card no-break">
+    <div class="sec-card-header">
+      <span class="sec-number">3</span>
+      <span class="sec-title">Le Contrôle des Portes d'Accès</span>
+      <span class="sec-tech">RBAC (Rôles)</span>
+    </div>
+    <p class="sec-desc">Seul votre compte <code>salomontchibkere@gmail.com</code> possède les clés pour ouvrir l'Espace Administration.</p>
+  </div>
+
+  <div class="sec-card no-break">
+    <div class="sec-card-header">
+      <span class="sec-number">4</span>
+      <span class="sec-title">L'Alarme Anti-Intrusion</span>
+      <span class="sec-tech">Rate Limiting</span>
+    </div>
+    <p class="sec-desc">Blocage automatique de 15 minutes si plus de 15 essais rapides de connexion sont détectés.</p>
+  </div>
+
+  <div class="sec-card no-break">
+    <div class="sec-card-header">
+      <span class="sec-number">5</span>
+      <span class="sec-title">L'Alerte E-mail Instantanée</span>
+      <span class="sec-tech">email.service.ts</span>
+    </div>
+    <p class="sec-desc">Notification envoyée sur votre boîte Gmail lors de chaque connexion réussie.</p>
+  </div>
+
+  <div class="sec-card no-break">
+    <div class="sec-card-header">
+      <span class="sec-number">6</span>
+      <span class="sec-title">Le Mur Anti-Code Malveillant</span>
+      <span class="sec-tech">Prisma ORM</span>
+    </div>
+    <p class="sec-desc">Neutralisation totale des injections SQL (SQLi) dans la base de données.</p>
+  </div>
+
+  <div class="sec-card no-break">
+    <div class="sec-card-header">
+      <span class="sec-number">7</span>
+      <span class="sec-title">La Barrière de Domaine</span>
+      <span class="sec-tech">CORS Policy</span>
+    </div>
+    <p class="sec-desc">Rejet systématique des requêtes provenant de sites web externes non autorisés.</p>
+  </div>
+
+  <div class="sec-card no-break">
+    <div class="sec-card-header">
+      <span class="sec-number">8</span>
+      <span class="sec-title">Le Contrôleur des Formulaires</span>
+      <span class="sec-tech">Zod Schemas</span>
+    </div>
+    <p class="sec-desc">Vérification automatique de la validité de chaque champ rempli sur le site.</p>
+  </div>
+
+  <div class="sec-card no-break">
+    <div class="sec-card-header">
+      <span class="sec-number">9</span>
+      <span class="sec-title">Le Fichier Secret Cache-Clés</span>
+      <span class="sec-tech">.env</span>
+    </div>
+    <p class="sec-desc">Stockage étanche des clés secrètes hors des dépôts publics GitHub.</p>
+  </div>
+
+  <!-- CHAPITRE 2 -->
+  <div class="page-break"></div>
+  <h2>🟡 CHAPITRE 2 : COMMENT FAIRE UNE MISE À JOUR DU SITE (PAS À PAS)</h2>
+
+  <div class="guide-box-blue no-break">
+    <div class="guide-title" style="color: #1E40AF;">💻 ÉTAPE 1 : Tester sur votre ordinateur (Local)</div>
+    <div class="guide-step">
+      Ouvrez le terminal dans VS Code et lancez les serveurs de test :
+      <span class="code-box">npm run dev --prefix backend</span>
+      <span class="code-box">npm run dev --prefix frontend</span>
+      Ouvrez votre navigateur sur : <code>http://localhost:5173</code>
+    </div>
+  </div>
+
+  <div class="guide-box-blue no-break">
+    <div class="guide-title" style="color: #1E40AF;">🔍 ÉTAPE 2 : Vérifier que le code compile sans erreur</div>
+    <div class="guide-step">
+      Testez que votre code n'a pas de bogue :
+      <span class="code-box">npm run build --prefix backend</span>
+      <span class="code-box">npm run build --prefix frontend</span>
+    </div>
+  </div>
+
+  <div class="guide-box-green no-break">
+    <div class="guide-title" style="color: #166534;">🚀 ÉTAPE 3 : Envoyer en ligne sur GitHub</div>
+    <div class="guide-step">
+      Tapez exactement ces 3 commandes dans le terminal :
+      <span class="code-box">git add .</span>
+      <span class="code-box">git commit -m "Mise à jour du site"</span>
+      <span class="code-box">git push origin main</span>
+    </div>
+  </div>
+
+  <!-- CHAPITRE 3 -->
+  <h2>🟣 CHAPITRE 3 : DÉMONSTRATION PRATIQUE — COMMENT MODIFIER LA BASE DE DONNÉES</h2>
+
+  <div class="guide-box-blue no-break">
+    <div class="guide-title" style="color: #1E40AF;">🖥️ MÉTHODE 1 : Modification via l'Interface Web Admin (Recommandé)</div>
+    <div class="guide-step">
+      1. Lancez le serveur local ou ouvrez le site officiel AJTES.<br>
+      2. Connectez-vous avec votre compte Super Admin : <code>salomontchibkere@gmail.com</code> / <code>SALOMON123@#</code>.<br>
+      3. Rendez-vous dans le tableau de bord <strong>Espace Administration</strong>.<br>
+      4. Cliquez sur <strong>Valider / Rejeter</strong> pour modifier l'état d'un membre ou éditer une actualité/projet directement à l'écran.
+    </div>
+  </div>
+
+  <div class="guide-box-green no-break">
+    <div class="guide-title" style="color: #166534;">📝 MÉTHODE 2 : Modification Directe du Fichier JSON dans VS Code</div>
+    <div class="guide-step">
+      1. Dans l'explorateur VS Code à gauche, ouvrez le fichier : <span class="code-inline">backend/data/db.json</span>.<br>
+      2. Recherchez la section à modifier (ex: <code>"users"</code>, <code>"memberProfiles"</code>, <code>"projects"</code>).<br>
+      3. Éditez directement les textes ou les statuts (ex: remplacez <code>"PENDING"</code> par <code>"APPROVED"</code>).<br>
+      4. Enregistrez les modifications avec les touches <span class="code-inline">CTRL + S</span>. Les données sont instantanément à jour !
+    </div>
+  </div>
+
+  <div class="guide-box-blue no-break">
+    <div class="guide-title" style="color: #0369A1;">⚙️ MÉTHODE 3 : Modification de la Base SQLite / Prisma</div>
+    <div class="guide-step">
+      Si vous travaillez avec Prisma et SQLite (<span class="code-inline">backend/prisma/dev.db</span>) :<br>
+      1. Lancez l'outil visuel de base de données dans le terminal :
+      <span class="code-box">npx prisma studio --prefix backend</span>
+      2. Une interface visuelle s'ouvrira dans votre navigateur sur <code>http://localhost:5555</code> pour modifier les tables en 1 clic.
+    </div>
+  </div>
+
+  <!-- CHAPITRE 4 -->
+  <div class="page-break"></div>
+  <h2>⚠️ CHAPITRE 4 : AUDIT DE SÉCURITÉ — FAILLES DÉTECTÉES & VULNÉRABILITÉS À SURVEILLER</h2>
+
+  <div class="guide-box-red no-break">
+    <div class="guide-title" style="color: #991B1B;">🚨 FAILLE 1 : Élévation de Privilèges Automatique sur l'Email (Risque Majeur)</div>
+    <div class="guide-step">
+      <strong>Location :</strong> <span class="code-inline">frontend/src/context/AuthContext.tsx</span> (Ligne 32)<br>
+      <strong>Description :</strong> L'instruction <code>cleanEmail.includes('admin')</code> attribue le rôle <code>super_admin</code> à toute adresse e-mail qui contient le terme <em>"admin"</em> (ex: <code>badadmin@gmail.com</code>).<br>
+      <strong>Impact :</strong> Un utilisateur malveillant peut s'octroyer des privilèges administrateur complets sur l'interface frontend sans mot de passe admin.<br>
+      <strong>Recommandation :</strong> Supprimer la vérification générique <code>.includes('admin')</code> et s'appuyer uniquement sur l'authentification serveur.
+    </div>
+  </div>
+
+  <div class="guide-box-red no-break">
+    <div class="guide-title" style="color: #991B1B;">🔑 FAILLE 2 : Exposition des Identifiants Réels en Clair (Risque Critique)</div>
+    <div class="guide-step">
+      <strong>Location :</strong> <span class="code-inline">frontend/public/documents/Rapport_Securite_Plateforme_AJTES.html</span><br>
+      <strong>Description :</strong> Le mot de passe réel (<code>SALOMON123@#</code>) et l'e-mail officiel (<code>salomontchibkere@gmail.com</code>) sont écrits en texte brut dans un fichier accessible publiquement.<br>
+      <strong>Impact :</strong> Si le site est déployé en ligne (Netlify, Vercel, GitHub Pages), n'importe quel robot web peut lire la fiche d'identifiants et prendre possession du compte Super Admin.<br>
+      <strong>Recommandation :</strong> Remplacer le mot de passe réel par une valeur générique d'exemple lors de la mise en production.
+    </div>
+  </div>
+
+  <div class="guide-box-red no-break">
+    <div class="guide-title" style="color: #991B1B;">🔐 FAILLE 3 : Clé Secrète JWT en Fallback Hardcodée (Risque Moyen / Élevé)</div>
+    <div class="guide-step">
+      <strong>Location :</strong> <span class="code-inline">backend/src/controllers/auth.controller.ts</span> (L9) & <span class="code-inline">backend/src/middlewares/auth.middleware.ts</span> (L12)<br>
+      <strong>Description :</strong> Si la variable d'environnement <code>JWT_SECRET</code> n'est pas définie dans <span class="code-inline">.env</span>, le serveur utilise par défaut la valeur <code>ajtes_secret_key_2026_salomon_secure_token</code>.<br>
+      <strong>Impact :</strong> Un hacker connaissant cette clé par défaut peut forger un faux jeton d'accès JWT administrateur.<br>
+      <strong>Recommandation :</strong> Bloquer le démarrage du serveur backend si <code>JWT_SECRET</code> n'est pas configuré.
+    </div>
+  </div>
+
+  <div class="guide-box-red no-break">
+    <div class="guide-title" style="color: #991B1B;">⚡ FAILLE 4 : Concurrence d'Écriture BDD & Stockage Mémoire des IP (Risque Faible / Moyen)</div>
+    <div class="guide-step">
+      <strong>Location :</strong> <span class="code-inline">backend/src/db.ts</span> & <span class="code-inline">backend/src/middlewares/rateLimit.middleware.ts</span><br>
+      <strong>Description :</strong> La méthode <code>fs.writeFileSync()</code> réécrit <span class="code-inline">db.json</span> sans verrouillage (risque de concurrence en cas de requêtes simultanées). De plus, le dictionnaire d'IP en mémoire vive ne nettoie pas les clés expirées.<br>
+      <strong>Impact :</strong> Risque de fuite mémoire progressive à long terme et risque de perte de données en cas d'inscriptions simultanées.<br>
+      <strong>Recommandation :</strong> Prévoir des sauvegardes régulières de <span class="code-inline">db.json</span> ou migrer vers SQLite/Prisma et ajouter une boucle d'assainissement de la mémoire.
+    </div>
+  </div>
+
+  <!-- CHAPITRE 5 -->
+  <div class="page-break"></div>
+  <h2>🚀 CHAPITRE 5 : GUIDE DE MISE EN PRODUCTION & MAINTENANCES FUTURES (LES 5 ÉTAPES CLÉS)</h2>
+
+  <div class="guide-box-blue no-break">
+    <div class="guide-title" style="color: #1E40AF;">🌐 ÉTAPE 1 : Déploiement du Site en Ligne (Vercel / Netlify & Render)</div>
+    <div class="guide-step">
+      <strong>Pourquoi c'est vital :</strong> Votre site n'est accessible que sur votre ordinateur local. Pour le rendre accessible au public 24h/24 :<br>
+      <strong>Comment appliquer :</strong><br>
+      1. Créez un compte gratuit sur <span class="code-inline">Vercel.com</span> ou <span class="code-inline">Netlify.com</span>.<br>
+      2. Importez votre dépôt GitHub <span class="code-inline">ASSOCIATION_JEUES_TCHADIENS_EDUCATION_SOLIDARITE</span>.<br>
+      3. Définissez le dossier racine du build sur <span class="code-inline">frontend</span> (Commande: <code>npm run build</code>).<br>
+      4. Pour le backend, créez un service web gratuit sur <span class="code-inline">Render.com</span> et renseignez les variables de <span class="code-inline">backend/.env</span>.
+    </div>
+  </div>
+
+  <div class="guide-box-green no-break">
+    <div class="guide-title" style="color: #166534;">💾 ÉTAPE 2 : Sauvegarde Automatique de la Base de Données (Backups)</div>
+    <div class="guide-step">
+      <strong>Pourquoi c'est vital :</strong> Éviter la perte définitive des inscrits et des dons enregistrés dans <span class="code-inline">backend/data/db.json</span> en cas de panne de serveur.<br>
+      <strong>Comment appliquer :</strong><br>
+      1. Créez une tâche automatisée (Cron Job) sur votre serveur Linux qui copie le fichier quotidiennement :
+      <span class="code-box">cp backend/data/db.json backend/data/backups/db_$(date +%Y%m%d).json</span>
+      2. Ou configurez un script Node.js qui envoie une copie hebdomadaire du fichier JSON sur votre boîte Gmail ou Google Drive.
+    </div>
+  </div>
+
+  <div class="guide-box-blue no-break">
+    <div class="guide-title" style="color: #0369A1;">🔒 ÉTAPE 3 : Sécurisation du Cadenas HTTPS (Certificat SSL Let's Encrypt)</div>
+    <div class="guide-step">
+      <strong>Pourquoi c'est vital :</strong> Sans HTTPS, Chrome affiche un avertissement "Site non sécurisé" et les visiteurs n'oseront pas faire de dons.<br>
+      <strong>Comment appliquer :</strong><br>
+      1. Vercel et Netlify génèrent un certificat SSL 100% gratuit et automatique pour votre nom de domaine.<br>
+      2. Si vous utilisez un VPS Linux personnalisé, installez Certbot et lancez :
+      <span class="code-box">sudo certbot --nginx -d ajtes.org -d www.ajtes.org</span>
+    </div>
+  </div>
+
+  <div class="guide-box-green no-break">
+    <div class="guide-title" style="color: #166534;">💳 ÉTAPE 4 : Intégration Réelle du Paiement Mobile Money (Airtel / Moov)</div>
+    <div class="guide-step">
+      <strong>Pourquoi c'est vital :</strong> Remplacer le système actuel de simulation par une réception réelle d'argent sur le compte de l'association.<br>
+      <strong>Comment appliquer :</strong><br>
+      1. Ouvrez un compte marchand chez Airtel Money Tchad, Moov Africa ou un agrégateur comme <strong>Flutterwave</strong> / <strong>PayDunya</strong>.<br>
+      2. Récupérez vos clés d'API (<code>PUBLIC_KEY</code> et <code>SECRET_KEY</code>) et ajoutez-les dans <span class="code-inline">backend/.env</span>.<br>
+      3. Interconnectez la route <span class="code-inline">backend/src/controllers/donations.controller.ts</span> avec le Webhook officiel du fournisseur.
+    </div>
+  </div>
+
+  <div class="guide-box-blue no-break">
+    <div class="guide-title" style="color: #1E40AF;">🔑 ÉTAPE 5 : Procédure "Mot de Passe Oublié" par E-mail</div>
+    <div class="guide-step">
+      <strong>Pourquoi c'est vital :</strong> Permettre aux utilisateurs et administrateurs de réinitialiser leur accès en toute autonomie s'ils oublient leur mot de passe.<br>
+      <strong>Comment appliquer :</strong><br>
+      1. Ajoutez la route POST <span class="code-inline">/auth/forgot-password</span> dans le backend.<br>
+      2. Générez un jeton temporaire JWT (valide 15 min) et envoyez-le par e-mail avec <span class="code-inline">email.service.ts</span>.<br>
+      3. Créez la page React de réinitialisation qui valide le jeton et met à jour le mot de passe hashé dans <span class="code-inline">db.json</span>.
+    </div>
+  </div>
+
+  <!-- CHAPITRE 6 -->
+  <h2>🔴 CHAPITRE 6 : GUIDE DE DÉPANNAGE FACILE (RÉSOLUTIONS DE BOGUES)</h2>
+
+  <div class="guide-box-red no-break">
+    <div class="guide-title" style="color: #991B1B;">❌ Cas 1 : "Je ne reçois pas les e-mails de notification sur mon Gmail"</div>
+    <div class="guide-step">
+      <strong>Solution :</strong> Ouvrez <span class="code-inline">backend/.env</span> ➔ Mettez <span class="code-inline">SMTP_USER=salomontchibkere@gmail.com</span> et collez votre Mot de passe d'application Gmail dans <span class="code-inline">SMTP_PASS</span>. Redémarrez le serveur.
+    </div>
+  </div>
+
+  <div class="guide-box-red no-break">
+    <div class="guide-title" style="color: #991B1B;">❌ Cas 2 : "Je n'arrive plus à cliquer sur les boutons Admin (Erreur 401)"</div>
+    <div class="guide-step">
+      <strong>Solution :</strong> Déconnectez-vous puis reconnectez-vous avec <span class="code-inline">salomontchibkere@gmail.com</span> et <span class="code-inline">SALOMON123@#</span> pour régénérer un token tout neuf.
+    </div>
+  </div>
+
+  <div class="guide-box-red no-break">
+    <div class="guide-title" style="color: #991B1B;">❌ Cas 3 : "J'ai modifié le code mais rien ne change sur mon écran !"</div>
+    <div class="guide-step">
+      <strong>Solution :</strong> Videz le cache du navigateur avec les touches <span class="code-inline">CTRL + SHIFT + R</span> (ou <span class="code-inline">CTRL + F5</span>).
+    </div>
+  </div>
+
+  <div class="guide-box-red no-break">
+    <div class="guide-title" style="color: #991B1B;">❌ Cas 4 : "Le site m'affiche Erreur 429 Trop de requêtes !"</div>
+    <div class="guide-step">
+      <strong>Solution :</strong> Attendez 15 minutes sans toucher à rien. Le déblocage anti-brute force est 100% automatique.
+    </div>
+  </div>
+
+  <div class="guide-box-red no-break">
+    <div class="guide-title" style="color: #991B1B;">❌ Cas 5 : "Git refuse mon git push et demande un mot de passe !"</div>
+    <div class="guide-step">
+      <strong>Solution :</strong> Générez un Personal Access Token (PAT) sur GitHub ➔ Settings ➔ Developer Settings ➔ Tokens (classic) avec la coche <span class="code-inline">repo</span> et utilisez-le comme mot de passe.
+    </div>
+  </div>
+
+  <!-- CHAPITRE 7 -->
+  <div class="page-break"></div>
+  <h2>🔵 CHAPITRE 7 : LE PENSE-BÊTE DES COMMANDES À RETENIR</h2>
+
+  <table class="cmd-table no-break">
+    <thead>
+      <tr>
+        <th>Action à réaliser</th>
+        <th>Commande à taper dans le Terminal</th>
+        <th>Quand l'utiliser ?</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Tester le site en local</strong></td>
+        <td><code>npm run dev --prefix frontend</code></td>
+        <td>Avant de modifier le code</td>
+      </tr>
+      <tr>
+        <td><strong>Vérifier les erreurs</strong></td>
+        <td><code>npm run build --prefix frontend</code></td>
+        <td>Après avoir fini vos modifications</td>
+      </tr>
+      <tr>
+        <td><strong>Sélectionner les fichiers</strong></td>
+        <td><code>git add .</code></td>
+        <td>1ère étape pour publier sur GitHub</td>
+      </tr>
+      <tr>
+        <td><strong>Enregistrer le travail</strong></td>
+        <td><code>git commit -m "Description"</code></td>
+        <td>2ème étape pour publier sur GitHub</td>
+      </tr>
+      <tr>
+        <td><strong>Publier en ligne</strong></td>
+        <td><code>git push origin main</code></td>
+        <td>Dernière étape de publication</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="footer-doc">
+    <p>© 2026 Association des Jeunes Tchadiens pour l'Éducation et la Solidarité (AJTES) — Siège Social N'Djamena, Tchad</p>
+    <p><strong>MANUEL CONFIDENTIEL APPRENANT</strong> — Destiné exclusivement à SALOMON (salomontchibkere@gmail.com)</p>
+  </div>
+
+</body>
+</html>
