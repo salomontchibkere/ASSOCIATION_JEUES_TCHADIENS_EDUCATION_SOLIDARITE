@@ -15,6 +15,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, navig
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const WHATSAPP_GROUP_LINK = "https://chat.whatsapp.com/KH42DjDTNHA7oNHrbBlwGI";
+  const FACEBOOK_PAGE_LINK = "https://facebook.com/events/s/retrouvez-nous-ici-/1425446342790196/";
 
   const navItems = [
     { id: 'home', label: t('navHome') },
@@ -134,6 +135,17 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, navig
 
           {/* Integrated Actions Group on the SAME Single Line */}
           <div className="cta-actions">
+            {/* Facebook Link */}
+            <a
+              href={FACEBOOK_PAGE_LINK}
+              target="_blank"
+              rel="noreferrer"
+              className="btn btn-facebook"
+              title="Page Facebook Officielle AJTES"
+            >
+              Facebook
+            </a>
+
             {/* WhatsApp Link */}
             <a
               href={WHATSAPP_GROUP_LINK}
@@ -232,6 +244,15 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, navig
                 <option value="ar">العربية (AR)</option>
               </select>
             </div>
+
+            <a
+              href={FACEBOOK_PAGE_LINK}
+              target="_blank"
+              rel="noreferrer"
+              className="btn btn-facebook w-full margin-top-sm"
+            >
+              Facebook Officiel
+            </a>
 
             <a
               href={WHATSAPP_GROUP_LINK}
@@ -414,6 +435,25 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, navig
           align-items: center;
           gap: 0.45rem;
           flex-shrink: 0;
+        }
+
+        .btn-facebook {
+          background-color: #1877F2;
+          color: #FFFFFF;
+          font-weight: 700;
+          border-radius: var(--radius-pill);
+          font-size: 0.78rem;
+          padding: 0.35rem 0.7rem;
+          text-decoration: none;
+          display: inline-flex;
+          align-items: center;
+          gap: 0.3rem;
+          transition: opacity 0.2s;
+        }
+
+        .btn-facebook:hover {
+          opacity: 0.9;
+          color: #FFFFFF;
         }
 
         .btn-whatsapp {
