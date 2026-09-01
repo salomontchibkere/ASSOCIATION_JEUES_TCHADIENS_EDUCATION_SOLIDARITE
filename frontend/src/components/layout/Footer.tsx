@@ -41,7 +41,7 @@ export const Footer: React.FC<FooterProps> = ({ setCurrentTab }) => {
               Association des Jeunes Tchadiens pour l’Éducation et la Solidarité. Organisation créée en 2022 pour l'épanouissement de la jeunesse et le soutien scolaire.
             </p>
             <div className="footer-socials">
-              <a href="https://facebook.com" target="_blank" rel="noreferrer" title="Facebook Official" className="social-icon fb">
+              <a href="https://facebook.com/events/s/retrouvez-nous-ici-/1425446342790196/" target="_blank" rel="noreferrer" title="Facebook Official AJTES" className="social-icon fb">
                 FB
               </a>
               <a href="https://chat.whatsapp.com/KH42DjDTNHA7oNHrbBlwGI" target="_blank" rel="noreferrer" title="Groupe WhatsApp Officiel AJTES" className="social-icon wa">

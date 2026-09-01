@@ -82,7 +82,7 @@ export const ContactView: React.FC = () => {
             <div className="social-box margin-top-lg">
               <h4>Suivez nos actions sur les Réseaux Sociaux</h4>
               <div className="social-links-grid">
-                <a href="https://facebook.com" target="_blank" rel="noreferrer" className="social-btn fb">
+                <a href="https://facebook.com/events/s/retrouvez-nous-ici-/1425446342790196/" target="_blank" rel="noreferrer" className="social-btn fb">
                   Facebook AJTES Officiel
                 </a>
                 <a href="https://chat.whatsapp.com/KH42DjDTNHA7oNHrbBlwGI" target="_blank" rel="noreferrer" className="social-btn wa">
