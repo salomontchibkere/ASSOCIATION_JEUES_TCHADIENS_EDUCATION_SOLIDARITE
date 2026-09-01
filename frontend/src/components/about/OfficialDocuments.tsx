@@ -15,7 +15,7 @@ export const OfficialDocuments: React.FC = () => {
     <section className="section bg-white-docs">
       <div className="section-title-container">
         <span className="section-badge animated-pulse-badge">
-          📜 CADRE JURIDIQUE & STATUTS OFFICIELS (2022)
+          CADRE JURIDIQUE & STATUTS OFFICIELS (2022)
         </span>
         <h2 className="section-title">Statuts & Règlement Intérieur de l'AJTES</h2>
         <p className="section-subtitle">

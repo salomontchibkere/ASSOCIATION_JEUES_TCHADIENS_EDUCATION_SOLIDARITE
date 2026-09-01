@@ -1,19 +1,20 @@
 import React from 'react';
 import { useLanguage } from '../../context/LanguageContext';
+import { BookOpen, HeartHandshake, Activity, Trees, Theater, Trophy, ShieldCheck, Building2, Sparkles } from 'lucide-react';
 
 export const ActionFields: React.FC = () => {
   const { t } = useLanguage();
 
   const fields = [
-    { icon: '📚', title: t('domainEdu'), desc: 'Fournitures scolaires, construction de bureaux & soutien aux élèves (Article 5 des Statuts).' },
-    { icon: '🤝', title: t('domainSolidarity'), desc: 'Entraide sociale, kits d\'hygiène et soutien aux familles défavorisées du Tchad.' },
-    { icon: '🏥', title: t('domainHum'), desc: 'Assistance d\'urgence, accompagnement médical et solidarité communautaire.' },
-    { icon: '🌳', title: t('domainEnv'), desc: 'Reboisement, propreté urbaine et éco-citoyenneté en milieu scolaire (Comité Salubrité).' },
-    { icon: '🎭', title: t('domainCulture'), desc: 'Promotion du patrimoine tchadien et événements culturels de la jeunesse.' },
-    { icon: '⚽', title: t('domainSport'), desc: 'Tournois sportifs pour la jeunesse et rassemblements citoyens d\'intégration.' },
-    { icon: '🕊️', title: t('domainReligion'), desc: 'Promotion de la paix, du respect mutuel et du dialogue interculturel.' },
-    { icon: '🏗️', title: t('domainDev'), desc: 'Développement local, infrastructures éducatives (CEG Nangassou) et aménagement.' },
-    { icon: '🌟', title: 'Accompagnement Jeunesse', desc: 'Orientation, mentorat et valorisation des talents par le Bureau Exécutif.' }
+    { icon: <BookOpen size={28} />, title: t('domainEdu'), desc: 'Fournitures scolaires, construction de bureaux & soutien aux élèves (Article 5 des Statuts).' },
+    { icon: <HeartHandshake size={28} />, title: t('domainSolidarity'), desc: 'Entraide sociale, kits d\'hygiène et soutien aux familles défavorisées du Tchad.' },
+    { icon: <Activity size={28} />, title: t('domainHum'), desc: 'Assistance d\'urgence, accompagnement médical et solidarité communautaire.' },
+    { icon: <Trees size={28} />, title: t('domainEnv'), desc: 'Reboisement, propreté urbaine et éco-citoyenneté en milieu scolaire (Comité Salubrité).' },
+    { icon: <Theater size={28} />, title: t('domainCulture'), desc: 'Promotion du patrimoine tchadien et événements culturels de la jeunesse.' },
+    { icon: <Trophy size={28} />, title: t('domainSport'), desc: 'Tournois sportifs pour la jeunesse et rassemblements citoyens d\'intégration.' },
+    { icon: <ShieldCheck size={28} />, title: t('domainReligion'), desc: 'Promotion de la paix, du respect mutuel et du dialogue interculturel.' },
+    { icon: <Building2 size={28} />, title: t('domainDev'), desc: 'Développement local, infrastructures éducatives (CEG Nangassou) et aménagement.' },
+    { icon: <Sparkles size={28} />, title: 'Accompagnement Jeunesse', desc: 'Orientation, mentorat et valorisation des talents par le Bureau Exécutif.' }
   ];
 
   return (
