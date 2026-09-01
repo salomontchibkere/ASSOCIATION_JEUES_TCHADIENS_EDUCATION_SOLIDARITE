@@ -152,7 +152,7 @@ async function generateConfigPDF() {
   doc.rect(0, 796, 595.28, 45).fill(darkSlate);
   doc.fillColor('#94a3b8').fontSize(7.5).font('Helvetica').text(
     'Fiche de Configuration des Accès Officielle — Association des Jeunes Tchadiens pour l\'Éducation et la Solidarité (AJTES)\n' +
-    'Siège Social: N\'Djamena, Tchad — Email: contact@ajtes.td — Site Officiel: http://localhost:5173/',
+    'Siège Social: N\'Djamena, Tchad — Email: impactdigital2026@gmail.com — Site Officiel: http://localhost:5173/',
     35, 808, { align: 'center' }
   );
 

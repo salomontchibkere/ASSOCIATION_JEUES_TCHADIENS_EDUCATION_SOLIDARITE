@@ -67,7 +67,7 @@ export const ContactView: React.FC = () => {
               <div className="info-item">
                 <div>
                   <strong>Adresse E-mail Officielle</strong>
-                  <p>association.ajtes@gmail.com</p>
+                  <p>impactdigital2026@gmail.com</p>
                 </div>
               </div>
 

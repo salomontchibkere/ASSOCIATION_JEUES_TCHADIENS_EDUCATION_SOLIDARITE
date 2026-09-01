@@ -90,7 +90,7 @@ Le schéma Prisma (`backend/prisma/schema.prisma`) modélise les entités princi
 | **`Event`** | Événements et campagnes sur le terrain. |
 | **`Project`** | Projets communautaires (Budget, Année, Localisation, Avancement). |
 | **`Donation`** | Dons enregistrés (Airtel Money, Moov Africa, Carte, Espèces) avec référence de transaction. |
-| **`ContactMessage`** | Messages envoyés via le formulaire de contact du site (`association.ajtes.@gmail.com`). |
+| **`ContactMessage`** | Messages envoyés via le formulaire de contact du site (`impactdigital2026@gmail.com`). |
 | **`Committee`** | Comités d'action de l'AJTES (Éducation, Santé, Environnement, Droits des Jeunes). |
 
 ---
@@ -170,4 +170,4 @@ npm run dev
 
 ---
 
-*Documentation technique développée par **Salomon** pour l'**AJTES Tchad** (Contact : `association.ajtes.@gmail.com`) — 2026.*
+*Documentation technique développée par **Salomon** pour l'**AJTES Tchad** (Contact : `impactdigital2026@gmail.com`) — 2026.*

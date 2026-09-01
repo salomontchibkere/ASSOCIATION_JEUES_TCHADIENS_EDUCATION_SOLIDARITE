@@ -4,8 +4,8 @@ const SMTP_HOST = process.env.SMTP_HOST || 'smtp.gmail.com';
 const SMTP_PORT = parseInt(process.env.SMTP_PORT || '587');
 const SMTP_USER = process.env.SMTP_USER || '';
 const SMTP_PASS = process.env.SMTP_PASS || '';
-const EMAIL_FROM = process.env.EMAIL_FROM || '"AJTES Tchad" <contact@ajtes.td>';
-const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'salomon@ajtes.td';
+const EMAIL_FROM = process.env.EMAIL_FROM || '"AJTES Tchad" <impactdigital2026@gmail.com>';
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'impactdigital2026@gmail.com';
 
 // Initialize Transporter
 const transporter = nodemailer.createTransport({
