@@ -131,6 +131,32 @@ export const initialProjects: Project[] = [
 
 export const initialNews: NewsArticle[] = [
   {
+    id: 'news-communique-pdf-1',
+    title: {
+      fr: "Communiqué Officiel : Calendrier de rentrée et Assemblée Générale 2026-2027",
+      en: "Official Press Release: School Year Schedule & 2026-2027 General Assembly",
+      ar: "بيان رسمي: جدول العام الدراسي والجمعية العمومية 2026-2027"
+    },
+    summary: {
+      fr: "Téléchargez le communiqué officiel au format PDF signé par le Bureau Exécutif concernant les grandes orientations et le calendrier d'activités.",
+      en: "Download the official signed PDF release regarding key guidelines and activities schedule.",
+      ar: "تحميل البيان الرسمي بصيغة PDF الموقع من المكتب التنفيذي للجمعية."
+    },
+    content: {
+      fr: "Le Bureau Exécutif de l'AJTES informe l'ensemble des membres actifs, sympathisants et partenaires de la publication du communiqué de presse relatif au calendrier d'orientation et à l'organisation de l'Assemblée Générale. Retrouvez tous les détails dans le document PDF officiel ci-joint.",
+      en: "The Executive Office of AJTES informs all active members and partners of the official release regarding the orientation calendar and General Assembly.",
+      ar: "يعلن المكتب التنفيذي لجميع الأعضاء والشركاء عن نشر البيان الرسمي المتعلق بجدول الأنشطة."
+    },
+    category: 'communique',
+    author: 'Bureau Exécutif AJTES',
+    publishDate: '2026-08-25',
+    imageUrl: './images/IMG-20260813-WA0123.jpg',
+    featured: true,
+    type: 'communique',
+    pdfUrl: './documents/Fiche_Configuration_Acces_AJTES.pdf',
+    pdfSize: '1.2 MB'
+  },
+  {
     id: 'news-1',
     title: {
       fr: "Inauguration officielle du bureau administratif du CEG de Nangassou",
@@ -151,7 +177,8 @@ export const initialNews: NewsArticle[] = [
     author: 'Bureau de Communication AJTES',
     publishDate: '2026-08-01',
     imageUrl: './images/IMG-20260813-WA0083.jpg',
-    featured: true
+    featured: true,
+    type: 'article'
   },
   {
     id: 'news-2',
@@ -174,7 +201,8 @@ export const initialNews: NewsArticle[] = [
     author: 'Salomon - Resp. Technique',
     publishDate: '2026-07-20',
     imageUrl: './images/IMG-20260813-WA0123.jpg',
-    featured: true
+    featured: false,
+    type: 'article'
   }
 ];
 
@@ -225,20 +253,20 @@ export const initialOfficialDocuments: OfficialDocument[] = [
   {
     id: 'doc-security-report',
     title: {
-      fr: "🔒 Rapport Confidentiel de Sécurité, Mise à Jour & Dépannage (2026)",
-      en: "🔒 Confidential Security, Update & Troubleshooting Report (2026)",
-      ar: "🔒 التقرير السري للأمان والتحديثات وحل المشكلات (2026)"
+      fr: "Rapport Confidentiel de Sécurité, Mise à Jour & Dépannage (2026)",
+      en: "Confidential Security, Update & Troubleshooting Report (2026)",
+      ar: "التقرير السري للأمان والتحديثات وحل المشكلات (2026)"
     },
     type: 'autre',
     description: {
-      fr: "🔒 DOCUMENT STRICTEMENT CONFIDENTIEL — Réservé exclusivement à SALOMON (Super Admin). Contient l'audit des 9 couches de sécurité, le guide de personnalisation et les procédures de dépannage des 5 soucis fréquents.",
-      en: "🔒 STRICTLY CONFIDENTIAL DOCUMENT — Reserved exclusively for SALOMON (Super Admin). Contains 9 security layers audit, configuration guide, and 5 troubleshooting procedures.",
-      ar: "🔒 وثيقة سرية للغاية — مخصصة حصريًا لسالومون (المدير الفائق)."
+      fr: "DOCUMENT STRICTEMENT CONFIDENTIEL — Réservé exclusivement à SALOMON (Super Admin). Contient l'audit des 9 couches de sécurité, le guide de personnalisation et les procédures de dépannage des 5 soucis fréquents.",
+      en: "STRICTLY CONFIDENTIAL DOCUMENT — Reserved exclusively for SALOMON (Super Admin). Contains 9 security layers audit, configuration guide, and 5 troubleshooting procedures.",
+      ar: "وثيقة سرية للغاية — مخصصة حصريًا لسالومون (المدير الفائق)."
     },
     downloadUrl: './documents/Rapport_Securite_Plateforme_AJTES.pdf',
     lastUpdated: '2026-08-28',
     contentMarkdown: {
-      fr: `### 🔒 DOCUMENT CONFIDENTIEL — USAGE EXCLUSIF DU SUPER ADMIN (SALOMON)
+      fr: `### DOCUMENT CONFIDENTIEL — USAGE EXCLUSIF DU SUPER ADMIN (SALOMON)
 
 **1. SYNTHÈSE DES 9 DISPOSITIFS DE SÉCURITÉ**
 1. **Hachage des Mots de Passe (\`bcryptjs\`)** : Cryptage irréversible (Cost 10).
@@ -266,8 +294,8 @@ export const initialOfficialDocuments: OfficialDocument[] = [
 - **Souci 3 (Nouveautés non visibles)** : Vider le cache du navigateur avec \`CTRL + SHIFT + R\`.
 - **Souci 4 (Erreur 429 Blocage)** : Attendre 15 minutes le déblocage automatique anti-brute force.
 - **Souci 5 (Erreur Git push)** : Utiliser un Personal Access Token (PAT) GitHub comme mot de passe.`,
-      en: `### 🔒 CONFIDENTIAL DOCUMENT — SALOMON ONLY`,
-      ar: `### 🔒 وثيقة سرية — لسالومون فقط`
+      en: `### CONFIDENTIAL DOCUMENT — SALOMON ONLY`,
+      ar: `### وثيقة سرية — لسالومون فقط`
     }
   },
   {

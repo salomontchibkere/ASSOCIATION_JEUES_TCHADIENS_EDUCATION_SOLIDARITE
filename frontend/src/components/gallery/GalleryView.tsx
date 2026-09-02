@@ -39,13 +39,13 @@ export const GalleryView: React.FC = () => {
               className={`filter-btn ${activeType === 'photo' ? 'active' : ''}`}
               onClick={() => setActiveType('photo')}
             >
-              📷 Photos ({photoCount})
+              Photos ({photoCount})
             </button>
             <button
               className={`filter-btn ${activeType === 'video' ? 'active' : ''}`}
               onClick={() => setActiveType('video')}
             >
-              🎬 Vidéos ({videoCount})
+              Vidéos ({videoCount})
             </button>
           </div>
         </div>
@@ -79,7 +79,7 @@ export const GalleryView: React.FC = () => {
                 </div>
 
                 <div className="gallery-card-body">
-                  <span className="media-category">🏷️ {item.category} • 📍 {item.location || 'Tchad'}</span>
+                  <span className="media-category">{item.category} • {item.location || 'Tchad'}</span>
                   <h4>{item.title[language] || item.title['fr']}</h4>
                 </div>
               </div>

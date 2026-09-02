@@ -242,7 +242,7 @@ export const DonationView: React.FC = () => {
                   className="btn btn-gold"
                   style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', textDecoration: 'none' }}
                 >
-                  📥 Télécharger le Reçu Officiel PDF (avec QR Code)
+                  Télécharger le Reçu Officiel PDF (avec QR Code)
                 </a>
                 <button className="btn btn-primary" onClick={() => window.print()}>
                   Imprimer ce Reçu

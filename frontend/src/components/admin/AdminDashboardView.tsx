@@ -7,8 +7,10 @@ export const AdminDashboardView: React.FC = () => {
     projects,
     media,
     donations,
+    news,
     addProject,
-    addMediaItem
+    addMediaItem,
+    addNewsArticle
   } = useData();
 
   const { currentUser, isLoggedIn, isAdmin, login, loginAsAdmin, logout } = useAuth();
@@ -18,7 +20,18 @@ export const AdminDashboardView: React.FC = () => {
   const [adminEmail, setAdminEmail] = useState('');
   const [adminPassword, setAdminPassword] = useState('');
 
-  // Form states for Content Creation
+  // Form states for Content Creation (News & Communiques)
+  const [adminNewsType, setAdminNewsType] = useState<'article' | 'communique' | 'photo'>('article');
+  const [adminNewsTitle, setAdminNewsTitle] = useState('');
+  const [adminNewsCategory, setAdminNewsCategory] = useState('education');
+  const [adminNewsSummary, setAdminNewsSummary] = useState('');
+  const [adminNewsContent, setAdminNewsContent] = useState('');
+  const [adminNewsImageUrl, setAdminNewsImageUrl] = useState('');
+  const [adminNewsPdfUrl, setAdminNewsPdfUrl] = useState('');
+  const [adminNewsAuthor, setAdminNewsAuthor] = useState('');
+  const [adminNewsSuccessMsg, setAdminNewsSuccessMsg] = useState(false);
+
+  // Form states for Project Creation
   const [newProjTitle, setNewProjTitle] = useState('');
   const [newProjCategory, setNewProjCategory] = useState<'education' | 'solidarite' | 'environnement' | 'humanitaire'>('education');
   const [newProjBudget, setNewProjBudget] = useState('5000000');
@@ -33,6 +46,35 @@ export const AdminDashboardView: React.FC = () => {
   const [mediaSuccessMsg, setMediaSuccessMsg] = useState(false);
 
   const totalDonationsAmount = donations.reduce((sum, d) => sum + d.amount, 0);
+
+  const handleAddNewsSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!adminNewsTitle || !adminNewsContent) return;
+
+    addNewsArticle({
+      id: `news-${Date.now()}`,
+      title: { fr: adminNewsTitle, en: adminNewsTitle, ar: adminNewsTitle },
+      summary: { fr: adminNewsSummary || adminNewsContent.substring(0, 120) + '...', en: adminNewsSummary, ar: adminNewsSummary },
+      content: { fr: adminNewsContent, en: adminNewsContent, ar: adminNewsContent },
+      category: adminNewsType === 'communique' ? 'communique' : adminNewsCategory,
+      author: adminNewsAuthor || (currentUser?.name ? `${currentUser.name} (Admin)` : 'Bureau Exécutif AJTES'),
+      publishDate: new Date().toISOString().split('T')[0],
+      imageUrl: adminNewsImageUrl || (adminNewsType === 'photo' ? './images/IMG-20260813-WA0125.jpg' : './images/IMG-20260813-WA0083.jpg'),
+      featured: true,
+      type: adminNewsType,
+      pdfUrl: adminNewsType === 'communique' ? (adminNewsPdfUrl || './documents/Fiche_Configuration_Acces_AJTES.pdf') : adminNewsPdfUrl || undefined,
+      pdfSize: adminNewsType === 'communique' ? '1.2 MB' : undefined
+    });
+
+    setAdminNewsTitle('');
+    setAdminNewsSummary('');
+    setAdminNewsContent('');
+    setAdminNewsImageUrl('');
+    setAdminNewsPdfUrl('');
+    setAdminNewsAuthor('');
+    setAdminNewsSuccessMsg(true);
+    setTimeout(() => setAdminNewsSuccessMsg(false), 3000);
+  };
 
   const handleAddProjectSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -87,7 +129,6 @@ export const AdminDashboardView: React.FC = () => {
 
         <section className="section">
           <div className="admin-login-card card">
-            <div className="security-icon">🛡️</div>
             <h2>Identification Administrateur</h2>
             <p className="security-text">
               Veuillez saisir vos identifiants d'administration pour accéder à la console de gestion des projets, des dons et des médias de l'AJTES.
@@ -221,7 +262,7 @@ export const AdminDashboardView: React.FC = () => {
     <div className="admin-page">
       <section className="admin-header-banner">
         <div className="admin-banner-container">
-          <div className="admin-badge">⚡ ESPACE ADMINISTRATION SÉCURISÉ</div>
+          <div className="admin-badge">ESPACE ADMINISTRATION SÉCURISÉ</div>
           <h1>Tableau de Bord Administrateur</h1>
           <p>Gestionnaire technique & maintenance — Connecté en tant que <strong>{currentUser?.name}</strong> ({currentUser?.email})</p>
           <div style={{ marginTop: '0.75rem' }}>
@@ -264,7 +305,6 @@ export const AdminDashboardView: React.FC = () => {
           <div className="admin-overview">
             <div className="grid-4">
               <div className="admin-stat-card card">
-                <span className="stat-icon">💰</span>
                 <div className="stat-info">
                   <span className="stat-val">{totalDonationsAmount.toLocaleString()} FCFA</span>
                   <span className="stat-title">Total des Dons Reçus</span>
@@ -272,7 +312,6 @@ export const AdminDashboardView: React.FC = () => {
               </div>
 
               <div className="admin-stat-card card">
-                <span className="stat-icon">🏗️</span>
                 <div className="stat-info">
                   <span className="stat-val">{projects.length}</span>
                   <span className="stat-title">Projets Gérés</span>
@@ -280,7 +319,6 @@ export const AdminDashboardView: React.FC = () => {
               </div>
 
               <div className="admin-stat-card card">
-                <span className="stat-icon">📷</span>
                 <div className="stat-info">
                   <span className="stat-val">{media.length}</span>
                   <span className="stat-title">Médias (Photos & Vidéos)</span>
@@ -288,7 +326,6 @@ export const AdminDashboardView: React.FC = () => {
               </div>
 
               <div className="admin-stat-card card">
-                <span className="stat-icon">👥</span>
                 <div className="stat-info">
                   <span className="stat-val">120+</span>
                   <span className="stat-title">Membres Répertoriés</span>
@@ -335,12 +372,12 @@ export const AdminDashboardView: React.FC = () => {
         {activeAdminTab === 'media' && (
           <div className="admin-media-manager">
             <div className="card admin-form-card">
-              <h2>📷 Ajouter de Nouvelles Photos ou Vidéos</h2>
+              <h2>Ajouter de Nouvelles Photos ou Vidéos</h2>
               <p>Mise à jour rapide de la galerie pour les réalisations 2026, statuts et évènements.</p>
 
               {mediaSuccessMsg && (
                 <div className="alert-success">
-                  ✅ Média ajouté avec succès à la Galerie Officielle !
+                  Média ajouté avec succès à la Galerie Officielle !
                 </div>
               )}
 
@@ -365,8 +402,8 @@ export const AdminDashboardView: React.FC = () => {
                       onChange={e => setMediaType(e.target.value as 'photo' | 'video')}
                       className="form-control"
                     >
-                      <option value="photo">📷 Photo</option>
-                      <option value="video">🎬 Vidéo (Lien Youtube ou Embed)</option>
+                      <option value="photo">Photo</option>
+                      <option value="video">Vidéo (Lien Youtube ou Embed)</option>
                     </select>
                   </div>
 
@@ -397,7 +434,7 @@ export const AdminDashboardView: React.FC = () => {
                 </div>
 
                 <button type="submit" className="btn btn-primary btn-lg w-full">
-                  ➕ Publier dans la Galerie Officielle
+                  Publier dans la Galerie Officielle
                 </button>
               </form>
             </div>
@@ -406,9 +443,130 @@ export const AdminDashboardView: React.FC = () => {
 
         {/* CONTENT MANAGER TAB */}
         {activeAdminTab === 'content' && (
-          <div className="admin-content-manager">
+          <div className="admin-content-manager grid-2 gap-lg">
+            {/* Form 1: Publier une Nouvelle / Communiqué / PDF */}
             <div className="card admin-form-card">
-              <h2>🏗️ Publier un Nouveau Projet</h2>
+              <h2>Publier une Nouvelle / Communiqué PDF ({news.length})</h2>
+              <p>Publication immédiate sur la page des Actualités de l'AJTES.</p>
+
+              {adminNewsSuccessMsg && (
+                <div className="alert-success margin-bottom">
+                  Nouvelle publiée avec succès sur le site !
+                </div>
+              )}
+
+              <form onSubmit={handleAddNewsSubmit} className="admin-form">
+                <div className="form-group">
+                  <label>Type de Publication *</label>
+                  <select
+                    value={adminNewsType}
+                    onChange={e => setAdminNewsType(e.target.value as any)}
+                    className="form-control"
+                  >
+                    <option value="article">Article de Presse / Actualité</option>
+                    <option value="communique">Communiqué Officiel PDF</option>
+                    <option value="photo">Publication Photo / Album</option>
+                  </select>
+                </div>
+
+                <div className="form-group">
+                  <label>Titre de la Publication *</label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="Titre de l'actualité ou du communiqué"
+                    value={adminNewsTitle}
+                    onChange={e => setAdminNewsTitle(e.target.value)}
+                    className="form-control"
+                  />
+                </div>
+
+                <div className="grid-2">
+                  <div className="form-group">
+                    <label>Catégorie *</label>
+                    <select
+                      value={adminNewsCategory}
+                      onChange={e => setAdminNewsCategory(e.target.value)}
+                      className="form-control"
+                    >
+                      <option value="education">Éducation</option>
+                      <option value="solidarite">Solidarité</option>
+                      <option value="environnement">Environnement</option>
+                      <option value="communique">Communiqué Officiel</option>
+                      <option value="humanitaire">Humanitaire</option>
+                    </select>
+                  </div>
+
+                  <div className="form-group">
+                    <label>Auteur *</label>
+                    <input
+                      type="text"
+                      placeholder="Ex: Bureau Exécutif AJTES"
+                      value={adminNewsAuthor}
+                      onChange={e => setAdminNewsAuthor(e.target.value)}
+                      className="form-control"
+                    />
+                  </div>
+                </div>
+
+                <div className="form-group">
+                  <label>Résumé court *</label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="Accroche de la publication"
+                    value={adminNewsSummary}
+                    onChange={e => setAdminNewsSummary(e.target.value)}
+                    className="form-control"
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label>Contenu Rédactionnel *</label>
+                  <textarea
+                    required
+                    rows={4}
+                    placeholder="Texte détaillé..."
+                    value={adminNewsContent}
+                    onChange={e => setAdminNewsContent(e.target.value)}
+                    className="form-control"
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label>Lien Photo / Image d'illustration</label>
+                  <input
+                    type="text"
+                    placeholder="./images/IMG-20260813-WA0123.jpg ou URL"
+                    value={adminNewsImageUrl}
+                    onChange={e => setAdminNewsImageUrl(e.target.value)}
+                    className="form-control"
+                  />
+                </div>
+
+                {adminNewsType === 'communique' && (
+                  <div className="form-group highlight-pdf-input">
+                    <label>Fichier / URL du Document PDF *</label>
+                    <input
+                      type="text"
+                      placeholder="./documents/Fiche_Configuration_Acces_AJTES.pdf ou lien PDF"
+                      value={adminNewsPdfUrl}
+                      onChange={e => setAdminNewsPdfUrl(e.target.value)}
+                      className="form-control"
+                    />
+                  </div>
+                )}
+
+                <button type="submit" className="btn btn-gold btn-lg w-full margin-top">
+                  Publier la Nouvelle
+                </button>
+              </form>
+            </div>
+
+            {/* Form 2: Publier un Nouveau Projet */}
+            <div className="card admin-form-card">
+              <h2>Publier un Nouveau Projet</h2>
+              <p>Ajouter une réalisation ou projet en cours d'exécution.</p>
               <form onSubmit={handleAddProjectSubmit} className="admin-form">
                 <div className="form-group">
                   <label>Titre du Projet *</label>
@@ -450,7 +608,7 @@ export const AdminDashboardView: React.FC = () => {
                 </div>
 
                 <button type="submit" className="btn btn-primary btn-lg w-full margin-top">
-                  🚀 Publier le projet
+                  Publier le projet
                 </button>
               </form>
             </div>

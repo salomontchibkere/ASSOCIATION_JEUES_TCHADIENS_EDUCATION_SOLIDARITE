@@ -202,7 +202,6 @@ export const MemberSpaceView: React.FC<MemberSpaceViewProps> = ({ initialMode = 
               boxShadow: '0 4px 12px rgba(52, 168, 83, 0.12)'
             }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                <span style={{ fontSize: '1.5rem' }}>📧</span>
                 <div>
                   <strong style={{ color: '#0F5132', fontSize: '0.95rem', display: 'block' }}>
                     Notification de Connexion Envoyée à {currentUser?.email}
@@ -238,7 +237,7 @@ export const MemberSpaceView: React.FC<MemberSpaceViewProps> = ({ initialMode = 
                 <span className="role-pill">Rôle: {currentUser?.role}</span>
                 {isAdmin && setCurrentTab && (
                   <button className="btn btn-gold btn-sm" onClick={() => setCurrentTab('admin')}>
-                    ⚡ Accéder à l'Admin
+                    Accéder à l'Admin
                   </button>
                 )}
                 <button className="btn btn-secondary btn-sm" onClick={logout}>
@@ -259,10 +258,10 @@ export const MemberSpaceView: React.FC<MemberSpaceViewProps> = ({ initialMode = 
                     className="btn btn-gold btn-sm"
                     style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.3rem' }}
                   >
-                    📥 Télécharger Carte PDF (Officiel)
+                    Télécharger Carte PDF (Officiel)
                   </a>
                   <button className="btn btn-secondary btn-sm" onClick={() => setShowQRModal(true)} title="Vérifier la carte">
-                    🔍 Scanner QR
+                    Scanner QR
                   </button>
                 </div>
               </div>
@@ -315,7 +314,7 @@ export const MemberSpaceView: React.FC<MemberSpaceViewProps> = ({ initialMode = 
                   <button className="modal-close" onClick={() => setShowQRModal(false)}>✕</button>
                   <div className="text-center">
                     <div className="seal-badge margin-bottom-sm">
-                      ✅ ADHÉRENT CERTIFIÉ AJTES TCHAD
+                      ADHÉRENT CERTIFIÉ AJTES TCHAD
                     </div>
                     <h2>Vérification d'Authenticité</h2>
                     <p className="text-muted">Document officiel délivré par le Bureau National AJTES (N'Djamena)</p>
@@ -341,7 +340,7 @@ export const MemberSpaceView: React.FC<MemberSpaceViewProps> = ({ initialMode = 
 
                     <div className="margin-top-lg flex-center gap-sm">
                       <button className="btn btn-gold btn-sm" onClick={() => { setShowQRModal(false); window.print(); }}>
-                        🖨️ Imprimer la Carte
+                        Imprimer la Carte
                       </button>
                       <button className="btn btn-secondary btn-sm" onClick={() => setShowQRModal(false)}>
                         Fermer

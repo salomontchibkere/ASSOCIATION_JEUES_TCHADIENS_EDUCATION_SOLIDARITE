@@ -42,11 +42,14 @@ export interface NewsArticle {
   title: Record<Language, string>;
   content: Record<Language, string>;
   summary: Record<Language, string>;
-  category: 'education' | 'solidarite' | 'environnement' | 'sport' | 'culture' | 'humanitaire' | 'communique';
+  category: 'education' | 'solidarite' | 'environnement' | 'sport' | 'culture' | 'humanitaire' | 'communique' | 'pdf' | 'photo' | 'article' | string;
   author: string;
   publishDate: string;
   imageUrl: string;
   featured?: boolean;
+  type?: 'article' | 'pdf' | 'photo' | 'communique';
+  pdfUrl?: string;
+  pdfSize?: string;
 }
 
 export interface Event {
