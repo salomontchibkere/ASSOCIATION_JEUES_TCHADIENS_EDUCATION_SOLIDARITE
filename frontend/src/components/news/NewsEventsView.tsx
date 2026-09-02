@@ -393,7 +393,7 @@ export const NewsEventsView: React.FC = () => {
                     <label>Lien du Document PDF Joint (Communiqué officiel)</label>
                     <input
                       type="text"
-                      placeholder="Ex: ./documents/Communique_Officiel_Rentrée_2026.pdf"
+                      placeholder="Ex: https://exemple.org/communique.pdf"
                       value={pubPdfUrl}
                       onChange={e => setPubPdfUrl(e.target.value)}
                       className="form-control"

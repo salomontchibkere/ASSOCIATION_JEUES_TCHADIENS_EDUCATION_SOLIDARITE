@@ -357,18 +357,8 @@ export const MemberSpaceView: React.FC<MemberSpaceViewProps> = ({ initialMode = 
                 <h3>Documents d'Adhésion & Réglementation</h3>
                 <p>Accédez aux textes de gouvernance officiels de l'association.</p>
                 <div className="doc-links">
-                  {isAdmin ? (
-                    <>
-                      <a href="./documents/statuts_AJTES.pdf" download target="_blank" rel="noopener noreferrer" className="doc-link">Statuts AJTES (PDF Admin)</a>
-                      <a href="./documents/reglement_interieur_AJTES.pdf" download target="_blank" rel="noopener noreferrer" className="doc-link">Règlement Intérieur (PDF Admin)</a>
-                    </>
-                  ) : (
-                    <>
-                      <a href="/#documents" className="doc-link">Consulter les Statuts en ligne</a>
-                      <a href="/#documents" className="doc-link">Consulter le Règlement Intérieur en ligne</a>
-                      <span className="doc-link text-muted" style={{ fontSize: '0.8rem', opacity: 0.8 }}>Téléchargement PDF réservé à l'Administration</span>
-                    </>
-                  )}
+                  <a href="/#documents" className="doc-link">Consulter les Statuts de l'AJTES en ligne</a>
+                  <a href="/#documents" className="doc-link">Consulter le Règlement Intérieur en ligne</a>
                   <button onClick={() => window.print()} className="doc-link btn-link-reset">Imprimer ma Carte d'Adhérent</button>
                 </div>
               </div>

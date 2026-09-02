@@ -153,8 +153,6 @@ export const initialNews: NewsArticle[] = [
     imageUrl: './images/IMG-20260813-WA0123.jpg',
     featured: true,
     type: 'communique',
-    pdfUrl: './documents/Fiche_Configuration_Acces_AJTES.pdf',
-    pdfSize: '1.2 MB'
   },
   {
     id: 'news-1',
@@ -263,7 +261,6 @@ export const initialOfficialDocuments: OfficialDocument[] = [
       en: "STRICTLY CONFIDENTIAL DOCUMENT — Reserved exclusively for SALOMON (Super Admin). Contains 9 security layers audit, configuration guide, and 5 troubleshooting procedures.",
       ar: "وثيقة سرية للغاية — مخصصة حصريًا لسالومون (المدير الفائق)."
     },
-    downloadUrl: './documents/Rapport_Securite_Plateforme_AJTES.pdf',
     lastUpdated: '2026-08-28',
     contentMarkdown: {
       fr: `### DOCUMENT CONFIDENTIEL — USAGE EXCLUSIF DU SUPER ADMIN (SALOMON)
@@ -311,7 +308,6 @@ export const initialOfficialDocuments: OfficialDocument[] = [
       en: "Credential and privilege collection sheet for the 5 website managers: Salomon & Marc (Full Access), Banakolong (President), Valentin (SG), and Boikoussigue (Comm Lead).",
       ar: "استمارة جمع بيانات الدخول والصلاحيات لـ 5 مدراء: سالومون ومارك (وصول كامل)، باناكولونغ (الرئيس)، فالنتين (الأمين العام)، وبويكوسيغي (مسؤول الإعلام)."
     },
-    downloadUrl: './documents/Fiche_Configuration_Acces_AJTES.pdf',
     lastUpdated: '2026-08-26',
     contentMarkdown: {
       fr: `### FICHE DE CONFIGURATION DU SITE WEB ET LA GESTION (AJTES)
@@ -362,7 +358,6 @@ export const initialOfficialDocuments: OfficialDocument[] = [
       en: "Official founding document establishing the creation in 2022, objectives, governance structure, and operating rules of AJTES.",
       ar: "الوثيقة التأسيسية الرسمية التي تحدد التأسيس في 2022 والأهداف والأجهزة الإدارية وقواعد عمل الجمعية."
     },
-    downloadUrl: './documents/statuts_AJTES.pdf',
     lastUpdated: '2022-04-12',
     contentMarkdown: {
       fr: `### STATUTS DE L'ASSOCIATION DES JEUNES TCHADIENS POUR L’ÉDUCATION ET LA SOLIDARITÉ (AJTES)
@@ -405,7 +400,6 @@ export const initialOfficialDocuments: OfficialDocument[] = [
       en: "Detailed rules for internal operation, member rights and duties, voting procedures, and financial management.",
       ar: "القواعد التفصيلية للعمل الداخلي وحقوق وواجبات الأعضاء والإجراءات المالية والإنضباطية."
     },
-    downloadUrl: './documents/reglement_interieur_AJTES.pdf',
     lastUpdated: '2022-05-01',
     contentMarkdown: {
       fr: `### RÈGLEMENT INTÉRIEUR DE L'AJTES

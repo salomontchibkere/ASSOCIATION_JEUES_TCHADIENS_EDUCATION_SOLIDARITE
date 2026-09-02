@@ -553,7 +553,7 @@ export const AdminDashboardView: React.FC = () => {
                     <label>Fichier / URL du Document PDF *</label>
                     <input
                       type="text"
-                      placeholder="./documents/Fiche_Configuration_Acces_AJTES.pdf ou lien PDF"
+                      placeholder="Ex: https://exemple.org/document.pdf"
                       value={adminNewsPdfUrl}
                       onChange={e => setAdminNewsPdfUrl(e.target.value)}
                       className="form-control"

@@ -113,7 +113,7 @@ export interface OfficialDocument {
   title: Record<Language, string>;
   type: 'statuts' | 'reglement_interieur' | 'rapport_annuel' | 'autre';
   description: Record<Language, string>;
-  downloadUrl: string;
+  downloadUrl?: string;
   lastUpdated: string;
   contentMarkdown: Record<Language, string>;
 }

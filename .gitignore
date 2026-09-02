@@ -21,3 +21,11 @@ Images/
 # Environment files
 .env
 .env.local
+
+# Confidential Documents & PDFs
+documents/
+doc/
+docs/documents/
+frontend/public/documents/
+*.pdf
+

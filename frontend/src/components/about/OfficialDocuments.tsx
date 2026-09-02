@@ -9,7 +9,7 @@ export const OfficialDocuments: React.FC = () => {
   const { language } = useLanguage();
   const { isAdmin } = useAuth();
   const [selectedDoc, setSelectedDoc] = useState<OfficialDocument | null>(officialDocuments[0] || null);
-  const [viewMode, setViewMode] = useState<'pdf' | 'text'>('pdf');
+  const [viewMode, setViewMode] = useState<'pdf' | 'text'>('text');
 
   return (
     <section className="section bg-white-docs">
@@ -32,7 +32,7 @@ export const OfficialDocuments: React.FC = () => {
               className={`doc-tab-btn ${selectedDoc?.id === doc.id ? 'active' : ''}`}
               onClick={() => setSelectedDoc(doc)}
             >
-              <span className="doc-type-badge">PDF</span>
+              <span className="doc-type-badge">DOC</span>
               <div className="doc-tab-text">
                 <span className="doc-title">{doc.title[language] || doc.title['fr']}</span>
                 <span className="doc-meta">Statuts Officiels 2022</span>
@@ -51,24 +51,24 @@ export const OfficialDocuments: React.FC = () => {
               </div>
 
               <div className="doc-actions">
-                {/* Mode toggle */}
-                <div className="view-mode-toggle">
-                  <button
-                    className={`mode-btn ${viewMode === 'pdf' ? 'active' : ''}`}
-                    onClick={() => setViewMode('pdf')}
-                  >
-                    Visionneuse PDF
-                  </button>
-                  <button
-                    className={`mode-btn ${viewMode === 'text' ? 'active' : ''}`}
-                    onClick={() => setViewMode('text')}
-                  >
-                    Texte des Articles
-                  </button>
-                </div>
+                {selectedDoc.downloadUrl && (
+                  <div className="view-mode-toggle">
+                    <button
+                      className={`mode-btn ${viewMode === 'text' ? 'active' : ''}`}
+                      onClick={() => setViewMode('text')}
+                    >
+                      Texte des Articles
+                    </button>
+                    <button
+                      className={`mode-btn ${viewMode === 'pdf' ? 'active' : ''}`}
+                      onClick={() => setViewMode('pdf')}
+                    >
+                      Visionneuse PDF
+                    </button>
+                  </div>
+                )}
 
-                {/* Download Button strictly for Admin */}
-                {isAdmin ? (
+                {selectedDoc.downloadUrl && isAdmin && (
                   <a
                     href={selectedDoc.downloadUrl}
                     download
@@ -79,19 +79,12 @@ export const OfficialDocuments: React.FC = () => {
                   >
                     Télécharger le PDF (Bureau Exécutif)
                   </a>
-                ) : (
-                  <span
-                    className="admin-only-badge"
-                    title="Seuls les administrateurs du Bureau Exécutif peuvent télécharger le fichier PDF source."
-                  >
-                    Téléchargement PDF réservé à l'Administration
-                  </span>
                 )}
               </div>
             </div>
 
             {/* Document Content Display */}
-            {viewMode === 'pdf' ? (
+            {viewMode === 'pdf' && selectedDoc.downloadUrl ? (
               <div className="pdf-embed-wrapper">
                 <iframe
                   src={`${selectedDoc.downloadUrl}#toolbar=0`}
