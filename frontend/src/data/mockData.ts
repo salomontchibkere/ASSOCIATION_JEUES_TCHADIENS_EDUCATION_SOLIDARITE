@@ -1022,5 +1022,41 @@ export const initialUsers: User[] = [
     memberType: 'actif',
     membershipStatus: 'actif',
     dateJoined: '2023-04-10'
+  },
+  {
+    id: 'usr-pending-1',
+    name: 'Ahmat Mahamat',
+    email: 'ahmat.mahamat@gmail.com',
+    role: 'membre',
+    profession: 'Enseignant / Formateur',
+    phone: '+235 66 12 88 99',
+    city: 'N\'Djamena',
+    memberType: 'actif',
+    membershipStatus: 'en_attente',
+    dateJoined: '2026-08-30'
+  },
+  {
+    id: 'usr-pending-2',
+    name: 'Fatimé Abakar',
+    email: 'fatime.abakar@gmail.com',
+    role: 'membre',
+    profession: 'Étudiante en Droit',
+    phone: '+235 68 44 22 11',
+    city: 'Moundou',
+    memberType: 'actif',
+    membershipStatus: 'en_attente',
+    dateJoined: '2026-09-01'
+  },
+  {
+    id: 'usr-pending-3',
+    name: 'Kassim Ali',
+    email: 'kassim.ali@gmail.com',
+    role: 'membre',
+    profession: 'Technicien Agronome',
+    phone: '+235 63 99 77 55',
+    city: 'Nangassou',
+    memberType: 'actif',
+    membershipStatus: 'en_attente',
+    dateJoined: '2026-09-02'
   }
 ];

@@ -16,6 +16,46 @@ export const NewsEventsView: React.FC = () => {
   const [registerEvent, setRegisterEvent] = useState<Event | null>(null);
   const [registeredSuccess, setRegisteredSuccess] = useState(false);
 
+  // Visitor Reactions State
+  const [reactions, setReactions] = useState<Record<string, { likes: number; hearts: number; claps: number }>>({});
+  
+  // Visitor Comments State
+  const [comments, setComments] = useState<Record<string, Array<{ id: string; author: string; text: string; date: string }>>>({});
+  const [commentAuthor, setCommentAuthor] = useState('');
+  const [commentText, setCommentText] = useState('');
+
+  const handleReact = (articleId: string, type: 'likes' | 'hearts' | 'claps') => {
+    setReactions(prev => {
+      const current = prev[articleId] || { likes: 0, hearts: 0, claps: 0 };
+      return {
+        ...prev,
+        [articleId]: {
+          ...current,
+          [type]: current[type] + 1
+        }
+      };
+    });
+  };
+
+  const handleAddComment = (e: React.FormEvent, articleId: string) => {
+    e.preventDefault();
+    if (!commentText.trim()) return;
+
+    const newComment = {
+      id: `c-${Date.now()}`,
+      author: commentAuthor.trim() || (currentUser?.name ? currentUser.name : 'Visiteur du site'),
+      text: commentText.trim(),
+      date: new Date().toLocaleDateString('fr-FR', { hour: '2-digit', minute: '2-digit' })
+    };
+
+    setComments(prev => ({
+      ...prev,
+      [articleId]: [newComment, ...(prev[articleId] || [])]
+    }));
+
+    setCommentText('');
+  };
+
   // Publish Modal State for Admins
   const [isPublishModalOpen, setIsPublishModalOpen] = useState(false);
   const [pubType, setPubType] = useState<'article' | 'communique' | 'photo'>('article');
@@ -237,10 +277,41 @@ export const NewsEventsView: React.FC = () => {
                         </div>
                       )}
 
+                      {/* Visitor Reactions Bar */}
+                      <div className="reactions-bar" style={{ display: 'flex', gap: '0.4rem', margin: '0.75rem 0', alignItems: 'center', flexWrap: 'wrap' }}>
+                        <button
+                          type="button"
+                          className="btn-reaction"
+                          onClick={() => handleReact(item.id, 'likes')}
+                          style={{ border: '1px solid #E5E7EB', background: '#F9FAFB', borderRadius: '20px', padding: '0.2rem 0.55rem', fontSize: '0.8rem', cursor: 'pointer' }}
+                        >
+                          👍 J'aime ({reactions[item.id]?.likes || 0})
+                        </button>
+                        <button
+                          type="button"
+                          className="btn-reaction"
+                          onClick={() => handleReact(item.id, 'hearts')}
+                          style={{ border: '1px solid #E5E7EB', background: '#F9FAFB', borderRadius: '20px', padding: '0.2rem 0.55rem', fontSize: '0.8rem', cursor: 'pointer' }}
+                        >
+                          ❤️ Soutien ({reactions[item.id]?.hearts || 0})
+                        </button>
+                        <button
+                          type="button"
+                          className="btn-reaction"
+                          onClick={() => handleReact(item.id, 'claps')}
+                          style={{ border: '1px solid #E5E7EB', background: '#F9FAFB', borderRadius: '20px', padding: '0.2rem 0.55rem', fontSize: '0.8rem', cursor: 'pointer' }}
+                        >
+                          👏 Bravo ({reactions[item.id]?.claps || 0})
+                        </button>
+                        <span style={{ fontSize: '0.78rem', color: '#6B7280', marginLeft: 'auto' }}>
+                          💬 {(comments[item.id] || []).length} comm.
+                        </span>
+                      </div>
+
                       <div className="news-footer">
                         <span className="author">Auteur : {item.author}</span>
                         <button className="btn btn-outline-emerald btn-sm" onClick={() => setSelectedNews(item)}>
-                          Lire l'article →
+                          Lire l'article & réagir →
                         </button>
                       </div>
                     </div>
@@ -464,6 +535,85 @@ export const NewsEventsView: React.FC = () => {
 
             <div className="full-content-text">
               <p>{selectedNews.content[language] || selectedNews.content['fr']}</p>
+            </div>
+
+            {/* Reactions & Comments Section inside Detail Modal */}
+            <div className="news-comments-section margin-top-lg" style={{ borderTop: '1px solid #E5E7EB', paddingTop: '1.25rem' }}>
+              <h3 style={{ fontSize: '1.1rem', marginBottom: '0.75rem', color: 'var(--neutral-heading)' }}>
+                Réactions & Commentaires des Visiteurs ({(comments[selectedNews.id] || []).length})
+              </h3>
+
+              {/* Reaction Buttons */}
+              <div style={{ display: 'flex', gap: '0.75rem', marginBottom: '1.25rem' }}>
+                <button
+                  type="button"
+                  className="btn btn-secondary btn-sm"
+                  onClick={() => handleReact(selectedNews.id, 'likes')}
+                >
+                  👍 J'aime ({reactions[selectedNews.id]?.likes || 0})
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-secondary btn-sm"
+                  onClick={() => handleReact(selectedNews.id, 'hearts')}
+                >
+                  ❤️ Soutien ({reactions[selectedNews.id]?.hearts || 0})
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-secondary btn-sm"
+                  onClick={() => handleReact(selectedNews.id, 'claps')}
+                >
+                  👏 Bravo ({reactions[selectedNews.id]?.claps || 0})
+                </button>
+              </div>
+
+              {/* Add Comment Form */}
+              <form onSubmit={(e) => handleAddComment(e, selectedNews.id)} style={{ marginBottom: '1.5rem' }}>
+                <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.5rem' }}>
+                  <input
+                    type="text"
+                    placeholder="Votre Nom ou Prénom (optionnel)"
+                    value={commentAuthor}
+                    onChange={e => setCommentAuthor(e.target.value)}
+                    className="form-control"
+                    style={{ maxWidth: '250px' }}
+                  />
+                </div>
+                <div style={{ display: 'flex', gap: '0.5rem' }}>
+                  <textarea
+                    rows={2}
+                    required
+                    placeholder="Exprimez votre réaction, encouragement ou avis..."
+                    value={commentText}
+                    onChange={e => setCommentText(e.target.value)}
+                    className="form-control"
+                    style={{ flex: 1 }}
+                  />
+                  <button type="submit" className="btn btn-gold btn-sm" style={{ alignSelf: 'flex-end', padding: '0.6rem 1rem' }}>
+                    Poster
+                  </button>
+                </div>
+              </form>
+
+              {/* Comments List */}
+              <div className="comments-list">
+                {(comments[selectedNews.id] || []).length === 0 ? (
+                  <p style={{ color: '#9CA3AF', fontSize: '0.88rem', fontStyle: 'italic' }}>
+                    Soyez le premier à commenter cette publication !
+                  </p>
+                ) : (
+                  (comments[selectedNews.id] || []).map(comment => (
+                    <div key={comment.id} style={{ background: '#F9FAFB', padding: '0.75rem 1rem', borderRadius: '8px', marginBottom: '0.5rem', border: '1px solid #F3F4F6' }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.25rem' }}>
+                        <strong style={{ fontSize: '0.88rem', color: '#1F2937' }}>{comment.author}</strong>
+                        <span style={{ fontSize: '0.75rem', color: '#9CA3AF' }}>{comment.date}</span>
+                      </div>
+                      <p style={{ margin: 0, fontSize: '0.88rem', color: '#4B5563' }}>{comment.text}</p>
+                    </div>
+                  ))
+                )}
+              </div>
             </div>
           </div>
         </div>

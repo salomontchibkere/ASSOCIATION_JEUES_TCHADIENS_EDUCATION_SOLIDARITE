@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useData } from '../../context/DataContext';
 import { useAuth } from '../../context/AuthContext';
+import { initialUsers } from '../../data/mockData';
+import type { User } from '../../types';
 
 export const AdminDashboardView: React.FC = () => {
   const {
@@ -13,8 +15,20 @@ export const AdminDashboardView: React.FC = () => {
     addNewsArticle
   } = useData();
 
-  const { currentUser, isLoggedIn, isAdmin, login, loginAsAdmin, logout } = useAuth();
-  const [activeAdminTab, setActiveAdminTab] = useState<'overview' | 'content' | 'media' | 'donations'>('overview');
+  const { currentUser, isLoggedIn, isAdmin, login, logout } = useAuth();
+  const [activeAdminTab, setActiveAdminTab] = useState<'overview' | 'members' | 'content' | 'media' | 'donations'>('overview');
+  const [memberList, setMemberList] = useState<User[]>(initialUsers);
+  const [approvalMsg, setApprovalMsg] = useState<string | null>(null);
+
+  const pendingMembers = memberList.filter(u => u.membershipStatus === 'en_attente');
+  const approvedMembers = memberList.filter(u => u.membershipStatus === 'admis' || u.membershipStatus === 'actif');
+
+  const handleConfirmMember = (userId: string) => {
+    setMemberList(prev => prev.map(u => u.id === userId ? { ...u, membershipStatus: 'admis' } : u));
+    const targetUser = memberList.find(u => u.id === userId);
+    setApprovalMsg(`Adhésion de ${targetUser?.name || 'Membre'} confirmée par l'Administration ! Sa Carte d'Adhérent Officielle est désormais disponible au téléchargement.`);
+    setTimeout(() => setApprovalMsg(null), 5000);
+  };
 
   // Admin login form states
   const [adminEmail, setAdminEmail] = useState('');
@@ -181,6 +195,14 @@ export const AdminDashboardView: React.FC = () => {
                 <button
                   type="button"
                   className="btn btn-gold w-full"
+                  style={{ fontWeight: 700 }}
+                  onClick={() => login('salomontchibkere@gmail.com', 'super_admin')}
+                >
+                  Connexion Salomon (Technicien & Super Admin 100%)
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-secondary w-full"
                   onClick={() => login('marcallandedjim@gmail.com', 'super_admin')}
                 >
                   Connexion Marc Allan Dedjim (Super Admin)
@@ -205,14 +227,6 @@ export const AdminDashboardView: React.FC = () => {
                   onClick={() => login('boikoussiguen@gmail.com', 'admin')}
                 >
                   Connexion Boikoussigue (Chargé de Com)
-                </button>
-                <button
-                  type="button"
-                  className="btn btn-outline w-full"
-                  style={{ marginTop: '0.25rem' }}
-                  onClick={() => loginAsAdmin()}
-                >
-                  Connexion Salomon (Tech Lead & Super Admin)
                 </button>
               </div>
             </form>
@@ -282,7 +296,14 @@ export const AdminDashboardView: React.FC = () => {
             className={`admin-tab ${activeAdminTab === 'overview' ? 'active' : ''}`}
             onClick={() => setActiveAdminTab('overview')}
           >
-            Vue d'Ensemble & Stats
+            Vue d'Ensemble & Fréquentation
+          </button>
+          <button
+            className={`admin-tab ${activeAdminTab === 'members' ? 'active' : ''}`}
+            onClick={() => setActiveAdminTab('members')}
+            style={{ position: 'relative' }}
+          >
+            Demandes d'Adhésion {pendingMembers.length > 0 && <span className="badge-count-alert" style={{ background: '#DC2626', color: '#FFF', borderRadius: '50%', padding: '2px 7px', fontSize: '0.75rem', marginLeft: '6px' }}>{pendingMembers.length}</span>}
           </button>
           <button
             className={`admin-tab ${activeAdminTab === 'content' ? 'active' : ''}`}
@@ -307,32 +328,82 @@ export const AdminDashboardView: React.FC = () => {
         {/* OVERVIEW TAB */}
         {activeAdminTab === 'overview' && (
           <div className="admin-overview">
-            <div className="grid-4">
+            <div className="grid-3">
               <div className="admin-stat-card card">
                 <div className="stat-info">
-                  <span className="stat-val">{totalDonationsAmount.toLocaleString()} FCFA</span>
-                  <span className="stat-title">Total des Dons Reçus</span>
+                  <span className="stat-val">14</span>
+                  <span className="stat-title">Utilisateurs en Ligne (Direct)</span>
+                </div>
+              </div>
+
+              <div className="admin-stat-card card">
+                <div className="stat-info">
+                  <span className="stat-val">{pendingMembers.length}</span>
+                  <span className="stat-title">Demandes d'Adhésion à Valider</span>
+                </div>
+              </div>
+
+              <div className="admin-stat-card card">
+                <div className="stat-info">
+                  <span className="stat-val">{approvedMembers.length}</span>
+                  <span className="stat-title">Membres Officiels Validés</span>
                 </div>
               </div>
 
               <div className="admin-stat-card card">
                 <div className="stat-info">
                   <span className="stat-val">{projects.length}</span>
-                  <span className="stat-title">Projets Gérés</span>
+                  <span className="stat-title">Projets Associatifs Gérés</span>
                 </div>
               </div>
 
               <div className="admin-stat-card card">
                 <div className="stat-info">
                   <span className="stat-val">{media.length}</span>
-                  <span className="stat-title">Médias (Photos & Vidéos)</span>
+                  <span className="stat-title">Photos & Médias</span>
                 </div>
               </div>
 
               <div className="admin-stat-card card">
                 <div className="stat-info">
-                  <span className="stat-val">120+</span>
-                  <span className="stat-title">Membres Répertoriés</span>
+                  <span className="stat-val">{totalDonationsAmount.toLocaleString()} FCFA</span>
+                  <span className="stat-title">Total des Dons Reçus</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Live Online Visitor Statistics Widget */}
+            <div className="margin-top-lg card" style={{ background: '#F9FAFB', border: '1px solid #E5E7EB', borderRadius: '12px', padding: '1.5rem' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
+                <div>
+                  <h3 style={{ margin: 0, color: '#111827', fontSize: '1.15rem' }}>Supervision Réseau & Visiteurs du Site en Direct</h3>
+                  <p style={{ margin: '0.25rem 0 0 0', color: '#6B7280', fontSize: '0.9rem' }}>
+                    Informations de fréquence de consultation pour l'équipe d'administration et le technicien <strong>Salomon</strong>.
+                  </p>
+                </div>
+                <span className="status-pill active" style={{ background: '#D1FAE5', color: '#065F46', padding: '0.4rem 0.8rem', borderRadius: '20px', fontSize: '0.85rem', fontWeight: 600 }}>
+                  ● Système 100% Opérationnel
+                </span>
+              </div>
+
+              <div className="grid-3 margin-top-md" style={{ gap: '1rem' }}>
+                <div style={{ background: '#FFFFFF', padding: '1rem', borderRadius: '8px', border: '1px solid #E5E7EB' }}>
+                  <strong style={{ color: '#374151', fontSize: '0.9rem' }}>Sessions Actives en Ligne</strong>
+                  <p style={{ fontSize: '1.4rem', fontWeight: 700, color: '#007A3D', margin: '0.25rem 0' }}>14 Connectés</p>
+                  <span style={{ fontSize: '0.8rem', color: '#6B7280' }}>10 Visiteurs anonymes • 4 Membres identifiés</span>
+                </div>
+                <div style={{ background: '#FFFFFF', padding: '1rem', borderRadius: '8px', border: '1px solid #E5E7EB' }}>
+                  <strong style={{ color: '#374151', fontSize: '0.9rem' }}>Origine Géographique des Visites</strong>
+                  <p style={{ fontSize: '0.85rem', color: '#4B5563', margin: '0.5rem 0 0 0', lineHeight: '1.4' }}>
+                    N'Djamena (65%) • Nangassou (20%)<br />Moundou (10%) • International (5%)
+                  </p>
+                </div>
+                <div style={{ background: '#FFFFFF', padding: '1rem', borderRadius: '8px', border: '1px solid #E5E7EB' }}>
+                  <strong style={{ color: '#374151', fontSize: '0.9rem' }}>Accréditation Technicien (Salomon)</strong>
+                  <p style={{ fontSize: '0.85rem', color: '#1F2937', margin: '0.5rem 0 0 0' }}>
+                    Identifiant: <code>salomontchibkere@gmail.com</code><br />
+                    Privilège: <strong>Super Admin (Accès Total)</strong>
+                  </p>
                 </div>
               </div>
             </div>
@@ -364,6 +435,99 @@ export const AdminDashboardView: React.FC = () => {
                       </td>
                       <td>{d.projectTitle}</td>
                       <td>{d.date}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        )}
+
+        {/* MEMBERS MANAGEMENT & APPROVAL TAB */}
+        {activeAdminTab === 'members' && (
+          <div className="admin-members-manager">
+            {approvalMsg && (
+              <div className="card margin-bottom-md" style={{ background: '#ECFDF5', border: '1px solid #10B981', color: '#065F46', padding: '1rem 1.25rem', borderRadius: '10px', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                <strong style={{ fontSize: '0.95rem' }}>✓ {approvalMsg}</strong>
+              </div>
+            )}
+
+            <div className="card admin-table-card margin-bottom-lg">
+              <div className="flex-between align-center margin-bottom-md">
+                <div>
+                  <h3 style={{ margin: 0, color: '#92400E' }}>Demandes d'Adhésion en Attente de Confirmation ({pendingMembers.length})</h3>
+                  <p style={{ margin: '0.25rem 0 0 0', color: '#B45309', fontSize: '0.88rem' }}>
+                    Conformément aux règles de l'association, chaque candidat doit être confirmé par un administrateur avant de pouvoir télécharger sa carte d'adhérent.
+                  </p>
+                </div>
+              </div>
+
+              {pendingMembers.length === 0 ? (
+                <div className="text-center" style={{ padding: '2rem 1rem', color: '#6B7280', background: '#FFFBEB', borderRadius: '8px' }}>
+                  <p style={{ margin: 0 }}>Aucune nouvelle demande d'adhésion en attente pour le moment.</p>
+                </div>
+              ) : (
+                <table className="admin-table">
+                  <thead>
+                    <tr>
+                      <th>Candidat</th>
+                      <th>Email</th>
+                      <th>Profession / Ville</th>
+                      <th>Date de Demande</th>
+                      <th>Action de Confirmation</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {pendingMembers.map(user => (
+                      <tr key={user.id}>
+                        <td><strong>{user.name}</strong></td>
+                        <td>{user.email}</td>
+                        <td>{user.profession || 'Membre'} • {user.city || 'Tchad'}</td>
+                        <td>{user.dateJoined}</td>
+                        <td>
+                          <button
+                            className="btn btn-gold btn-sm"
+                            style={{ fontWeight: 600 }}
+                            onClick={() => handleConfirmMember(user.id)}
+                          >
+                            Confirmer & Valider l'Adhésion
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              )}
+            </div>
+
+            <div className="card admin-table-card">
+              <h3>Membres Officiels Admis & Bureau Exécutif ({approvedMembers.length})</h3>
+              <table className="admin-table">
+                <thead>
+                  <tr>
+                    <th>Membre</th>
+                    <th>Email</th>
+                    <th>Rôle Officiel</th>
+                    <th>Ville</th>
+                    <th>Statut Carte</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {approvedMembers.map(user => (
+                    <tr key={user.id}>
+                      <td><strong>{user.name}</strong></td>
+                      <td>{user.email}</td>
+                      <td>
+                        <span className={`status-pill ${user.role === 'super_admin' || user.role === 'admin' ? 'active' : ''}`}>
+                          {user.role === 'super_admin' ? 'Super Admin (Tech Lead)' : user.role === 'admin' ? 'Administrateur Bureau' : 'Membre Actif Admis'}
+                        </span>
+                      </td>
+                      <td>{user.city || 'N\'Djamena'}</td>
+                      <td>
+                        <span style={{ color: '#059669', fontWeight: 600, fontSize: '0.85rem' }}>
+                          ✓ Carte Générée & Validée
+                        </span>
+                      </td>
                     </tr>
                   ))}
                 </tbody>
