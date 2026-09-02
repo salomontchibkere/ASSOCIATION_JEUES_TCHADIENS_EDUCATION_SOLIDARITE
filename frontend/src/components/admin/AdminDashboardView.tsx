@@ -382,7 +382,7 @@ export const AdminDashboardView: React.FC = () => {
                   </p>
                 </div>
                 <span className="status-pill active" style={{ background: '#D1FAE5', color: '#065F46', padding: '0.4rem 0.8rem', borderRadius: '20px', fontSize: '0.85rem', fontWeight: 600 }}>
-                  ● Système 100% Opérationnel
+                  Système 100% Opérationnel
                 </span>
               </div>
 
@@ -448,7 +448,7 @@ export const AdminDashboardView: React.FC = () => {
           <div className="admin-members-manager">
             {approvalMsg && (
               <div className="card margin-bottom-md" style={{ background: '#ECFDF5', border: '1px solid #10B981', color: '#065F46', padding: '1rem 1.25rem', borderRadius: '10px', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                <strong style={{ fontSize: '0.95rem' }}>✓ {approvalMsg}</strong>
+                <strong style={{ fontSize: '0.95rem' }}>{approvalMsg}</strong>
               </div>
             )}
 
@@ -525,7 +525,7 @@ export const AdminDashboardView: React.FC = () => {
                       <td>{user.city || 'N\'Djamena'}</td>
                       <td>
                         <span style={{ color: '#059669', fontWeight: 600, fontSize: '0.85rem' }}>
-                          ✓ Carte Générée & Validée
+                          Carte Générée & Validée
                         </span>
                       </td>
                     </tr>

@@ -285,7 +285,7 @@ export const NewsEventsView: React.FC = () => {
                           onClick={() => handleReact(item.id, 'likes')}
                           style={{ border: '1px solid #E5E7EB', background: '#F9FAFB', borderRadius: '20px', padding: '0.2rem 0.55rem', fontSize: '0.8rem', cursor: 'pointer' }}
                         >
-                          👍 J'aime ({reactions[item.id]?.likes || 0})
+                          J'aime ({reactions[item.id]?.likes || 0})
                         </button>
                         <button
                           type="button"
@@ -293,7 +293,7 @@ export const NewsEventsView: React.FC = () => {
                           onClick={() => handleReact(item.id, 'hearts')}
                           style={{ border: '1px solid #E5E7EB', background: '#F9FAFB', borderRadius: '20px', padding: '0.2rem 0.55rem', fontSize: '0.8rem', cursor: 'pointer' }}
                         >
-                          ❤️ Soutien ({reactions[item.id]?.hearts || 0})
+                          Soutien ({reactions[item.id]?.hearts || 0})
                         </button>
                         <button
                           type="button"
@@ -301,10 +301,10 @@ export const NewsEventsView: React.FC = () => {
                           onClick={() => handleReact(item.id, 'claps')}
                           style={{ border: '1px solid #E5E7EB', background: '#F9FAFB', borderRadius: '20px', padding: '0.2rem 0.55rem', fontSize: '0.8rem', cursor: 'pointer' }}
                         >
-                          👏 Bravo ({reactions[item.id]?.claps || 0})
+                          Bravo ({reactions[item.id]?.claps || 0})
                         </button>
                         <span style={{ fontSize: '0.78rem', color: '#6B7280', marginLeft: 'auto' }}>
-                          💬 {(comments[item.id] || []).length} comm.
+                          Commentaires: {(comments[item.id] || []).length}
                         </span>
                       </div>
 
@@ -550,21 +550,21 @@ export const NewsEventsView: React.FC = () => {
                   className="btn btn-secondary btn-sm"
                   onClick={() => handleReact(selectedNews.id, 'likes')}
                 >
-                  👍 J'aime ({reactions[selectedNews.id]?.likes || 0})
+                  J'aime ({reactions[selectedNews.id]?.likes || 0})
                 </button>
                 <button
                   type="button"
                   className="btn btn-secondary btn-sm"
                   onClick={() => handleReact(selectedNews.id, 'hearts')}
                 >
-                  ❤️ Soutien ({reactions[selectedNews.id]?.hearts || 0})
+                  Soutien ({reactions[selectedNews.id]?.hearts || 0})
                 </button>
                 <button
                   type="button"
                   className="btn btn-secondary btn-sm"
                   onClick={() => handleReact(selectedNews.id, 'claps')}
                 >
-                  👏 Bravo ({reactions[selectedNews.id]?.claps || 0})
+                  Bravo ({reactions[selectedNews.id]?.claps || 0})
                 </button>
               </div>
 
