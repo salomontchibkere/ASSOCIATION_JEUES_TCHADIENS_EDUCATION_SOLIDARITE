@@ -34,7 +34,7 @@ export const AdminDashboardView: React.FC = () => {
   // Form states for Project Creation
   const [newProjTitle, setNewProjTitle] = useState('');
   const [newProjCategory, setNewProjCategory] = useState<'education' | 'solidarite' | 'environnement' | 'humanitaire'>('education');
-  const [newProjBudget, setNewProjBudget] = useState('5000000');
+  const [newProjBudget, setNewProjBudget] = useState('');
   const newProjLocation = 'Nangassou, Tchad';
 
   // Form states for Media Upload
@@ -53,17 +53,21 @@ export const AdminDashboardView: React.FC = () => {
 
     addNewsArticle({
       id: `news-${Date.now()}`,
-      title: { fr: adminNewsTitle, en: adminNewsTitle, ar: adminNewsTitle },
-      summary: { fr: adminNewsSummary || adminNewsContent.substring(0, 120) + '...', en: adminNewsSummary, ar: adminNewsSummary },
-      content: { fr: adminNewsContent, en: adminNewsContent, ar: adminNewsContent },
+      title: { fr: adminNewsTitle.trim(), en: adminNewsTitle.trim(), ar: adminNewsTitle.trim() },
+      summary: { 
+        fr: adminNewsSummary.trim() || adminNewsContent.substring(0, 120) + '...', 
+        en: adminNewsSummary.trim(), 
+        ar: adminNewsSummary.trim() 
+      },
+      content: { fr: adminNewsContent.trim(), en: adminNewsContent.trim(), ar: adminNewsContent.trim() },
       category: adminNewsType === 'communique' ? 'communique' : adminNewsCategory,
-      author: adminNewsAuthor || (currentUser?.name ? `${currentUser.name} (Admin)` : 'Bureau Exécutif AJTES'),
+      author: adminNewsAuthor.trim() || (currentUser?.name ? `${currentUser.name} (Admin)` : 'Bureau Exécutif AJTES'),
       publishDate: new Date().toISOString().split('T')[0],
-      imageUrl: adminNewsImageUrl || (adminNewsType === 'photo' ? './images/IMG-20260813-WA0125.jpg' : './images/IMG-20260813-WA0083.jpg'),
+      imageUrl: adminNewsImageUrl.trim() || './images/IMG-20260813-WA0083.jpg',
       featured: true,
       type: adminNewsType,
-      pdfUrl: adminNewsType === 'communique' ? (adminNewsPdfUrl || './documents/Fiche_Configuration_Acces_AJTES.pdf') : adminNewsPdfUrl || undefined,
-      pdfSize: adminNewsType === 'communique' ? '1.2 MB' : undefined
+      pdfUrl: adminNewsPdfUrl.trim() ? adminNewsPdfUrl.trim() : undefined,
+      pdfSize: adminNewsPdfUrl.trim() ? 'Document PDF' : undefined
     });
 
     setAdminNewsTitle('');

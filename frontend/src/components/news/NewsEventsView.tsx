@@ -7,7 +7,7 @@ import type { NewsArticle, Event } from '../../types';
 export const NewsEventsView: React.FC = () => {
   const { news, events, addNewsArticle } = useData();
   const { language } = useLanguage();
-  const { currentUser } = useAuth();
+  const { currentUser, isAdmin } = useAuth();
 
   const [activeTab, setActiveTab] = useState<'news' | 'events'>('news');
   const [newsFilter, setNewsFilter] = useState<'all' | 'article' | 'communique' | 'photo'>('all');
@@ -16,7 +16,7 @@ export const NewsEventsView: React.FC = () => {
   const [registerEvent, setRegisterEvent] = useState<Event | null>(null);
   const [registeredSuccess, setRegisteredSuccess] = useState(false);
 
-  // Publish Modal State
+  // Publish Modal State for Admins
   const [isPublishModalOpen, setIsPublishModalOpen] = useState(false);
   const [pubType, setPubType] = useState<'article' | 'communique' | 'photo'>('article');
   const [pubTitle, setPubTitle] = useState('');
@@ -27,6 +27,21 @@ export const NewsEventsView: React.FC = () => {
   const [pubPdfUrl, setPubPdfUrl] = useState('');
   const [pubAuthor, setPubAuthor] = useState('');
   const [pubSuccess, setPubSuccess] = useState(false);
+
+  const resetForm = () => {
+    setPubTitle('');
+    setPubSummary('');
+    setPubContent('');
+    setPubImageUrl('');
+    setPubPdfUrl('');
+    setPubAuthor('');
+    setPubType('article');
+  };
+
+  const handleOpenModal = () => {
+    resetForm();
+    setIsPublishModalOpen(true);
+  };
 
   const handleRSVP = (e: React.FormEvent) => {
     e.preventDefault();
@@ -40,37 +55,29 @@ export const NewsEventsView: React.FC = () => {
   const handlePublishSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!pubTitle.trim() || !pubContent.trim()) {
-      alert('Veuillez remplir le titre et le contenu principal.');
+      alert('Veuillez renseigner au moins le titre et le contenu principal.');
       return;
     }
 
-    const defaultImage = pubType === 'photo' 
-      ? (pubImageUrl || './images/IMG-20260813-WA0125.jpg')
-      : pubType === 'communique'
-      ? (pubImageUrl || './images/IMG-20260813-WA0123.jpg')
-      : (pubImageUrl || './images/IMG-20260813-WA0083.jpg');
-
-    const defaultPdf = pubType === 'communique' 
-      ? (pubPdfUrl || './documents/Fiche_Configuration_Acces_AJTES.pdf') 
-      : pubPdfUrl;
+    const defaultImg = pubImageUrl.trim() || './images/IMG-20260813-WA0083.jpg';
 
     const newArticle: NewsArticle = {
       id: `news-${Date.now()}`,
-      title: { fr: pubTitle, en: pubTitle, ar: pubTitle },
+      title: { fr: pubTitle.trim(), en: pubTitle.trim(), ar: pubTitle.trim() },
       summary: { 
-        fr: pubSummary || pubContent.substring(0, 140) + '...', 
-        en: pubSummary || pubContent.substring(0, 140) + '...', 
-        ar: pubSummary || pubContent.substring(0, 140) + '...' 
+        fr: pubSummary.trim() || pubContent.substring(0, 140) + '...', 
+        en: pubSummary.trim() || pubContent.substring(0, 140) + '...', 
+        ar: pubSummary.trim() || pubContent.substring(0, 140) + '...' 
       },
-      content: { fr: pubContent, en: pubContent, ar: pubContent },
+      content: { fr: pubContent.trim(), en: pubContent.trim(), ar: pubContent.trim() },
       category: pubType === 'communique' ? 'communique' : pubCategory,
-      author: pubAuthor || (currentUser?.name ? `${currentUser.name} (AJTES)` : 'Bureau Exécutif AJTES'),
+      author: pubAuthor.trim() || (currentUser?.name ? `${currentUser.name} (Bureau AJTES)` : 'Bureau Exécutif AJTES'),
       publishDate: new Date().toISOString().split('T')[0],
-      imageUrl: defaultImage,
+      imageUrl: defaultImg,
       featured: true,
       type: pubType,
-      pdfUrl: defaultPdf ? defaultPdf : undefined,
-      pdfSize: defaultPdf ? '1.2 MB' : undefined
+      pdfUrl: pubPdfUrl.trim() ? pubPdfUrl.trim() : undefined,
+      pdfSize: pubPdfUrl.trim() ? 'Document PDF Officiel' : undefined
     };
 
     addNewsArticle(newArticle);
@@ -79,14 +86,8 @@ export const NewsEventsView: React.FC = () => {
     setTimeout(() => {
       setPubSuccess(false);
       setIsPublishModalOpen(false);
-      // Reset form
-      setPubTitle('');
-      setPubSummary('');
-      setPubContent('');
-      setPubImageUrl('');
-      setPubPdfUrl('');
-      setPubAuthor('');
-    }, 1800);
+      resetForm();
+    }, 1500);
   };
 
   const filteredNews = news.filter(item => {
@@ -99,22 +100,26 @@ export const NewsEventsView: React.FC = () => {
 
   return (
     <div className="news-events-page">
+      {/* Public Header Banner */}
       <section className="page-banner">
         <div className="banner-container">
           <span className="section-badge">Vie Associative & Communication Officielle</span>
           <h1>Actualités, PDF & Communiqués AJTES</h1>
           <p>
-            Suivez la vie de l'association, téléchargez les communiqués officiels en PDF et publiez de nouveaux contenus.
+            Suivez les activités de l'association, consultez les réalisations et téléchargez les communiqués officiels en PDF.
           </p>
 
-          <div className="banner-actions">
-            <button
-              className="btn btn-gold btn-lg btn-publish-main"
-              onClick={() => setIsPublishModalOpen(true)}
-            >
-              Publier une Nouvelle (Article, PDF, Photo, Communiqué)
-            </button>
-          </div>
+          {/* Admin quick publish action button (Only visible to logged-in Admins) */}
+          {isAdmin && (
+            <div className="banner-actions margin-top">
+              <button
+                className="btn btn-gold btn-lg btn-publish-main"
+                onClick={handleOpenModal}
+              >
+                + Publier une Nouvelle (Admin)
+              </button>
+            </div>
+          )}
         </div>
       </section>
 
@@ -166,12 +171,15 @@ export const NewsEventsView: React.FC = () => {
                 Photos
               </button>
 
-              <button
-                className="btn btn-primary btn-sm btn-quick-new"
-                onClick={() => setIsPublishModalOpen(true)}
-              >
-                + Nouvelle
-              </button>
+              {/* Action reserved strictly for Admins */}
+              {isAdmin && (
+                <button
+                  className="btn btn-primary btn-sm btn-quick-new"
+                  onClick={handleOpenModal}
+                >
+                  + Nouvelle
+                </button>
+              )}
             </div>
 
             <div className="grid-2 margin-top-md">
@@ -262,7 +270,7 @@ export const NewsEventsView: React.FC = () => {
         )}
       </section>
 
-      {/* PUBLISH NEW ITEM MODAL (NOUVELLE PUBLICATION) */}
+      {/* PUBLISH NEW ITEM MODAL (ACCÈS RESTREINT ADMIN) */}
       {isPublishModalOpen && (
         <div className="modal-overlay" onClick={() => setIsPublishModalOpen(false)}>
           <div className="modal-content publish-modal-content" onClick={e => e.stopPropagation()}>
@@ -276,11 +284,11 @@ export const NewsEventsView: React.FC = () => {
             ) : (
               <form onSubmit={handlePublishSubmit} className="publish-form">
                 <div className="modal-header-box">
-                  <h2>Publier une Nouvelle</h2>
-                  <p>Ajoutez un nouvel article, un document PDF/communiqué ou un album photo.</p>
+                  <h2>Formulaire de Publication Officielle</h2>
+                  <p>Ajoutez un nouvel article de presse, un communiqué PDF officiel ou un album photo.</p>
                 </div>
 
-                {/* Select Type of Publication */}
+                {/* Type Selector */}
                 <div className="pub-type-selector">
                   <button
                     type="button"
@@ -310,7 +318,7 @@ export const NewsEventsView: React.FC = () => {
                   <input
                     type="text"
                     required
-                    placeholder="Ex: Communiqué relatif à la rentrée académique 2026-2027"
+                    placeholder="Saisissez le titre de l'article ou du communiqué..."
                     value={pubTitle}
                     onChange={e => setPubTitle(e.target.value)}
                     className="form-control"
@@ -347,11 +355,10 @@ export const NewsEventsView: React.FC = () => {
                 </div>
 
                 <div className="form-group">
-                  <label>Court Résumé (Introductif) *</label>
+                  <label>Court Résumé (Introductif)</label>
                   <input
                     type="text"
-                    required
-                    placeholder="Résumé concis de la publication"
+                    placeholder="Brève accroche synthétique (optionnelle)"
                     value={pubSummary}
                     onChange={e => setPubSummary(e.target.value)}
                     className="form-control"
@@ -363,7 +370,7 @@ export const NewsEventsView: React.FC = () => {
                   <textarea
                     required
                     rows={4}
-                    placeholder="Saisissez ici le texte intégral de l'article ou du communiqué..."
+                    placeholder="Saisissez ici le texte intégral..."
                     value={pubContent}
                     onChange={e => setPubContent(e.target.value)}
                     className="form-control"
@@ -371,10 +378,10 @@ export const NewsEventsView: React.FC = () => {
                 </div>
 
                 <div className="form-group">
-                  <label>URL de la photo / Illustration (Facultatif)</label>
+                  <label>URL de l'Illustration (Optionnelle)</label>
                   <input
                     type="text"
-                    placeholder="./images/IMG-20260813-WA0123.jpg ou URL d'image"
+                    placeholder="Ex: ./images/IMG-20260813-WA0123.jpg"
                     value={pubImageUrl}
                     onChange={e => setPubImageUrl(e.target.value)}
                     className="form-control"
@@ -383,16 +390,16 @@ export const NewsEventsView: React.FC = () => {
 
                 {pubType === 'communique' && (
                   <div className="form-group highlight-pdf-input">
-                    <label>URL du Document PDF (Communiqué officiel) *</label>
+                    <label>Lien du Document PDF Joint (Communiqué officiel)</label>
                     <input
                       type="text"
-                      placeholder="./documents/Fiche_Configuration_Acces_AJTES.pdf ou lien PDF"
+                      placeholder="Ex: ./documents/Communique_Officiel_Rentrée_2026.pdf"
                       value={pubPdfUrl}
                       onChange={e => setPubPdfUrl(e.target.value)}
                       className="form-control"
                     />
-                    <small style={{ color: 'var(--neutral-muted)', marginTop: '0.2rem' }}>
-                      Ce lien permettra aux visiteurs de télécharger directement le communiqué signé en PDF.
+                    <small style={{ color: 'var(--neutral-muted)', marginTop: '0.25rem', display: 'block' }}>
+                      Renseignez l'emplacement ou l'URL du fichier PDF téléchargeable.
                     </small>
                   </div>
                 )}
@@ -406,7 +413,7 @@ export const NewsEventsView: React.FC = () => {
                     Annuler
                   </button>
                   <button type="submit" className="btn btn-primary btn-lg flex-1">
-                    Valider & Publier la Nouvelle
+                    Valider & Publier
                   </button>
                 </div>
               </form>

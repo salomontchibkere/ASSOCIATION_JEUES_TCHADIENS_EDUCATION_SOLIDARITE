@@ -30,7 +30,7 @@ const isEmailConfigured = () => {
  * Send Welcome Email to a newly registered Member
  */
 export async function sendWelcomeEmail(toEmail: string, fullName: string): Promise<boolean> {
-  const subject = `🌿 Bienvenue à l'AJTES Tchad, ${fullName} !`;
+  const subject = `Bienvenue à l'AJTES Tchad, ${fullName} !`;
 
   const html = `
     <div style="font-family: 'Plus Jakarta Sans', Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #F8FAFC; padding: 20px; border-radius: 12px;">
@@ -49,7 +49,7 @@ export async function sendWelcomeEmail(toEmail: string, fullName: string): Promi
         </p>
 
         <div style="background-color: #E6F5ED; border-left: 4px solid #007A3D; padding: 15px; border-radius: 6px; margin: 20px 0;">
-          <h3 style="margin: 0 0 5px 0; color: #007A3D; font-size: 16px;">💳 Votre Carte Membre Digitale</h3>
+          <h3 style="margin: 0 0 5px 0; color: #007A3D; font-size: 16px;">Votre Carte Membre Digitale</h3>
           <p style="margin: 0; color: #1C2836; font-size: 14px;">
             Vous pouvez consulter et imprimer votre carte membre directement depuis votre espace personnel sur le site officiel.
           </p>
@@ -67,7 +67,7 @@ export async function sendWelcomeEmail(toEmail: string, fullName: string): Promi
   `;
 
   if (!isEmailConfigured()) {
-    console.log(`\n📧 [EMAIL SERVICE - DEV MODE] Email de Bienvenue simulé pour: ${toEmail} (${fullName})`);
+    console.log(`\n[EMAIL SERVICE - DEV MODE] Email de Bienvenue simulé pour: ${toEmail} (${fullName})`);
     return true;
   }
 
@@ -78,10 +78,10 @@ export async function sendWelcomeEmail(toEmail: string, fullName: string): Promi
       subject,
       html,
     });
-    console.log(`✅ [EMAIL SERVICE] Email de bienvenue transmis avec succès à: ${toEmail}`);
+    console.log(`[EMAIL SERVICE] Email de bienvenue transmis avec succès à: ${toEmail}`);
     return true;
   } catch (error: any) {
-    console.error(`❌ [EMAIL SERVICE ERROR] Échec de l'envoi de l'email de bienvenue: ${error.message}`);
+    console.error(`[EMAIL SERVICE ERROR] Échec de l'envoi de l'email de bienvenue: ${error.message}`);
     return false;
   }
 }
@@ -94,7 +94,7 @@ export async function sendLoginNotificationEmail(
   fullName: string,
   loginTime: string = new Date().toLocaleString('fr-FR')
 ): Promise<boolean> {
-  const subject = `🔐 Notification de Connexion — AJTES Tchad`;
+  const subject = `Notification de Connexion — AJTES Tchad`;
 
   const html = `
     <div style="font-family: 'Plus Jakarta Sans', Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #F8FAFC; padding: 20px; border-radius: 12px;">
@@ -110,9 +110,9 @@ export async function sendLoginNotificationEmail(
         </p>
 
         <div style="background-color: #F1F5F9; border-left: 4px solid #007A3D; padding: 15px; border-radius: 6px; margin: 20px 0; font-size: 14px;">
-          <p style="margin: 0 0 8px 0;"><strong>📧 Compte:</strong> ${toEmail}</p>
-          <p style="margin: 0 0 8px 0;"><strong>🕒 Date et Heure:</strong> ${loginTime}</p>
-          <p style="margin: 0;"><strong>✅ Statut:</strong> Authentification Réussie</p>
+          <p style="margin: 0 0 8px 0;"><strong>Compte:</strong> ${toEmail}</p>
+          <p style="margin: 0 0 8px 0;"><strong>Date et Heure:</strong> ${loginTime}</p>
+          <p style="margin: 0;"><strong>Statut:</strong> Authentification Réussie</p>
         </div>
 
         <p style="color: #718096; font-size: 13px;">
@@ -127,7 +127,7 @@ export async function sendLoginNotificationEmail(
   `;
 
   if (!isEmailConfigured()) {
-    console.log(`\n📧 [EMAIL SERVICE - DEV MODE] Notification de connexion simulée pour: ${toEmail} (${fullName}) à ${loginTime}`);
+    console.log(`\n[EMAIL SERVICE - DEV MODE] Notification de connexion simulée pour: ${toEmail} (${fullName}) à ${loginTime}`);
     return true;
   }
 
@@ -138,10 +138,10 @@ export async function sendLoginNotificationEmail(
       subject,
       html,
     });
-    console.log(`✅ [EMAIL SERVICE] Notification de connexion transmise avec succès à: ${toEmail}`);
+    console.log(`[EMAIL SERVICE] Notification de connexion transmise avec succès à: ${toEmail}`);
     return true;
   } catch (error: any) {
-    console.error(`❌ [EMAIL SERVICE ERROR] Échec de l'envoi de la notification de connexion: ${error.message}`);
+    console.error(`[EMAIL SERVICE ERROR] Échec de l'envoi de la notification de connexion: ${error.message}`);
     return false;
   }
 }
@@ -156,7 +156,7 @@ export async function sendDonationReceiptEmail(
   transactionRef: string,
   paymentMethod: string
 ): Promise<boolean> {
-  const subject = `🧾 Attestation & Reçu de Don AJTES (Ref: ${transactionRef})`;
+  const subject = `Attestation & Reçu de Don AJTES (Ref: ${transactionRef})`;
 
   const html = `
     <div style="font-family: 'Plus Jakarta Sans', Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #F8FAFC; padding: 20px; border-radius: 12px;">
@@ -186,13 +186,13 @@ export async function sendDonationReceiptEmail(
           </tr>
           <tr>
             <td style="padding: 10px 0; color: #718096;">Statut:</td>
-            <td style="padding: 10px 0; font-weight: bold; color: #007A3D; text-align: right;">✅ Confirmé & Validé</td>
+            <td style="padding: 10px 0; font-weight: bold; color: #007A3D; text-align: right;">Confirmé & Validé</td>
           </tr>
         </table>
 
         <div style="background-color: #FFF8EB; border: 1px solid #F5A623; padding: 15px; border-radius: 6px; margin-top: 15px;">
           <p style="margin: 0; color: #121A24; font-size: 13px;">
-            💡 Ce reçu fait foi de votre contribution directe au financement des kits scolaires et des infrastructures au Tchad.
+            Ce reçu fait foi de votre contribution directe au financement des kits scolaires et des infrastructures au Tchad.
           </p>
         </div>
       </div>
@@ -204,7 +204,7 @@ export async function sendDonationReceiptEmail(
   `;
 
   if (!isEmailConfigured()) {
-    console.log(`\n📧 [EMAIL SERVICE - DEV MODE] Reçu de don envoyé pour: ${toEmail} (${amount} FCFA, Ref: ${transactionRef})`);
+    console.log(`\n[EMAIL SERVICE - DEV MODE] Reçu de don envoyé pour: ${toEmail} (${amount} FCFA, Ref: ${transactionRef})`);
     return true;
   }
 
@@ -215,10 +215,10 @@ export async function sendDonationReceiptEmail(
       subject,
       html,
     });
-    console.log(`✅ [EMAIL SERVICE] Reçu de don transmis à: ${toEmail}`);
+    console.log(`[EMAIL SERVICE] Reçu de don transmis à: ${toEmail}`);
     return true;
   } catch (error: any) {
-    console.error(`❌ [EMAIL SERVICE ERROR] Échec d'envoi du reçu: ${error.message}`);
+    console.error(`[EMAIL SERVICE ERROR] Échec d'envoi du reçu: ${error.message}`);
     return false;
   }
 }
@@ -231,6 +231,9 @@ export async function sendContactAlertEmail(contactData: {
   email: string;
   phone?: string;
   subject: string;
+  message: string;
+}): Promise<boolean> {
+  const emailSubject = `NOUVEAU MESSAGE CITOYEN: ${contactData.subject}`;: string;
   message: string;
 }): Promise<boolean> {
   const emailSubject = `📩 NOUVEAU MESSAGE CITOYEN: ${contactData.subject}`;
