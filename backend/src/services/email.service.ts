@@ -233,10 +233,7 @@ export async function sendContactAlertEmail(contactData: {
   subject: string;
   message: string;
 }): Promise<boolean> {
-  const emailSubject = `NOUVEAU MESSAGE CITOYEN: ${contactData.subject}`;: string;
-  message: string;
-}): Promise<boolean> {
-  const emailSubject = `📩 NOUVEAU MESSAGE CITOYEN: ${contactData.subject}`;
+  const emailSubject = `NOUVEAU MESSAGE CITOYEN: ${contactData.subject}`;
 
   const html = `
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #F8FAFC;">
@@ -255,7 +252,7 @@ export async function sendContactAlertEmail(contactData: {
   `;
 
   if (!isEmailConfigured()) {
-    console.log(`\n📧 [EMAIL SERVICE - DEV MODE] Alerte de contact simulée pour le bureau (${ADMIN_EMAIL}) de la part de ${contactData.email}`);
+    console.log(`\n[EMAIL SERVICE - DEV MODE] Alerte de contact simulée pour le bureau (${ADMIN_EMAIL}) de la part de ${contactData.email}`);
     return true;
   }
 
@@ -266,10 +263,10 @@ export async function sendContactAlertEmail(contactData: {
       subject: emailSubject,
       html,
     });
-    console.log(`✅ [EMAIL SERVICE] Alerte de message de contact transmise au bureau (${ADMIN_EMAIL})`);
+    console.log(`[EMAIL SERVICE] Alerte de message de contact transmise au bureau (${ADMIN_EMAIL})`);
     return true;
   } catch (error: any) {
-    console.error(`❌ [EMAIL SERVICE ERROR] Échec de l'alerte contact: ${error.message}`);
+    console.error(`[EMAIL SERVICE ERROR] Échec de l'alerte contact: ${error.message}`);
     return false;
   }
 }
