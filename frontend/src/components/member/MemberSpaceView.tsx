@@ -188,32 +188,6 @@ export const MemberSpaceView: React.FC<MemberSpaceViewProps> = ({ initialMode = 
         ) : (
           /* LOGGED IN MEMBER DASHBOARD */
           <div className="dashboard-container">
-            {/* Login & Security Notification Notice */}
-            <div className="notification-toast-alert" style={{
-              backgroundColor: '#E6F4EA',
-              border: '1px solid #34A853',
-              borderRadius: '12px',
-              padding: '1rem 1.25rem',
-              marginBottom: '1.5rem',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              gap: '1rem',
-              boxShadow: '0 4px 12px rgba(52, 168, 83, 0.12)'
-            }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                <div>
-                  <strong style={{ color: '#0F5132', fontSize: '0.95rem', display: 'block' }}>
-                    Notification de Connexion Envoyée à {currentUser?.email}
-                  </strong>
-                  <span style={{ color: '#146C43', fontSize: '0.85rem' }}>
-                    Le service backend a généré une notification de sécurité pour cette session. 
-                    <em> (Note : En mode local, configurez SMTP_PASS dans le fichier backend/.env pour délivrer l'email dans la boîte de réception réelle).</em>
-                  </span>
-                </div>
-              </div>
-            </div>
-
             {/* Header Profile */}
             <div className="profile-header-card card">
               <div className="profile-info">
@@ -226,15 +200,14 @@ export const MemberSpaceView: React.FC<MemberSpaceViewProps> = ({ initialMode = 
                 </div>
                 <div className="profile-details">
                   <h2>{currentUser?.name}</h2>
-                  <p>Email: {currentUser?.email} • Tél: {currentUser?.phone || '+235 60 00 00 00'}</p>
+                  <p>Email: {currentUser?.email} • Tél: {currentUser?.phone || 'Non renseigné'}</p>
                   <p>Ville: {currentUser?.city || 'Tchad'} • Profession: {currentUser?.profession || 'Membre Engagé'}</p>
                 </div>
               </div>
               <div className="status-box">
-                <span className="status-pill active">
-                  Statut: {currentUser?.membershipStatus === 'actif' ? 'Membre Actif (Cotisation 2026)' : 'En Attente'}
+                <span className={`status-pill ${(isAdmin || currentUser?.membershipStatus === 'admis' || currentUser?.membershipStatus === 'actif') ? 'active' : 'pending'}`}>
+                  Statut: {(isAdmin || currentUser?.membershipStatus === 'admis' || currentUser?.membershipStatus === 'actif') ? 'Membre Admis (Validé)' : 'Adhésion en Attente de Confirmation'}
                 </span>
-                <span className="role-pill">Rôle: {currentUser?.role}</span>
                 {isAdmin && setCurrentTab && (
                   <button className="btn btn-gold btn-sm" onClick={() => setCurrentTab('admin')}>
                     Accéder à l'Admin
@@ -246,66 +219,72 @@ export const MemberSpaceView: React.FC<MemberSpaceViewProps> = ({ initialMode = 
               </div>
             </div>
 
-            {/* Digital Membership Card Preview */}
-            <div className="digital-card-section margin-top-lg">
-              <div className="flex-between align-center margin-bottom-sm">
-                <h3 className="section-subtitle-dark" style={{ margin: 0 }}>Carte d'Adhérent Officielle AJTES</h3>
-                <div className="card-actions-row" style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-                  <a
-                    href={`http://localhost:5000/api/members/${currentUser?.id || 'demo'}/card`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn btn-gold btn-sm"
-                    style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.3rem' }}
-                  >
-                    Télécharger Carte PDF (Officiel)
-                  </a>
-                  <button className="btn btn-secondary btn-sm" onClick={() => setShowQRModal(true)} title="Vérifier la carte">
-                    Scanner QR
-                  </button>
+            {/* Digital Membership Card Preview - Strictly ONLY if Approved by Admin */}
+            {(isAdmin || currentUser?.membershipStatus === 'admis' || currentUser?.membershipStatus === 'actif') ? (
+              <div className="digital-card-section margin-top-lg">
+                <div className="flex-between align-center margin-bottom-sm">
+                  <h3 className="section-subtitle-dark" style={{ margin: 0 }}>Carte d'Adhérent Officielle AJTES</h3>
+                  <div className="card-actions-row" style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                    <button className="btn btn-gold btn-sm" onClick={() => window.print()}>
+                      Imprimer ma Carte
+                    </button>
+                    <button className="btn btn-secondary btn-sm" onClick={() => setShowQRModal(true)} title="Vérifier la carte">
+                      Scanner QR
+                    </button>
+                  </div>
                 </div>
-              </div>
 
-              <div className="digital-member-card">
-                <div className="card-top">
-                  <div className="card-brand">
-                    <span className="brand-logo">AJTES</span>
-                    <div>
-                      <strong>AJTES TCHAD</strong>
-                      <span className="card-motto">Éducation & Solidarité</span>
+                <div className="digital-member-card">
+                  <div className="card-top">
+                    <div className="card-brand">
+                      <span className="brand-logo">AJTES</span>
+                      <div>
+                        <strong>AJTES TCHAD</strong>
+                        <span className="card-motto">Éducation & Solidarité</span>
+                      </div>
                     </div>
+                    <span className="card-year">2026</span>
                   </div>
-                  <span className="card-year">2026</span>
-                </div>
-                <div className="card-main">
-                  <div className="card-photo">
-                    {currentUser?.avatarUrl ? (
-                      <img src={currentUser.avatarUrl} alt={currentUser.name} className="card-avatar-img" />
-                    ) : (
-                      currentUser?.name.charAt(0)
-                    )}
-                  </div>
-                  <div className="card-info">
-                    <h4>{currentUser?.name}</h4>
-                    <p className="card-role">{currentUser?.role === 'admin' ? 'Administrateur du Bureau' : 'Membre Actif'}</p>
-                    <p className="card-id">ID: AJTES-2026-{(currentUser?.email.length || 7) * 142}</p>
-                    <p className="card-city">{currentUser?.city || 'N\'Djamena'}, Tchad</p>
-                  </div>
-                  <div className="card-qr" onClick={() => setShowQRModal(true)} title="Cliquez pour scanner et vérifier l'authenticité" style={{ cursor: 'pointer' }}>
-                    <span>CODE QR OFFICIEL</span>
-                    <div className="qr-box">
-                      <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <rect x="3" y="3" width="7" height="7" rx="1" fill="#000" />
-                        <rect x="14" y="3" width="7" height="7" rx="1" fill="#000" />
-                        <rect x="3" y="14" width="7" height="7" rx="1" fill="#000" />
-                        <rect x="14" y="14" width="4" height="4" fill="#000" />
-                        <rect x="18" y="18" width="3" height="3" fill="#000" />
-                      </svg>
+                  <div className="card-main">
+                    <div className="card-photo">
+                      {currentUser?.avatarUrl ? (
+                        <img src={currentUser.avatarUrl} alt={currentUser.name} className="card-avatar-img" />
+                      ) : (
+                        currentUser?.name.charAt(0)
+                      )}
+                    </div>
+                    <div className="card-info">
+                      <h4>{currentUser?.name}</h4>
+                      <p className="card-role">{currentUser?.role === 'admin' ? 'Administrateur du Bureau' : 'Membre Actif Admis'}</p>
+                      <p className="card-id">ID: AJTES-2026-{(currentUser?.email.length || 7) * 142}</p>
+                      <p className="card-city">{currentUser?.city || 'N\'Djamena'}, Tchad</p>
+                    </div>
+                    <div className="card-qr" onClick={() => setShowQRModal(true)} title="Cliquez pour scanner et vérifier l'authenticité" style={{ cursor: 'pointer' }}>
+                      <span>CODE QR OFFICIEL</span>
+                      <div className="qr-box">
+                        <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <rect x="3" y="3" width="7" height="7" rx="1" fill="#000" />
+                          <rect x="14" y="3" width="7" height="7" rx="1" fill="#000" />
+                          <rect x="3" y="14" width="7" height="7" rx="1" fill="#000" />
+                          <rect x="14" y="14" width="4" height="4" fill="#000" />
+                          <rect x="18" y="18" width="3" height="3" fill="#000" />
+                        </svg>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
+            ) : (
+              <div className="card text-center margin-top-lg" style={{ padding: '2.5rem 2rem', background: '#FFFBEB', border: '1px solid #FCD34D', borderRadius: '12px' }}>
+                <h3 style={{ color: '#92400E', fontSize: '1.2rem', marginBottom: '0.5rem' }}>
+                  Demande d'Adhésion en cours de Validation par l'Administration
+                </h3>
+                <p style={{ color: '#78350F', fontSize: '0.95rem', maxWidth: '650px', margin: '0 auto', lineHeight: '1.6' }}>
+                  Votre demande d'inscription a bien été transmise au Bureau Exécutif de l'AJTES. 
+                  Un administrateur doit confirmer et valider votre adhésion. Dès confirmation, votre <strong>Carte d'Adhérent Officielle</strong> sera automatiquement activée et téléchargeable depuis cet espace.
+                </p>
+              </div>
+            )}
 
             {/* QR Code Verification Modal */}
             {showQRModal && (
@@ -332,7 +311,7 @@ export const MemberSpaceView: React.FC<MemberSpaceViewProps> = ({ initialMode = 
 
                     <div className="verify-info-table">
                       <div className="v-row"><span>Nom & Prénom:</span> <strong>{currentUser?.name}</strong></div>
-                      <div className="v-row"><span>Rôle Officiel:</span> <strong>{currentUser?.role === 'admin' ? 'Administrateur' : 'Membre Actif'}</strong></div>
+                      <div className="v-row"><span>Rôle Officiel:</span> <strong>{currentUser?.role === 'admin' ? 'Administrateur' : 'Membre Actif Admis'}</strong></div>
                       <div className="v-row"><span>Matricule AJTES:</span> <strong>AJTES-2026-{(currentUser?.email.length || 7) * 142}</strong></div>
                       <div className="v-row"><span>Siège Social:</span> <strong>N'Djamena, République du Tchad</strong></div>
                       <div className="v-row"><span>Année d'Exercice:</span> <strong>2026 (Statut Actif)</strong></div>
@@ -359,7 +338,9 @@ export const MemberSpaceView: React.FC<MemberSpaceViewProps> = ({ initialMode = 
                 <div className="doc-links">
                   <a href="/#documents" className="doc-link">Consulter les Statuts de l'AJTES en ligne</a>
                   <a href="/#documents" className="doc-link">Consulter le Règlement Intérieur en ligne</a>
-                  <button onClick={() => window.print()} className="doc-link btn-link-reset">Imprimer ma Carte d'Adhérent</button>
+                  {(isAdmin || currentUser?.membershipStatus === 'admis' || currentUser?.membershipStatus === 'actif') && (
+                    <button onClick={() => window.print()} className="doc-link btn-link-reset">Imprimer ma Carte d'Adhérent</button>
+                  )}
                 </div>
               </div>
 

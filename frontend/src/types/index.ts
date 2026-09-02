@@ -14,7 +14,7 @@ export interface User {
   city?: string;
   avatarUrl?: string;
   memberType?: MemberType;
-  membershipStatus?: 'actif' | 'en_attente' | 'suspendu';
+  membershipStatus?: 'actif' | 'admis' | 'en_attente' | 'suspendu';
   dateJoined: string;
 }
 

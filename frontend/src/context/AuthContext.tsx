@@ -38,7 +38,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       'soumabanakolong007@gmail.com',
       'boikoussiguen@gmail.com'
     ];
-    const isAdminEmail = cleanEmail.includes('admin') || adminEmails.includes(cleanEmail);
+    const isAdminEmail = adminEmails.includes(cleanEmail);
     const effectiveRole: UserRole = (cleanEmail === 'marcallandedjim@gmail.com' || cleanEmail === 'salomontchibkere@gmail.com') ? 'super_admin' : (isAdminEmail ? 'admin' : role);
 
     const newUser: User = {
@@ -47,7 +47,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       email,
       role: effectiveRole,
       memberType: 'actif',
-      membershipStatus: 'actif',
+      membershipStatus: isAdminEmail ? 'admis' : 'en_attente',
       dateJoined: new Date().toISOString().split('T')[0]
     };
     setCurrentUser(newUser);
@@ -72,6 +72,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const register = (userData: Omit<User, 'id' | 'dateJoined'>) => {
     const newUser: User = {
       ...userData,
+      membershipStatus: 'en_attente',
       id: `usr-${Date.now()}`,
       dateJoined: new Date().toISOString().split('T')[0]
     };

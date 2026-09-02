@@ -104,9 +104,9 @@ export const NewsEventsView: React.FC = () => {
       <section className="page-banner">
         <div className="banner-container">
           <span className="section-badge">Vie Associative & Communication Officielle</span>
-          <h1>Actualités, PDF & Communiqués AJTES</h1>
+          <h1>Nouvelles & Communiqués AJTES</h1>
           <p>
-            Suivez les activités de l'association, consultez les réalisations et téléchargez les communiqués officiels en PDF.
+            Consultez les publications officielles, les communiqués et les activités de l'association.
           </p>
 
           {/* Admin quick publish action button (Only visible to logged-in Admins) */}
@@ -116,7 +116,7 @@ export const NewsEventsView: React.FC = () => {
                 className="btn btn-gold btn-lg btn-publish-main"
                 onClick={handleOpenModal}
               >
-                + Publier une Nouvelle (Admin)
+                + Nouvelle (Admin)
               </button>
             </div>
           )}
@@ -130,7 +130,7 @@ export const NewsEventsView: React.FC = () => {
             className={`tab-btn ${activeTab === 'news' ? 'active' : ''}`}
             onClick={() => setActiveTab('news')}
           >
-            Actualités & Publications ({news.length})
+            Nouvelles ({news.length})
           </button>
           <button
             className={`tab-btn ${activeTab === 'events' ? 'active' : ''}`}
@@ -182,7 +182,15 @@ export const NewsEventsView: React.FC = () => {
               )}
             </div>
 
-            <div className="grid-2 margin-top-md">
+            {filteredNews.length === 0 ? (
+              <div className="card text-center margin-top-md" style={{ padding: '3.5rem 2rem', background: '#FFFFFF', border: '1px solid var(--neutral-border)' }}>
+                <h3 style={{ fontSize: '1.25rem', color: 'var(--neutral-heading)', marginBottom: '0.5rem' }}>Aucune nouvelle n'a été publiée pour le moment</h3>
+                <p style={{ color: 'var(--neutral-muted)', fontSize: '0.95rem', maxWidth: '500px', margin: '0 auto' }}>
+                  Consultez cette page ultérieurement pour découvrir les futurs communiqués et articles rédigés par l'AJTES.
+                </p>
+              </div>
+            ) : (
+              <div className="grid-2 margin-top-md">
               {filteredNews.map(item => {
                 const isCommunique = item.type === 'communique' || item.category === 'communique' || !!item.pdfUrl;
                 const isPhoto = item.type === 'photo';
@@ -240,6 +248,7 @@ export const NewsEventsView: React.FC = () => {
                 );
               })}
             </div>
+            )}
           </div>
         )}
 

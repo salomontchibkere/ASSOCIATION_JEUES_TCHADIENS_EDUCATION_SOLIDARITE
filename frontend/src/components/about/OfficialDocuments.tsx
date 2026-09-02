@@ -94,9 +94,6 @@ export const OfficialDocuments: React.FC = () => {
               </div>
             ) : (
               <div className="doc-content-body">
-                <div className="doc-legal-note">
-                  <strong>Note Officielle :</strong> Conformément au Règlement Intérieur de l'AJTES (2022), tout membre est tenu d'en respecter l'intégralité des clauses.
-                </div>
                 <pre className="doc-text-formatting">
                   {selectedDoc.contentMarkdown[language] || selectedDoc.contentMarkdown['fr']}
                 </pre>

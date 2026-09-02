@@ -14,7 +14,7 @@ export const uiTranslations: Translations = {
   navHome: { fr: 'Accueil', en: 'Home', ar: 'الرئيسية' },
   navAbout: { fr: 'Qui sommes-nous ?', en: 'About Us', ar: 'من نحن' },
   navProjects: { fr: 'Nos Projets', en: 'Our Projects', ar: 'مشاريعنا' },
-  navNews: { fr: 'Actualités & Événements', en: 'News & Events', ar: 'الأخبار والفعاليات' },
+  navNews: { fr: 'Nouvelles', en: 'News', ar: 'الأخبار' },
   navGallery: { fr: 'Galerie', en: 'Gallery', ar: 'المعرض' },
   navCommittees: { fr: 'Comités & Partenaires', en: 'Committees & Partners', ar: 'اللجان والشركاء' },
   navDocuments: { fr: 'Documents Officiels', en: 'Official Documents', ar: 'الوثائق الرسمية' },
