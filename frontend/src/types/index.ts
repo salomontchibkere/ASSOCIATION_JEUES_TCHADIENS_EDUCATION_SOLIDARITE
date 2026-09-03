@@ -15,6 +15,9 @@ export interface User {
   avatarUrl?: string;
   memberType?: MemberType;
   membershipStatus?: 'actif' | 'admis' | 'en_attente' | 'suspendu';
+  feePaid?: boolean;
+  feeAmount?: number;
+  feeYear?: number;
   dateJoined: string;
 }
 

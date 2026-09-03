@@ -27,6 +27,95 @@ export const MemberSpaceView: React.FC<MemberSpaceViewProps> = ({ initialMode = 
   const [city, setCity] = useState('N\'Djamena');
   const [memberType, setMemberType] = useState<MemberType>('actif');
 
+  const downloadHDCard = () => {
+    if (!currentUser) return;
+    const canvas = document.createElement('canvas');
+    canvas.width = 750;
+    canvas.height = 450;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    // Background gradient
+    const gradient = ctx.createLinearGradient(0, 0, 750, 450);
+    gradient.addColorStop(0, '#064E3B');
+    gradient.addColorStop(1, '#022C22');
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, 750, 450);
+
+    // Gold Outer Border
+    ctx.strokeStyle = '#D97706';
+    ctx.lineWidth = 8;
+    ctx.strokeRect(14, 14, 722, 422);
+
+    // Inner White Border Line
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
+    ctx.lineWidth = 2;
+    ctx.strokeRect(24, 24, 702, 402);
+
+    // Header Background
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.08)';
+    ctx.fillRect(24, 24, 702, 80);
+
+    // Logo Text & Association Name
+    ctx.fillStyle = '#F59E0B';
+    ctx.font = 'bold 30px sans-serif';
+    ctx.fillText('AJTES TCHAD', 45, 65);
+
+    ctx.fillStyle = '#FFFFFF';
+    ctx.font = '14px sans-serif';
+    ctx.fillText('Association des Jeunes Tchadiens pour l\'Éducation et la Solidarité', 45, 90);
+
+    ctx.fillStyle = '#F59E0B';
+    ctx.font = 'bold 20px sans-serif';
+    ctx.fillText('2026', 660, 65);
+
+    // Member Information
+    ctx.fillStyle = '#FFFFFF';
+    ctx.font = 'bold 26px sans-serif';
+    ctx.fillText(currentUser.name, 45, 160);
+
+    ctx.fillStyle = '#F3F4F6';
+    ctx.font = '16px sans-serif';
+    ctx.fillText(`Rôle Officiel : ${currentUser.role === 'super_admin' ? 'Super Administrateur' : currentUser.role === 'admin' ? 'Administrateur Bureau' : 'Membre Actif Admis'}`, 45, 200);
+    ctx.fillText(`Matricule : AJTES-2026-${(currentUser.email.length || 7) * 142}`, 45, 235);
+    ctx.fillText(`E-mail : ${currentUser.email}`, 45, 270);
+    ctx.fillText(`Téléphone : ${currentUser.phone || '+235 -- -- -- --'}`, 45, 305);
+    ctx.fillText(`Ville / Siège : ${currentUser.city || 'N\'Djamena'}, Tchad`, 45, 340);
+    
+    // Fee status badge
+    ctx.fillStyle = currentUser.feePaid ? '#10B981' : '#F59E0B';
+    ctx.fillRect(45, 365, 260, 35);
+    ctx.fillStyle = '#FFFFFF';
+    ctx.font = 'bold 13px sans-serif';
+    ctx.fillText(currentUser.feePaid ? 'COTISATION 2026 : À JOUR' : 'STATUT : MEMBRE ACTIF VALIDÉ', 60, 388);
+
+    // Official Stamp / Seal
+    ctx.fillStyle = '#D97706';
+    ctx.beginPath();
+    ctx.arc(620, 220, 55, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.fillStyle = '#064E3B';
+    ctx.font = 'bold 13px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('AJTES TCHAD', 620, 212);
+    ctx.fillText('SCEAU OFFICIEL', 620, 228);
+    ctx.fillText('2026', 620, 244);
+    ctx.textAlign = 'left';
+
+    // QR Verification Box
+    ctx.fillStyle = '#FFFFFF';
+    ctx.fillRect(560, 310, 120, 100);
+    ctx.fillStyle = '#000000';
+    ctx.font = 'bold 10px monospace';
+    ctx.fillText('VERIFIED QR', 585, 365);
+
+    const link = document.createElement('a');
+    link.download = `Carte_Adherent_AJTES_${currentUser.name.replace(/\s+/g, '_')}.png`;
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  };
+
   const handleAuthSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (isLoginMode) {
@@ -225,7 +314,10 @@ export const MemberSpaceView: React.FC<MemberSpaceViewProps> = ({ initialMode = 
                 <div className="flex-between align-center margin-bottom-sm">
                   <h3 className="section-subtitle-dark" style={{ margin: 0 }}>Carte d'Adhérent Officielle AJTES</h3>
                   <div className="card-actions-row" style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-                    <button className="btn btn-gold btn-sm" onClick={() => window.print()}>
+                    <button className="btn btn-gold btn-sm" onClick={downloadHDCard} style={{ fontWeight: 700 }}>
+                      Télécharger Carte HD (PNG)
+                    </button>
+                    <button className="btn btn-primary btn-sm" onClick={() => window.print()}>
                       Imprimer ma Carte
                     </button>
                     <button className="btn btn-secondary btn-sm" onClick={() => setShowQRModal(true)} title="Vérifier la carte">

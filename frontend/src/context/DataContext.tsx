@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 import type { Project, NewsArticle, Event, Donation, MediaItem, OfficialDocument, Committee, Partner, ContactMessage, User } from '../types';
 import {
   initialProjects,
@@ -38,21 +38,39 @@ interface DataContextType {
   updateOfficialDocument: (doc: OfficialDocument) => void;
   confirmUser: (userId: string) => void;
   deleteUser: (userId: string) => void;
+  toggleUserFeeStatus: (userId: string, feePaid?: boolean, amount?: number) => void;
 }
 
 const DataContext = createContext<DataContextType | undefined>(undefined);
 
+const loadSaved = <T,>(key: string, fallback: T): T => {
+  try {
+    const item = localStorage.getItem(`ajtes_${key}`);
+    return item ? JSON.parse(item) : fallback;
+  } catch (e) {
+    return fallback;
+  }
+};
+
 export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [projects, setProjects] = useState<Project[]>(initialProjects);
-  const [news, setNews] = useState<NewsArticle[]>(initialNews);
-  const [events, setEvents] = useState<Event[]>(initialEvents);
-  const [media, setMedia] = useState<MediaItem[]>(initialMedia);
-  const [officialDocuments, setOfficialDocuments] = useState<OfficialDocument[]>(initialOfficialDocuments);
+  const [projects, setProjects] = useState<Project[]>(() => loadSaved('projects', initialProjects));
+  const [news, setNews] = useState<NewsArticle[]>(() => loadSaved('news', initialNews));
+  const [events, setEvents] = useState<Event[]>(() => loadSaved('events', initialEvents));
+  const [media, setMedia] = useState<MediaItem[]>(() => loadSaved('media', initialMedia));
+  const [officialDocuments, setOfficialDocuments] = useState<OfficialDocument[]>(() => loadSaved('officialDocuments', initialOfficialDocuments));
   const [committees] = useState<Committee[]>(initialCommittees);
   const [partners] = useState<Partner[]>(initialPartners);
-  const [donations, setDonations] = useState<Donation[]>(initialDonations);
-  const [contactMessages, setContactMessages] = useState<ContactMessage[]>([]);
-  const [users, setUsers] = useState<User[]>(initialUsers);
+  const [donations, setDonations] = useState<Donation[]>(() => loadSaved('donations', initialDonations));
+  const [contactMessages, setContactMessages] = useState<ContactMessage[]>(() => loadSaved('contactMessages', []));
+  const [users, setUsers] = useState<User[]>(() => loadSaved('users', initialUsers));
+
+  // Sync state to localStorage
+  useEffect(() => { localStorage.setItem('ajtes_projects', JSON.stringify(projects)); }, [projects]);
+  useEffect(() => { localStorage.setItem('ajtes_news', JSON.stringify(news)); }, [news]);
+  useEffect(() => { localStorage.setItem('ajtes_media', JSON.stringify(media)); }, [media]);
+  useEffect(() => { localStorage.setItem('ajtes_donations', JSON.stringify(donations)); }, [donations]);
+  useEffect(() => { localStorage.setItem('ajtes_contactMessages', JSON.stringify(contactMessages)); }, [contactMessages]);
+  useEffect(() => { localStorage.setItem('ajtes_users', JSON.stringify(users)); }, [users]);
 
   const confirmUser = (userId: string) => {
     setUsers(prev => prev.map(u => u.id === userId ? { ...u, membershipStatus: 'admis' } : u));
@@ -60,6 +78,21 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const deleteUser = (userId: string) => {
     setUsers(prev => prev.filter(u => u.id !== userId));
+  };
+
+  const toggleUserFeeStatus = (userId: string, feePaid?: boolean, amount: number = 5000) => {
+    setUsers(prev => prev.map(u => {
+      if (u.id === userId) {
+        const nextStatus = feePaid !== undefined ? feePaid : !u.feePaid;
+        return {
+          ...u,
+          feePaid: nextStatus,
+          feeAmount: amount,
+          feeYear: 2026
+        };
+      }
+      return u;
+    }));
   };
 
   const addDonation = (donationData: Omit<Donation, 'id' | 'date' | 'reference' | 'status'>): Donation => {
@@ -73,7 +106,6 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
     setDonations(prev => [newDonation, ...prev]);
 
-    // If donation targets a specific project, update raised budget
     if (donationData.projectId) {
       setProjects(prev =>
         prev.map(p => {
@@ -164,7 +196,8 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
         deleteContactMessage,
         updateOfficialDocument,
         confirmUser,
-        deleteUser
+        deleteUser,
+        toggleUserFeeStatus
       }}
     >
       {children}

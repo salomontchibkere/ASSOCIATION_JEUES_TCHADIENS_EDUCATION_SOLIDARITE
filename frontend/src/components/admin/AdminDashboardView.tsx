@@ -18,7 +18,8 @@ export const AdminDashboardView: React.FC = () => {
     deleteNewsArticle,
     deleteContactMessage,
     confirmUser,
-    deleteUser
+    deleteUser,
+    toggleUserFeeStatus
   } = useData();
 
   const { currentUser, isLoggedIn, isAdmin, login, logout } = useAuth();
@@ -573,6 +574,7 @@ export const AdminDashboardView: React.FC = () => {
                     <th>Email</th>
                     <th>Rôle Officiel</th>
                     <th>Ville</th>
+                    <th>Cotisation 2026 (5 000 FCFA)</th>
                     <th>Statut Carte</th>
                     <th>Actions Administration</th>
                   </tr>
@@ -588,6 +590,22 @@ export const AdminDashboardView: React.FC = () => {
                         </span>
                       </td>
                       <td>{user.city || 'N\'Djamena'}</td>
+                      <td>
+                        <button
+                          className={`btn btn-sm ${user.feePaid ? 'btn-primary' : 'btn-secondary'}`}
+                          style={{
+                            fontSize: '0.8rem',
+                            fontWeight: 700,
+                            background: user.feePaid ? '#D1FAE5' : '#FEF3C7',
+                            color: user.feePaid ? '#065F46' : '#B45309',
+                            border: user.feePaid ? '1px solid #10B981' : '1px solid #F59E0B'
+                          }}
+                          onClick={() => toggleUserFeeStatus(user.id)}
+                          title="Cliquer pour changer l'état de la cotisation annuelle"
+                        >
+                          {user.feePaid ? 'A Jour (5 000 FCFA)' : 'Non Reglee (En attente)'}
+                        </button>
+                      </td>
                       <td>
                         <span style={{ color: '#059669', fontWeight: 600, fontSize: '0.85rem' }}>
                           Carte Générée & Validée
