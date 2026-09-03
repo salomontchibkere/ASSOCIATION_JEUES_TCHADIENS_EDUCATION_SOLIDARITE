@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useData } from '../../context/DataContext';
+import { apiService } from '../../services/api';
+
 export const ContactView: React.FC = () => {
   const { addContactMessage } = useData();
 
@@ -11,8 +13,16 @@ export const ContactView: React.FC = () => {
   const [message, setMessage] = useState('');
   const [sentSuccess, setSentSuccess] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    const contactPayload = {
+      name,
+      email,
+      phone,
+      subject: subject ? `[${topic.toUpperCase()}] ${subject}` : `Demande via le site web (${topic})`,
+      message: `Catégorie: ${topic}\n\n${message}`
+    };
+
     addContactMessage({
       name,
       email,
@@ -21,13 +31,20 @@ export const ContactView: React.FC = () => {
       topic,
       message
     });
+
+    try {
+      await apiService.submitContact(contactPayload);
+    } catch (err) {
+      console.warn('[CONTACT API] Le backend n\'a pas pu enregistrer ou l\'API n\'est pas démarrée:', err);
+    }
+
     setSentSuccess(true);
     setName('');
     setEmail('');
     setPhone('');
     setSubject('');
     setMessage('');
-    setTimeout(() => setSentSuccess(false), 3500);
+    setTimeout(() => setSentSuccess(false), 4000);
   };
 
   return (

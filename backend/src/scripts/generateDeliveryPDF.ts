@@ -3,7 +3,7 @@ import fs from 'fs';
 import path from 'path';
 
 async function generateDeliveryPDF() {
-  console.log('📄 Génération du Rapport Complet de Réalisation & Livraison (PDF 6 Pages)...');
+  console.log('[PDF] Génération du Rapport Complet de Réalisation & Livraison (PDF 6 Pages)...');
 
   const doc = new PDFDocument({
     size: 'A4',
@@ -292,7 +292,7 @@ async function generateDeliveryPDF() {
 
   return new Promise((resolve) => {
     streamPublic.on('finish', () => {
-      console.log('✅ Rapport Complet de Livraison PDF généré en 6 PAGES STRICTES PARFAITES.');
+      console.log('[PDF] Rapport Complet de Livraison PDF généré en 6 PAGES STRICTES PARFAITES.');
       resolve(true);
     });
   });

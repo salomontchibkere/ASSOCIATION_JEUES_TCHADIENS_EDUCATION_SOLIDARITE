@@ -3,7 +3,7 @@ import fs from 'fs';
 import path from 'path';
 
 async function generateConfigPDF() {
-  console.log('📄 Génération de la Fiche Officielle de Configuration (1 Page Strict)...');
+  console.log('[PDF] Génération de la Fiche Officielle de Configuration (1 Page Strict)...');
 
   // Set margin to 0 and handle layout manually to guarantee 1 page
   const doc = new PDFDocument({
@@ -160,7 +160,7 @@ async function generateConfigPDF() {
 
   return new Promise((resolve) => {
     streamPublic.on('finish', () => {
-      console.log('✅ PDF de configuration généré en 1 PAGE STRICTE.');
+      console.log('[PDF] PDF de configuration généré en 1 PAGE STRICTE.');
       resolve(true);
     });
   });

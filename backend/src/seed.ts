@@ -4,11 +4,11 @@ import { cryptoUUID } from './utils/uuid.js';
 
 export async function seedInitialData() {
   if (db.users.length > 0) {
-    console.log('ℹ️ La base de données contient déjà des données.');
+    console.log('[SEED] La base de données contient déjà des données.');
     return;
   }
 
-  console.log('🌱 Démarrage de l\'initialisation des données AJTES...');
+  console.log('[SEED] Démarrage de l\'initialisation des données AJTES...');
 
   const now = new Date().toISOString();
 
@@ -136,5 +136,5 @@ export async function seedInitialData() {
   db.committees.push(...initialCommittees);
 
   db.saveDb();
-  console.log('🎉 Initialisation des données terminée avec succès !');
+  console.log('[SEED] Initialisation des données terminée avec succès !');
 }

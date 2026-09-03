@@ -7,8 +7,8 @@ async function startServer() {
   await seedInitialData();
 
   app.listen(PORT, () => {
-    console.log(`🚀 Serveur Backend AJTES démarré avec succès sur le port ${PORT}`);
-    console.log(`📡 URL API: http://localhost:${PORT}/api`);
+    console.log(`[SERVER] Serveur Backend AJTES démarré avec succès sur le port ${PORT}`);
+    console.log(`[SERVER] URL API: http://localhost:${PORT}/api`);
   });
 }
 
