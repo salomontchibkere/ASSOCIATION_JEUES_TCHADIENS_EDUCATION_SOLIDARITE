@@ -58,7 +58,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, navig
             </div>
           </div>
 
-          {/* Desktop Links with Grouped Dropdown Menus */}
+          {/* Desktop Links with Direct Access */}
           <nav className="desktop-links">
             <button
               className={`nav-link ${currentTab === 'home' ? 'active' : ''}`}
@@ -67,63 +67,41 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, navig
               {t('navHome')}
             </button>
 
-            {/* Dropdown 1: L'Association */}
-            <div className="nav-dropdown-wrapper">
-              <button
-                className={`nav-link dropdown-trigger ${['about', 'documents', 'committees'].includes(currentTab) ? 'active' : ''}`}
-              >
-                L'Association <span className="dropdown-arrow">▾</span>
-              </button>
-              <div className="dropdown-menu">
-                <button
-                  className={`dropdown-item ${currentTab === 'about' ? 'active' : ''}`}
-                  onClick={() => handleNavClick('about')}
-                >
-                  Qui sommes-nous ?
-                </button>
-                <button
-                  className={`dropdown-item ${currentTab === 'documents' ? 'active' : ''}`}
-                  onClick={() => handleNavClick('documents')}
-                >
-                  Statuts & Règlement Intérieur
-                </button>
-                <button
-                  className={`dropdown-item ${currentTab === 'committees' ? 'active' : ''}`}
-                  onClick={() => handleNavClick('committees')}
-                >
-                  Organes & Commissions
-                </button>
-              </div>
-            </div>
+            <button
+              className={`nav-link ${currentTab === 'about' ? 'active' : ''}`}
+              onClick={() => handleNavClick('about')}
+            >
+              {t('navAbout')}
+            </button>
 
-            {/* Dropdown 2: Projets & Médias */}
-            <div className="nav-dropdown-wrapper">
-              <button
-                className={`nav-link dropdown-trigger ${['projects', 'news', 'gallery'].includes(currentTab) ? 'active' : ''}`}
-              >
-                Projets & Médias <span className="dropdown-arrow">▾</span>
-              </button>
-              <div className="dropdown-menu">
-                <button
-                  className={`dropdown-item ${currentTab === 'projects' ? 'active' : ''}`}
-                  onClick={() => handleNavClick('projects')}
-                >
-                  Nos Projets & Réalisations
-                </button>
-                <button
-                  className={`dropdown-item ${currentTab === 'news' ? 'active' : ''}`}
-                  onClick={() => handleNavClick('news')}
-                >
-                  Actualités & Événements
-                </button>
-                <button
-                  className={`dropdown-item ${currentTab === 'gallery' ? 'active' : ''}`}
-                  onClick={() => handleNavClick('gallery')}
-                >
-                  Galerie Photos & Vidéos
-                </button>
-              </div>
-            </div>
+            <button
+              className={`nav-link ${currentTab === 'projects' ? 'active' : ''}`}
+              onClick={() => handleNavClick('projects')}
+            >
+              {t('navProjects')}
+            </button>
+
+            <button
+              className={`nav-link ${currentTab === 'news' ? 'active' : ''}`}
+              onClick={() => handleNavClick('news')}
+              style={{ fontWeight: 700 }}
+            >
+              Actualités & Nouvelles
+            </button>
+
+            <button
+              className={`nav-link ${currentTab === 'gallery' ? 'active' : ''}`}
+              onClick={() => handleNavClick('gallery')}
+            >
+              {t('navGallery')}
+            </button>
+
+            <button
+              className={`nav-link ${currentTab === 'documents' ? 'active' : ''}`}
+              onClick={() => handleNavClick('documents')}
+            >
+              Statuts & Règlement
+            </button>
 
             <button
               className={`nav-link ${currentTab === 'contact' ? 'active' : ''}`}
