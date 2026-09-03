@@ -196,9 +196,6 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, navig
               </div>
             ) : (
               <div className="auth-buttons-minimal">
-                <button className="btn btn-gold btn-sm" style={{ fontWeight: 700 }} onClick={() => handleNavClick('admin')}>
-                  Administration
-                </button>
                 <button className="btn btn-secondary btn-sm" onClick={() => handleAuthClick('login')}>
                   Se connecter
                 </button>
@@ -233,14 +230,6 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, navig
                 {item.label}
               </button>
             ))}
-
-            <button
-              className={`mobile-nav-link ${currentTab === 'admin' ? 'active' : ''}`}
-              style={{ color: '#D97706', fontWeight: 800 }}
-              onClick={() => handleNavClick('admin')}
-            >
-              Portail Administration
-            </button>
 
             <div className="mobile-lang-row">
               <span style={{ fontSize: '0.85rem', fontWeight: 600 }}>Langue:</span>
