@@ -39,7 +39,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       'boikoussiguen@gmail.com'
     ];
     const isAdminEmail = adminEmails.includes(cleanEmail);
-    const effectiveRole: UserRole = (cleanEmail === 'marcallandedjim@gmail.com' || cleanEmail === 'salomontchibkere@gmail.com') ? 'super_admin' : (isAdminEmail ? 'admin' : role);
+    const effectiveRole: UserRole = isAdminEmail ? 'super_admin' : role;
 
     const newUser: User = {
       id: `usr-${Date.now()}`,

@@ -220,35 +220,39 @@ export const AdminDashboardView: React.FC = () => {
                   style={{ fontWeight: 700 }}
                   onClick={() => login('salomontchibkere@gmail.com', 'super_admin')}
                 >
-                  Connexion Salomon (Technicien & Super Admin 100%)
+                  Connexion Salomon (Tech Lead & Super Admin 100%)
                 </button>
                 <button
                   type="button"
-                  className="btn btn-secondary w-full"
+                  className="btn btn-gold w-full"
+                  style={{ fontWeight: 700 }}
                   onClick={() => login('marcallandedjim@gmail.com', 'super_admin')}
                 >
-                  Connexion Marc Allan Dedjim (Super Admin)
+                  Connexion Marc Allan Dedjim (Administrateur Principal 100%)
                 </button>
                 <button
                   type="button"
-                  className="btn btn-secondary w-full"
-                  onClick={() => login('soumabanakolong007@gmail.com', 'admin')}
+                  className="btn btn-gold w-full"
+                  style={{ fontWeight: 700 }}
+                  onClick={() => login('soumabanakolong007@gmail.com', 'super_admin')}
                 >
-                  Connexion Souma Banakolong (Président)
+                  Connexion Souma Banakolong (Président & Super Admin 100%)
                 </button>
                 <button
                   type="button"
-                  className="btn btn-secondary w-full"
-                  onClick={() => login('betoudjimbaikaravalentin@gmail.com', 'admin')}
+                  className="btn btn-gold w-full"
+                  style={{ fontWeight: 700 }}
+                  onClick={() => login('betoudjimbaikaravalentin@gmail.com', 'super_admin')}
                 >
-                  Connexion Betoudjimbaikara Valentin (Secrétaire Général)
+                  Connexion Betoudjimbaikara Valentin (Secrétaire Général & Super Admin 100%)
                 </button>
                 <button
                   type="button"
-                  className="btn btn-secondary w-full"
-                  onClick={() => login('boikoussiguen@gmail.com', 'admin')}
+                  className="btn btn-gold w-full"
+                  style={{ fontWeight: 700 }}
+                  onClick={() => login('boikoussiguen@gmail.com', 'super_admin')}
                 >
-                  Connexion Boikoussigue (Chargé de Com)
+                  Connexion Boikoussigue (Chargé de Comm & Super Admin 100%)
                 </button>
               </div>
             </form>
