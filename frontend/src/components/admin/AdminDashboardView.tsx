@@ -23,7 +23,7 @@ export const AdminDashboardView: React.FC = () => {
   } = useData();
 
   const { currentUser, isLoggedIn, isAdmin, login, logout } = useAuth();
-  const [activeAdminTab, setActiveAdminTab] = useState<'overview' | 'members' | 'content' | 'media' | 'donations' | 'messages'>('overview');
+  const [activeAdminTab, setActiveAdminTab] = useState<'overview' | 'members' | 'content' | 'media' | 'donations' | 'messages'>('members');
   const [memberSearch, setMemberSearch] = useState('');
   const [approvalMsg, setApprovalMsg] = useState<string | null>(null);
 
@@ -310,7 +310,10 @@ export const AdminDashboardView: React.FC = () => {
           <div className="admin-badge">ESPACE ADMINISTRATION SÉCURISÉ</div>
           <h1>Tableau de Bord Administrateur</h1>
           <p>Gestionnaire technique & maintenance — Connecté en tant que <strong>{currentUser?.name}</strong> ({currentUser?.email})</p>
-          <div style={{ marginTop: '0.75rem' }}>
+          <div style={{ marginTop: '1rem', display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+            <button className="btn btn-gold btn-sm" onClick={() => setActiveAdminTab('members')} style={{ fontWeight: 800 }}>
+              Gestion des Membres ({approvedMembers.length + pendingMembers.length})
+            </button>
             <button className="btn btn-secondary btn-sm" onClick={logout}>Déconnexion Admin</button>
           </div>
         </div>
@@ -320,17 +323,17 @@ export const AdminDashboardView: React.FC = () => {
         {/* Admin Nav Tabs */}
         <div className="admin-tab-bar">
           <button
+            className={`admin-tab ${activeAdminTab === 'members' ? 'active' : ''}`}
+            onClick={() => setActiveAdminTab('members')}
+            style={{ position: 'relative', fontWeight: 800 }}
+          >
+            Gestion des Membres ({approvedMembers.length + pendingMembers.length}) {pendingMembers.length > 0 && <span className="badge-count-alert" style={{ background: '#DC2626', color: '#FFF', borderRadius: '50%', padding: '2px 7px', fontSize: '0.75rem', marginLeft: '6px' }}>{pendingMembers.length} à valider</span>}
+          </button>
+          <button
             className={`admin-tab ${activeAdminTab === 'overview' ? 'active' : ''}`}
             onClick={() => setActiveAdminTab('overview')}
           >
-            Vue d'Ensemble & Fréquentation
-          </button>
-          <button
-            className={`admin-tab ${activeAdminTab === 'members' ? 'active' : ''}`}
-            onClick={() => setActiveAdminTab('members')}
-            style={{ position: 'relative' }}
-          >
-            Gestion des Membres {pendingMembers.length > 0 && <span className="badge-count-alert" style={{ background: '#DC2626', color: '#FFF', borderRadius: '50%', padding: '2px 7px', fontSize: '0.75rem', marginLeft: '6px' }}>{pendingMembers.length}</span>}
+            Vue d'Ensemble & Stats
           </button>
           <button
             className={`admin-tab ${activeAdminTab === 'content' ? 'active' : ''}`}
