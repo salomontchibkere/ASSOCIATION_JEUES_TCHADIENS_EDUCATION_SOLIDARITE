@@ -239,7 +239,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, navig
               style={{ color: '#D97706', fontWeight: 800 }}
               onClick={() => handleNavClick('admin')}
             >
-              🔐 Portail Administration
+              Portail Administration
             </button>
 
             <div className="mobile-lang-row">

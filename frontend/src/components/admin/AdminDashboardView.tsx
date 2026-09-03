@@ -482,7 +482,7 @@ export const AdminDashboardView: React.FC = () => {
             {/* Search Box */}
             <div className="card margin-bottom-md" style={{ padding: '1rem 1.25rem', background: '#F8FAFC', border: '1px solid #E2E8F0' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
-                <strong style={{ fontSize: '0.9rem', color: '#1E293B', whiteSpace: 'nowrap' }}>🔍 Recherche rapide de membre :</strong>
+                <strong style={{ fontSize: '0.9rem', color: '#1E293B', whiteSpace: 'nowrap' }}>Recherche rapide de membre :</strong>
                 <input
                   type="text"
                   placeholder="Rechercher par nom, email, profession ou ville..."

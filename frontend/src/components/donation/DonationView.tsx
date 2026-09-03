@@ -139,7 +139,7 @@ export const DonationView: React.FC = () => {
                     <span>Numéro 2 : <strong>+235 68 90 23 47</strong></span>
                   </div>
                   <p className="airtel-desc">
-                    <strong>Procédure USSD :</strong> Composez <code>*150#</code> sur votre mobile ➔ Sélectionnez <em>"Envoi d'argent"</em> ➔ Saisissez l'un des numéros ci-dessus ➔ Entrez le montant et validez avec votre code secret.
+                    <strong>Procédure USSD :</strong> Composez <code>*150#</code> sur votre mobile -&gt; Sélectionnez <em>"Envoi d'argent"</em> -&gt; Saisissez l'un des numéros ci-dessus -&gt; Entrez le montant et validez avec votre code secret.
                   </p>
                 </div>
               )}
@@ -151,7 +151,7 @@ export const DonationView: React.FC = () => {
                     <span>Moov Money : <strong>+235 99 00 11 22</strong></span>
                   </div>
                   <p className="airtel-desc" style={{ color: '#075985' }}>
-                    <strong>Procédure USSD :</strong> Composez <code>*800#</code> ➔ Choisissez <em>"Transfert d'argent"</em> ➔ Entrez le numéro de l'association et le montant.
+                    <strong>Procédure USSD :</strong> Composez <code>*800#</code> -&gt; Choisissez <em>"Transfert d'argent"</em> -&gt; Entrez le numéro de l'association et le montant.
                   </p>
                 </div>
               )}
