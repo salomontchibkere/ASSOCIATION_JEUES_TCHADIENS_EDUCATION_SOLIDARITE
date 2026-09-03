@@ -482,6 +482,157 @@ export const AdminDashboardView: React.FC = () => {
                 </tbody>
               </table>
             </div>
+
+            {/* Direct Member Management Module on Overview Screen */}
+            <div className="margin-top-lg">
+              {approvalMsg && (
+                <div className="card margin-bottom-md" style={{ background: '#ECFDF5', border: '1px solid #10B981', color: '#065F46', padding: '1rem 1.25rem', borderRadius: '10px', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                  <strong style={{ fontSize: '0.95rem' }}>{approvalMsg}</strong>
+                </div>
+              )}
+
+              {/* Search Box */}
+              <div className="card margin-bottom-md" style={{ padding: '1rem 1.25rem', background: '#F8FAFC', border: '1px solid #E2E8F0' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
+                  <strong style={{ fontSize: '0.9rem', color: '#1E293B', whiteSpace: 'nowrap' }}>Recherche rapide de membre :</strong>
+                  <input
+                    type="text"
+                    placeholder="Rechercher par nom, email, profession ou ville..."
+                    value={memberSearch}
+                    onChange={e => setMemberSearch(e.target.value)}
+                    className="form-control"
+                    style={{ flex: 1, minWidth: '220px', padding: '0.5rem 0.85rem', fontSize: '0.9rem' }}
+                  />
+                  {memberSearch && (
+                    <button className="btn btn-secondary btn-sm" onClick={() => setMemberSearch('')}>
+                      Effacer
+                    </button>
+                  )}
+                </div>
+              </div>
+
+              {/* Pending Approvals Table */}
+              <div className="card admin-table-card margin-bottom-lg">
+                <div className="flex-between align-center margin-bottom-md">
+                  <div>
+                    <h3 style={{ margin: 0, color: '#92400E' }}>Demandes d'Adhésion en Attente de Confirmation ({pendingMembers.length})</h3>
+                    <p style={{ margin: '0.25rem 0 0 0', color: '#B45309', fontSize: '0.88rem' }}>
+                      Conformément aux règles de l'association, chaque candidat doit être confirmé par un administrateur avant de pouvoir télécharger sa carte d'adhérent.
+                    </p>
+                  </div>
+                </div>
+
+                {pendingMembers.length === 0 ? (
+                  <div className="text-center" style={{ padding: '2rem 1rem', color: '#6B7280', background: '#FFFBEB', borderRadius: '8px' }}>
+                    <p style={{ margin: 0 }}>Aucune nouvelle demande d'adhésion en attente pour le moment.</p>
+                  </div>
+                ) : (
+                  <table className="admin-table">
+                    <thead>
+                      <tr>
+                        <th>Candidat</th>
+                        <th>Email</th>
+                        <th>Profession / Ville</th>
+                        <th>Date de Demande</th>
+                        <th>Action de Confirmation</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {pendingMembers.map(user => (
+                        <tr key={user.id}>
+                          <td><strong>{user.name}</strong></td>
+                          <td>{user.email}</td>
+                          <td>{user.profession || 'Membre'} • {user.city || 'Tchad'}</td>
+                          <td>{user.dateJoined}</td>
+                          <td style={{ display: 'flex', gap: '0.5rem' }}>
+                            <button
+                              className="btn btn-gold btn-sm"
+                              style={{ fontWeight: 600 }}
+                              onClick={() => handleConfirmMember(user.id)}
+                            >
+                              Confirmer & Valider
+                            </button>
+                            <button
+                              className="btn btn-secondary btn-sm"
+                              style={{ background: '#FEE2E2', color: '#991B1B', border: '1px solid #FCA5A5', fontWeight: 600 }}
+                              onClick={() => handleDeleteMember(user.id)}
+                            >
+                              Refuser & Supprimer
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                )}
+              </div>
+
+              {/* Official Approved Members Table */}
+              <div className="card admin-table-card margin-bottom-lg">
+                <h3>Membres Officiels Admis & Bureau Exécutif ({approvedMembers.length})</h3>
+                <table className="admin-table">
+                  <thead>
+                    <tr>
+                      <th>Membre</th>
+                      <th>Email</th>
+                      <th>Rôle Officiel</th>
+                      <th>Ville</th>
+                      <th>Cotisation 2026 (5 000 FCFA)</th>
+                      <th>Statut Carte</th>
+                      <th>Actions Administration</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {approvedMembers.map(user => (
+                      <tr key={user.id}>
+                        <td><strong>{user.name}</strong></td>
+                        <td>{user.email}</td>
+                        <td>
+                          <span className={`status-pill ${user.role === 'super_admin' || user.role === 'admin' ? 'active' : ''}`}>
+                            {user.role === 'super_admin' ? 'Super Admin (Tech Lead)' : user.role === 'admin' ? 'Administrateur Bureau' : 'Membre Actif Admis'}
+                          </span>
+                        </td>
+                        <td>{user.city || 'N\'Djamena'}</td>
+                        <td>
+                          <button
+                            className={`btn btn-sm ${user.feePaid ? 'btn-primary' : 'btn-secondary'}`}
+                            style={{
+                              fontSize: '0.8rem',
+                              fontWeight: 700,
+                              background: user.feePaid ? '#D1FAE5' : '#FEF3C7',
+                              color: user.feePaid ? '#065F46' : '#B45309',
+                              border: user.feePaid ? '1px solid #10B981' : '1px solid #F59E0B'
+                            }}
+                            onClick={() => toggleUserFeeStatus(user.id)}
+                            title="Cliquer pour changer l'état de la cotisation annuelle"
+                          >
+                            {user.feePaid ? 'A Jour (5 000 FCFA)' : 'Non Reglee (En attente)'}
+                          </button>
+                        </td>
+                        <td>
+                          <span style={{ color: '#059669', fontWeight: 600, fontSize: '0.85rem' }}>
+                            Carte Générée & Validée
+                          </span>
+                        </td>
+                        <td>
+                          {user.role !== 'super_admin' ? (
+                            <button
+                              className="btn btn-secondary btn-sm"
+                              style={{ background: '#FEE2E2', color: '#991B1B', border: '1px solid #FCA5A5', fontWeight: 600 }}
+                              onClick={() => handleDeleteMember(user.id)}
+                            >
+                              Supprimer Membre
+                            </button>
+                          ) : (
+                            <span style={{ fontSize: '0.8rem', color: '#6B7280', fontStyle: 'italic' }}>Compte Inviolable</span>
+                          )}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
         )}
 
