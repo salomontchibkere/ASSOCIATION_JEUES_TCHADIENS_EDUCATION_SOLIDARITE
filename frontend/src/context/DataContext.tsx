@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState } from 'react';
-import type { Project, NewsArticle, Event, Donation, MediaItem, OfficialDocument, Committee, Partner, ContactMessage } from '../types';
+import type { Project, NewsArticle, Event, Donation, MediaItem, OfficialDocument, Committee, Partner, ContactMessage, User } from '../types';
 import {
   initialProjects,
   initialNews,
@@ -8,7 +8,8 @@ import {
   initialOfficialDocuments,
   initialCommittees,
   initialPartners,
-  initialDonations
+  initialDonations,
+  initialUsers
 } from '../data/mockData';
 
 interface DataContextType {
@@ -21,6 +22,7 @@ interface DataContextType {
   partners: Partner[];
   donations: Donation[];
   contactMessages: ContactMessage[];
+  users: User[];
 
   // Actions
   addDonation: (donationData: Omit<Donation, 'id' | 'date' | 'reference' | 'status'>) => Donation;
@@ -34,6 +36,8 @@ interface DataContextType {
   addContactMessage: (msg: Omit<ContactMessage, 'id' | 'date' | 'status'>) => void;
   deleteContactMessage: (id: string) => void;
   updateOfficialDocument: (doc: OfficialDocument) => void;
+  confirmUser: (userId: string) => void;
+  deleteUser: (userId: string) => void;
 }
 
 const DataContext = createContext<DataContextType | undefined>(undefined);
@@ -48,6 +52,15 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [partners] = useState<Partner[]>(initialPartners);
   const [donations, setDonations] = useState<Donation[]>(initialDonations);
   const [contactMessages, setContactMessages] = useState<ContactMessage[]>([]);
+  const [users, setUsers] = useState<User[]>(initialUsers);
+
+  const confirmUser = (userId: string) => {
+    setUsers(prev => prev.map(u => u.id === userId ? { ...u, membershipStatus: 'admis' } : u));
+  };
+
+  const deleteUser = (userId: string) => {
+    setUsers(prev => prev.filter(u => u.id !== userId));
+  };
 
   const addDonation = (donationData: Omit<Donation, 'id' | 'date' | 'reference' | 'status'>): Donation => {
     const newDonation: Donation = {
@@ -138,6 +151,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
         partners,
         donations,
         contactMessages,
+        users,
         addDonation,
         addProject,
         deleteProject,
@@ -148,7 +162,9 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
         deleteMediaItem,
         addContactMessage,
         deleteContactMessage,
-        updateOfficialDocument
+        updateOfficialDocument,
+        confirmUser,
+        deleteUser
       }}
     >
       {children}

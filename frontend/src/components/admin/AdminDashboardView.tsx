@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { useData } from '../../context/DataContext';
 import { useAuth } from '../../context/AuthContext';
-import { initialUsers } from '../../data/mockData';
-import type { User } from '../../types';
 
 export const AdminDashboardView: React.FC = () => {
   const {
@@ -11,35 +9,45 @@ export const AdminDashboardView: React.FC = () => {
     donations,
     news,
     contactMessages,
+    users,
     addProject,
     deleteProject,
     addMediaItem,
     deleteMediaItem,
     addNewsArticle,
     deleteNewsArticle,
-    deleteContactMessage
+    deleteContactMessage,
+    confirmUser,
+    deleteUser
   } = useData();
 
   const { currentUser, isLoggedIn, isAdmin, login, logout } = useAuth();
   const [activeAdminTab, setActiveAdminTab] = useState<'overview' | 'members' | 'content' | 'media' | 'donations' | 'messages'>('overview');
-  const [memberList, setMemberList] = useState<User[]>(initialUsers);
+  const [memberSearch, setMemberSearch] = useState('');
   const [approvalMsg, setApprovalMsg] = useState<string | null>(null);
 
-  const pendingMembers = memberList.filter(u => u.membershipStatus === 'en_attente');
-  const approvedMembers = memberList.filter(u => u.membershipStatus === 'admis' || u.membershipStatus === 'actif');
+  const filteredUsers = users.filter(u =>
+    u.name.toLowerCase().includes(memberSearch.toLowerCase()) ||
+    u.email.toLowerCase().includes(memberSearch.toLowerCase()) ||
+    (u.profession && u.profession.toLowerCase().includes(memberSearch.toLowerCase())) ||
+    (u.city && u.city.toLowerCase().includes(memberSearch.toLowerCase()))
+  );
+
+  const pendingMembers = filteredUsers.filter(u => u.membershipStatus === 'en_attente');
+  const approvedMembers = filteredUsers.filter(u => u.membershipStatus === 'admis' || u.membershipStatus === 'actif');
 
   const handleConfirmMember = (userId: string) => {
-    setMemberList(prev => prev.map(u => u.id === userId ? { ...u, membershipStatus: 'admis' } : u));
-    const targetUser = memberList.find(u => u.id === userId);
+    confirmUser(userId);
+    const targetUser = users.find(u => u.id === userId);
     setApprovalMsg(`Adhésion de ${targetUser?.name || 'Membre'} confirmée par l'Administration ! Sa Carte d'Adhérent Officielle est désormais disponible au téléchargement.`);
     setTimeout(() => setApprovalMsg(null), 5000);
   };
 
   const handleDeleteMember = (userId: string) => {
-    const targetUser = memberList.find(u => u.id === userId);
-    if (window.confirm(`Voulez-vous vraiment supprimer le membre "${targetUser?.name || userId}" ?`)) {
-      setMemberList(prev => prev.filter(u => u.id !== userId));
-      setApprovalMsg(`Le membre "${targetUser?.name || 'Membre'}" a été supprimé du registre de l'association.`);
+    const targetUser = users.find(u => u.id === userId);
+    if (window.confirm(`Voulez-vous vraiment supprimer définitivement le membre "${targetUser?.name || userId}" ?`)) {
+      deleteUser(userId);
+      setApprovalMsg(`Le membre "${targetUser?.name || 'Membre'}" a été définitivement supprimé de la base de données.`);
       setTimeout(() => setApprovalMsg(null), 5000);
     }
   };
@@ -471,6 +479,25 @@ export const AdminDashboardView: React.FC = () => {
                 <strong style={{ fontSize: '0.95rem' }}>{approvalMsg}</strong>
               </div>
             )}
+            {/* Search Box */}
+            <div className="card margin-bottom-md" style={{ padding: '1rem 1.25rem', background: '#F8FAFC', border: '1px solid #E2E8F0' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
+                <strong style={{ fontSize: '0.9rem', color: '#1E293B', whiteSpace: 'nowrap' }}>🔍 Recherche rapide de membre :</strong>
+                <input
+                  type="text"
+                  placeholder="Rechercher par nom, email, profession ou ville..."
+                  value={memberSearch}
+                  onChange={e => setMemberSearch(e.target.value)}
+                  className="form-control"
+                  style={{ flex: 1, minWidth: '220px', padding: '0.5rem 0.85rem', fontSize: '0.9rem' }}
+                />
+                {memberSearch && (
+                  <button className="btn btn-secondary btn-sm" onClick={() => setMemberSearch('')}>
+                    Effacer
+                  </button>
+                )}
+              </div>
+            </div>
 
             <div className="card admin-table-card margin-bottom-lg">
               <div className="flex-between align-center margin-bottom-md">

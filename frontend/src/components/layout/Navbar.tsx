@@ -11,7 +11,7 @@ interface NavbarProps {
 
 export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, navigateToAuth }) => {
   const { language, setLanguage, t } = useLanguage();
-  const { isLoggedIn, isAdmin, currentUser, logout } = useAuth();
+  const { isLoggedIn, currentUser, logout } = useAuth();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const WHATSAPP_GROUP_LINK = "https://chat.whatsapp.com/KH42DjDTNHA7oNHrbBlwGI";
@@ -175,15 +175,14 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, navig
             {isLoggedIn ? (
               <div className="user-control-group">
                 <span className="user-name" title={currentUser?.name}>{currentUser?.name}</span>
-                {isAdmin && (
-                  <button
-                    className="btn btn-admin btn-sm"
-                    onClick={() => handleNavClick('admin')}
-                    title="Accéder au Tableau de Bord Administration"
-                  >
-                    Admin
-                  </button>
-                )}
+                <button
+                  className="btn btn-gold btn-sm"
+                  style={{ fontWeight: 700 }}
+                  onClick={() => handleNavClick('admin')}
+                  title="Accéder au Tableau de Bord Administration"
+                >
+                  Administration
+                </button>
                 <button
                   className="btn btn-primary btn-sm"
                   onClick={() => handleNavClick('member')}
@@ -197,6 +196,9 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, navig
               </div>
             ) : (
               <div className="auth-buttons-minimal">
+                <button className="btn btn-gold btn-sm" style={{ fontWeight: 700 }} onClick={() => handleNavClick('admin')}>
+                  Administration
+                </button>
                 <button className="btn btn-secondary btn-sm" onClick={() => handleAuthClick('login')}>
                   Se connecter
                 </button>
@@ -231,6 +233,14 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, navig
                 {item.label}
               </button>
             ))}
+
+            <button
+              className={`mobile-nav-link ${currentTab === 'admin' ? 'active' : ''}`}
+              style={{ color: '#D97706', fontWeight: 800 }}
+              onClick={() => handleNavClick('admin')}
+            >
+              🔐 Portail Administration
+            </button>
 
             <div className="mobile-lang-row">
               <span style={{ fontSize: '0.85rem', fontWeight: 600 }}>Langue:</span>
@@ -274,9 +284,14 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, navig
                   </button>
                 </div>
               ) : (
-                <button className="btn btn-primary w-full" onClick={() => handleNavClick('member')}>
-                  Mon Espace Membre
-                </button>
+                <div className="flex-column gap-sm" style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
+                  <button className="btn btn-gold w-full" onClick={() => handleNavClick('admin')}>
+                    Portail Administration
+                  </button>
+                  <button className="btn btn-primary w-full" onClick={() => handleNavClick('member')}>
+                    Mon Espace Membre
+                  </button>
+                </div>
               )}
             </div>
           </div>
