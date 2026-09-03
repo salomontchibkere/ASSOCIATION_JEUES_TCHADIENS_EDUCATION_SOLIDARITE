@@ -364,17 +364,23 @@ export const AdminDashboardView: React.FC = () => {
                 </div>
               </div>
 
-              <div className="admin-stat-card card">
+              <div className="admin-stat-card card" style={{ cursor: 'pointer' }} onClick={() => setActiveAdminTab('members')}>
                 <div className="stat-info">
                   <span className="stat-val">{pendingMembers.length}</span>
                   <span className="stat-title">Demandes d'Adhésion à Valider</span>
+                  <button className="btn btn-gold btn-sm" style={{ marginTop: '0.5rem', width: '100%', fontSize: '0.8rem', fontWeight: 700 }}>
+                    Ouvrir Gestion des Membres
+                  </button>
                 </div>
               </div>
 
-              <div className="admin-stat-card card">
+              <div className="admin-stat-card card" style={{ cursor: 'pointer' }} onClick={() => setActiveAdminTab('members')}>
                 <div className="stat-info">
                   <span className="stat-val">{approvedMembers.length}</span>
                   <span className="stat-title">Membres Officiels Validés</span>
+                  <button className="btn btn-primary btn-sm" style={{ marginTop: '0.5rem', width: '100%', fontSize: '0.8rem', fontWeight: 700 }}>
+                    Voir & Supprimer les Membres
+                  </button>
                 </div>
               </div>
 
