@@ -176,14 +176,6 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, navig
               <div className="user-control-group">
                 <span className="user-name" title={currentUser?.name}>{currentUser?.name}</span>
                 <button
-                  className="btn btn-gold btn-sm"
-                  style={{ fontWeight: 700 }}
-                  onClick={() => handleNavClick('admin')}
-                  title="Accéder au Tableau de Bord Administration"
-                >
-                  Administration
-                </button>
-                <button
                   className="btn btn-primary btn-sm"
                   onClick={() => handleNavClick('member')}
                   title="Mon Espace Membre"
@@ -273,14 +265,9 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, navig
                   </button>
                 </div>
               ) : (
-                <div className="flex-column gap-sm" style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
-                  <button className="btn btn-gold w-full" onClick={() => handleNavClick('admin')}>
-                    Portail Administration
-                  </button>
-                  <button className="btn btn-primary w-full" onClick={() => handleNavClick('member')}>
-                    Mon Espace Membre
-                  </button>
-                </div>
+                <button className="btn btn-primary w-full" onClick={() => handleNavClick('member')}>
+                  Mon Espace Membre
+                </button>
               )}
             </div>
           </div>
