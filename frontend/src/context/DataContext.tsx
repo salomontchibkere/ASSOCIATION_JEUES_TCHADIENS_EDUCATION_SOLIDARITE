@@ -25,10 +25,14 @@ interface DataContextType {
   // Actions
   addDonation: (donationData: Omit<Donation, 'id' | 'date' | 'reference' | 'status'>) => Donation;
   addProject: (project: Project) => void;
+  deleteProject: (id: string) => void;
   addNewsArticle: (news: NewsArticle) => void;
+  deleteNewsArticle: (id: string) => void;
   addEvent: (event: Event) => void;
   addMediaItem: (media: MediaItem) => void;
+  deleteMediaItem: (id: string) => void;
   addContactMessage: (msg: Omit<ContactMessage, 'id' | 'date' | 'status'>) => void;
+  deleteContactMessage: (id: string) => void;
   updateOfficialDocument: (doc: OfficialDocument) => void;
 }
 
@@ -78,8 +82,16 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setProjects(prev => [project, ...prev]);
   };
 
+  const deleteProject = (id: string) => {
+    setProjects(prev => prev.filter(p => p.id !== id));
+  };
+
   const addNewsArticle = (newArticle: NewsArticle) => {
     setNews(prev => [newArticle, ...prev]);
+  };
+
+  const deleteNewsArticle = (id: string) => {
+    setNews(prev => prev.filter(n => n.id !== id));
   };
 
   const addEvent = (newEvent: Event) => {
@@ -90,6 +102,10 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setMedia(prev => [newMedia, ...prev]);
   };
 
+  const deleteMediaItem = (id: string) => {
+    setMedia(prev => prev.filter(m => m.id !== id));
+  };
+
   const addContactMessage = (msg: Omit<ContactMessage, 'id' | 'date' | 'status'>) => {
     const newMsg: ContactMessage = {
       ...msg,
@@ -98,6 +114,10 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
       status: 'nouveau'
     };
     setContactMessages(prev => [newMsg, ...prev]);
+  };
+
+  const deleteContactMessage = (id: string) => {
+    setContactMessages(prev => prev.filter(m => m.id !== id));
   };
 
   const updateOfficialDocument = (updatedDoc: OfficialDocument) => {
@@ -120,10 +140,14 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
         contactMessages,
         addDonation,
         addProject,
+        deleteProject,
         addNewsArticle,
+        deleteNewsArticle,
         addEvent,
         addMediaItem,
+        deleteMediaItem,
         addContactMessage,
+        deleteContactMessage,
         updateOfficialDocument
       }}
     >

@@ -10,13 +10,18 @@ export const AdminDashboardView: React.FC = () => {
     media,
     donations,
     news,
+    contactMessages,
     addProject,
+    deleteProject,
     addMediaItem,
-    addNewsArticle
+    deleteMediaItem,
+    addNewsArticle,
+    deleteNewsArticle,
+    deleteContactMessage
   } = useData();
 
   const { currentUser, isLoggedIn, isAdmin, login, logout } = useAuth();
-  const [activeAdminTab, setActiveAdminTab] = useState<'overview' | 'members' | 'content' | 'media' | 'donations'>('overview');
+  const [activeAdminTab, setActiveAdminTab] = useState<'overview' | 'members' | 'content' | 'media' | 'donations' | 'messages'>('overview');
   const [memberList, setMemberList] = useState<User[]>(initialUsers);
   const [approvalMsg, setApprovalMsg] = useState<string | null>(null);
 
@@ -28,6 +33,15 @@ export const AdminDashboardView: React.FC = () => {
     const targetUser = memberList.find(u => u.id === userId);
     setApprovalMsg(`Adhésion de ${targetUser?.name || 'Membre'} confirmée par l'Administration ! Sa Carte d'Adhérent Officielle est désormais disponible au téléchargement.`);
     setTimeout(() => setApprovalMsg(null), 5000);
+  };
+
+  const handleDeleteMember = (userId: string) => {
+    const targetUser = memberList.find(u => u.id === userId);
+    if (window.confirm(`Voulez-vous vraiment supprimer le membre "${targetUser?.name || userId}" ?`)) {
+      setMemberList(prev => prev.filter(u => u.id !== userId));
+      setApprovalMsg(`Le membre "${targetUser?.name || 'Membre'}" a été supprimé du registre de l'association.`);
+      setTimeout(() => setApprovalMsg(null), 5000);
+    }
   };
 
   // Admin login form states
@@ -303,7 +317,7 @@ export const AdminDashboardView: React.FC = () => {
             onClick={() => setActiveAdminTab('members')}
             style={{ position: 'relative' }}
           >
-            Demandes d'Adhésion {pendingMembers.length > 0 && <span className="badge-count-alert" style={{ background: '#DC2626', color: '#FFF', borderRadius: '50%', padding: '2px 7px', fontSize: '0.75rem', marginLeft: '6px' }}>{pendingMembers.length}</span>}
+            Gestion des Membres {pendingMembers.length > 0 && <span className="badge-count-alert" style={{ background: '#DC2626', color: '#FFF', borderRadius: '50%', padding: '2px 7px', fontSize: '0.75rem', marginLeft: '6px' }}>{pendingMembers.length}</span>}
           </button>
           <button
             className={`admin-tab ${activeAdminTab === 'content' ? 'active' : ''}`}
@@ -316,6 +330,12 @@ export const AdminDashboardView: React.FC = () => {
             onClick={() => setActiveAdminTab('media')}
           >
             Ajout Photos & Vidéos
+          </button>
+          <button
+            className={`admin-tab ${activeAdminTab === 'messages' ? 'active' : ''}`}
+            onClick={() => setActiveAdminTab('messages')}
+          >
+            Messages Réçus ({contactMessages.length})
           </button>
           <button
             className={`admin-tab ${activeAdminTab === 'donations' ? 'active' : ''}`}
@@ -484,13 +504,20 @@ export const AdminDashboardView: React.FC = () => {
                         <td>{user.email}</td>
                         <td>{user.profession || 'Membre'} • {user.city || 'Tchad'}</td>
                         <td>{user.dateJoined}</td>
-                        <td>
+                        <td style={{ display: 'flex', gap: '0.5rem' }}>
                           <button
                             className="btn btn-gold btn-sm"
                             style={{ fontWeight: 600 }}
                             onClick={() => handleConfirmMember(user.id)}
                           >
-                            Confirmer & Valider l'Adhésion
+                            Confirmer & Valider
+                          </button>
+                          <button
+                            className="btn btn-secondary btn-sm"
+                            style={{ background: '#FEE2E2', color: '#991B1B', border: '1px solid #FCA5A5', fontWeight: 600 }}
+                            onClick={() => handleDeleteMember(user.id)}
+                          >
+                            Refuser & Supprimer
                           </button>
                         </td>
                       </tr>
@@ -510,6 +537,7 @@ export const AdminDashboardView: React.FC = () => {
                     <th>Rôle Officiel</th>
                     <th>Ville</th>
                     <th>Statut Carte</th>
+                    <th>Actions Administration</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -527,6 +555,19 @@ export const AdminDashboardView: React.FC = () => {
                         <span style={{ color: '#059669', fontWeight: 600, fontSize: '0.85rem' }}>
                           Carte Générée & Validée
                         </span>
+                      </td>
+                      <td>
+                        {user.role !== 'super_admin' ? (
+                          <button
+                            className="btn btn-secondary btn-sm"
+                            style={{ background: '#FEE2E2', color: '#991B1B', border: '1px solid #FCA5A5', fontWeight: 600 }}
+                            onClick={() => handleDeleteMember(user.id)}
+                          >
+                            Supprimer Membre
+                          </button>
+                        ) : (
+                          <span style={{ fontSize: '0.8rem', color: '#6B7280', fontStyle: 'italic' }}>Compte Inviolable</span>
+                        )}
                       </td>
                     </tr>
                   ))}
@@ -605,6 +646,46 @@ export const AdminDashboardView: React.FC = () => {
                   Publier dans la Galerie Officielle
                 </button>
               </form>
+            </div>
+
+            <div className="card admin-table-card margin-top-lg">
+              <h3>Médias & Photos de la Galerie ({media.length})</h3>
+              <table className="admin-table">
+                <thead>
+                  <tr>
+                    <th>Titre</th>
+                    <th>Type</th>
+                    <th>Année</th>
+                    <th>Aperçu</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {media.map(m => (
+                    <tr key={m.id}>
+                      <td><strong>{typeof m.title === 'string' ? m.title : m.title.fr}</strong></td>
+                      <td><span className="status-pill active">{m.type === 'photo' ? 'Photo' : 'Vidéo'}</span></td>
+                      <td>{m.year}</td>
+                      <td>
+                        <img src={m.url} alt="media" style={{ width: '45px', height: '35px', objectFit: 'cover', borderRadius: '4px' }} />
+                      </td>
+                      <td>
+                        <button
+                          className="btn btn-secondary btn-sm"
+                          style={{ background: '#FEE2E2', color: '#991B1B', border: '1px solid #FCA5A5', fontWeight: 600 }}
+                          onClick={() => {
+                            if (window.confirm('Voulez-vous vraiment supprimer ce média de la galerie ?')) {
+                              deleteMediaItem(m.id);
+                            }
+                          }}
+                        >
+                          Supprimer Média
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           </div>
         )}
@@ -780,6 +861,143 @@ export const AdminDashboardView: React.FC = () => {
                 </button>
               </form>
             </div>
+
+            {/* List and Delete Existing Projects & News */}
+            <div className="card admin-table-card margin-top-lg" style={{ gridColumn: '1 / -1' }}>
+              <h3>Projets et Réalisations Associatives ({projects.length})</h3>
+              <table className="admin-table">
+                <thead>
+                  <tr>
+                    <th>Titre du Projet</th>
+                    <th>Catégorie</th>
+                    <th>Année</th>
+                    <th>Budget Cible</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {projects.map(p => (
+                    <tr key={p.id}>
+                      <td><strong>{typeof p.title === 'string' ? p.title : p.title.fr}</strong></td>
+                      <td>{p.category}</td>
+                      <td>{p.year || 2026}</td>
+                      <td>{(p.targetBudget || 0).toLocaleString()} FCFA</td>
+                      <td>
+                        <button
+                          className="btn btn-secondary btn-sm"
+                          style={{ background: '#FEE2E2', color: '#991B1B', border: '1px solid #FCA5A5', fontWeight: 600 }}
+                          onClick={() => {
+                            if (window.confirm('Voulez-vous vraiment supprimer ce projet ?')) {
+                              deleteProject(p.id);
+                            }
+                          }}
+                        >
+                          Supprimer Projet
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            <div className="card admin-table-card margin-top-lg" style={{ gridColumn: '1 / -1' }}>
+              <h3>Actualités et Communiqués Publiés ({news.length})</h3>
+              <table className="admin-table">
+                <thead>
+                  <tr>
+                    <th>Titre</th>
+                    <th>Catégorie</th>
+                    <th>Auteur</th>
+                    <th>Date</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {news.map(n => (
+                    <tr key={n.id}>
+                      <td><strong>{typeof n.title === 'string' ? n.title : n.title.fr}</strong></td>
+                      <td>{n.category}</td>
+                      <td>{n.author}</td>
+                      <td>{n.publishDate}</td>
+                      <td>
+                        <button
+                          className="btn btn-secondary btn-sm"
+                          style={{ background: '#FEE2E2', color: '#991B1B', border: '1px solid #FCA5A5', fontWeight: 600 }}
+                          onClick={() => {
+                            if (window.confirm('Voulez-vous vraiment supprimer cette actualité ?')) {
+                              deleteNewsArticle(n.id);
+                            }
+                          }}
+                        >
+                          Supprimer Actualité
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        )}
+
+        {/* MESSAGES TAB */}
+        {activeAdminTab === 'messages' && (
+          <div className="card admin-table-card">
+            <div className="table-header-row margin-bottom-md">
+              <div>
+                <h3 style={{ margin: 0 }}>Boîte de Réception — Messages de Contact ({contactMessages.length})</h3>
+                <p style={{ margin: '0.25rem 0 0 0', color: '#6B7280', fontSize: '0.9rem' }}>
+                  Tous les messages envoyés par les visiteurs via le formulaire de contact du site.
+                </p>
+              </div>
+            </div>
+
+            {contactMessages.length === 0 ? (
+              <div className="text-center" style={{ padding: '2.5rem 1rem', color: '#6B7280', background: '#F9FAFB', borderRadius: '8px' }}>
+                <p style={{ margin: 0, fontWeight: 600 }}>Aucun message reçu pour le moment.</p>
+              </div>
+            ) : (
+              <table className="admin-table">
+                <thead>
+                  <tr>
+                    <th>Expéditeur</th>
+                    <th>Email / Téléphone</th>
+                    <th>Sujet</th>
+                    <th>Message</th>
+                    <th>Date</th>
+                    <th>Actions Administration</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {contactMessages.map(msg => (
+                    <tr key={msg.id}>
+                      <td><strong>{msg.name}</strong></td>
+                      <td>
+                        {msg.email}<br />
+                        <span style={{ fontSize: '0.8rem', color: '#6B7280' }}>{msg.phone || 'Non renseigné'}</span>
+                      </td>
+                      <td><span className="status-pill active">{msg.subject}</span></td>
+                      <td style={{ maxWidth: '300px', whiteSpace: 'pre-wrap', fontSize: '0.85rem' }}>{msg.message}</td>
+                      <td>{msg.date}</td>
+                      <td>
+                        <button
+                          className="btn btn-secondary btn-sm"
+                          style={{ background: '#FEE2E2', color: '#991B1B', border: '1px solid #FCA5A5', fontWeight: 600 }}
+                          onClick={() => {
+                            if (window.confirm(`Supprimer le message de "${msg.name}" ?`)) {
+                              deleteContactMessage(msg.id);
+                            }
+                          }}
+                        >
+                          Supprimer Message
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
           </div>
         )}
 
