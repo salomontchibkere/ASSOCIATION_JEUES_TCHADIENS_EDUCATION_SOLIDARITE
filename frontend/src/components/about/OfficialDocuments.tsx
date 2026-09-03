@@ -8,7 +8,12 @@ export const OfficialDocuments: React.FC = () => {
   const { officialDocuments } = useData();
   const { language } = useLanguage();
   const { isAdmin } = useAuth();
-  const [selectedDoc, setSelectedDoc] = useState<OfficialDocument | null>(officialDocuments[0] || null);
+  // Strictly filter out any confidential documents from public view
+  const publicOfficialDocuments = officialDocuments.filter(
+    doc => doc.id === 'doc-statuts' || doc.id === 'doc-reglement'
+  );
+
+  const [selectedDoc, setSelectedDoc] = useState<OfficialDocument | null>(publicOfficialDocuments[0] || null);
   const [viewMode, setViewMode] = useState<'pdf' | 'text'>('text');
 
   return (
@@ -26,7 +31,7 @@ export const OfficialDocuments: React.FC = () => {
       <div className="documents-container">
         {/* Document Tabs / List */}
         <div className="docs-tabs">
-          {officialDocuments.map(doc => (
+          {publicOfficialDocuments.map(doc => (
             <button
               key={doc.id}
               className={`doc-tab-btn ${selectedDoc?.id === doc.id ? 'active' : ''}`}

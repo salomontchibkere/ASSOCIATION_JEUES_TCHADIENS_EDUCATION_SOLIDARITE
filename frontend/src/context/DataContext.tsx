@@ -57,7 +57,15 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [news, setNews] = useState<NewsArticle[]>(() => loadSaved('news', initialNews));
   const [events, setEvents] = useState<Event[]>(() => loadSaved('events', initialEvents));
   const [media, setMedia] = useState<MediaItem[]>(() => loadSaved('media', initialMedia));
-  const [officialDocuments, setOfficialDocuments] = useState<OfficialDocument[]>(() => loadSaved('officialDocuments', initialOfficialDocuments));
+  const [officialDocuments, setOfficialDocuments] = useState<OfficialDocument[]>(() => {
+    const loaded = loadSaved('officialDocuments', initialOfficialDocuments);
+    // Strictly filter out any confidential or non-public documents
+    const sanitized = loaded.filter(doc => doc.id === 'doc-statuts' || doc.id === 'doc-reglement');
+    try {
+      localStorage.setItem('ajtes_officialDocuments', JSON.stringify(sanitized));
+    } catch (e) {}
+    return sanitized;
+  });
   const [committees] = useState<Committee[]>(initialCommittees);
   const [partners] = useState<Partner[]>(initialPartners);
   const [donations, setDonations] = useState<Donation[]>(() => loadSaved('donations', initialDonations));
