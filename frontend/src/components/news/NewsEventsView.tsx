@@ -277,11 +277,23 @@ export const NewsEventsView: React.FC = () => {
             </div>
 
             {filteredNews.length === 0 ? (
-              <div className="card text-center margin-top-md" style={{ padding: '3.5rem 2rem', background: '#FFFFFF', border: '1px solid var(--neutral-border)' }}>
-                <h3 style={{ fontSize: '1.25rem', color: 'var(--neutral-heading)', marginBottom: '0.5rem' }}>Aucune nouvelle n'a été publiée pour le moment</h3>
-                <p style={{ color: 'var(--neutral-muted)', fontSize: '0.95rem', maxWidth: '500px', margin: '0 auto' }}>
-                  Consultez cette page ultérieurement pour découvrir les futurs communiqués et articles rédigés par l'AJTES.
+              <div className="card text-center margin-top-md" style={{ padding: '3.5rem 2rem', background: '#FFFFFF', border: '1px solid var(--neutral-border)', borderRadius: '12px', boxShadow: 'var(--shadow-sm)' }}>
+                <div style={{ fontSize: '3rem', marginBottom: '0.75rem' }}>📰</div>
+                <h3 style={{ fontSize: '1.25rem', color: 'var(--neutral-heading)', marginBottom: '0.5rem', fontWeight: 800 }}>
+                  Aucune nouvelle n'a été publiée pour le moment
+                </h3>
+                <p style={{ color: 'var(--neutral-muted)', fontSize: '0.95rem', maxWidth: '520px', margin: '0 auto', lineHeight: 1.5 }}>
+                  L'espace des Nouvelles est totalement vierge et prêt. Dès qu'un administrateur soumet un communiqué, une vidéo, un album photo ou un article, il sera immédiatement affiché ici pour les visiteurs !
                 </p>
+                {isAdmin && (
+                  <button
+                    className="btn btn-primary margin-top-md"
+                    onClick={handleOpenModal}
+                    style={{ fontWeight: 700, padding: '0.6rem 1.25rem' }}
+                  >
+                    + Publier la Première Actualité
+                  </button>
+                )}
               </div>
             ) : (
               <div className="grid-2 margin-top-md">

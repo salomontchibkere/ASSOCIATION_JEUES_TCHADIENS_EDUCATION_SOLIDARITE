@@ -2,7 +2,6 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 import type { Project, NewsArticle, Event, Donation, MediaItem, OfficialDocument, Committee, Partner, ContactMessage, User } from '../types';
 import {
   initialProjects,
-  initialNews,
   initialEvents,
   initialMedia,
   initialOfficialDocuments,
@@ -64,7 +63,10 @@ const loadSaved = <T,>(key: string, fallback: T): T => {
 
 export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [projects, setProjects] = useState<Project[]>(() => loadSaved('projects', initialProjects));
-  const [news, setNews] = useState<NewsArticle[]>(() => loadSaved('news', initialNews));
+  const [news, setNews] = useState<NewsArticle[]>(() => {
+    const saved = loadSaved<NewsArticle[]>('news', []);
+    return saved.filter(item => !['news-1', 'news-2', 'news-3'].includes(item.id));
+  });
   const [events, setEvents] = useState<Event[]>(() => loadSaved('events', initialEvents));
   const [media, setMedia] = useState<MediaItem[]>(() => loadSaved('media', initialMedia));
   const [officialDocuments, setOfficialDocuments] = useState<OfficialDocument[]>(() => {
