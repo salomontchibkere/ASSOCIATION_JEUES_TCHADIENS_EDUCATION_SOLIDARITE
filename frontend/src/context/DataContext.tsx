@@ -66,10 +66,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [projects, setProjects] = useState<Project[]>(() => loadSaved('projects', initialProjects));
   const [news, setNews] = useState<NewsArticle[]>(() => loadSaved('news', initialNews));
   const [events, setEvents] = useState<Event[]>(() => loadSaved('events', initialEvents));
-  const [media, setMedia] = useState<MediaItem[]>(() => {
-    const saved = loadSaved('media', initialMedia);
-    return saved.filter(m => m.type !== 'video');
-  });
+  const [media, setMedia] = useState<MediaItem[]>(() => loadSaved('media', initialMedia));
   const [officialDocuments, setOfficialDocuments] = useState<OfficialDocument[]>(() => {
     const loaded = loadSaved('officialDocuments', initialOfficialDocuments);
     const sanitized = loaded.filter(doc => doc.id === 'doc-statuts' || doc.id === 'doc-reglement');

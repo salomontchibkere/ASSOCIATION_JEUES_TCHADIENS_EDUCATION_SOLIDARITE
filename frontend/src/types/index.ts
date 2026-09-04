@@ -39,6 +39,9 @@ export interface Project {
   results?: Record<Language, string>;
   featured?: boolean;
   year?: number;
+  pdfUrl?: string;
+  videoUrl?: string;
+  linkUrl?: string;
 }
 
 export interface NewsArticle {
@@ -54,6 +57,8 @@ export interface NewsArticle {
   type?: 'article' | 'pdf' | 'photo' | 'communique';
   pdfUrl?: string;
   pdfSize?: string;
+  videoUrl?: string;
+  linkUrl?: string;
 }
 
 export interface Event {

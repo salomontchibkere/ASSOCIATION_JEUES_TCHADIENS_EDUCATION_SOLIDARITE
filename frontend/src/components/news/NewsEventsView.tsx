@@ -3,6 +3,7 @@ import { useData } from '../../context/DataContext';
 import { useLanguage } from '../../context/LanguageContext';
 import { useAuth } from '../../context/AuthContext';
 import type { NewsArticle, Event } from '../../types';
+import { FileUploadPicker } from '../common/FileUploadPicker';
 
 export const NewsEventsView: React.FC = () => {
   const { news, events, addNewsArticle } = useData();
@@ -111,6 +112,9 @@ export const NewsEventsView: React.FC = () => {
   const [pubContent, setPubContent] = useState('');
   const [pubImageUrl, setPubImageUrl] = useState('');
   const [pubPdfUrl, setPubPdfUrl] = useState('');
+  const [pubPdfSize, setPubPdfSize] = useState('Document PDF');
+  const [pubVideoUrl, setPubVideoUrl] = useState('');
+  const [pubLinkUrl, setPubLinkUrl] = useState('');
   const [pubAuthor, setPubAuthor] = useState('');
   const [pubSuccess, setPubSuccess] = useState(false);
 
@@ -120,6 +124,8 @@ export const NewsEventsView: React.FC = () => {
     setPubContent('');
     setPubImageUrl('');
     setPubPdfUrl('');
+    setPubVideoUrl('');
+    setPubLinkUrl('');
     setPubAuthor('');
     setPubType('article');
   };
@@ -163,7 +169,9 @@ export const NewsEventsView: React.FC = () => {
       featured: true,
       type: pubType,
       pdfUrl: pubPdfUrl.trim() ? pubPdfUrl.trim() : undefined,
-      pdfSize: pubPdfUrl.trim() ? 'Document PDF Officiel' : undefined
+      pdfSize: pubPdfUrl.trim() ? pubPdfSize : undefined,
+      videoUrl: pubVideoUrl.trim() ? pubVideoUrl.trim() : undefined,
+      linkUrl: pubLinkUrl.trim() ? pubLinkUrl.trim() : undefined,
     };
 
     addNewsArticle(newArticle);
@@ -319,6 +327,30 @@ export const NewsEventsView: React.FC = () => {
                             download
                           >
                             Télécharger PDF
+                          </a>
+                        </div>
+                      )}
+
+                      {item.videoUrl && (
+                        <div style={{ margin: '0.5rem 0', background: '#F8FAFC', padding: '0.5rem', borderRadius: '8px', border: '1px solid #E2E8F0' }}>
+                          <span style={{ fontSize: '0.78rem', fontWeight: 700, color: '#007A3D', display: 'block', marginBottom: '0.3rem' }}>🎥 Vidéo rattachée</span>
+                          {item.videoUrl.startsWith('data:video') || item.videoUrl.endsWith('.mp4') ? (
+                            <video src={item.videoUrl} controls style={{ width: '100%', maxHeight: '180px', borderRadius: '6px' }} />
+                          ) : (
+                            <iframe src={item.videoUrl} title="Vidéo" style={{ width: '100%', height: '180px', border: 'none', borderRadius: '6px' }} allowFullScreen />
+                          )}
+                        </div>
+                      )}
+
+                      {item.linkUrl && (
+                        <div style={{ marginTop: '0.4rem' }}>
+                          <a
+                            href={item.linkUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            style={{ fontSize: '0.82rem', fontWeight: 700, color: '#007A3D', display: 'inline-flex', alignItems: 'center', gap: '0.3rem', textDecoration: 'none' }}
+                          >
+                            🔗 Consulter le lien / Source Web ↗
                           </a>
                         </div>
                       )}
@@ -563,32 +595,48 @@ export const NewsEventsView: React.FC = () => {
                   />
                 </div>
 
+                <FileUploadPicker
+                  label="Photo / Image d'illustration"
+                  fileTypeHint="image"
+                  accept="image/*"
+                  value={pubImageUrl}
+                  onChange={(val) => setPubImageUrl(val)}
+                  helpText="Importer une photo depuis l'appareil ou coller une URL d'illustration."
+                />
+
+                <FileUploadPicker
+                  label="Document PDF Joint (Communiqué / Rapport)"
+                  fileTypeHint="pdf"
+                  accept="application/pdf"
+                  value={pubPdfUrl}
+                  onChange={(val, meta) => {
+                    setPubPdfUrl(val);
+                    if (meta?.fileSize) {
+                      setPubPdfSize(`PDF (${meta.fileSize})`);
+                    }
+                  }}
+                  helpText="Importer un document PDF officiel ou renseigner son URL."
+                />
+
+                <FileUploadPicker
+                  label="Fichier Vidéo ou Lien Youtube Rattaché"
+                  fileTypeHint="video"
+                  accept="video/*"
+                  value={pubVideoUrl}
+                  onChange={(val) => setPubVideoUrl(val)}
+                  helpText="Importer un fichier vidéo (.mp4) ou coller un lien Youtube."
+                />
+
                 <div className="form-group">
-                  <label>URL de l'Illustration (Optionnelle)</label>
+                  <label>Lien Web / Source Externe (URL)</label>
                   <input
-                    type="text"
-                    placeholder="Ex: ./images/IMG-20260813-WA0123.jpg"
-                    value={pubImageUrl}
-                    onChange={e => setPubImageUrl(e.target.value)}
+                    type="url"
+                    placeholder="Ex: https://ajtes.org/source-article"
+                    value={pubLinkUrl}
+                    onChange={e => setPubLinkUrl(e.target.value)}
                     className="form-control"
                   />
                 </div>
-
-                {pubType === 'communique' && (
-                  <div className="form-group highlight-pdf-input">
-                    <label>Lien du Document PDF Joint (Communiqué officiel)</label>
-                    <input
-                      type="text"
-                      placeholder="Ex: https://exemple.org/communique.pdf"
-                      value={pubPdfUrl}
-                      onChange={e => setPubPdfUrl(e.target.value)}
-                      className="form-control"
-                    />
-                    <small style={{ color: 'var(--neutral-muted)', marginTop: '0.25rem', display: 'block' }}>
-                      Renseignez l'emplacement ou l'URL du fichier PDF téléchargeable.
-                    </small>
-                  </div>
-                )}
 
                 <div className="modal-actions-row margin-top">
                   <button
@@ -635,6 +683,31 @@ export const NewsEventsView: React.FC = () => {
                   download
                 >
                   Télécharger le PDF Officiel
+                </a>
+              </div>
+            )}
+
+            {selectedNews.videoUrl && (
+              <div style={{ marginBottom: '1.25rem', background: '#F8FAFC', padding: '1rem', borderRadius: '10px', border: '1px solid #E2E8F0' }}>
+                <h4 style={{ fontSize: '0.9rem', color: '#007A3D', marginBottom: '0.5rem' }}>🎥 Vidéo rattachée à cette publication</h4>
+                {selectedNews.videoUrl.startsWith('data:video') || selectedNews.videoUrl.endsWith('.mp4') ? (
+                  <video src={selectedNews.videoUrl} controls style={{ width: '100%', maxHeight: '380px', borderRadius: '8px', background: '#000' }} />
+                ) : (
+                  <iframe src={selectedNews.videoUrl} title="Vidéo" style={{ width: '100%', height: '320px', border: 'none', borderRadius: '8px' }} allowFullScreen />
+                )}
+              </div>
+            )}
+
+            {selectedNews.linkUrl && (
+              <div style={{ marginBottom: '1rem' }}>
+                <a
+                  href={selectedNews.linkUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-secondary btn-sm"
+                  style={{ background: '#ECFDF5', color: '#047857', border: '1px solid #A7F3D0', fontWeight: 700 }}
+                >
+                  🔗 Consulter le lien / Source Web externe ↗
                 </a>
               </div>
             )}

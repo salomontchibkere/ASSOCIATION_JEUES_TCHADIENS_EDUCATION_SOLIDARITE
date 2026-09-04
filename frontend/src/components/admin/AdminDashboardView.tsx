@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useData } from '../../context/DataContext';
 import { useAuth } from '../../context/AuthContext';
+import { FileUploadPicker } from '../common/FileUploadPicker';
 
 export const AdminDashboardView: React.FC = () => {
   const {
@@ -65,6 +66,9 @@ export const AdminDashboardView: React.FC = () => {
   const [adminNewsContent, setAdminNewsContent] = useState('');
   const [adminNewsImageUrl, setAdminNewsImageUrl] = useState('');
   const [adminNewsPdfUrl, setAdminNewsPdfUrl] = useState('');
+  const [adminNewsPdfSize, setAdminNewsPdfSize] = useState('Document PDF');
+  const [adminNewsVideoUrl, setAdminNewsVideoUrl] = useState('');
+  const [adminNewsLinkUrl, setAdminNewsLinkUrl] = useState('');
   const [adminNewsAuthor, setAdminNewsAuthor] = useState('');
   const [adminNewsSuccessMsg, setAdminNewsSuccessMsg] = useState(false);
 
@@ -72,6 +76,8 @@ export const AdminDashboardView: React.FC = () => {
   const [newProjTitle, setNewProjTitle] = useState('');
   const [newProjCategory, setNewProjCategory] = useState<'education' | 'solidarite' | 'environnement' | 'humanitaire'>('education');
   const [newProjBudget, setNewProjBudget] = useState('');
+  const [newProjImageUrl, setNewProjImageUrl] = useState('');
+  const [newProjPdfUrl, setNewProjPdfUrl] = useState('');
   const newProjLocation = 'Tchad';
 
   // Form states for Media Upload
@@ -104,7 +110,9 @@ export const AdminDashboardView: React.FC = () => {
       featured: true,
       type: adminNewsType,
       pdfUrl: adminNewsPdfUrl.trim() ? adminNewsPdfUrl.trim() : undefined,
-      pdfSize: adminNewsPdfUrl.trim() ? 'Document PDF' : undefined
+      pdfSize: adminNewsPdfUrl.trim() ? adminNewsPdfSize : undefined,
+      videoUrl: adminNewsVideoUrl.trim() ? adminNewsVideoUrl.trim() : undefined,
+      linkUrl: adminNewsLinkUrl.trim() ? adminNewsLinkUrl.trim() : undefined,
     });
 
     setAdminNewsTitle('');
@@ -112,6 +120,8 @@ export const AdminDashboardView: React.FC = () => {
     setAdminNewsContent('');
     setAdminNewsImageUrl('');
     setAdminNewsPdfUrl('');
+    setAdminNewsVideoUrl('');
+    setAdminNewsLinkUrl('');
     setAdminNewsAuthor('');
     setAdminNewsSuccessMsg(true);
     setTimeout(() => setAdminNewsSuccessMsg(false), 3000);
@@ -131,15 +141,23 @@ export const AdminDashboardView: React.FC = () => {
       raisedBudget: 0,
       beneficiariesCount: 200,
       status: 'en_cours',
-      imageUrl: 'https://images.unsplash.com/photo-1541829070764-84a7d30dd3f3?auto=format&fit=crop&w=800&q=80',
+      imageUrl: newProjImageUrl.trim() || 'https://images.unsplash.com/photo-1541829070764-84a7d30dd3f3?auto=format&fit=crop&w=800&q=80',
+      pdfUrl: newProjPdfUrl.trim() ? newProjPdfUrl.trim() : undefined,
       year: 2026
     });
     setNewProjTitle('');
+    setNewProjImageUrl('');
+    setNewProjPdfUrl('');
     alert('Projet publié avec succès sur le site !');
   };
 
   const handleAddMediaSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!mediaUrl.trim()) {
+      alert('Veuillez sélectionner ou importer un fichier média.');
+      return;
+    }
+
     addMediaItem({
       id: `media-${Date.now()}`,
       title: { fr: mediaTitle, en: mediaTitle, ar: mediaTitle },
@@ -527,49 +545,345 @@ export const AdminDashboardView: React.FC = () => {
                     <p style={{ margin: 0 }}>Aucune nouvelle demande d'adhésion en attente pour le moment.</p>
                   </div>
                 ) : (
-                  <table className="admin-table">
-                    <thead>
-                      <tr>
-                        <th>Candidat</th>
-                        <th>Email</th>
-                        <th>Profession / Ville</th>
-                        <th>Date de Demande</th>
-                        <th>Action de Confirmation</th>
-                      </tr>
-                    </thead>
-                    <tbody>
+                  <>
+                    {/* Desktop Table View */}
+                    <div className="admin-table-container desktop-table-only">
+                      <table className="admin-table">
+                        <thead>
+                          <tr>
+                            <th>Candidat</th>
+                            <th>Email</th>
+                            <th>Profession / Ville</th>
+                            <th>Date de Demande</th>
+                            <th>Action de Confirmation</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {pendingMembers.map(user => (
+                            <tr key={user.id}>
+                              <td><strong>{user.name}</strong></td>
+                              <td>{user.email}</td>
+                              <td>{user.profession || 'Membre'} • {user.city || 'Tchad'}</td>
+                              <td>{user.dateJoined}</td>
+                              <td style={{ display: 'flex', gap: '0.5rem' }}>
+                                <button
+                                  className="btn btn-gold btn-sm"
+                                  style={{ fontWeight: 600 }}
+                                  onClick={() => handleConfirmMember(user.id)}
+                                >
+                                  Confirmer & Valider
+                                </button>
+                                <button
+                                  className="btn btn-secondary btn-sm"
+                                  style={{ background: '#FEE2E2', color: '#991B1B', border: '1px solid #FCA5A5', fontWeight: 600 }}
+                                  onClick={() => handleDeleteMember(user.id)}
+                                >
+                                  Refuser & Supprimer
+                                </button>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+
+                    {/* Mobile Card List View (< 768px) */}
+                    <div className="mobile-members-list">
                       {pendingMembers.map(user => (
-                        <tr key={user.id}>
-                          <td><strong>{user.name}</strong></td>
-                          <td>{user.email}</td>
-                          <td>{user.profession || 'Membre'} • {user.city || 'Tchad'}</td>
-                          <td>{user.dateJoined}</td>
-                          <td style={{ display: 'flex', gap: '0.5rem' }}>
+                        <div key={`m-pend-${user.id}`} className="mobile-member-card">
+                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                            <div>
+                              <strong style={{ fontSize: '1.05rem', color: '#1E293B', display: 'block' }}>{user.name}</strong>
+                              <span style={{ fontSize: '0.85rem', color: '#64748B' }}>{user.email}</span>
+                            </div>
+                            <span style={{ background: '#FEF3C7', color: '#92400E', fontSize: '0.75rem', padding: '0.2rem 0.6rem', borderRadius: '12px', fontWeight: 700 }}>
+                              En Attente
+                            </span>
+                          </div>
+                          <div style={{ fontSize: '0.85rem', color: '#334155', background: '#F8FAFC', padding: '0.6rem 0.85rem', borderRadius: '8px' }}>
+                            <div><strong>Profession :</strong> {user.profession || 'Membre'}</div>
+                            <div><strong>Ville / Pays :</strong> {user.city || 'Tchad'}</div>
+                            <div><strong>Date de demande :</strong> {user.dateJoined}</div>
+                          </div>
+                          <div className="action-buttons-stack">
                             <button
                               className="btn btn-gold btn-sm"
-                              style={{ fontWeight: 600 }}
+                              style={{ fontWeight: 800, padding: '0.75rem' }}
                               onClick={() => handleConfirmMember(user.id)}
                             >
-                              Confirmer & Valider
+                              ✔ Confirmer & Valider l'Adhésion
                             </button>
                             <button
                               className="btn btn-secondary btn-sm"
-                              style={{ background: '#FEE2E2', color: '#991B1B', border: '1px solid #FCA5A5', fontWeight: 600 }}
+                              style={{ background: '#FEE2E2', color: '#991B1B', border: '1px solid #FCA5A5', fontWeight: 700, padding: '0.65rem' }}
                               onClick={() => handleDeleteMember(user.id)}
                             >
-                              Refuser & Supprimer
+                              ✖ Refuser & Supprimer
                             </button>
-                          </td>
-                        </tr>
+                          </div>
+                        </div>
                       ))}
-                    </tbody>
-                  </table>
+                    </div>
+                  </>
                 )}
               </div>
 
               {/* Official Approved Members Table */}
               <div className="card admin-table-card margin-bottom-lg">
                 <h3>Membres Officiels Admis & Bureau Exécutif ({approvedMembers.length})</h3>
+                
+                {/* Desktop Table View */}
+                <div className="admin-table-container desktop-table-only">
+                  <table className="admin-table">
+                    <thead>
+                      <tr>
+                        <th>Membre</th>
+                        <th>Email</th>
+                        <th>Rôle Officiel</th>
+                        <th>Ville</th>
+                        <th>Cotisation 2026 (5 000 FCFA)</th>
+                        <th>Statut Carte</th>
+                        <th>Actions Administration</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {approvedMembers.map(user => (
+                        <tr key={user.id}>
+                          <td><strong>{user.name}</strong></td>
+                          <td>{user.email}</td>
+                          <td>
+                            <span className={`status-pill ${user.role === 'super_admin' || user.role === 'admin' ? 'active' : ''}`}>
+                              {user.role === 'super_admin' ? 'Super Admin (Tech Lead)' : user.role === 'admin' ? 'Administrateur Bureau' : 'Membre Actif Admis'}
+                            </span>
+                          </td>
+                          <td>{user.city || 'N\'Djamena'}</td>
+                          <td>
+                            <button
+                              className={`btn btn-sm ${user.feePaid ? 'btn-primary' : 'btn-secondary'}`}
+                              style={{
+                                fontSize: '0.8rem',
+                                fontWeight: 700,
+                                background: user.feePaid ? '#D1FAE5' : '#FEF3C7',
+                                color: user.feePaid ? '#065F46' : '#B45309',
+                                border: user.feePaid ? '1px solid #10B981' : '1px solid #F59E0B'
+                              }}
+                              onClick={() => toggleUserFeeStatus(user.id)}
+                              title="Cliquer pour changer l'état de la cotisation annuelle"
+                            >
+                              {user.feePaid ? 'A Jour (5 000 FCFA)' : 'Non Reglee (En attente)'}
+                            </button>
+                          </td>
+                          <td>
+                            <span style={{ color: '#059669', fontWeight: 600, fontSize: '0.85rem' }}>
+                              Carte Générée & Validée
+                            </span>
+                          </td>
+                          <td>
+                            {user.role !== 'super_admin' ? (
+                              <button
+                                className="btn btn-secondary btn-sm"
+                                style={{ background: '#FEE2E2', color: '#991B1B', border: '1px solid #FCA5A5', fontWeight: 600 }}
+                                onClick={() => handleDeleteMember(user.id)}
+                              >
+                                Supprimer Membre
+                              </button>
+                            ) : (
+                              <span style={{ fontSize: '0.8rem', color: '#6B7280', fontStyle: 'italic' }}>Compte Inviolable</span>
+                            )}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+
+                {/* Mobile Card List View (< 768px) */}
+                <div className="mobile-members-list">
+                  {approvedMembers.map(user => (
+                    <div key={`m-appr-${user.id}`} className="mobile-member-card">
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                        <div>
+                          <strong style={{ fontSize: '1.05rem', color: '#1E293B', display: 'block' }}>{user.name}</strong>
+                          <span style={{ fontSize: '0.85rem', color: '#64748B' }}>{user.email}</span>
+                        </div>
+                        <span style={{ background: '#D1FAE5', color: '#065F46', fontSize: '0.75rem', padding: '0.2rem 0.6rem', borderRadius: '12px', fontWeight: 700 }}>
+                          Admis
+                        </span>
+                      </div>
+                      <div style={{ fontSize: '0.85rem', color: '#334155', background: '#F8FAFC', padding: '0.6rem 0.85rem', borderRadius: '8px', display: 'flex', flexDirection: 'column', gap: '0.3rem' }}>
+                        <div><strong>Rôle :</strong> {user.role === 'super_admin' ? 'Super Admin (Tech Lead)' : user.role === 'admin' ? 'Administrateur Bureau' : 'Membre Actif'}</div>
+                        <div><strong>Ville :</strong> {user.city || 'N\'Djamena'}</div>
+                        <div><strong>Carte d'Adhérent :</strong> <span style={{ color: '#059669', fontWeight: 700 }}>Validée & Téléchargeable</span></div>
+                      </div>
+                      <div className="action-buttons-stack">
+                        <button
+                          className={`btn btn-sm ${user.feePaid ? 'btn-primary' : 'btn-secondary'}`}
+                          style={{
+                            fontSize: '0.85rem',
+                            fontWeight: 800,
+                            padding: '0.65rem',
+                            background: user.feePaid ? '#D1FAE5' : '#FEF3C7',
+                            color: user.feePaid ? '#065F46' : '#B45309',
+                            border: user.feePaid ? '1px solid #10B981' : '1px solid #F59E0B'
+                          }}
+                          onClick={() => toggleUserFeeStatus(user.id)}
+                        >
+                          💳 Cotisation 2026 : {user.feePaid ? 'A Jour (5 000 FCFA)' : 'Non Réglée (Cliquer pour régler)'}
+                        </button>
+
+                        {user.role !== 'super_admin' ? (
+                          <button
+                            className="btn btn-secondary btn-sm"
+                            style={{ background: '#FEE2E2', color: '#991B1B', border: '1px solid #FCA5A5', fontWeight: 700, padding: '0.65rem' }}
+                            onClick={() => handleDeleteMember(user.id)}
+                          >
+                            🗑️ Supprimer le Membre
+                          </button>
+                        ) : (
+                          <div style={{ textAlign: 'center', fontSize: '0.8rem', color: '#6B7280', fontStyle: 'italic', padding: '0.3rem' }}>
+                            🔒 Compte Administrateur Inviolable
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* MEMBERS MANAGEMENT & APPROVAL TAB */}
+        {activeAdminTab === 'members' && (
+          <div className="admin-members-manager">
+            {approvalMsg && (
+              <div className="card margin-bottom-md" style={{ background: '#ECFDF5', border: '1px solid #10B981', color: '#065F46', padding: '1rem 1.25rem', borderRadius: '10px', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                <strong style={{ fontSize: '0.95rem' }}>{approvalMsg}</strong>
+              </div>
+            )}
+            {/* Search Box */}
+            <div className="card margin-bottom-md" style={{ padding: '1rem 1.25rem', background: '#F8FAFC', border: '1px solid #E2E8F0' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
+                <strong style={{ fontSize: '0.9rem', color: '#1E293B', whiteSpace: 'nowrap' }}>Recherche rapide de membre :</strong>
+                <input
+                  type="text"
+                  placeholder="Rechercher par nom, email, profession ou ville..."
+                  value={memberSearch}
+                  onChange={e => setMemberSearch(e.target.value)}
+                  className="form-control"
+                  style={{ flex: 1, minWidth: '220px', padding: '0.5rem 0.85rem', fontSize: '0.9rem' }}
+                />
+                {memberSearch && (
+                  <button className="btn btn-secondary btn-sm" onClick={() => setMemberSearch('')}>
+                    Effacer
+                  </button>
+                )}
+              </div>
+            </div>
+
+            <div className="card admin-table-card margin-bottom-lg">
+              <div className="flex-between align-center margin-bottom-md">
+                <div>
+                  <h3 style={{ margin: 0, color: '#92400E' }}>Demandes d'Adhésion en Attente de Confirmation ({pendingMembers.length})</h3>
+                  <p style={{ margin: '0.25rem 0 0 0', color: '#B45309', fontSize: '0.88rem' }}>
+                    Conformément aux règles de l'association, chaque candidat doit être confirmé par un administrateur avant de pouvoir télécharger sa carte d'adhérent.
+                  </p>
+                </div>
+              </div>
+
+              {pendingMembers.length === 0 ? (
+                <div className="text-center" style={{ padding: '2rem 1rem', color: '#6B7280', background: '#FFFBEB', borderRadius: '8px' }}>
+                  <p style={{ margin: 0 }}>Aucune nouvelle demande d'adhésion en attente pour le moment.</p>
+                </div>
+              ) : (
+                <>
+                  {/* Desktop Table View */}
+                  <div className="admin-table-container desktop-table-only">
+                    <table className="admin-table">
+                      <thead>
+                        <tr>
+                          <th>Candidat</th>
+                          <th>Email</th>
+                          <th>Profession / Ville</th>
+                          <th>Date de Demande</th>
+                          <th>Action de Confirmation</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {pendingMembers.map(user => (
+                          <tr key={user.id}>
+                            <td><strong>{user.name}</strong></td>
+                            <td>{user.email}</td>
+                            <td>{user.profession || 'Membre'} • {user.city || 'Tchad'}</td>
+                            <td>{user.dateJoined}</td>
+                            <td style={{ display: 'flex', gap: '0.5rem' }}>
+                              <button
+                                className="btn btn-gold btn-sm"
+                                style={{ fontWeight: 600 }}
+                                onClick={() => handleConfirmMember(user.id)}
+                              >
+                                Confirmer & Valider
+                              </button>
+                              <button
+                                className="btn btn-secondary btn-sm"
+                                style={{ background: '#FEE2E2', color: '#991B1B', border: '1px solid #FCA5A5', fontWeight: 600 }}
+                                onClick={() => handleDeleteMember(user.id)}
+                              >
+                                Refuser & Supprimer
+                              </button>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+
+                  {/* Mobile Card List View (< 768px) */}
+                  <div className="mobile-members-list">
+                    {pendingMembers.map(user => (
+                      <div key={`m-pend2-${user.id}`} className="mobile-member-card">
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                          <div>
+                            <strong style={{ fontSize: '1.05rem', color: '#1E293B', display: 'block' }}>{user.name}</strong>
+                            <span style={{ fontSize: '0.85rem', color: '#64748B' }}>{user.email}</span>
+                          </div>
+                          <span style={{ background: '#FEF3C7', color: '#92400E', fontSize: '0.75rem', padding: '0.2rem 0.6rem', borderRadius: '12px', fontWeight: 700 }}>
+                            En Attente
+                          </span>
+                        </div>
+                        <div style={{ fontSize: '0.85rem', color: '#334155', background: '#F8FAFC', padding: '0.6rem 0.85rem', borderRadius: '8px' }}>
+                          <div><strong>Profession :</strong> {user.profession || 'Membre'}</div>
+                          <div><strong>Ville / Pays :</strong> {user.city || 'Tchad'}</div>
+                          <div><strong>Date de demande :</strong> {user.dateJoined}</div>
+                        </div>
+                        <div className="action-buttons-stack">
+                          <button
+                            className="btn btn-gold btn-sm"
+                            style={{ fontWeight: 800, padding: '0.75rem' }}
+                            onClick={() => handleConfirmMember(user.id)}
+                          >
+                            ✔ Confirmer & Valider l'Adhésion
+                          </button>
+                          <button
+                            className="btn btn-secondary btn-sm"
+                            style={{ background: '#FEE2E2', color: '#991B1B', border: '1px solid #FCA5A5', fontWeight: 700, padding: '0.65rem' }}
+                            onClick={() => handleDeleteMember(user.id)}
+                          >
+                            ✖ Refuser & Supprimer
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </>
+              )}
+            </div>
+
+            <div className="card admin-table-card">
+              <h3>Membres Officiels Admis & Bureau Exécutif ({approvedMembers.length})</h3>
+              
+              {/* Desktop Table View */}
+              <div className="admin-table-container desktop-table-only">
                 <table className="admin-table">
                   <thead>
                     <tr>
@@ -632,156 +946,58 @@ export const AdminDashboardView: React.FC = () => {
                   </tbody>
                 </table>
               </div>
-            </div>
-          </div>
-        )}
 
-        {/* MEMBERS MANAGEMENT & APPROVAL TAB */}
-        {activeAdminTab === 'members' && (
-          <div className="admin-members-manager">
-            {approvalMsg && (
-              <div className="card margin-bottom-md" style={{ background: '#ECFDF5', border: '1px solid #10B981', color: '#065F46', padding: '1rem 1.25rem', borderRadius: '10px', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                <strong style={{ fontSize: '0.95rem' }}>{approvalMsg}</strong>
-              </div>
-            )}
-            {/* Search Box */}
-            <div className="card margin-bottom-md" style={{ padding: '1rem 1.25rem', background: '#F8FAFC', border: '1px solid #E2E8F0' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
-                <strong style={{ fontSize: '0.9rem', color: '#1E293B', whiteSpace: 'nowrap' }}>Recherche rapide de membre :</strong>
-                <input
-                  type="text"
-                  placeholder="Rechercher par nom, email, profession ou ville..."
-                  value={memberSearch}
-                  onChange={e => setMemberSearch(e.target.value)}
-                  className="form-control"
-                  style={{ flex: 1, minWidth: '220px', padding: '0.5rem 0.85rem', fontSize: '0.9rem' }}
-                />
-                {memberSearch && (
-                  <button className="btn btn-secondary btn-sm" onClick={() => setMemberSearch('')}>
-                    Effacer
-                  </button>
-                )}
-              </div>
-            </div>
+              {/* Mobile Card List View (< 768px) */}
+              <div className="mobile-members-list">
+                {approvedMembers.map(user => (
+                  <div key={`m-appr2-${user.id}`} className="mobile-member-card">
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                      <div>
+                        <strong style={{ fontSize: '1.05rem', color: '#1E293B', display: 'block' }}>{user.name}</strong>
+                        <span style={{ fontSize: '0.85rem', color: '#64748B' }}>{user.email}</span>
+                      </div>
+                      <span style={{ background: '#D1FAE5', color: '#065F46', fontSize: '0.75rem', padding: '0.2rem 0.6rem', borderRadius: '12px', fontWeight: 700 }}>
+                        Admis
+                      </span>
+                    </div>
+                    <div style={{ fontSize: '0.85rem', color: '#334155', background: '#F8FAFC', padding: '0.6rem 0.85rem', borderRadius: '8px', display: 'flex', flexDirection: 'column', gap: '0.3rem' }}>
+                      <div><strong>Rôle :</strong> {user.role === 'super_admin' ? 'Super Admin (Tech Lead)' : user.role === 'admin' ? 'Administrateur Bureau' : 'Membre Actif'}</div>
+                      <div><strong>Ville :</strong> {user.city || 'N\'Djamena'}</div>
+                      <div><strong>Carte d'Adhérent :</strong> <span style={{ color: '#059669', fontWeight: 700 }}>Validée & Téléchargeable</span></div>
+                    </div>
+                    <div className="action-buttons-stack">
+                      <button
+                        className={`btn btn-sm ${user.feePaid ? 'btn-primary' : 'btn-secondary'}`}
+                        style={{
+                          fontSize: '0.85rem',
+                          fontWeight: 800,
+                          padding: '0.65rem',
+                          background: user.feePaid ? '#D1FAE5' : '#FEF3C7',
+                          color: user.feePaid ? '#065F46' : '#B45309',
+                          border: user.feePaid ? '1px solid #10B981' : '1px solid #F59E0B'
+                        }}
+                        onClick={() => toggleUserFeeStatus(user.id)}
+                      >
+                        💳 Cotisation 2026 : {user.feePaid ? 'A Jour (5 000 FCFA)' : 'Non Réglée (Cliquer pour régler)'}
+                      </button>
 
-            <div className="card admin-table-card margin-bottom-lg">
-              <div className="flex-between align-center margin-bottom-md">
-                <div>
-                  <h3 style={{ margin: 0, color: '#92400E' }}>Demandes d'Adhésion en Attente de Confirmation ({pendingMembers.length})</h3>
-                  <p style={{ margin: '0.25rem 0 0 0', color: '#B45309', fontSize: '0.88rem' }}>
-                    Conformément aux règles de l'association, chaque candidat doit être confirmé par un administrateur avant de pouvoir télécharger sa carte d'adhérent.
-                  </p>
-                </div>
-              </div>
-
-              {pendingMembers.length === 0 ? (
-                <div className="text-center" style={{ padding: '2rem 1rem', color: '#6B7280', background: '#FFFBEB', borderRadius: '8px' }}>
-                  <p style={{ margin: 0 }}>Aucune nouvelle demande d'adhésion en attente pour le moment.</p>
-                </div>
-              ) : (
-                <table className="admin-table">
-                  <thead>
-                    <tr>
-                      <th>Candidat</th>
-                      <th>Email</th>
-                      <th>Profession / Ville</th>
-                      <th>Date de Demande</th>
-                      <th>Action de Confirmation</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {pendingMembers.map(user => (
-                      <tr key={user.id}>
-                        <td><strong>{user.name}</strong></td>
-                        <td>{user.email}</td>
-                        <td>{user.profession || 'Membre'} • {user.city || 'Tchad'}</td>
-                        <td>{user.dateJoined}</td>
-                        <td style={{ display: 'flex', gap: '0.5rem' }}>
-                          <button
-                            className="btn btn-gold btn-sm"
-                            style={{ fontWeight: 600 }}
-                            onClick={() => handleConfirmMember(user.id)}
-                          >
-                            Confirmer & Valider
-                          </button>
-                          <button
-                            className="btn btn-secondary btn-sm"
-                            style={{ background: '#FEE2E2', color: '#991B1B', border: '1px solid #FCA5A5', fontWeight: 600 }}
-                            onClick={() => handleDeleteMember(user.id)}
-                          >
-                            Refuser & Supprimer
-                          </button>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              )}
-            </div>
-
-            <div className="card admin-table-card">
-              <h3>Membres Officiels Admis & Bureau Exécutif ({approvedMembers.length})</h3>
-              <table className="admin-table">
-                <thead>
-                  <tr>
-                    <th>Membre</th>
-                    <th>Email</th>
-                    <th>Rôle Officiel</th>
-                    <th>Ville</th>
-                    <th>Cotisation 2026 (5 000 FCFA)</th>
-                    <th>Statut Carte</th>
-                    <th>Actions Administration</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {approvedMembers.map(user => (
-                    <tr key={user.id}>
-                      <td><strong>{user.name}</strong></td>
-                      <td>{user.email}</td>
-                      <td>
-                        <span className={`status-pill ${user.role === 'super_admin' || user.role === 'admin' ? 'active' : ''}`}>
-                          {user.role === 'super_admin' ? 'Super Admin (Tech Lead)' : user.role === 'admin' ? 'Administrateur Bureau' : 'Membre Actif Admis'}
-                        </span>
-                      </td>
-                      <td>{user.city || 'N\'Djamena'}</td>
-                      <td>
+                      {user.role !== 'super_admin' ? (
                         <button
-                          className={`btn btn-sm ${user.feePaid ? 'btn-primary' : 'btn-secondary'}`}
-                          style={{
-                            fontSize: '0.8rem',
-                            fontWeight: 700,
-                            background: user.feePaid ? '#D1FAE5' : '#FEF3C7',
-                            color: user.feePaid ? '#065F46' : '#B45309',
-                            border: user.feePaid ? '1px solid #10B981' : '1px solid #F59E0B'
-                          }}
-                          onClick={() => toggleUserFeeStatus(user.id)}
-                          title="Cliquer pour changer l'état de la cotisation annuelle"
+                          className="btn btn-secondary btn-sm"
+                          style={{ background: '#FEE2E2', color: '#991B1B', border: '1px solid #FCA5A5', fontWeight: 700, padding: '0.65rem' }}
+                          onClick={() => handleDeleteMember(user.id)}
                         >
-                          {user.feePaid ? 'A Jour (5 000 FCFA)' : 'Non Reglee (En attente)'}
+                          🗑️ Supprimer le Membre
                         </button>
-                      </td>
-                      <td>
-                        <span style={{ color: '#059669', fontWeight: 600, fontSize: '0.85rem' }}>
-                          Carte Générée & Validée
-                        </span>
-                      </td>
-                      <td>
-                        {user.role !== 'super_admin' ? (
-                          <button
-                            className="btn btn-secondary btn-sm"
-                            style={{ background: '#FEE2E2', color: '#991B1B', border: '1px solid #FCA5A5', fontWeight: 600 }}
-                            onClick={() => handleDeleteMember(user.id)}
-                          >
-                            Supprimer Membre
-                          </button>
-                        ) : (
-                          <span style={{ fontSize: '0.8rem', color: '#6B7280', fontStyle: 'italic' }}>Compte Inviolable</span>
-                        )}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+                      ) : (
+                        <div style={{ textAlign: 'center', fontSize: '0.8rem', color: '#6B7280', fontStyle: 'italic', padding: '0.3rem' }}>
+                          🔒 Compte Administrateur Inviolable
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         )}
@@ -839,17 +1055,16 @@ export const AdminDashboardView: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="form-group">
-                  <label>URL de l'image ou de la vidéo *</label>
-                  <input
-                    type="url"
-                    required
-                    placeholder="https://images.unsplash.com/... ou URL vidéo"
-                    value={mediaUrl}
-                    onChange={e => setMediaUrl(e.target.value)}
-                    className="form-control"
-                  />
-                </div>
+                <FileUploadPicker
+                  label={mediaType === 'photo' ? "Photo / Image d'illustration *" : "Fichier Vidéo (MP4) ou Lien Youtube *"}
+                  fileTypeHint={mediaType === 'photo' ? 'image' : 'video'}
+                  accept={mediaType === 'photo' ? "image/*" : "video/*"}
+                  value={mediaUrl}
+                  onChange={(val) => setMediaUrl(val)}
+                  required
+                  placeholder={mediaType === 'photo' ? "Lien d'image ou parcourir un fichier..." : "URL de la vidéo MP4 / Youtube ou parcourir un fichier vidéo..."}
+                  helpText={mediaType === 'photo' ? "Sélectionnez une photo (.jpg, .png) depuis votre appareil ou collez un lien Web." : "Sélectionnez un fichier vidéo (.mp4, .webm) ou renseignez un lien Youtube."}
+                />
 
                 <button type="submit" className="btn btn-primary btn-lg w-full">
                   Publier dans la Galerie Officielle
@@ -991,29 +1206,48 @@ export const AdminDashboardView: React.FC = () => {
                   />
                 </div>
 
+                <FileUploadPicker
+                  label="Photo / Image d'illustration"
+                  fileTypeHint="image"
+                  accept="image/*"
+                  value={adminNewsImageUrl}
+                  onChange={(val) => setAdminNewsImageUrl(val)}
+                  helpText="Importer une photo depuis votre appareil ou coller un lien URL."
+                />
+
+                <FileUploadPicker
+                  label="Document PDF Officiel Rattaché (Communiqué / Rapport)"
+                  fileTypeHint="pdf"
+                  accept="application/pdf"
+                  value={adminNewsPdfUrl}
+                  onChange={(val, meta) => {
+                    setAdminNewsPdfUrl(val);
+                    if (meta?.fileSize) {
+                      setAdminNewsPdfSize(`PDF (${meta.fileSize})`);
+                    }
+                  }}
+                  helpText="Importer un fichier PDF officiel ou renseigner un lien Web PDF."
+                />
+
+                <FileUploadPicker
+                  label="Fichier Vidéo ou Lien Youtube Rattaché"
+                  fileTypeHint="video"
+                  accept="video/*"
+                  value={adminNewsVideoUrl}
+                  onChange={(val) => setAdminNewsVideoUrl(val)}
+                  helpText="Importer un fichier vidéo (.mp4) ou intégrer un lien vidéo Youtube."
+                />
+
                 <div className="form-group">
-                  <label>Lien Photo / Image d'illustration</label>
+                  <label>Lien Web / URL Externe (Source)</label>
                   <input
-                    type="text"
-                    placeholder="./images/IMG-20260813-WA0123.jpg ou URL"
-                    value={adminNewsImageUrl}
-                    onChange={e => setAdminNewsImageUrl(e.target.value)}
+                    type="url"
+                    placeholder="Ex: https://exemple.org/communique-ajtes"
+                    value={adminNewsLinkUrl}
+                    onChange={e => setAdminNewsLinkUrl(e.target.value)}
                     className="form-control"
                   />
                 </div>
-
-                {adminNewsType === 'communique' && (
-                  <div className="form-group highlight-pdf-input">
-                    <label>Fichier / URL du Document PDF *</label>
-                    <input
-                      type="text"
-                      placeholder="Ex: https://exemple.org/document.pdf"
-                      value={adminNewsPdfUrl}
-                      onChange={e => setAdminNewsPdfUrl(e.target.value)}
-                      className="form-control"
-                    />
-                  </div>
-                )}
 
                 <button type="submit" className="btn btn-gold btn-lg w-full margin-top">
                   Publier la Nouvelle
@@ -1064,6 +1298,24 @@ export const AdminDashboardView: React.FC = () => {
                     />
                   </div>
                 </div>
+
+                <FileUploadPicker
+                  label="Photo d'illustration du Projet"
+                  fileTypeHint="image"
+                  accept="image/*"
+                  value={newProjImageUrl}
+                  onChange={(val) => setNewProjImageUrl(val)}
+                  helpText="Importer une image de couverture pour ce projet."
+                />
+
+                <FileUploadPicker
+                  label="Document PDF du Projet (Fiche technique / Rapport)"
+                  fileTypeHint="pdf"
+                  accept="application/pdf"
+                  value={newProjPdfUrl}
+                  onChange={(val) => setNewProjPdfUrl(val)}
+                  helpText="Optionnel : Joindre un document PDF récapitulatif."
+                />
 
                 <button type="submit" className="btn btn-primary btn-lg w-full margin-top">
                   Publier le projet
@@ -1400,6 +1652,69 @@ export const AdminDashboardView: React.FC = () => {
           padding: 0.85rem 1.25rem;
           border-radius: var(--radius-sm);
           margin-top: 1rem;
+        }
+
+        .admin-table-container {
+          width: 100%;
+          overflow-x: auto;
+          -webkit-overflow-scrolling: touch;
+          margin-top: 1rem;
+        }
+
+        .mobile-members-list {
+          display: none;
+        }
+
+        @media (max-width: 768px) {
+          .admin-table-card {
+            padding: 1.25rem 0.85rem !important;
+          }
+          .desktop-table-only {
+            display: none !important;
+          }
+          .mobile-members-list {
+            display: flex !important;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 1rem;
+          }
+          .mobile-member-card {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            background: #FFFFFF;
+            border: 1px solid #E2E8F0;
+            border-radius: 12px;
+            padding: 1.15rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+          }
+          .mobile-member-card .action-buttons-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+            width: 100%;
+          }
+          .mobile-member-card .action-buttons-stack button {
+            width: 100%;
+            justify-content: center;
+            padding: 0.75rem 1rem;
+            font-size: 0.88rem;
+            font-weight: 700;
+            border-radius: 8px;
+          }
+          .admin-tab-bar {
+            justify-content: flex-start;
+            overflow-x: auto;
+            white-space: nowrap;
+            padding-bottom: 0.5rem;
+            -webkit-overflow-scrolling: touch;
+          }
+          .admin-tab {
+            flex-shrink: 0;
+            padding: 0.6rem 0.9rem;
+            font-size: 0.85rem;
+          }
         }
       `}</style>
     </div>
