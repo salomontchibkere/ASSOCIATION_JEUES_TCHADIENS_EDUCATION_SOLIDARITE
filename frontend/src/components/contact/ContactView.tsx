@@ -183,7 +183,7 @@ export const ContactView: React.FC = () => {
                 <label>Sujet du message</label>
                 <input
                   type="text"
-                  placeholder="Ex: Soutien pour l'école de Nangassou"
+                  placeholder="Ex: Soutien pour l'éducation et les écoles"
                   value={subject}
                   onChange={e => setSubject(e.target.value)}
                   className="form-control"

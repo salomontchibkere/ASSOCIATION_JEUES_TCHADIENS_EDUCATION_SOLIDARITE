@@ -20,6 +20,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, navig
   const navItems = [
     { id: 'home', label: t('navHome') },
     { id: 'about', label: t('navAbout') },
+    { id: 'realizations', label: 'Nos Réalisations' },
     { id: 'projects', label: t('navProjects') },
     { id: 'documents', label: 'Statuts & Règlement' },
     { id: 'news', label: t('navNews') },
@@ -72,6 +73,13 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, navig
               onClick={() => handleNavClick('about')}
             >
               {t('navAbout')}
+            </button>
+
+            <button
+              className={`nav-link ${currentTab === 'realizations' ? 'active' : ''}`}
+              onClick={() => handleNavClick('realizations')}
+            >
+              Nos Réalisations
             </button>
 
             <button

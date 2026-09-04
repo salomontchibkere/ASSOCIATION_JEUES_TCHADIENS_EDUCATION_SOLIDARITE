@@ -10,24 +10,6 @@ export const Footer: React.FC<FooterProps> = ({ setCurrentTab }) => {
 
   return (
     <footer className="site-footer">
-      {/* Institutional Call Banner */}
-      <div className="footer-callout">
-        <div className="footer-callout-container">
-          <div className="callout-content">
-            <h3>{t('partnerCallTitle')}</h3>
-            <p>{t('partnerCallText')}</p>
-          </div>
-          <div className="callout-actions">
-            <button className="btn btn-gold" onClick={() => setCurrentTab('donate')}>
-              Faire un Don
-            </button>
-            <button className="btn btn-secondary" onClick={() => setCurrentTab('contact')}>
-              Nous Contactez
-            </button>
-          </div>
-        </div>
-      </div>
-
       {/* Main Footer Links */}
       <div className="main-footer-body">
         <div className="footer-grid">
@@ -62,7 +44,8 @@ export const Footer: React.FC<FooterProps> = ({ setCurrentTab }) => {
             <ul className="footer-links">
               <li><button onClick={() => setCurrentTab('home')}>Accueil</button></li>
               <li><button onClick={() => setCurrentTab('about')}>Qui sommes-nous ?</button></li>
-              <li><button onClick={() => setCurrentTab('projects')}>Nos Projets & Réalisations</button></li>
+              <li><button onClick={() => setCurrentTab('realizations')}>Nos Réalisations Clés</button></li>
+              <li><button onClick={() => setCurrentTab('projects')}>Nos Projets</button></li>
               <li><button onClick={() => setCurrentTab('documents')}>Statuts & Règlement Intérieur</button></li>
               <li><button onClick={() => setCurrentTab('gallery')}>Galerie Photos & Vidéos</button></li>
             </ul>
@@ -114,43 +97,6 @@ export const Footer: React.FC<FooterProps> = ({ setCurrentTab }) => {
           background-color: var(--neutral-heading);
           color: #E2E8F0;
           margin-top: 4rem;
-        }
-
-        .footer-callout {
-          background: linear-gradient(135deg, var(--primary-emerald), #004D26);
-          color: #FFF;
-          padding: 3rem 1.5rem;
-        }
-
-        .footer-callout-container {
-          max-width: 1280px;
-          margin: 0 auto;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          flex-wrap: wrap;
-          gap: 2rem;
-        }
-
-        .callout-content {
-          max-width: 750px;
-        }
-
-        .callout-content h3 {
-          color: #FFF;
-          font-size: 1.6rem;
-          margin-bottom: 0.5rem;
-        }
-
-        .callout-content p {
-          color: #E6F5ED;
-          font-size: 1.05rem;
-        }
-
-        .callout-actions {
-          display: flex;
-          gap: 1rem;
-          flex-wrap: wrap;
         }
 
         .main-footer-body {

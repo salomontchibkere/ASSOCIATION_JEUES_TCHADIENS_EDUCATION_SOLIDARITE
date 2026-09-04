@@ -41,6 +41,12 @@ function AppContent() {
             <Realizations />
           </>
         );
+      case 'realizations':
+        return (
+          <div style={{ paddingTop: '1.5rem' }}>
+            <Realizations />
+          </div>
+        );
       case 'about':
         return <AboutView />;
       case 'documents':

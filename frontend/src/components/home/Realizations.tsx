@@ -1,41 +1,39 @@
 import React from 'react';
-import { useLanguage } from '../../context/LanguageContext';
 
 export const Realizations: React.FC = () => {
-  const { t } = useLanguage();
 
   const milestones = [
     {
       year: '2022',
       badge: 'Fondation & Lancement',
-      title: t('year2022Title'),
-      desc: t('year2022Desc'),
+      title: '2022 — Création de l\'AJTES',
+      desc: 'Lancement des premières activités d\'entraide et de sensibilisation pour l\'éducation.',
       details: 'Création officielle de l’AJTES par un groupe de jeunes tchadiens engagés. Organisation des premières campagnes d\'orientation et de sensibilisation pour l\'éducation et l\'environnement.',
-      img: '/images/IMG-20260813-WA0123.jpg'
+      img: './images/IMG-20260813-WA0123.jpg'
     },
     {
       year: '2023',
-      badge: 'Action Scolaire Nangassou',
-      title: t('year2023Title'),
-      desc: t('year2023Desc'),
-      details: 'Distribution directe de fournitures scolaires (cahiers, stylos, sacs, matériel pédagogique) aux élèves du Collège d\'Enseignement Général (CEG) de Nangassou.',
-      img: '/images/IMG-20260813-WA0142.jpg'
+      badge: 'Action Scolaire',
+      title: '2023 — Distribution au CEG',
+      desc: 'Fournitures scolaires complètes distribuées aux élèves défavorisés.',
+      details: 'Distribution directe de fournitures scolaires (cahiers, stylos, sacs, matériel pédagogique) aux élèves du Collège d\'Enseignement Général (CEG).',
+      img: './images/IMG-20260813-WA0142.jpg'
     },
     {
       year: '2026',
       badge: 'Infrastructures & Bâtiment',
-      title: t('year2026Title'),
-      desc: t('year2026Desc'),
-      details: 'Construction complète et équipement d\'un bureau administratif de deux chambres au niveau du CEG de Nangassou pour assurer de meilleures conditions de travail au personnel enseignant.',
-      img: '/images/IMG-20260813-WA0106.jpg'
+      title: '2026 — Bureau administratif au CEG',
+      desc: 'Construction et équipement d\'un bâtiment administratif de deux chambres.',
+      details: 'Construction complète et équipement d\'un bureau administratif de deux chambres au niveau du CEG pour assurer de meilleures conditions de travail au personnel enseignant.',
+      img: './images/IMG-20260813-WA0106.jpg'
     }
   ];
 
   return (
-    <section className="section bg-slate">
+    <section className="section bg-slate" id="realizations-section">
       <div className="section-title-container">
         <span className="section-badge">Impact Concret sur le Terrain</span>
-        <h2 className="section-title">{t('realizationsTitle')}</h2>
+        <h2 className="section-title">Nos Réalisations Clés Sur le Terrain</h2>
         <p className="section-subtitle">
           Depuis sa création en 2022, l'AJTES prouve par des réalisations matérielles tangibles qu’elle agit chaque jour pour l’avenir des élèves et des établissements scolaires.
         </p>
@@ -61,12 +59,15 @@ export const Realizations: React.FC = () => {
       <style>{`
         .bg-slate {
           background-color: var(--neutral-light-bg);
+          padding: 4rem 1.5rem;
         }
 
         .timeline-grid {
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
           gap: 2rem;
+          max-width: 1200px;
+          margin: 2.5rem auto 0 auto;
         }
 
         .timeline-card {
@@ -74,6 +75,15 @@ export const Realizations: React.FC = () => {
           flex-direction: column;
           border-radius: var(--radius-lg);
           overflow: hidden;
+          background: #FFFFFF;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+          border: 1px solid var(--neutral-border);
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .timeline-card:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
         }
 
         .card-image-box {
@@ -131,6 +141,7 @@ export const Realizations: React.FC = () => {
           font-size: 1.25rem;
           color: var(--neutral-heading);
           margin-bottom: 0.75rem;
+          line-height: 1.3;
         }
 
         .milestone-desc {
@@ -143,9 +154,10 @@ export const Realizations: React.FC = () => {
         .milestone-details {
           font-size: 0.9rem;
           color: var(--neutral-muted);
-          line-height: 1.5;
+          line-height: 1.55;
         }
       `}</style>
     </section>
   );
 };
+

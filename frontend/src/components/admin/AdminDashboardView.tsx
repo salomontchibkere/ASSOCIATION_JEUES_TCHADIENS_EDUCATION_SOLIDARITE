@@ -72,7 +72,7 @@ export const AdminDashboardView: React.FC = () => {
   const [newProjTitle, setNewProjTitle] = useState('');
   const [newProjCategory, setNewProjCategory] = useState<'education' | 'solidarite' | 'environnement' | 'humanitaire'>('education');
   const [newProjBudget, setNewProjBudget] = useState('');
-  const newProjLocation = 'Nangassou, Tchad';
+  const newProjLocation = 'Tchad';
 
   // Form states for Media Upload
   const [mediaTitle, setMediaTitle] = useState('');
@@ -437,7 +437,7 @@ export const AdminDashboardView: React.FC = () => {
                 <div style={{ background: '#FFFFFF', padding: '1rem', borderRadius: '8px', border: '1px solid #E5E7EB' }}>
                   <strong style={{ color: '#374151', fontSize: '0.9rem' }}>Origine Géographique des Visites</strong>
                   <p style={{ fontSize: '0.85rem', color: '#4B5563', margin: '0.5rem 0 0 0', lineHeight: '1.4' }}>
-                    N'Djamena (65%) • Nangassou (20%)<br />Moundou (10%) • International (5%)
+                    N'Djamena (65%) • Provinces (25%)<br />Moundou (10%)
                   </p>
                 </div>
                 <div style={{ background: '#FFFFFF', padding: '1rem', borderRadius: '8px', border: '1px solid #E5E7EB' }}>
@@ -805,7 +805,7 @@ export const AdminDashboardView: React.FC = () => {
                   <input
                     type="text"
                     required
-                    placeholder="Ex: Construction du bureau administratif au CEG de Nangassou"
+                    placeholder="Ex: Construction du bureau administratif au CEG"
                     value={mediaTitle}
                     onChange={e => setMediaTitle(e.target.value)}
                     className="form-control"

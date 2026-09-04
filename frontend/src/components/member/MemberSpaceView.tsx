@@ -223,7 +223,7 @@ export const MemberSpaceView: React.FC<MemberSpaceViewProps> = ({ initialMode = 
                       <input
                         type="text"
                         required
-                        placeholder="Ex: N'Djamena, Nangassou, Sarh"
+                        placeholder="Ex: N'Djamena, Moundou, Sarh"
                         value={city}
                         onChange={e => setCity(e.target.value)}
                         className="form-control"
@@ -445,7 +445,7 @@ export const MemberSpaceView: React.FC<MemberSpaceViewProps> = ({ initialMode = 
                     <span className="act-date">15 Octobre 2026</span>
                   </div>
                   <div className="act-item">
-                    <span>Journée Écologique & Reboisement (Nangassou)</span>
+                    <span>Journée Écologique & Reboisement</span>
                     <span className="act-date">05 Septembre 2026</span>
                   </div>
                 </div>

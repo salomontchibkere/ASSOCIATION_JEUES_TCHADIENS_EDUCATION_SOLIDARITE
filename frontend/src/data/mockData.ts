@@ -4,22 +4,22 @@ export const initialProjects: Project[] = [
   {
     id: 'proj-1',
     title: {
-      fr: "Construction du bureau administratif au CEG de Nangassou",
-      en: "Construction of the Administrative Office at CEG Nangassou",
-      ar: "بناء المكتب الإداري في إعدادية نانغاسو"
+      fr: "Construction du bureau administratif au CEG",
+      en: "Construction of the Administrative Office at CEG",
+      ar: "بناء المكتب الإداري في الإعدادية"
     },
     description: {
-      fr: "Construction d'un bâtiment administratif moderne de deux chambres pour améliorer les conditions de travail des enseignants et la gestion du Collège d'Enseignement Général (CEG) de Nangassou.",
-      en: "Construction of a modern two-room administrative building to improve working conditions for teachers and management at CEG Nangassou.",
+      fr: "Construction d'un bâtiment administratif moderne de deux chambres pour améliorer les conditions de travail des enseignants et la gestion du Collège d'Enseignement Général (CEG).",
+      en: "Construction of a modern two-room administrative building to improve working conditions for teachers and management at CEG.",
       ar: "بناء مبنى إداري حديث يتكون من غرفتين لتحسين ظروف عمل المعلمين وإدارة الإعدادية."
     },
     category: 'education',
-    location: 'Nangassou, Tchad',
+    location: 'Tchad',
     startDate: '2026-01-10',
     endDate: '2026-06-30',
     objective: {
-      fr: "Doter le CEG de Nangassou d'infrastructures administratives décentes et fonctionnelles.",
-      en: "Provide CEG Nangassou with decent and functional administrative infrastructure.",
+      fr: "Doter le CEG d'infrastructures administratives décentes et fonctionnelles.",
+      en: "Provide CEG with decent and functional administrative infrastructure.",
       ar: "تزويد إعدادية نانغاسو ببنية تحتية إدارية لائقة وفعالة."
     },
     targetBudget: 6500000,
@@ -38,8 +38,8 @@ export const initialProjects: Project[] = [
   {
     id: 'proj-2',
     title: {
-      fr: "Distribution de fournitures scolaires au CEG de Nangassou",
-      en: "Distribution of School Supplies at CEG Nangassou",
+      fr: "Distribution de fournitures scolaires au CEG",
+      en: "Distribution of School Supplies at CEG",
       ar: "توزيع المستلزمات المدرسية في إعدادية نانغاسو"
     },
     description: {
@@ -48,7 +48,7 @@ export const initialProjects: Project[] = [
       ar: "تقديم حقائب مدرسية كاملة لأكثر من 300 طالب من العائلات المتعثرة لتعزيز التعليم ورعاية الطلاب."
     },
     category: 'education',
-    location: 'Nangassou, Tchad',
+    location: 'Tchad',
     startDate: '2023-09-15',
     endDate: '2023-10-30',
     objective: {
@@ -111,7 +111,7 @@ export const initialProjects: Project[] = [
       ar: "تنظيم جلسات مجانية للدعم المدرسي والتوجيه الأكاديمي للطلاب المقبلين على الامتحانات."
     },
     category: 'education',
-    location: 'N\'Djamena & Nangassou',
+    location: 'N\'Djamena & Tchad',
     startDate: '2026-10-01',
     endDate: '2027-05-30',
     objective: {
@@ -166,7 +166,7 @@ export const initialEvents: Event[] = [
     },
     date: '2026-09-05',
     time: '07:30 - 12:00',
-    location: 'Quartier Nangassou & CEG, Tchad',
+    location: 'Établissements Scolaires, Tchad',
     organizer: 'Commission Environnement AJTES',
     imageUrl: './images/IMG-20260813-WA0132.jpg',
     maxAttendees: 100,
@@ -285,7 +285,7 @@ export const initialMedia: MediaItem[] = [
     url: './images/IMG-20260813-WA0083.jpg',
     year: 2026,
     category: 'Photos Officielles',
-    location: "Nangassou"
+    location: "Tchad"
   },
   {
     id: 'media-photo-2',
@@ -298,7 +298,7 @@ export const initialMedia: MediaItem[] = [
     url: './images/IMG-20260813-WA0085.jpg',
     year: 2026,
     category: 'Photos Officielles',
-    location: "Nangassou"
+    location: "Tchad"
   },
   {
     id: 'media-photo-3',
@@ -311,7 +311,7 @@ export const initialMedia: MediaItem[] = [
     url: './images/IMG-20260813-WA0086.jpg',
     year: 2026,
     category: 'Photos Officielles',
-    location: "Nangassou"
+    location: "Tchad"
   },
   {
     id: 'media-photo-4',
@@ -324,7 +324,7 @@ export const initialMedia: MediaItem[] = [
     url: './images/IMG-20260813-WA0088.jpg',
     year: 2026,
     category: 'Photos Officielles',
-    location: "Nangassou"
+    location: "Tchad"
   },
   {
     id: 'media-photo-5',
@@ -337,7 +337,7 @@ export const initialMedia: MediaItem[] = [
     url: './images/IMG-20260813-WA0092.jpg',
     year: 2026,
     category: 'Photos Officielles',
-    location: "Nangassou"
+    location: "Tchad"
   },
   {
     id: 'media-photo-6',
@@ -350,20 +350,20 @@ export const initialMedia: MediaItem[] = [
     url: './images/IMG-20260813-WA0093.jpg',
     year: 2026,
     category: 'Photos Officielles',
-    location: "Nangassou"
+    location: "Tchad"
   },
   {
     id: 'media-photo-7',
     title: {
-      fr: "Bâtiment administratif achevé du CEG de Nangassou (Projet phare 2026)",
-      en: "Bâtiment administratif achevé du CEG de Nangassou (Projet phare 2026)",
-      ar: "Bâtiment administratif achevé du CEG de Nangassou (Projet phare 2026)"
+      fr: "Bâtiment administratif achevé du CEG (Projet phare 2026)",
+      en: "Bâtiment administratif achevé du CEG (Projet phare 2026)",
+      ar: "Bâtiment administratif achevé du CEG (Projet phare 2026)"
     },
     type: 'photo',
     url: './images/IMG-20260813-WA0106.jpg',
     year: 2026,
     category: 'Photos Officielles',
-    location: "Nangassou"
+    location: "Tchad"
   },
   {
     id: 'media-photo-8',
@@ -376,7 +376,7 @@ export const initialMedia: MediaItem[] = [
     url: './images/IMG-20260813-WA0113.jpg',
     year: 2026,
     category: 'Photos Officielles',
-    location: "Nangassou"
+    location: "Tchad"
   },
   {
     id: 'media-photo-9',
@@ -441,7 +441,7 @@ export const initialMedia: MediaItem[] = [
     url: './images/IMG-20260813-WA0132.jpg',
     year: 2026,
     category: 'Photos Officielles',
-    location: "Nangassou"
+    location: "Tchad"
   },
   {
     id: 'media-photo-14',
@@ -454,7 +454,7 @@ export const initialMedia: MediaItem[] = [
     url: './images/IMG-20260813-WA0140.jpg',
     year: 2023,
     category: 'Photos Officielles',
-    location: "Nangassou"
+    location: "Tchad"
   },
   {
     id: 'media-photo-15',
@@ -467,20 +467,20 @@ export const initialMedia: MediaItem[] = [
     url: './images/IMG-20260813-WA0142.jpg',
     year: 2023,
     category: 'Photos Officielles',
-    location: "Nangassou"
+    location: "Tchad"
   },
   {
     id: 'media-photo-16',
     title: {
-      fr: "Concertation avec le corps enseignant du CEG de Nangassou",
-      en: "Concertation avec le corps enseignant du CEG de Nangassou",
-      ar: "Concertation avec le corps enseignant du CEG de Nangassou"
+      fr: "Concertation avec le corps enseignant du CEG",
+      en: "Concertation avec le corps enseignant du CEG",
+      ar: "Concertation avec le corps enseignant du CEG"
     },
     type: 'photo',
     url: './images/IMG-20260813-WA0143.jpg',
     year: 2023,
     category: 'Photos Officielles',
-    location: "Nangassou"
+    location: "Tchad"
   },
   {
     id: 'media-photo-17',
@@ -493,7 +493,7 @@ export const initialMedia: MediaItem[] = [
     url: './images/IMG-20260813-WA0146.jpg',
     year: 2023,
     category: 'Photos Officielles',
-    location: "Nangassou"
+    location: "Tchad"
   },
   {
     id: 'media-photo-18',
@@ -506,20 +506,20 @@ export const initialMedia: MediaItem[] = [
     url: './images/IMG-20260813-WA0151.jpg',
     year: 2023,
     category: 'Photos Officielles',
-    location: "Nangassou"
+    location: "Tchad"
   },
   {
     id: 'media-photo-19',
     title: {
-      fr: "Séance d'entraide et soutien éducatif aux élèves de Nangassou",
-      en: "Séance d'entraide et soutien éducatif aux élèves de Nangassou",
-      ar: "Séance d'entraide et soutien éducatif aux élèves de Nangassou"
+      fr: "Séance d'entraide et soutien éducatif aux élèves",
+      en: "Séance d'entraide et soutien éducatif aux élèves",
+      ar: "Séance d'entraide et soutien éducatif aux élèves"
     },
     type: 'photo',
     url: './images/IMG-20260816-WA0051.jpg',
     year: 2026,
     category: 'Photos Officielles',
-    location: "Nangassou"
+    location: "Tchad"
   },
   {
     id: 'media-photo-20',
@@ -545,7 +545,7 @@ export const initialMedia: MediaItem[] = [
     url: './images/IMG-20260816-WA0068.jpg',
     year: 2026,
     category: 'Photos Officielles',
-    location: "Nangassou"
+    location: "Tchad"
   },
   {
     id: 'media-photo-22',
@@ -558,7 +558,7 @@ export const initialMedia: MediaItem[] = [
     url: './images/IMG-20260816-WA0072.jpg',
     year: 2026,
     category: 'Photos Officielles',
-    location: "Nangassou"
+    location: "Tchad"
   },
   {
     id: 'media-photo-23',
@@ -584,7 +584,7 @@ export const initialMedia: MediaItem[] = [
     url: './images/IMG-20260819-WA0156.jpg',
     year: 2026,
     category: 'Photos Officielles',
-    location: "Nangassou"
+    location: "Tchad"
   },
   {
     id: 'media-photo-25',
@@ -597,7 +597,7 @@ export const initialMedia: MediaItem[] = [
     url: './images/IMG-20260819-WA0189.jpg',
     year: 2026,
     category: 'Photos Officielles',
-    location: "Nangassou"
+    location: "Tchad"
   },
   {
     id: 'media-photo-26',
@@ -610,7 +610,7 @@ export const initialMedia: MediaItem[] = [
     url: './images/IMG-20260819-WA0196.jpg',
     year: 2026,
     category: 'Photos Officielles',
-    location: "Nangassou"
+    location: "Tchad"
   },
   {
     id: 'media-photo-27',
@@ -662,7 +662,7 @@ export const initialMedia: MediaItem[] = [
     url: './images/IMG_20250119_163228_691.jpg',
     year: 2025,
     category: 'Photos Officielles',
-    location: "Nangassou"
+    location: "Tchad"
   },
   {
     id: 'media-photo-31',
@@ -675,7 +675,7 @@ export const initialMedia: MediaItem[] = [
     url: './images/IMG_20250119_163253_600.jpg',
     year: 2025,
     category: 'Photos Officielles',
-    location: "Nangassou"
+    location: "Tchad"
   },
   {
     id: 'media-photo-32',
@@ -688,7 +688,7 @@ export const initialMedia: MediaItem[] = [
     url: './images/IMG_20250119_163312_501.jpg',
     year: 2025,
     category: 'Photos Officielles',
-    location: "Nangassou"
+    location: "Tchad"
   },
   {
     id: 'media-photo-33',
@@ -741,7 +741,7 @@ export const initialMedia: MediaItem[] = [
     thumbnailUrl: './images/IMG-20260813-WA0085.jpg',
     year: 2026,
     category: 'Vidéos Officielles',
-    location: "Nangassou"
+    location: "Tchad"
   },
   {
     id: 'media-vid-2',
@@ -769,21 +769,21 @@ export const initialMedia: MediaItem[] = [
     thumbnailUrl: './images/IMG-20260813-WA0093.jpg',
     year: 2026,
     category: 'Vidéos Officielles',
-    location: "Nangassou"
+    location: "Tchad"
   },
   {
     id: 'media-vid-4',
     title: {
-      fr: "Vidéo — Rapport de chantier : Construction du bureau du CEG de Nangassou",
-      en: "Vidéo — Rapport de chantier : Construction du bureau du CEG de Nangassou",
-      ar: "Vidéo — Rapport de chantier : Construction du bureau du CEG de Nangassou"
+      fr: "Vidéo — Rapport de chantier : Construction du bureau du CEG",
+      en: "Vidéo — Rapport de chantier : Construction du bureau du CEG",
+      ar: "Vidéo — Rapport de chantier : Construction du bureau du CEG"
     },
     type: 'video',
     url: './videos/VID-20260813-WA0152.mp4',
     thumbnailUrl: './images/IMG-20260813-WA0106.jpg',
     year: 2026,
     category: 'Vidéos Officielles',
-    location: "Nangassou"
+    location: "Tchad"
   },
   {
     id: 'media-vid-5',
@@ -797,7 +797,7 @@ export const initialMedia: MediaItem[] = [
     thumbnailUrl: './images/IMG-20260813-WA0083.jpg',
     year: 2026,
     category: 'Vidéos Officielles',
-    location: "Nangassou"
+    location: "Tchad"
   },
   {
     id: 'media-vid-6',
@@ -811,7 +811,7 @@ export const initialMedia: MediaItem[] = [
     thumbnailUrl: './images/IMG-20260816-WA0058.jpg',
     year: 2026,
     category: 'Vidéos Officielles',
-    location: "Nangassou"
+    location: "Tchad"
   },
   {
     id: 'media-vid-7',
@@ -825,7 +825,7 @@ export const initialMedia: MediaItem[] = [
     thumbnailUrl: './images/IMG-20260813-WA0113.jpg',
     year: 2025,
     category: 'Vidéos Officielles',
-    location: "Nangassou"
+    location: "Tchad"
   },
   {
     id: 'media-vid-8',
@@ -875,7 +875,7 @@ export const initialCommittees: Committee[] = [
     },
     leader: "Responsable Commission Éducation",
     membersCount: 12,
-    region: "Nangassou & Logone",
+    region: "Logone & Régions",
     imageUrl: './images/IMG-20260813-WA0106.jpg'
   },
   {
@@ -911,7 +911,7 @@ export const initialPartners: Partner[] = [
   },
   {
     id: 'part-2',
-    name: "Association Nangassou Solidarité",
+    name: "Association Solidarité",
     type: 'ong',
     logoUrl: './images/IMG-20260813-WA0151.jpg',
     description: {
@@ -929,7 +929,7 @@ export const initialDonations: Donation[] = [
     donorEmail: 'moussa.m@example.com',
     amount: 50000,
     projectId: 'proj-1',
-    projectTitle: 'Construction du bureau administratif au CEG de Nangassou',
+    projectTitle: 'Construction du bureau administratif au CEG',
     paymentMethod: 'airtel_money',
     reference: 'AJTES-DON-88421',
     status: 'succes',
@@ -1022,7 +1022,7 @@ export const initialUsers: User[] = [
     role: 'membre',
     profession: 'Enseignant',
     phone: '+235 66 12 34 56',
-    city: 'Nangassou',
+    city: 'Moundou',
     memberType: 'actif',
     membershipStatus: 'actif',
     dateJoined: '2023-04-10'
@@ -1058,7 +1058,7 @@ export const initialUsers: User[] = [
     role: 'membre',
     profession: 'Technicien Agronome',
     phone: '+235 63 99 77 55',
-    city: 'Nangassou',
+    city: 'Moundou',
     memberType: 'actif',
     membershipStatus: 'en_attente',
     dateJoined: '2026-09-02'

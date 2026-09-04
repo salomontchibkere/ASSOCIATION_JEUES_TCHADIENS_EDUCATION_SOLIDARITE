@@ -69,7 +69,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ setCurrentTab: _setCur
                 className={`video-tab-btn ${videoTab === 'ceg' ? 'active' : ''}`}
                 onClick={() => setVideoTab('ceg')}
               >
-                Inauguration CEG Nangassou (Reportage)
+                Inauguration Bureau CEG (Reportage)
               </button>
             </div>
 
@@ -89,7 +89,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ setCurrentTab: _setCur
             ) : (
               <div className="video-modal-body">
                 <div className="video-header-info">
-                  <h3>Reportage Vidéo Officiel : Bureau Administratif du CEG de Nangassou</h3>
+                  <h3>Reportage Vidéo Officiel : Bureau Administratif du CEG</h3>
                   <p>Réalisation majeure de l'Association des Jeunes Tchadiens pour l'Éducation et la Solidarité (Projet 2026)</p>
                 </div>
                 <video

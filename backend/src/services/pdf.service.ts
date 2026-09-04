@@ -118,7 +118,7 @@ export const generateDonationReceiptPDF = async (donation: any): Promise<Buffer>
 
       // Footer
       doc.rect(0, 790, 595.28, 52).fill('#0f172a');
-      doc.fillColor('#94a3b8').fontSize(8).font('Helvetica').text('AJTES Tchad — Siège Administratif N\'Djamena / Nangassou — Email : contact@ajtes.td — Site : www.ajtes.td', 40, 808, { align: 'center' });
+      doc.fillColor('#94a3b8').fontSize(8).font('Helvetica').text('AJTES Tchad — Siège Administratif N\'Djamena — Email : contact@ajtes.td — Site : www.ajtes.td', 40, 808, { align: 'center' });
 
       doc.end();
     } catch (err) {

@@ -38,7 +38,7 @@ export const ProjectsView: React.FC<ProjectsViewProps> = ({ setCurrentTab }) => 
             Nos Projets & <span className="animated-gradient-text">Actions Communautaires</span>
           </h1>
           <p className="projects-main-sub">
-            Découvrez nos réalisations phares (telles que la construction du bâtiment administratif du CEG de Nangassou) et nos projets en cours de financement à travers le Tchad.
+            Découvrez nos réalisations phares (telles que la construction du bâtiment administratif du CEG) et nos projets en cours de financement à travers le Tchad.
           </p>
         </div>
       </section>

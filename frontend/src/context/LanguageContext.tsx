@@ -67,9 +67,9 @@ export const uiTranslations: Translations = {
   realizationsTitle: { fr: 'Nos Réalisations Clés Sur le Terrain', en: 'Key Achievements on the Field', ar: 'إنجازاتنا الرئيسية على الميدان' },
   year2022Title: { fr: '2022 — Création de l\'AJTES', en: '2022 — Foundation of AJTES', ar: '2022 — تأسيس الجمعية' },
   year2022Desc: { fr: 'Lancement des premières activités d\'entraide et de sensibilisation pour l\'éducation.', en: 'Launch of first community support and education awareness activities.', ar: 'إطلاق أولى أنشطة التضامن والتوعية التعليمية.' },
-  year2023Title: { fr: '2023 — Distribution au CEG de Nangassou', en: '2023 — Distribution at CEG Nangassou', ar: '2023 — توزيع المستلزمات في إعدادية نانغاسو' },
+  year2023Title: { fr: '2023 — Distribution au CEG', en: '2023 — Distribution at CEG', ar: '2023 — توزيع المستلزمات في الإعدادية' },
   year2023Desc: { fr: 'Fournitures scolaires complètes distribuées aux élèves défavorisés.', en: 'Complete school kits distributed to underprivileged students.', ar: "توزيع مستلزمات مدرسية كاملة على الطلاب المتعثرين." },
-  year2026Title: { fr: '2026 — Bureau administratif au CEG de Nangassou', en: '2026 — Admin Office at CEG Nangassou', ar: '2026 — المبنى الإداري بإعدادية نانغاسو' },
+  year2026Title: { fr: '2026 — Bureau administratif au CEG', en: '2026 — Admin Office at CEG', ar: '2026 — المبنى الإداري بالإعدادية' },
   year2026Desc: { fr: 'Construction et équipement d\'un bâtiment administratif de deux chambres.', en: 'Construction and equipping of a 2-room administrative office building.', ar: 'بناء وتجهيز مبنى إداري مكون من غرفتين.' },
 
   // Footer & Institutional Call
@@ -77,12 +77,6 @@ export const uiTranslations: Translations = {
     fr: "Association des Jeunes Tchadiens pour l’Éducation et la Solidarité (AJTES) — Créée en 2022.",
     en: "Association of Young Chadians for Education and Solidarity (AJTES) — Founded in 2022.",
     ar: "جمعية الشباب التشاديين من أجل التعليم والتضامن (AJTES) — تأسست عام 2022."
-  },
-  partnerCallTitle: { fr: "Appel Institutionnel aux Partenaires & ONG", en: "Institutional Call to Partners & NGOs", ar: "نداء للمؤسسات والمنظمات الشريكة" },
-  partnerCallText: {
-    fr: "AJTES invite les ONG, institutions étatiques, entreprises et personnes de bonne volonté à unir leurs efforts afin d'offrir un avenir meilleur à la jeunesse tchadienne.",
-    en: "AJTES invites NGOs, government institutions, companies, and individuals of goodwill to join forces to empower Chadian youth.",
-    ar: "تدعو الجمعية المنظمات والمؤسسات والشركات وأهل الخير لتكثيف الجهود من أجل بناء مستقبل أفضل لشباب تشاد."
   },
 
   // Donation

@@ -36,7 +36,7 @@ export const AboutView: React.FC = () => {
               L'AJTES a vu le jour en 2022 face à un constat clair : les besoins urgents d'accompagnement des élèves et des établissements scolaires tchadiens nécessitent une mobilisation citoyenne forte et structurée.
             </p>
             <p>
-              Dès 2023, nos volontaires sont intervenus au <strong>CEG de Nangassou</strong> pour offrir des fournitures scolaires complètes. En 2026, nous avons franchi une étape majeure avec la <strong>construction d'un bureau administratif de deux chambres</strong> dans le même établissement.
+              Dès 2023, nos volontaires sont intervenus au <strong>CEG</strong> pour offrir des fournitures scolaires complètes. En 2026, nous avons franchi une étape majeure avec la <strong>construction d'un bureau administratif de deux chambres</strong> au bénéfice des élèves et du corps enseignant.
             </p>
           </div>
 

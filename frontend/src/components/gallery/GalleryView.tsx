@@ -25,7 +25,7 @@ export const GalleryView: React.FC = () => {
           </span>
           <h1>Médiathèque Officielle — Galerie Photos & Vidéos</h1>
           <p>
-            Retrouvez en images et vidéos le fil des réalisations, des chantiers d'infrastructures au CEG de Nangassou, des distributions scolaires et des événements de l'AJTES.
+            Retrouvez en images et vidéos le fil des réalisations, des chantiers d'infrastructures éducatives au CEG, des distributions scolaires et des événements de l'AJTES.
           </p>
         </div>
       </div>

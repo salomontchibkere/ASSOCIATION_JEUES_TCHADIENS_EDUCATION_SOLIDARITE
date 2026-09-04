@@ -104,21 +104,21 @@ async function main() {
   await prisma.project.createMany({
     data: [
       {
-        titleFr: 'Construction du bureau administratif du CEG de Nangassou',
-        summaryFr: 'Construction d\'un bureau administratif de deux chambres au niveau du CEG de Nangassou.',
-        descriptionFr: 'En 2026, l\'AJTES a réalisé la construction d\'un bâtiment administratif moderne de deux pièces pour équiper le Collège d\'Enseignement Général (CEG) de Nangassou, offrant de meilleures conditions de travail au corps enseignant.',
+        titleFr: 'Construction du bureau administratif du CEG',
+        summaryFr: 'Construction d\'un bureau administratif de deux chambres au niveau du CEG.',
+        descriptionFr: 'En 2026, l\'AJTES a réalisé la construction d\'un bâtiment administratif moderne de deux pièces pour équiper le Collège d\'Enseignement Général (CEG) de Tchad, offrant de meilleures conditions de travail au corps enseignant.',
         status: 'COMPLETED',
         year: 2026,
-        location: 'Nangassou, Tchad',
+        location: 'Tchad',
         budget: 3500000,
       },
       {
-        titleFr: 'Distribution de fournitures scolaires au CEG de Nangassou',
-        summaryFr: 'Distribution gratuite de kits scolaires complets aux élèves du CEG de Nangassou.',
+        titleFr: 'Distribution de fournitures scolaires au CEG',
+        summaryFr: 'Distribution gratuite de kits scolaires complets aux élèves du CEG.',
         descriptionFr: 'Actions de solidarité menées en 2023 pour encourager la scolarisation des jeunes ruraux à travers la dotation de cahiers, stylos et manuels pédagogiques.',
         status: 'COMPLETED',
         year: 2023,
-        location: 'Nangassou, Tchad',
+        location: 'Tchad',
         budget: 1200000,
       },
       {
@@ -138,8 +138,8 @@ async function main() {
   await prisma.news.createMany({
     data: [
       {
-        titleFr: 'Inauguration officielle du nouveau bureau administratif au CEG de Nangassou',
-        contentFr: 'L\'Association des Jeunes Tchadiens pour l\'Éducation et la Solidarité (AJTES) a inauguré avec succès le nouveau bureau administratif de deux chambres construit pour le CEG de Nangassou. Une grande avancée pour la jeunesse locale !',
+        titleFr: 'Inauguration officielle du nouveau bureau administratif au CEG',
+        contentFr: 'L\'Association des Jeunes Tchadiens pour l\'Éducation et la Solidarité (AJTES) a inauguré avec succès le nouveau bureau administratif de deux chambres construit pour le CEG. Une grande avancée pour la jeunesse locale !',
         category: 'ACTUALITE',
         published: true,
         authorId: adminRefId,

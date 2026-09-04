@@ -13,7 +13,7 @@ export const ActionFields: React.FC = () => {
     { icon: <Theater size={28} />, title: t('domainCulture'), desc: 'Promotion du patrimoine tchadien et événements culturels de la jeunesse.' },
     { icon: <Trophy size={28} />, title: t('domainSport'), desc: 'Tournois sportifs pour la jeunesse et rassemblements citoyens d\'intégration.' },
     { icon: <ShieldCheck size={28} />, title: t('domainReligion'), desc: 'Promotion de la paix, du respect mutuel et du dialogue interculturel.' },
-    { icon: <Building2 size={28} />, title: t('domainDev'), desc: 'Développement local, infrastructures éducatives (CEG Nangassou) et aménagement.' },
+    { icon: <Building2 size={28} />, title: t('domainDev'), desc: 'Développement local, infrastructures éducatives (CEG) et aménagement.' },
     { icon: <Sparkles size={28} />, title: 'Accompagnement Jeunesse', desc: 'Orientation, mentorat et valorisation des talents par le Bureau Exécutif.' }
   ];
 
