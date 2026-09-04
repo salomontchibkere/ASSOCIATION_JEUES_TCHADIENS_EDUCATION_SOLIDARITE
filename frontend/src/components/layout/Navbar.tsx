@@ -23,7 +23,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, navig
     { id: 'realizations', label: 'Nos Réalisations' },
     { id: 'projects', label: t('navProjects') },
     { id: 'documents', label: 'Statuts & Règlement' },
-    { id: 'news', label: t('navNews') },
+    { id: 'news', label: 'Actualités & Nouvelles' },
     { id: 'gallery', label: t('navGallery') },
     { id: 'committees', label: t('navCommittees') },
     { id: 'contact', label: t('navContact') }

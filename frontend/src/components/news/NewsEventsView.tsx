@@ -356,20 +356,47 @@ export const NewsEventsView: React.FC = () => {
                       )}
 
                       {/* Visitor Reactions Bar & Comment Toggle */}
-                      <div className="reactions-bar" style={{ display: 'flex', gap: '0.4rem', margin: '0.75rem 0', alignItems: 'center', flexWrap: 'wrap' }}>
+                      <div className="reactions-bar" style={{ display: 'flex', gap: '0.5rem', margin: '0.85rem 0', alignItems: 'center', flexWrap: 'wrap' }}>
                         <button
                           type="button"
                           className="btn-reaction"
                           onClick={() => handleReact(item.id, 'likes')}
-                          style={{ border: '1px solid #E5E7EB', background: '#F9FAFB', borderRadius: '20px', padding: '0.25rem 0.65rem', fontSize: '0.8rem', cursor: 'pointer', fontWeight: 600 }}
+                          style={{
+                            border: '1px solid #2563EB',
+                            background: '#EFF6FF',
+                            color: '#1D4ED8',
+                            borderRadius: '20px',
+                            padding: '0.35rem 0.85rem',
+                            fontSize: '0.84rem',
+                            cursor: 'pointer',
+                            fontWeight: 800,
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '0.35rem',
+                            boxShadow: '0 2px 5px rgba(37,99,235,0.15)',
+                            transition: 'all 0.15s'
+                          }}
+                          title="Laissez un pouce bleu pour aimer cette publication !"
                         >
-                          👍 J'aime ({reactions[item.id]?.likes || 0})
+                          👍 Pouce Bleu J'aime ({reactions[item.id]?.likes || 0})
                         </button>
                         <button
                           type="button"
                           className="btn-reaction"
                           onClick={() => handleReact(item.id, 'hearts')}
-                          style={{ border: '1px solid #E5E7EB', background: '#F9FAFB', borderRadius: '20px', padding: '0.25rem 0.65rem', fontSize: '0.8rem', cursor: 'pointer', fontWeight: 600 }}
+                          style={{
+                            border: '1px solid #EC4899',
+                            background: '#FDF2F8',
+                            color: '#BE185D',
+                            borderRadius: '20px',
+                            padding: '0.35rem 0.85rem',
+                            fontSize: '0.84rem',
+                            cursor: 'pointer',
+                            fontWeight: 700,
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '0.35rem'
+                          }}
                         >
                           ❤️ Soutien ({reactions[item.id]?.hearts || 0})
                         </button>
@@ -377,16 +404,38 @@ export const NewsEventsView: React.FC = () => {
                           type="button"
                           className="btn-reaction"
                           onClick={() => handleReact(item.id, 'claps')}
-                          style={{ border: '1px solid #E5E7EB', background: '#F9FAFB', borderRadius: '20px', padding: '0.25rem 0.65rem', fontSize: '0.8rem', cursor: 'pointer', fontWeight: 600 }}
+                          style={{
+                            border: '1px solid #D97706',
+                            background: '#FEF3C7',
+                            color: '#B45309',
+                            borderRadius: '20px',
+                            padding: '0.35rem 0.85rem',
+                            fontSize: '0.84rem',
+                            cursor: 'pointer',
+                            fontWeight: 700,
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '0.35rem'
+                          }}
                         >
                           👏 Bravo ({reactions[item.id]?.claps || 0})
                         </button>
                         <button
                           type="button"
                           onClick={() => setOpenInlineCommentId(openInlineCommentId === item.id ? null : item.id)}
-                          style={{ border: '1px solid var(--primary-emerald)', background: openInlineCommentId === item.id ? 'var(--primary-emerald-light)' : '#FFF', color: 'var(--primary-emerald-text)', borderRadius: '20px', padding: '0.25rem 0.65rem', fontSize: '0.8rem', cursor: 'pointer', fontWeight: 700, marginLeft: 'auto' }}
+                          style={{
+                            border: '1px solid #007A3D',
+                            background: openInlineCommentId === item.id ? '#007A3D' : '#ECFDF5',
+                            color: openInlineCommentId === item.id ? '#FFF' : '#047857',
+                            borderRadius: '20px',
+                            padding: '0.35rem 0.85rem',
+                            fontSize: '0.84rem',
+                            cursor: 'pointer',
+                            fontWeight: 800,
+                            marginLeft: 'auto'
+                          }}
                         >
-                          💬 Commenter ({(comments[item.id] || []).length})
+                          💬 Commentaires ({(comments[item.id] || []).length})
                         </button>
                       </div>
 
