@@ -45,17 +45,17 @@ const DataContext = createContext<DataContextType | undefined>(undefined);
 
 const loadSaved = <T,>(key: string, fallback: T): T => {
   try {
-    const item = localStorage.getItem(`ajtes_v2_${key}`);
+    const item = localStorage.getItem(`ajtes_v3_${key}`);
     if (item) {
-      // If cached item contains residual "Nangassou", discard it to enforce neutrality
-      if (item.includes('Nangassou') || item.includes('nangassou')) {
-        localStorage.removeItem(`ajtes_v2_${key}`);
+      if (item.includes('Nangassou') || item.includes('nangassou') || item.includes('media-vid-')) {
+        localStorage.removeItem(`ajtes_v3_${key}`);
         return fallback;
       }
       return JSON.parse(item);
     }
-    // Also clean up old v1 keys if present
+    // Clean up old version keys if present
     localStorage.removeItem(`ajtes_${key}`);
+    localStorage.removeItem(`ajtes_v2_${key}`);
     return fallback;
   } catch (e) {
     return fallback;
@@ -66,13 +66,15 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [projects, setProjects] = useState<Project[]>(() => loadSaved('projects', initialProjects));
   const [news, setNews] = useState<NewsArticle[]>(() => loadSaved('news', initialNews));
   const [events, setEvents] = useState<Event[]>(() => loadSaved('events', initialEvents));
-  const [media, setMedia] = useState<MediaItem[]>(() => loadSaved('media', initialMedia));
+  const [media, setMedia] = useState<MediaItem[]>(() => {
+    const saved = loadSaved('media', initialMedia);
+    return saved.filter(m => m.type !== 'video');
+  });
   const [officialDocuments, setOfficialDocuments] = useState<OfficialDocument[]>(() => {
     const loaded = loadSaved('officialDocuments', initialOfficialDocuments);
-    // Strictly filter out any confidential or non-public documents
     const sanitized = loaded.filter(doc => doc.id === 'doc-statuts' || doc.id === 'doc-reglement');
     try {
-      localStorage.setItem('ajtes_v2_officialDocuments', JSON.stringify(sanitized));
+      localStorage.setItem('ajtes_v3_officialDocuments', JSON.stringify(sanitized));
     } catch (e) {}
     return sanitized;
   });
@@ -82,13 +84,13 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [contactMessages, setContactMessages] = useState<ContactMessage[]>(() => loadSaved('contactMessages', []));
   const [users, setUsers] = useState<User[]>(() => loadSaved('users', initialUsers));
 
-  // Sync state to localStorage with v2 key
-  useEffect(() => { localStorage.setItem('ajtes_v2_projects', JSON.stringify(projects)); }, [projects]);
-  useEffect(() => { localStorage.setItem('ajtes_v2_news', JSON.stringify(news)); }, [news]);
-  useEffect(() => { localStorage.setItem('ajtes_v2_media', JSON.stringify(media)); }, [media]);
-  useEffect(() => { localStorage.setItem('ajtes_v2_donations', JSON.stringify(donations)); }, [donations]);
-  useEffect(() => { localStorage.setItem('ajtes_v2_contactMessages', JSON.stringify(contactMessages)); }, [contactMessages]);
-  useEffect(() => { localStorage.setItem('ajtes_v2_users', JSON.stringify(users)); }, [users]);
+  // Sync state to localStorage with v3 key
+  useEffect(() => { localStorage.setItem('ajtes_v3_projects', JSON.stringify(projects)); }, [projects]);
+  useEffect(() => { localStorage.setItem('ajtes_v3_news', JSON.stringify(news)); }, [news]);
+  useEffect(() => { localStorage.setItem('ajtes_v3_media', JSON.stringify(media)); }, [media]);
+  useEffect(() => { localStorage.setItem('ajtes_v3_donations', JSON.stringify(donations)); }, [donations]);
+  useEffect(() => { localStorage.setItem('ajtes_v3_contactMessages', JSON.stringify(contactMessages)); }, [contactMessages]);
+  useEffect(() => { localStorage.setItem('ajtes_v3_users', JSON.stringify(users)); }, [users]);
 
   const confirmUser = (userId: string) => {
     setUsers(prev => prev.map(u => u.id === userId ? { ...u, membershipStatus: 'admis' } : u));

@@ -261,20 +261,6 @@ export const initialOfficialDocuments: OfficialDocument[] = [
 
 export const initialMedia: MediaItem[] = [
   {
-    id: 'media-video-tutorial-salomon',
-    title: {
-      fr: "Tutoriel Officiel : Inscription, Connexion & Guide d'utilisation (Présenté par Salomon — Resp. Technique AJTES)",
-      en: "Official Platform Guide & Tutorial (Presented by Salomon - AJTES Tech Lead)",
-      ar: "الشرح الرسمي للموقع واستخدامه (تقديم سالومون - المسؤول التقني)"
-    },
-    type: 'video',
-    url: './images/tutoriel_demo_salomon_ajtes.gif',
-    thumbnailUrl: './images/IMG_20250119_163228_691.jpg',
-    year: 2026,
-    category: 'Tutoriels & Démonstrations',
-    location: "N'Djamena"
-  },
-  {
     id: 'media-photo-1',
     title: {
       fr: "Cérémonie officielle d'inauguration du bureau administratif",
@@ -727,118 +713,6 @@ export const initialMedia: MediaItem[] = [
     url: './images/IMG_20250119_163427_776.jpg',
     year: 2025,
     category: 'Photos Officielles',
-    location: "N'Djamena"
-  },
-  {
-    id: 'media-vid-1',
-    title: {
-      fr: "Vidéo — Évolution des travaux de fondation et maçonnerie du bureau",
-      en: "Vidéo — Évolution des travaux de fondation et maçonnerie du bureau",
-      ar: "Vidéo — Évolution des travaux de fondation et maçonnerie du bureau"
-    },
-    type: 'video',
-    url: './videos/Demonstration_Complete_AJTES_3min_Salomon.mp4',
-    thumbnailUrl: './images/IMG-20260813-WA0085.jpg',
-    year: 2026,
-    category: 'Vidéos Officielles',
-    location: "Tchad"
-  },
-  {
-    id: 'media-vid-2',
-    title: {
-      fr: "Vidéo — Synthèse audiovisuelle des actions et projets de l'AJTES",
-      en: "Vidéo — Synthèse audiovisuelle des actions et projets de l'AJTES",
-      ar: "Vidéo — Synthèse audiovisuelle des actions et projets de l'AJTES"
-    },
-    type: 'video',
-    url: './videos/TUTORIEL_AJTES_SALOMON_3MIN.mp4',
-    thumbnailUrl: './images/IMG-20260813-WA0123.jpg',
-    year: 2026,
-    category: 'Vidéos Officielles',
-    location: "N'Djamena"
-  },
-  {
-    id: 'media-vid-3',
-    title: {
-      fr: "Vidéo — Témoignages des élèves, enseignants et responsables du collège",
-      en: "Vidéo — Témoignages des élèves, enseignants et responsables du collège",
-      ar: "Vidéo — Témoignages des élèves, enseignants et responsables du collège"
-    },
-    type: 'video',
-    url: './videos/VID-20260726-WA0093.mp4',
-    thumbnailUrl: './images/IMG-20260813-WA0093.jpg',
-    year: 2026,
-    category: 'Vidéos Officielles',
-    location: "Tchad"
-  },
-  {
-    id: 'media-vid-4',
-    title: {
-      fr: "Vidéo — Rapport de chantier : Construction du bureau du CEG",
-      en: "Vidéo — Rapport de chantier : Construction du bureau du CEG",
-      ar: "Vidéo — Rapport de chantier : Construction du bureau du CEG"
-    },
-    type: 'video',
-    url: './videos/VID-20260813-WA0152.mp4',
-    thumbnailUrl: './images/IMG-20260813-WA0106.jpg',
-    year: 2026,
-    category: 'Vidéos Officielles',
-    location: "Tchad"
-  },
-  {
-    id: 'media-vid-5',
-    title: {
-      fr: "Vidéo — Cérémonie d'inauguration & Allocutions officielles du Bureau AJTES",
-      en: "Vidéo — Cérémonie d'inauguration & Allocutions officielles du Bureau AJTES",
-      ar: "Vidéo — Cérémonie d'inauguration & Allocutions officielles du Bureau AJTES"
-    },
-    type: 'video',
-    url: './videos/VID-20260813-WA0153.mp4',
-    thumbnailUrl: './images/IMG-20260813-WA0083.jpg',
-    year: 2026,
-    category: 'Vidéos Officielles',
-    location: "Tchad"
-  },
-  {
-    id: 'media-vid-6',
-    title: {
-      fr: "Vidéo — Reportage terrain : Activités et engagements de la jeunesse AJTES",
-      en: "Vidéo — Reportage terrain : Activités et engagements de la jeunesse AJTES",
-      ar: "Vidéo — Reportage terrain : Activités et engagements de la jeunesse AJTES"
-    },
-    type: 'video',
-    url: './videos/VID-20260816-WA0077.mp4',
-    thumbnailUrl: './images/IMG-20260816-WA0058.jpg',
-    year: 2026,
-    category: 'Vidéos Officielles',
-    location: "Tchad"
-  },
-  {
-    id: 'media-vid-7',
-    title: {
-      fr: "Vidéo — Immersion terrain : Campagne de reboisement et salubrité",
-      en: "Vidéo — Immersion terrain : Campagne de reboisement et salubrité",
-      ar: "Vidéo — Immersion terrain : Campagne de reboisement et salubrité"
-    },
-    type: 'video',
-    url: './videos/VID_20250928_145845.mp4',
-    thumbnailUrl: './images/IMG-20260813-WA0113.jpg',
-    year: 2025,
-    category: 'Vidéos Officielles',
-    location: "Tchad"
-  },
-  {
-    id: 'media-vid-8',
-    title: {
-      fr: "Vidéo — Présentation générale de la plateforme web AJTES",
-      en: "Vidéo — Présentation générale de la plateforme web AJTES",
-      ar: "Vidéo — Présentation générale de la plateforme web AJTES"
-    },
-    type: 'video',
-    url: './videos/Demonstration_Complete_AJTES_3min_Salomon.mp4',
-    thumbnailUrl: './images/IMG-20260813-WA0142.jpg',
-    year: 2026,
-    category: 'Vidéos Officielles',
     location: "N'Djamena"
   }
 ];
