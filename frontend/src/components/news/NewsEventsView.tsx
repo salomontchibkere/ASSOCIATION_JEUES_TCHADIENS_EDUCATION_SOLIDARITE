@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useData } from '../../context/DataContext';
 import { useLanguage } from '../../context/LanguageContext';
 import { useAuth } from '../../context/AuthContext';
@@ -16,13 +16,59 @@ export const NewsEventsView: React.FC = () => {
   const [registerEvent, setRegisterEvent] = useState<Event | null>(null);
   const [registeredSuccess, setRegisteredSuccess] = useState(false);
 
-  // Visitor Reactions State
-  const [reactions, setReactions] = useState<Record<string, { likes: number; hearts: number; claps: number }>>({});
-  
-  // Visitor Comments State
-  const [comments, setComments] = useState<Record<string, Array<{ id: string; author: string; text: string; date: string }>>>({});
+  // Visitor Reactions State with localStorage persistence
+  const [reactions, setReactions] = useState<Record<string, { likes: number; hearts: number; claps: number }>>(() => {
+    try {
+      const saved = localStorage.getItem('ajtes_v4_reactions');
+      return saved ? JSON.parse(saved) : {
+        'news-1': { likes: 14, hearts: 8, claps: 12 },
+        'news-2': { likes: 9, hearts: 6, claps: 11 },
+        'news-3': { likes: 7, hearts: 5, claps: 4 }
+      };
+    } catch (e) {
+      return {};
+    }
+  });
+
+  // Visitor Comments State with localStorage persistence
+  const initialDefaultComments: Record<string, Array<{ id: string; author: string; text: string; date: string }>> = {
+    'news-1': [
+      { id: 'c-1', author: 'Mahamat Abakar', text: 'Félicitations au Bureau AJTES pour cette belle réalisation concrète au service des élèves !', date: '16/08/2026 10:15' },
+      { id: 'c-2', author: 'Clarisse N.', text: 'Une excellente initiative qui va encourager le personnel enseignant et moderniser l\'école.', date: '17/08/2026 14:30' }
+    ],
+    'news-2': [
+      { id: 'c-3', author: 'Yves T.', text: 'Bravo pour la campagne de reboisement, la jeunesse tchadienne en action !', date: '21/08/2026 09:00' }
+    ],
+    'news-3': [
+      { id: 'c-4', author: 'Salimata B.', text: 'Merci pour le soutien scolaire et la distribution de fournitures aux enfants.', date: '29/08/2026 16:45' }
+    ]
+  };
+
+  const [comments, setComments] = useState<Record<string, Array<{ id: string; author: string; text: string; date: string }>>>(() => {
+    try {
+      const saved = localStorage.getItem('ajtes_v4_comments');
+      return saved ? JSON.parse(saved) : initialDefaultComments;
+    } catch (e) {
+      return initialDefaultComments;
+    }
+  });
+
   const [commentAuthor, setCommentAuthor] = useState('');
   const [commentText, setCommentText] = useState('');
+  const [openInlineCommentId, setOpenInlineCommentId] = useState<string | null>(null);
+
+  // Sync reactions & comments to localStorage
+  useEffect(() => {
+    try {
+      localStorage.setItem('ajtes_v4_reactions', JSON.stringify(reactions));
+    } catch (e) {}
+  }, [reactions]);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('ajtes_v4_comments', JSON.stringify(comments));
+    } catch (e) {}
+  }, [comments]);
 
   const handleReact = (articleId: string, type: 'likes' | 'hearts' | 'claps') => {
     setReactions(prev => {
@@ -45,7 +91,7 @@ export const NewsEventsView: React.FC = () => {
       id: `c-${Date.now()}`,
       author: commentAuthor.trim() || (currentUser?.name ? currentUser.name : 'Visiteur du site'),
       text: commentText.trim(),
-      date: new Date().toLocaleDateString('fr-FR', { hour: '2-digit', minute: '2-digit' })
+      date: new Date().toLocaleDateString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric' }) + ' ' + new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })
     };
 
     setComments(prev => ({
@@ -277,36 +323,96 @@ export const NewsEventsView: React.FC = () => {
                         </div>
                       )}
 
-                      {/* Visitor Reactions Bar */}
+                      {/* Visitor Reactions Bar & Comment Toggle */}
                       <div className="reactions-bar" style={{ display: 'flex', gap: '0.4rem', margin: '0.75rem 0', alignItems: 'center', flexWrap: 'wrap' }}>
                         <button
                           type="button"
                           className="btn-reaction"
                           onClick={() => handleReact(item.id, 'likes')}
-                          style={{ border: '1px solid #E5E7EB', background: '#F9FAFB', borderRadius: '20px', padding: '0.2rem 0.55rem', fontSize: '0.8rem', cursor: 'pointer' }}
+                          style={{ border: '1px solid #E5E7EB', background: '#F9FAFB', borderRadius: '20px', padding: '0.25rem 0.65rem', fontSize: '0.8rem', cursor: 'pointer', fontWeight: 600 }}
                         >
-                          J'aime ({reactions[item.id]?.likes || 0})
+                          👍 J'aime ({reactions[item.id]?.likes || 0})
                         </button>
                         <button
                           type="button"
                           className="btn-reaction"
                           onClick={() => handleReact(item.id, 'hearts')}
-                          style={{ border: '1px solid #E5E7EB', background: '#F9FAFB', borderRadius: '20px', padding: '0.2rem 0.55rem', fontSize: '0.8rem', cursor: 'pointer' }}
+                          style={{ border: '1px solid #E5E7EB', background: '#F9FAFB', borderRadius: '20px', padding: '0.25rem 0.65rem', fontSize: '0.8rem', cursor: 'pointer', fontWeight: 600 }}
                         >
-                          Soutien ({reactions[item.id]?.hearts || 0})
+                          ❤️ Soutien ({reactions[item.id]?.hearts || 0})
                         </button>
                         <button
                           type="button"
                           className="btn-reaction"
                           onClick={() => handleReact(item.id, 'claps')}
-                          style={{ border: '1px solid #E5E7EB', background: '#F9FAFB', borderRadius: '20px', padding: '0.2rem 0.55rem', fontSize: '0.8rem', cursor: 'pointer' }}
+                          style={{ border: '1px solid #E5E7EB', background: '#F9FAFB', borderRadius: '20px', padding: '0.25rem 0.65rem', fontSize: '0.8rem', cursor: 'pointer', fontWeight: 600 }}
                         >
-                          Bravo ({reactions[item.id]?.claps || 0})
+                          👏 Bravo ({reactions[item.id]?.claps || 0})
                         </button>
-                        <span style={{ fontSize: '0.78rem', color: '#6B7280', marginLeft: 'auto' }}>
-                          Commentaires: {(comments[item.id] || []).length}
-                        </span>
+                        <button
+                          type="button"
+                          onClick={() => setOpenInlineCommentId(openInlineCommentId === item.id ? null : item.id)}
+                          style={{ border: '1px solid var(--primary-emerald)', background: openInlineCommentId === item.id ? 'var(--primary-emerald-light)' : '#FFF', color: 'var(--primary-emerald-text)', borderRadius: '20px', padding: '0.25rem 0.65rem', fontSize: '0.8rem', cursor: 'pointer', fontWeight: 700, marginLeft: 'auto' }}
+                        >
+                          💬 Commenter ({(comments[item.id] || []).length})
+                        </button>
                       </div>
+
+                      {/* Inline Visitor Comment Drawer */}
+                      {openInlineCommentId === item.id && (
+                        <div className="inline-comment-drawer" style={{ background: '#F8FAFC', border: '1px solid #E2E8F0', borderRadius: '12px', padding: '1rem', marginTop: '0.75rem', marginBottom: '0.75rem' }}>
+                          <h4 style={{ fontSize: '0.92rem', color: 'var(--neutral-heading)', marginBottom: '0.6rem', fontWeight: 700 }}>
+                            💬 Commentaires des visiteurs ({(comments[item.id] || []).length})
+                          </h4>
+
+                          {/* Quick Add Form */}
+                          <form onSubmit={(e) => handleAddComment(e, item.id)} style={{ marginBottom: '1rem' }}>
+                            <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.5rem' }}>
+                              <input
+                                type="text"
+                                placeholder="Votre Nom / Prénom (Optionnel)"
+                                value={commentAuthor}
+                                onChange={e => setCommentAuthor(e.target.value)}
+                                className="form-control"
+                                style={{ fontSize: '0.82rem', padding: '0.4rem 0.65rem' }}
+                              />
+                            </div>
+                            <div style={{ display: 'flex', gap: '0.5rem' }}>
+                              <input
+                                type="text"
+                                required
+                                placeholder="Écrivez votre commentaire ici..."
+                                value={commentText}
+                                onChange={e => setCommentText(e.target.value)}
+                                className="form-control"
+                                style={{ flex: 1, fontSize: '0.85rem', padding: '0.45rem 0.65rem' }}
+                              />
+                              <button type="submit" className="btn btn-gold btn-sm" style={{ padding: '0.4rem 0.85rem', fontSize: '0.82rem', fontWeight: 700 }}>
+                                Envoyer
+                              </button>
+                            </div>
+                          </form>
+
+                          {/* Comments list */}
+                          <div style={{ maxHeight: '200px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+                            {(comments[item.id] || []).length === 0 ? (
+                              <p style={{ fontSize: '0.8rem', color: '#94A3B8', fontStyle: 'italic', margin: 0 }}>
+                                Aucun commentaire pour le moment. Soyez le premier à réagir !
+                              </p>
+                            ) : (
+                              (comments[item.id] || []).map(c => (
+                                <div key={c.id} style={{ background: '#FFFFFF', padding: '0.5rem 0.75rem', borderRadius: '8px', border: '1px solid #E2E8F0' }}>
+                                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.2rem' }}>
+                                    <strong style={{ fontSize: '0.82rem', color: '#1E293B' }}>{c.author}</strong>
+                                    <span style={{ fontSize: '0.72rem', color: '#94A3B8' }}>{c.date}</span>
+                                  </div>
+                                  <p style={{ margin: 0, fontSize: '0.83rem', color: '#334155', lineHeight: 1.4 }}>{c.text}</p>
+                                </div>
+                              ))
+                            )}
+                          </div>
+                        </div>
+                      )}
 
                       <div className="news-footer">
                         <span className="author">Auteur : {item.author}</span>

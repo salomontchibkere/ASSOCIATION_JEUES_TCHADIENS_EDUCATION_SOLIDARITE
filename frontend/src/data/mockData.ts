@@ -129,7 +129,80 @@ export const initialProjects: Project[] = [
   }
 ];
 
-export const initialNews: NewsArticle[] = [];
+export const initialNews: NewsArticle[] = [
+  {
+    id: 'news-1',
+    title: {
+      fr: "Communiqué Officiel : Inauguration réussie du bureau administratif du CEG",
+      en: "Official Press Release: Successful Inauguration of CEG Administrative Building",
+      ar: "بيان رسمي: افتتاح المبنى الإداري للإعدادية بنجاح"
+    },
+    summary: {
+      fr: "L'AJTES annonce la finalisation et la remise officielle des clés du bâtiment administratif composé de deux bureaux équipés pour la direction du collège.",
+      en: "AJTES announces the completion and official handover of the administrative building comprising two equipped offices for school management.",
+      ar: "تعلن الجمعية عن اكتمال وتسليم مفاتيح المبنى الإداري مكون من غرفتين مجهزتين للإدارة."
+    },
+    content: {
+      fr: "L'Association des Jeunes Tchadiens pour l’Éducation et la Solidarité (AJTES) a le plaisir d'informer l'opinion publique, ses partenaires institutionnels et la communauté éducative de la réception officielle du bureau administratif du Collège d'Enseignement Général (CEG).\n\nRéalisé grâce à la mobilisation des membres et donateurs, ce bâtiment moderne de deux chambres offrira aux enseignants et à l'administration scolaire des conditions de travail décentes, sécurisées et propices au suivi des élèves.\n\nLe Bureau Exécutif de l'AJTES réitère son engagement ferme à poursuivre ses actions concrètes en faveur de la jeunesse et de la scolarisation au Tchad.",
+      en: "The Association of Young Chadians for Education and Solidarity (AJTES) is pleased to inform the public, institutional partners, and the educational community of the official reception of the CEG administrative office.",
+      ar: "تعلن جمعية الشباب التشاديين من أجل التعليم والتضامن عن تسليم المكتب الإداري بنجاح."
+    },
+    category: 'communique',
+    author: 'Bureau Exécutif AJTES',
+    publishDate: '2026-08-15',
+    imageUrl: './images/IMG-20260813-WA0106.jpg',
+    featured: true,
+    type: 'communique'
+  },
+  {
+    id: 'news-2',
+    title: {
+      fr: "Lancement de la grande campagne d'éco-citoyenneté et de salubrité 2026",
+      en: "Launch of the 2026 Eco-Citizenship and Sanitation Campaign",
+      ar: "إطلاق حملة المواطنة البيئية والنظافة لعام 2026"
+    },
+    summary: {
+      fr: "Mobilisation des comités de jeunes pour l'assainissement et la plantation d'arbres dans les établissements scolaires du Tchad.",
+      en: "Mobilization of youth committees for sanitation and tree planting across Chadian schools.",
+      ar: "تعبئة لجان الشباب للنظافة وغرس الأشجار في المدارس."
+    },
+    content: {
+      fr: "Dans le cadre de la mise en œuvre de ses objectifs environnementaux (Article 5 des Statuts), la Commission Éco-Citoyenneté de l'AJTES a officiellement lancé sa campagne de reboisement et d'assainissement en milieu scolaire.\n\nPlus de 500 arbres d'ombrage seront plantés dans la cour des établissements cibles et des séances de sensibilisation à la propreté urbaine sont dispensées par les bénévoles de l'association.",
+      en: "As part of its environmental goals, the AJTES Eco-Citizenship Commission has launched its school reforestation drive.",
+      ar: "في إطار تحقيق أهدافها البيئية، أطلقت الجمعية حملة غرس الأشجار في المدارس."
+    },
+    category: 'environnement',
+    author: 'Commission Environnement AJTES',
+    publishDate: '2026-08-20',
+    imageUrl: './images/IMG-20260813-WA0113.jpg',
+    featured: true,
+    type: 'article'
+  },
+  {
+    id: 'news-3',
+    title: {
+      fr: "Bilan des kits scolaires distribués et préparation de la rentrée 2026-2027",
+      en: "Assessment of Distributed School Supplies & Preparation for 2026-2027 Term",
+      ar: "تقرير الحقائب المدرسية الموزعة والتحضير للعام الدراسي الجديد"
+    },
+    summary: {
+      fr: "Retour sur l'impact de la distribution de fournitures aux 320 élèves vulnérables et ouverture des inscriptions pour les cours de soutien gratuits.",
+      en: "Review of the impact of school supplies distributed to 320 vulnerable students and opening of registration for free tutoring.",
+      ar: "تقييم أثر توزيع الحقائب المدرسية على 320 طالباً وفتح التسجيل لدروس الدعم."
+    },
+    content: {
+      fr: "Grâce au soutien des membres et donateurs, plus de 320 élèves défavorisés ont bénéficié de kits scolaires complets au cours des campagnes précédentes. L'AJTES prépare actuellement la nouvelle phase d'orientation académique et de soutien scolaire gratuit pour accompagner les candidats aux examens d'État.",
+      en: "Thanks to our donors, 320 students received school supplies. AJTES is preparing the next phase of academic support.",
+      ar: "بفضل دعم المتبرعين والأعضاء، استفاد أكثر من 320 طالباً من المستلزمات المدرسية."
+    },
+    category: 'education',
+    author: 'Comité Éducation AJTES',
+    publishDate: '2026-08-28',
+    imageUrl: './images/IMG-20260813-WA0142.jpg',
+    featured: false,
+    type: 'article'
+  }
+];
 
 export const initialEvents: Event[] = [
   {
