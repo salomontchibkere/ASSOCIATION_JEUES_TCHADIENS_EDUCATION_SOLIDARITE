@@ -45,8 +45,18 @@ const DataContext = createContext<DataContextType | undefined>(undefined);
 
 const loadSaved = <T,>(key: string, fallback: T): T => {
   try {
-    const item = localStorage.getItem(`ajtes_${key}`);
-    return item ? JSON.parse(item) : fallback;
+    const item = localStorage.getItem(`ajtes_v2_${key}`);
+    if (item) {
+      // If cached item contains residual "Nangassou", discard it to enforce neutrality
+      if (item.includes('Nangassou') || item.includes('nangassou')) {
+        localStorage.removeItem(`ajtes_v2_${key}`);
+        return fallback;
+      }
+      return JSON.parse(item);
+    }
+    // Also clean up old v1 keys if present
+    localStorage.removeItem(`ajtes_${key}`);
+    return fallback;
   } catch (e) {
     return fallback;
   }
@@ -62,7 +72,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     // Strictly filter out any confidential or non-public documents
     const sanitized = loaded.filter(doc => doc.id === 'doc-statuts' || doc.id === 'doc-reglement');
     try {
-      localStorage.setItem('ajtes_officialDocuments', JSON.stringify(sanitized));
+      localStorage.setItem('ajtes_v2_officialDocuments', JSON.stringify(sanitized));
     } catch (e) {}
     return sanitized;
   });
@@ -72,13 +82,13 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [contactMessages, setContactMessages] = useState<ContactMessage[]>(() => loadSaved('contactMessages', []));
   const [users, setUsers] = useState<User[]>(() => loadSaved('users', initialUsers));
 
-  // Sync state to localStorage
-  useEffect(() => { localStorage.setItem('ajtes_projects', JSON.stringify(projects)); }, [projects]);
-  useEffect(() => { localStorage.setItem('ajtes_news', JSON.stringify(news)); }, [news]);
-  useEffect(() => { localStorage.setItem('ajtes_media', JSON.stringify(media)); }, [media]);
-  useEffect(() => { localStorage.setItem('ajtes_donations', JSON.stringify(donations)); }, [donations]);
-  useEffect(() => { localStorage.setItem('ajtes_contactMessages', JSON.stringify(contactMessages)); }, [contactMessages]);
-  useEffect(() => { localStorage.setItem('ajtes_users', JSON.stringify(users)); }, [users]);
+  // Sync state to localStorage with v2 key
+  useEffect(() => { localStorage.setItem('ajtes_v2_projects', JSON.stringify(projects)); }, [projects]);
+  useEffect(() => { localStorage.setItem('ajtes_v2_news', JSON.stringify(news)); }, [news]);
+  useEffect(() => { localStorage.setItem('ajtes_v2_media', JSON.stringify(media)); }, [media]);
+  useEffect(() => { localStorage.setItem('ajtes_v2_donations', JSON.stringify(donations)); }, [donations]);
+  useEffect(() => { localStorage.setItem('ajtes_v2_contactMessages', JSON.stringify(contactMessages)); }, [contactMessages]);
+  useEffect(() => { localStorage.setItem('ajtes_v2_users', JSON.stringify(users)); }, [users]);
 
   const confirmUser = (userId: string) => {
     setUsers(prev => prev.map(u => u.id === userId ? { ...u, membershipStatus: 'admis' } : u));
