@@ -28,4 +28,5 @@ doc/
 docs/documents/
 frontend/public/documents/
 *.pdf
+!Dossier_Administratif_Livraison_AJTES_2026.pdf
 
