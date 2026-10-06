@@ -5,6 +5,7 @@ Générateur du Dossier Administratif Officiel de Livraison
 Projet : Plateforme Numérique Officielle AJTES Tchad
 Auteur : Salomon TCHIBKERE
 Format : HTML imprimable + PDF certifié A4 (Police 12pt stricte)
+Page 1 : Page de couverture prestigieuse avec double bordure noble et trame de sécurité
 """
 
 import base64
@@ -27,7 +28,7 @@ def generate_html(logo_b64):
 <style>
   @page {{
     size: A4 portrait;
-    margin: 20mm 18mm 20mm 18mm;
+    margin: 18mm 16mm 18mm 16mm;
     @bottom-center {{
       content: "Page " counter(page) " sur " counter(pages);
       font-size: 10pt;
@@ -60,188 +61,348 @@ def generate_html(logo_b64):
   .page {{
     page-break-after: always;
     position: relative;
-    padding-bottom: 20px;
+    padding-bottom: 15px;
   }}
 
   .page:last-child {{
     page-break-after: avoid;
   }}
 
-  /* En-tête officiel de République */
+  /* ========================================================= */
+  /* PAGE DE COUVERTURE PRESTIGIEUSE (PAGE 1 UNIQUEMENT)       */
+  /* ========================================================= */
+  .cover-page {{
+    page-break-after: always;
+    position: relative;
+    box-sizing: border-box;
+  }}
+
+  /* Cadre extérieur noble */
+  .cover-outer-border {{
+    border: 3.5px solid #1e3a8a;
+    padding: 5px;
+    background-color: #ffffff;
+    box-shadow: 0 0 15px rgba(30, 58, 138, 0.08);
+  }}
+
+  /* Cadre intérieur avec trame de sécurité institutionnelle */
+  .cover-inner-border {{
+    border: 1.5px solid #b45309;
+    padding: 18px 20px 14px 20px;
+    position: relative;
+    background: 
+      radial-gradient(circle at 50% 35%, rgba(255, 255, 255, 0.94) 0%, rgba(248, 250, 252, 0.96) 100%),
+      repeating-linear-gradient(45deg, rgba(30, 58, 138, 0.018) 0px, rgba(30, 58, 138, 0.018) 2px, transparent 2px, transparent 12px),
+      repeating-linear-gradient(-45deg, rgba(180, 83, 9, 0.014) 0px, rgba(180, 83, 9, 0.014) 2px, transparent 2px, transparent 12px);
+  }}
+
+  /* Ornements d'angle (coins administratifs) */
+  .corner-ornament {{
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    z-index: 5;
+  }}
+  .corner-tl {{ top: 4px; left: 4px; border-top: 3px solid #1e3a8a; border-left: 3px solid #1e3a8a; }}
+  .corner-tr {{ top: 4px; right: 4px; border-top: 3px solid #1e3a8a; border-right: 3px solid #1e3a8a; }}
+  .corner-bl {{ bottom: 4px; left: 4px; border-bottom: 3px solid #1e3a8a; border-left: 3px solid #1e3a8a; }}
+  .corner-br {{ bottom: 4px; right: 4px; border-bottom: 3px solid #1e3a8a; border-right: 3px solid #1e3a8a; }}
+
+  /* Ruban tricolore République du Tchad */
+  .tchad-flag-bar {{
+    display: flex;
+    height: 4px;
+    width: 160px;
+    margin: 6px auto 10px auto;
+  }}
+  .tchad-flag-bar .c-blue {{ background-color: #0c2380; flex: 1; }}
+  .tchad-flag-bar .c-gold {{ background-color: #f7bf14; flex: 1; }}
+  .tchad-flag-bar .c-red  {{ background-color: #c91823; flex: 1; }}
+
+  .cover-header-rep {{
+    text-align: center;
+    margin-bottom: 12px;
+  }}
+
+  .cover-rep-title {{
+    font-size: 13pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    color: #1e3a8a;
+    margin: 0;
+  }}
+
+  .cover-rep-motto {{
+    font-size: 10.5pt;
+    font-style: italic;
+    color: #475569;
+    letter-spacing: 1px;
+    margin: 2px 0;
+  }}
+
+  .cover-ministry {{
+    font-size: 10pt;
+    font-weight: 600;
+    color: #334155;
+    margin: 0;
+  }}
+
+  .cover-assoc-lead {{
+    font-size: 11.5pt;
+    font-weight: bold;
+    color: #b45309;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 4px 0 0 0;
+  }}
+
+  /* Médaillon central Logo */
+  .cover-logo-wrapper {{
+    text-align: center;
+    margin: 12px auto 14px auto;
+  }}
+
+  .cover-logo-img {{
+    width: 110px;
+    height: 110px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3.5px solid #1e3a8a;
+    outline: 2px solid #b45309;
+    outline-offset: 3px;
+    box-shadow: 0 4px 12px rgba(30, 58, 138, 0.2);
+    display: block;
+    margin: 0 auto;
+  }}
+
+  .cover-assoc-devise {{
+    font-size: 9.5pt;
+    font-style: italic;
+    color: #64748b;
+    margin-top: 6px;
+  }}
+
+  /* Cartouche Titre Officiel */
+  .cover-title-cartouche {{
+    text-align: center;
+    background: linear-gradient(180deg, #f8fafc 0%, #edf2f7 100%);
+    border: 1.5px solid #cbd5e1;
+    border-top: 4px solid #1e3a8a;
+    border-bottom: 3px solid #b45309;
+    padding: 12px 14px;
+    margin: 10px 0 14px 0;
+    border-radius: 4px;
+  }}
+
+  .cover-cartouche-tag {{
+    font-size: 9.5pt;
+    font-weight: bold;
+    color: #1e3a8a;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+  }}
+
+  .cover-title-main {{
+    font-size: 17pt;
+    font-weight: bold;
+    color: #0f172a;
+    text-transform: uppercase;
+    line-height: 1.25;
+    margin: 4px 0 6px 0;
+  }}
+
+  .cover-title-sub {{
+    font-size: 12pt;
+    font-weight: 600;
+    color: #b45309;
+    margin: 0;
+  }}
+
+  /* Référence officielle du dossier */
+  .cover-ref-strip {{
+    text-align: center;
+    margin-bottom: 14px;
+  }}
+
+  .cover-ref-box {{
+    display: inline-block;
+    background: #1e3a8a;
+    color: #ffffff;
+    font-size: 10.5pt;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    padding: 5px 18px;
+    border-radius: 3px;
+    border: 1px solid #172554;
+  }}
+
+  /* Tableau d'identification officiel bipartite */
+  .cover-parties-table {{
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 12px;
+  }}
+
+  .cover-parties-table td {{
+    width: 50%;
+    vertical-align: top;
+    padding: 10px 12px;
+    border: 1px solid #cbd5e1;
+    background-color: #ffffff;
+    font-size: 11pt;
+  }}
+
+  .party-header {{
+    font-size: 10.5pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding-bottom: 4px;
+    margin-bottom: 6px;
+    border-bottom: 2px solid;
+  }}
+
+  .party-header.client {{
+    color: #1e3a8a;
+    border-color: #1e3a8a;
+  }}
+
+  .party-header.provider {{
+    color: #b45309;
+    border-color: #b45309;
+  }}
+
+  .party-name {{
+    font-size: 11pt;
+    font-weight: bold;
+    color: #0f172a;
+    margin-bottom: 3px;
+  }}
+
+  .party-detail {{
+    font-size: 10.5pt;
+    line-height: 1.4;
+    color: #334155;
+  }}
+
+  /* Bandeau de conformité et validation */
+  .cover-status-banner {{
+    background-color: #f0fdf4;
+    border: 1.5px solid #86efac;
+    border-left: 5px solid #16a34a;
+    padding: 6px 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    border-radius: 2px;
+  }}
+
+  .cover-status-badge {{
+    font-weight: bold;
+    color: #15803d;
+    font-size: 10.5pt;
+  }}
+
+  .cover-status-date {{
+    font-size: 10pt;
+    color: #475569;
+    font-weight: 600;
+  }}
+
+  /* Pied de page de couverture */
+  .cover-legal-note {{
+    text-align: center;
+    font-size: 9.5pt;
+    color: #64748b;
+    border-top: 1px solid #cbd5e1;
+    padding-top: 8px;
+    line-height: 1.35;
+    margin: 0;
+  }}
+
+  /* ========================================================= */
+  /* STYLES DES PAGES SUIVANTES (PAGES 2 À 8)                   */
+  /* ========================================================= */
   .republic-header {{
     text-align: center;
     border-bottom: 2px double #1e3a8a;
-    padding-bottom: 12px;
-    margin-bottom: 24px;
+    padding-bottom: 10px;
+    margin-bottom: 22px;
   }}
 
   .republic-title {{
-    font-size: 13pt;
+    font-size: 12.5pt;
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 1.5px;
     color: #1e3a8a;
-    margin: 0 0 4px 0;
+    margin: 0 0 3px 0;
   }}
 
   .republic-motto {{
-    font-size: 11pt;
+    font-size: 10.5pt;
     font-style: italic;
     color: #475569;
-    margin: 0 0 6px 0;
-  }}
-
-  .ministry-title {{
-    font-size: 11pt;
-    font-weight: bold;
-    color: #334155;
-    margin: 0 0 4px 0;
+    margin: 0 0 5px 0;
   }}
 
   .assoc-header-title {{
-    font-size: 12pt;
+    font-size: 11.5pt;
     font-weight: bold;
     color: #b45309;
     text-transform: uppercase;
     margin: 0;
   }}
 
-  /* Page de Garde */
-  .cover-container {{
-    text-align: center;
-    padding-top: 10px;
-  }}
-
-  .cover-logo {{
-    width: 110px;
-    height: 110px;
-    object-fit: cover;
-    border-radius: 50%;
-    border: 3px solid #1e3a8a;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-    margin: 15px auto 20px auto;
-    display: block;
-  }}
-
-  .cover-doc-type {{
-    display: inline-block;
-    background-color: #1e3a8a;
-    color: #ffffff;
-    font-size: 11pt;
-    font-weight: bold;
-    letter-spacing: 2px;
-    padding: 6px 20px;
-    border-radius: 4px;
-    text-transform: uppercase;
-    margin-bottom: 18px;
-  }}
-
-  .cover-main-title {{
-    font-size: 20pt;
-    font-weight: bold;
-    color: #0f172a;
-    text-transform: uppercase;
-    line-height: 1.25;
-    margin: 10px 0 15px 0;
-  }}
-
-  .cover-sub-title {{
-    font-size: 14pt;
-    font-weight: 600;
-    color: #b45309;
-    margin: 0 0 25px 0;
-  }}
-
-  .cover-reference-badge {{
-    background: #f8fafc;
-    border: 1px solid #cbd5e1;
-    border-left: 5px solid #1e3a8a;
-    padding: 10px 18px;
-    display: inline-block;
-    font-size: 11pt;
-    font-weight: bold;
-    color: #1e293b;
-    margin-bottom: 30px;
-  }}
-
-  .cover-meta-grid {{
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 25px;
-    text-align: left;
-  }}
-
-  .cover-meta-grid td {{
-    padding: 12px 16px;
-    vertical-align: top;
-    border: 1px solid #e2e8f0;
-    font-size: 11.5pt;
-  }}
-
-  .cover-meta-label {{
-    font-weight: bold;
-    color: #1e3a8a;
-    width: 32%;
-    background-color: #f8fafc;
-  }}
-
-  .cover-footer-notice {{
-    margin-top: 40px;
-    font-size: 10.5pt;
-    font-style: italic;
-    color: #64748b;
-    border-top: 1px solid #e2e8f0;
-    padding-top: 12px;
-  }}
-
-  /* Titres de sections */
   h1.section-title {{
-    font-size: 15pt;
+    font-size: 14.5pt;
     font-weight: bold;
     color: #1e3a8a;
     text-transform: uppercase;
     border-bottom: 2px solid #1e3a8a;
-    padding-bottom: 6px;
-    margin-top: 24px;
-    margin-bottom: 16px;
+    padding-bottom: 5px;
+    margin-top: 20px;
+    margin-bottom: 14px;
   }}
 
   h2.sub-section-title {{
-    font-size: 13pt;
+    font-size: 12.5pt;
     font-weight: bold;
     color: #b45309;
-    margin-top: 18px;
-    margin-bottom: 10px;
+    margin-top: 16px;
+    margin-bottom: 8px;
   }}
 
   /* Lettre de transmission */
   .letter-meta {{
     width: 100%;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
   }}
 
   .letter-meta td {{
     vertical-align: top;
-    padding: 4px 0;
+    padding: 3px 0;
     font-size: 12pt;
   }}
 
   .letter-obj {{
     background-color: #f1f5f9;
     border-left: 4px solid #1e3a8a;
-    padding: 10px 14px;
+    padding: 9px 12px;
     font-weight: bold;
-    margin: 18px 0;
+    margin: 16px 0;
   }}
 
   .letter-body p {{
     text-align: justify;
-    margin-bottom: 14px;
+    margin-bottom: 12px;
     text-indent: 25px;
   }}
 
   .letter-sign {{
-    margin-top: 25px;
+    margin-top: 22px;
     float: right;
     text-align: right;
     width: 280px;
@@ -251,7 +412,7 @@ def generate_html(logo_b64):
   table.admin-table {{
     width: 100%;
     border-collapse: collapse;
-    margin: 16px 0;
+    margin: 14px 0;
   }}
 
   table.admin-table th {{
@@ -259,13 +420,13 @@ def generate_html(logo_b64):
     color: #ffffff;
     font-weight: bold;
     text-align: left;
-    padding: 8px 10px;
+    padding: 7px 9px;
     border: 1px solid #1e3a8a;
     font-size: 11pt;
   }}
 
   table.admin-table td {{
-    padding: 8px 10px;
+    padding: 7px 9px;
     border: 1px solid #cbd5e1;
     font-size: 11pt;
     vertical-align: top;
@@ -291,22 +452,22 @@ def generate_html(logo_b64):
     background: #f8fafc;
     border: 1px solid #cbd5e1;
     border-left: 4px solid #b45309;
-    padding: 12px 16px;
-    margin: 16px 0;
+    padding: 10px 14px;
+    margin: 14px 0;
   }}
 
   .info-box-title {{
     font-weight: bold;
     color: #b45309;
-    margin-bottom: 6px;
-    font-size: 12pt;
+    margin-bottom: 5px;
+    font-size: 11.5pt;
   }}
 
   /* Cadres d'émargement et signatures */
   .signature-grid {{
     width: 100%;
     border-collapse: collapse;
-    margin-top: 30px;
+    margin-top: 25px;
   }}
 
   .signature-grid td {{
@@ -317,7 +478,7 @@ def generate_html(logo_b64):
   }}
 
   .signature-box {{
-    min-height: 140px;
+    min-height: 135px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -337,7 +498,7 @@ def generate_html(logo_b64):
     font-size: 10.5pt;
     font-style: italic;
     color: #64748b;
-    margin-bottom: 45px;
+    margin-bottom: 40px;
   }}
 
   .signature-name {{
@@ -347,10 +508,10 @@ def generate_html(logo_b64):
   }}
 
   .seal-box {{
-    width: 110px;
-    height: 110px;
+    width: 105px;
+    height: 105px;
     border: 2px dashed #94a3b8;
-    margin: 15px auto 0 auto;
+    margin: 12px auto 0 auto;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -362,16 +523,15 @@ def generate_html(logo_b64):
   }}
 
   ul.admin-list {{
-    margin: 10px 0;
-    padding-left: 28px;
+    margin: 8px 0;
+    padding-left: 26px;
   }}
 
   ul.admin-list li {{
-    margin-bottom: 6px;
+    margin-bottom: 5px;
     text-align: justify;
   }}
 
-  /* Pied de page imprimé */
   .page-footer-note {{
     position: absolute;
     bottom: 0;
@@ -381,79 +541,102 @@ def generate_html(logo_b64):
     font-size: 9.5pt;
     color: #64748b;
     border-top: 1px solid #e2e8f0;
-    padding-top: 6px;
+    padding-top: 5px;
   }}
 </style>
 </head>
 <body>
 
-  <!-- ========================================== -->
-  <!-- PAGE 1 : PAGE DE GARDE ADMINISTRATIVE      -->
-  <!-- ========================================== -->
-  <div class="page">
-    <div class="republic-header">
-      <div class="republic-title">RÉPUBLIQUE DU TCHAD</div>
-      <div class="republic-motto">Unité — Travail — Progrès</div>
-      <div class="ministry-title">Ministère de la Jeunesse, des Sports et du Leadership Entrepreneurial</div>
-      <div class="assoc-header-title">Association des Jeunes Tchadiens pour l’Éducation et la Solidarité (AJTES)</div>
-    </div>
+  <!-- ============================================================== -->
+  <!-- PAGE 1 : PAGE DE COUVERTURE PRESTIGIEUSE (BORDURE & TRAME)     -->
+  <!-- ============================================================== -->
+  <div class="cover-page">
+    <div class="cover-outer-border">
+      <div class="cover-inner-border">
+        <!-- Coins ornementaux -->
+        <div class="corner-ornament corner-tl"></div>
+        <div class="corner-ornament corner-tr"></div>
+        <div class="corner-ornament corner-bl"></div>
+        <div class="corner-ornament corner-br"></div>
 
-    <div class="cover-container">
-      {"<img src='data:image/jpeg;base64," + logo_b64 + "' class='cover-logo' alt='Logo Officiel AJTES'>" if logo_b64 else ""}
-      
-      <div class="cover-doc-type">Dossier Administratif Officiel & Homologation</div>
-      
-      <div class="cover-main-title">Dossier de Livraison de Projet &amp; Procès-Verbal de Réception Définitive</div>
-      
-      <div class="cover-sub-title">Plateforme Numérique Officielle, Portail Adhérents &amp; Système de Gestion Intégré</div>
+        <!-- En-tête républicain -->
+        <div class="cover-header-rep">
+          <div class="cover-rep-title">RÉPUBLIQUE DU TCHAD</div>
+          <div class="cover-rep-motto">Unité — Travail — Progrès</div>
+          <div class="tchad-flag-bar">
+            <div class="c-blue"></div>
+            <div class="c-gold"></div>
+            <div class="c-red"></div>
+          </div>
+          <div class="cover-ministry">Ministère de la Jeunesse, des Sports et du Leadership Entrepreneurial</div>
+          <div class="cover-assoc-lead">Association des Jeunes Tchadiens pour l’Éducation et la Solidarité (AJTES)</div>
+        </div>
 
-      <div class="cover-reference-badge">
-        RÉFÉRENCE OFFICIELLE DU DOSSIER : AJTES/DIR/LIV-ADM/2026-N°001
-      </div>
+        <!-- Médaillon central Logo -->
+        <div class="cover-logo-wrapper">
+          {"<img src='data:image/jpeg;base64," + logo_b64 + "' class='cover-logo-img' alt='Logo Officiel AJTES'>" if logo_b64 else ""}
+          <div class="cover-assoc-devise">« Coopération — Intégrité — Force »</div>
+        </div>
 
-      <table class="cover-meta-grid">
-        <tr>
-          <td class="cover-meta-label">Maître d’Ouvrage (Client) :</td>
-          <td>
-            <strong>Association des Jeunes Tchadiens pour l’Éducation et la Solidarité (AJTES)</strong><br>
-            Représentée par son Président et le Bureau Exécutif National<br>
-            Siège Social : N'Djamena, République du Tchad<br>
-            <strong>E-mail Officiel de l'Association : ajtes235@gmail.com</strong><br>
-            Téléphones : +235 66 43 95 02 / +235 68 90 23 47
-          </td>
-        </tr>
-        <tr>
-          <td class="cover-meta-label">Maître d’Œuvre (Prestataire) :</td>
-          <td>
-            <strong>M. Salomon TCHIBKERE</strong><br>
-            Ingénieur Concepteur Logiciel &amp; Chef de Projet Web<br>
-            Résidence &amp; Établissement : Yaoundé, Cameroun<br>
-            Contact Développeur : salomontchibkere@gmail.com | Tél. : +237 655 13 68 24
-          </td>
-        </tr>
-        <tr>
-          <td class="cover-meta-label">Nature du Marché / Mission :</td>
-          <td>Conception, Développement, Sécurisation, Intégration Multilingue et Déploiement Cloud Haute Disponibilité de la Plateforme Web Officielle</td>
-        </tr>
-        <tr>
-          <td class="cover-meta-label">Date de Dépôt Administratif :</td>
-          <td><strong>Mardi 06 Octobre 2026</strong></td>
-        </tr>
-        <tr>
-          <td class="cover-meta-label">Statut du Dossier :</td>
-          <td><span class="badge-conforme">PROJET 100% FINALISÉ — CONFORME SANS RÉSERVE</span></td>
-        </tr>
-      </table>
+        <!-- Cartouche Titre Officiel -->
+        <div class="cover-title-cartouche">
+          <div class="cover-cartouche-tag">Dossier Administratif Officiel &amp; Homologation Technique</div>
+          <div class="cover-title-main">DOSSIER DE LIVRAISON DE PROJET &amp; PROCÈS-VERBAL DE RÉCEPTION DÉFINITIVE</div>
+          <div class="cover-title-sub">Plateforme Numérique Officielle, Portail Adhérents &amp; Système de Gestion Intégré</div>
+        </div>
 
-      <div class="cover-footer-notice">
-        Document administratif certifié conforme, établi en trois (03) exemplaires originaux pour archivage institutionnel, audit comptable et transmission au Bureau Exécutif de l'AJTES.
+        <!-- Référence officielle -->
+        <div class="cover-ref-strip">
+          <div class="cover-ref-box">
+            RÉFÉRENCE OFFICIELLE DU MARCHÉ : AJTES/DIR/LIV-ADM/2026-N°001
+          </div>
+        </div>
+
+        <!-- Tableau bipartite Client / Prestataire -->
+        <table class="cover-parties-table">
+          <tr>
+            <td>
+              <div class="party-header client">Maître d’Ouvrage (Client)</div>
+              <div class="party-name">Association AJTES Tchad</div>
+              <div class="party-detail">
+                Représentée par le Bureau Exécutif National<br>
+                Siège Social : N'Djamena, République du Tchad<br>
+                <strong>E-mail Officiel : ajtes235@gmail.com</strong><br>
+                Tél. : +235 66 43 95 02 / +235 68 90 23 47
+              </div>
+            </td>
+            <td>
+              <div class="party-header provider">Maître d’Œuvre (Prestataire)</div>
+              <div class="party-name">M. Salomon TCHIBKERE</div>
+              <div class="party-detail">
+                Ingénieur Concepteur Logiciel &amp; Chef de Projet<br>
+                <strong>Résidence &amp; Établissement : Yaoundé, Cameroun</strong><br>
+                E-mail : salomontchibkere@gmail.com<br>
+                Tél. : +237 655 13 68 24
+              </div>
+            </td>
+          </tr>
+        </table>
+
+        <!-- Bandeau de conformité -->
+        <div class="cover-status-banner">
+          <div class="cover-status-badge">✔ STATUT : PROJET 100% FINALISÉ — CONFORME SANS RÉSERVE</div>
+          <div class="cover-status-date">Date de Dépôt : 06 Octobre 2026</div>
+        </div>
+
+        <!-- Mention légale de transmission -->
+        <p class="cover-legal-note">
+          Document administratif certifié conforme, établi à <strong>Yaoundé</strong> pour transmission et dépôt au siège de l'AJTES à <strong>N'Djamena</strong>.<br>
+          Établi en trois (03) exemplaires originaux pour archivage institutionnel, audit comptable et gouvernance.
+        </p>
+
       </div>
     </div>
   </div>
 
-  <!-- ========================================== -->
-  <!-- PAGE 2 : BORDEREAU DE TRANSMISSION         -->
-  <!-- ========================================== -->
+  <!-- ============================================================== -->
+  <!-- PAGE 2 : BORDEREAU DE TRANSMISSION                             -->
+  <!-- ============================================================== -->
   <div class="page">
     <div class="republic-header">
       <div class="republic-title">RÉPUBLIQUE DU TCHAD</div>
@@ -484,7 +667,7 @@ def generate_html(logo_b64):
       </tr>
     </table>
 
-    <p style="text-align: right; margin-top: 10px;"><strong>Fait à Yaoundé, le 06 Octobre 2026</strong></p>
+    <p style="text-align: right; margin-top: 8px;"><strong>Fait à Yaoundé, le 06 Octobre 2026</strong></p>
 
     <div class="letter-obj">
       OBJET : Dépôt officiel du Dossier de Livraison et demande de signature du Procès-Verbal de Réception Définitive de la Plateforme Numérique AJTES Tchad.
@@ -512,15 +695,15 @@ def generate_html(logo_b64):
     </div>
 
     <div class="letter-sign">
-      <p style="margin-bottom: 4px;"><strong>L'Ingénieur Concepteur,</strong></p>
-      <p style="margin-bottom: 50px; color: #64748b; font-size: 10.5pt;">(Signature et paraphe)</p>
+      <p style="margin-bottom: 3px;"><strong>L'Ingénieur Concepteur,</strong></p>
+      <p style="margin-bottom: 45px; color: #64748b; font-size: 10.5pt;">(Signature et paraphe)</p>
       <p><strong>Salomon TCHIBKERE</strong><br><span style="font-size: 10pt; color: #475569;">Yaoundé, Cameroun</span></p>
     </div>
   </div>
 
-  <!-- ========================================== -->
-  <!-- PAGE 3 : FICHE SIGNALÉTIQUE DU PROJET      -->
-  <!-- ========================================== -->
+  <!-- ============================================================== -->
+  <!-- PAGE 3 : FICHE SIGNALÉTIQUE DU PROJET                          -->
+  <!-- ============================================================== -->
   <div class="page">
     <div class="republic-header">
       <div class="republic-title">RÉPUBLIQUE DU TCHAD</div>
@@ -600,9 +783,9 @@ def generate_html(logo_b64):
     </div>
   </div>
 
-  <!-- ========================================== -->
-  <!-- PAGE 4 : INVENTAIRE DES LIVRABLES (PART 1) -->
-  <!-- ========================================== -->
+  <!-- ============================================================== -->
+  <!-- PAGE 4 : INVENTAIRE DES LIVRABLES (PART 1)                     -->
+  <!-- ============================================================== -->
   <div class="page">
     <div class="republic-header">
       <div class="republic-title">RÉPUBLIQUE DU TCHAD</div>
@@ -646,9 +829,9 @@ def generate_html(logo_b64):
     </ul>
   </div>
 
-  <!-- ========================================== -->
-  <!-- PAGE 5 : INVENTAIRE DES LIVRABLES (PART 2) -->
-  <!-- ========================================== -->
+  <!-- ============================================================== -->
+  <!-- PAGE 5 : INVENTAIRE DES LIVRABLES (PART 2)                     -->
+  <!-- ============================================================== -->
   <div class="page">
     <div class="republic-header">
       <div class="republic-title">RÉPUBLIQUE DU TCHAD</div>
@@ -685,9 +868,9 @@ def generate_html(logo_b64):
     </div>
   </div>
 
-  <!-- ========================================== -->
-  <!-- PAGE 6 : PROCÈS-VERBAL DE RECETTE          -->
-  <!-- ========================================== -->
+  <!-- ============================================================== -->
+  <!-- PAGE 6 : PROCÈS-VERBAL DE RECETTE                              -->
+  <!-- ============================================================== -->
   <div class="page">
     <div class="republic-header">
       <div class="republic-title">RÉPUBLIQUE DU TCHAD</div>
@@ -776,9 +959,9 @@ def generate_html(logo_b64):
     </div>
   </div>
 
-  <!-- ========================================== -->
-  <!-- PAGE 7 : PROPRIÉTÉ INTELLECTUELLE & ACCÈS  -->
-  <!-- ========================================== -->
+  <!-- ============================================================== -->
+  <!-- PAGE 7 : PROPRIÉTÉ INTELLECTUELLE & ACCÈS                      -->
+  <!-- ============================================================== -->
   <div class="page">
     <div class="republic-header">
       <div class="republic-title">RÉPUBLIQUE DU TCHAD</div>
@@ -836,9 +1019,9 @@ def generate_html(logo_b64):
     </p>
   </div>
 
-  <!-- ========================================== -->
-  <!-- PAGE 8 : GARANTIE, MAINTENANCE & SIGNATURES-->
-  <!-- ========================================== -->
+  <!-- ============================================================== -->
+  <!-- PAGE 8 : GARANTIE, MAINTENANCE & SIGNATURES                    -->
+  <!-- ============================================================== -->
   <div class="page">
     <div class="republic-header">
       <div class="republic-title">RÉPUBLIQUE DU TCHAD</div>
@@ -854,7 +1037,7 @@ def generate_html(logo_b64):
     </p>
 
     <h2 class="sub-section-title">6.2. Cadre d'Émargement et Signatures Conjointes</h2>
-    <p style="text-align: justify; margin-bottom: 20px;">
+    <p style="text-align: justify; margin-bottom: 18px;">
       En foi de quoi, le présent Procès-Verbal de Réception Définitive a été dressé, lu, approuvé et signé conjointement par les parties pour servir et valoir ce que de droit.
     </p>
 
@@ -867,7 +1050,7 @@ def generate_html(logo_b64):
               <div class="signature-notice">« Lu, approuvé et certifié conforme pour livraison définitive »</div>
             </div>
             <div>
-              <div style="height: 60px;"></div>
+              <div style="height: 55px;"></div>
               <div class="signature-name">M. Salomon TCHIBKERE</div>
               <div style="font-size: 10.5pt; color: #475569;">Ingénieur Concepteur Web</div>
               <div style="font-size: 10.5pt; color: #475569;">Établi à Yaoundé, le 06 / 10 / 2026</div>
@@ -881,7 +1064,7 @@ def generate_html(logo_b64):
               <div class="signature-notice">« Bon pour réception définitive sans réserve et prise en charge »</div>
             </div>
             <div>
-              <div style="height: 60px;"></div>
+              <div style="height: 55px;"></div>
               <div class="signature-name">Le Président National de l'AJTES</div>
               <div style="font-size: 10.5pt; color: #475569;">Pour le Bureau Exécutif (N'Djamena)</div>
               <div style="font-size: 10.5pt; color: #475569;">Date : ..... / ..... / 2026</div>
@@ -890,8 +1073,8 @@ def generate_html(logo_b64):
         </td>
       </tr>
       <tr>
-        <td colspan="2" style="background-color: #f8fafc; text-align: center; padding: 16px;">
-          <div style="font-weight: bold; color: #1e3a8a; text-transform: uppercase; font-size: 11pt; margin-bottom: 6px;">
+        <td colspan="2" style="background-color: #f8fafc; text-align: center; padding: 14px;">
+          <div style="font-weight: bold; color: #1e3a8a; text-transform: uppercase; font-size: 11pt; margin-bottom: 5px;">
             Emplacement Réservé au Cachet Officiel / Sceau de l'Association AJTES
           </div>
           <div class="seal-box">
