@@ -56,3 +56,14 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: Deploy to Surge (Universal Clean Domain)
+        env:
+          SURGE_LOGIN: impactdigital2026@gmail.com
+          SURGE_TOKEN: ${{ secrets.SURGE_TOKEN || 'a7cff111eb7d818e8b88e48223eddf15' }}
+        run: |
+          mkdir -p /tmp/surge_deploy
+          cp -r frontend/dist/* /tmp/surge_deploy/
+          rm -f /tmp/surge_deploy/videos/VID_20250928_145845.mp4 /tmp/surge_deploy/videos/VID-20260816-WA0077.mp4
+          cp /tmp/surge_deploy/index.html /tmp/surge_deploy/200.html
+          npx -y surge /tmp/surge_deploy ajtes-tchad.surge.sh
