@@ -1595,6 +1595,8 @@ export const AdminDashboardView: React.FC = () => {
 
         .admin-table-card {
           padding: 2rem;
+          overflow-x: auto;
+          -webkit-overflow-scrolling: touch;
         }
 
         .table-header-row {
@@ -1672,8 +1674,33 @@ export const AdminDashboardView: React.FC = () => {
         }
 
         @media (max-width: 768px) {
+          .admin-header-banner {
+            padding: 2rem 1rem !important;
+          }
+          .admin-banner-container h1 {
+            font-size: 1.5rem !important;
+            line-height: 1.25 !important;
+          }
+          .admin-banner-container p {
+            font-size: 0.88rem !important;
+          }
+          .admin-login-card {
+            padding: 1.5rem 1rem !important;
+          }
+          .admin-form-card {
+            padding: 1.25rem 0.85rem !important;
+          }
+          .admin-form .grid-2 {
+            grid-template-columns: 1fr !important;
+            gap: 1rem !important;
+          }
           .admin-table-card {
             padding: 1.25rem 0.85rem !important;
+            overflow-x: auto !important;
+            -webkit-overflow-scrolling: touch;
+          }
+          .admin-table {
+            min-width: 580px;
           }
           .desktop-table-only {
             display: none !important;

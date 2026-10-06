@@ -23,7 +23,7 @@ const WhatsAppIcon = () => (
 
 export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, navigateToAuth }) => {
   const { language, setLanguage, t } = useLanguage();
-  const { isLoggedIn, currentUser, logout } = useAuth();
+  const { isLoggedIn, currentUser, logout, isAdmin } = useAuth();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const WHATSAPP_GROUP_LINK = "https://chat.whatsapp.com/KH42DjDTNHA7oNHrbBlwGI";
@@ -197,6 +197,16 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, navig
                 >
                   Mon Espace
                 </button>
+                {isAdmin && (
+                  <button
+                    className="btn btn-gold btn-sm"
+                    onClick={() => handleNavClick('admin')}
+                    title="Console d'Administration"
+                    style={{ fontWeight: 800 }}
+                  >
+                    Admin
+                  </button>
+                )}
                 <button className="btn btn-secondary btn-sm logout-btn" onClick={logout} title="Déconnexion">
                   Déconnexion
                 </button>
@@ -294,9 +304,19 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, navig
                   </button>
                 </div>
               ) : (
-                <button className="btn btn-primary w-full" onClick={() => handleNavClick('member')}>
-                  Mon Espace Membre
-                </button>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', width: '100%' }}>
+                  <button className="btn btn-primary w-full" onClick={() => handleNavClick('member')}>
+                    Mon Espace Membre
+                  </button>
+                  {isAdmin && (
+                    <button className="btn btn-gold w-full" onClick={() => handleNavClick('admin')} style={{ fontWeight: 800 }}>
+                      🛡️ Tableau de Bord Admin
+                    </button>
+                  )}
+                  <button className="btn btn-secondary w-full" onClick={logout} style={{ fontSize: '0.85rem' }}>
+                    Déconnexion
+                  </button>
+                </div>
               )}
             </div>
           </div>

@@ -95,9 +95,14 @@ export const Footer: React.FC<FooterProps> = ({ setCurrentTab }) => {
         <p>« {t('mainSlogan')} »</p>
       </div>
 
-      {/* Copyright */}
+      {/* Copyright & Discreet Admin Access */}
       <div className="footer-bottom">
         <p>© 2022 - 2026 AJTES - Association des Jeunes Tchadiens pour l’Éducation et la Solidarité. Tous droits réservés.</p>
+        <div className="footer-admin-link">
+          <button className="admin-discrete-btn" onClick={() => setCurrentTab('admin')}>
+            ⚙️ Espace Administration (Accès Restreint)
+          </button>
+        </div>
       </div>
 
       <style>{`
