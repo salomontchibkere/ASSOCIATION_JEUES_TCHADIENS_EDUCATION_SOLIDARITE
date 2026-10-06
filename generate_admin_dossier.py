@@ -414,11 +414,22 @@ def generate_html(logo_b64):
       <table class="cover-meta-grid">
         <tr>
           <td class="cover-meta-label">Maître d’Ouvrage (Client) :</td>
-          <td><strong>Association des Jeunes Tchadiens pour l’Éducation et la Solidarité (AJTES)</strong><br>Représentée par son Président et le Bureau Exécutif National<br>Siège Social : N'Djamena, République du Tchad</td>
+          <td>
+            <strong>Association des Jeunes Tchadiens pour l’Éducation et la Solidarité (AJTES)</strong><br>
+            Représentée par son Président et le Bureau Exécutif National<br>
+            Siège Social : N'Djamena, République du Tchad<br>
+            <strong>E-mail Officiel de l'Association : ajtes235@gmail.com</strong><br>
+            Téléphones : +235 66 43 95 02 / +235 68 90 23 47
+          </td>
         </tr>
         <tr>
           <td class="cover-meta-label">Maître d’Œuvre (Prestataire) :</td>
-          <td><strong>M. Salomon TCHIBKERE</strong><br>Ingénieur Concepteur Logiciel &amp; Chef de Projet Web<br>Contact : salomontchibkere@gmail.com | Tél. : +235 66 43 95 02 / +235 68 90 23 47</td>
+          <td>
+            <strong>M. Salomon TCHIBKERE</strong><br>
+            Ingénieur Concepteur Logiciel &amp; Chef de Projet Web<br>
+            Résidence &amp; Établissement : Yaoundé, Cameroun<br>
+            Contact Développeur : salomontchibkere@gmail.com | Tél. : +237 655 13 68 24
+          </td>
         </tr>
         <tr>
           <td class="cover-meta-label">Nature du Marché / Mission :</td>
@@ -458,20 +469,22 @@ def generate_html(logo_b64):
           <strong>EXPÉDITEUR :</strong><br>
           M. Salomon TCHIBKERE<br>
           Ingénieur Développeur &amp; Chef de Projet Web<br>
-          N'Djamena, République du Tchad<br>
-          E-mail : salomontchibkere@gmail.com
+          Yaoundé, Cameroun<br>
+          E-mail : salomontchibkere@gmail.com<br>
+          Tél. : +237 655 13 68 24
         </td>
         <td style="width: 50%; text-align: right;">
           <strong>DESTINATAIRE :</strong><br>
           À l'attention de Monsieur le Président<br>
           et des Membres du Bureau Exécutif de l'AJTES<br>
           Siège National de l'AJTES<br>
-          N'Djamena, République du Tchad
+          N'Djamena, République du Tchad<br>
+          E-mail Officiel : ajtes235@gmail.com
         </td>
       </tr>
     </table>
 
-    <p style="text-align: right; margin-top: 10px;"><strong>Fait à N'Djamena, le 06 Octobre 2026</strong></p>
+    <p style="text-align: right; margin-top: 10px;"><strong>Fait à Yaoundé, le 06 Octobre 2026</strong></p>
 
     <div class="letter-obj">
       OBJET : Dépôt officiel du Dossier de Livraison et demande de signature du Procès-Verbal de Réception Définitive de la Plateforme Numérique AJTES Tchad.
@@ -501,7 +514,7 @@ def generate_html(logo_b64):
     <div class="letter-sign">
       <p style="margin-bottom: 4px;"><strong>L'Ingénieur Concepteur,</strong></p>
       <p style="margin-bottom: 50px; color: #64748b; font-size: 10.5pt;">(Signature et paraphe)</p>
-      <p><strong>Salomon TCHIBKERE</strong></p>
+      <p><strong>Salomon TCHIBKERE</strong><br><span style="font-size: 10pt; color: #475569;">Yaoundé, Cameroun</span></p>
     </div>
   </div>
 
@@ -536,6 +549,14 @@ def generate_html(logo_b64):
         <td>Portail Web Institutionnel &amp; Système de Gestion Intégré AJTES Tchad</td>
       </tr>
       <tr>
+        <td><strong>Maître d’Ouvrage (Client) :</strong></td>
+        <td>AJTES Tchad (Siège : N'Djamena, Tchad) — E-mail : <code>ajtes235@gmail.com</code></td>
+      </tr>
+      <tr>
+        <td><strong>Maître d’Œuvre (Prestataire) :</strong></td>
+        <td>M. Salomon TCHIBKERE (Yaoundé, Cameroun) — E-mail : <code>salomontchibkere@gmail.com</code></td>
+      </tr>
+      <tr>
         <td><strong>Bénéficiaire Direct :</strong></td>
         <td>Bureau Exécutif, Membres Adhérents et Bénévoles de l'AJTES</td>
       </tr>
@@ -568,8 +589,8 @@ def generate_html(logo_b64):
         <td>Plateforme GitHub Pages : <code>https://salomontchibkere.github.io/...</code></td>
       </tr>
       <tr>
-        <td><strong>Responsable du Compte Déploiement :</strong></td>
-        <td>salomontchibkere@gmail.com (Administrateur Technique Officiel)</td>
+        <td><strong>Responsable Technique Hébergement :</strong></td>
+        <td>salomontchibkere@gmail.com (Administrateur Technique Développeur)</td>
       </tr>
     </table>
 
@@ -788,14 +809,14 @@ def generate_html(logo_b64):
         <th style="width: 30%;">Niveau d'Autorisation</th>
       </tr>
       <tr>
-        <td><strong>Administration Web AJTES :</strong></td>
-        <td><code>admin@ajtes.td</code></td>
-        <td>Super Administrateur (Gestion Totale)</td>
+        <td><strong>Administration Officielle AJTES :</strong></td>
+        <td><code>ajtes235@gmail.com</code> / <code>admin@ajtes.td</code></td>
+        <td>Super Administrateur de l'Association</td>
       </tr>
       <tr>
         <td><strong>Plateforme Cloud Surge :</strong></td>
         <td><code>salomontchibkere@gmail.com</code></td>
-        <td>Propriétaire du domaine <code>ajtes-tchad.surge.sh</code></td>
+        <td>Compte Technique de Maintenance (Domaine <code>ajtes-tchad.surge.sh</code>)</td>
       </tr>
       <tr>
         <td><strong>Dépôt GitHub Officiel :</strong></td>
@@ -811,7 +832,7 @@ def generate_html(logo_b64):
 
     <h2 class="sub-section-title">5.3. Garantie et Souveraineté des Données Personnelles</h2>
     <p style="text-align: justify;">
-      Toutes les informations enregistrées (coordonnées des adhérents et donateurs) demeurent la propriété confidentielle et souveraine de l'AJTES. Aucune donnée n'est cédée, louée ni partagée avec des tiers, conformément aux lois tchadiennes et aux standards internationaux de protection de la vie privée.
+      Toutes les informations enregistrées (coordonnées des adhérents et donateurs) demeurent la propriété confidentielle et souveraine de l'AJTES. Aucune donnée n'est cédée, louée ni partagée avec des tiers, conformément aux lois en vigueur et aux standards internationaux de protection de la vie privée.
     </p>
   </div>
 
@@ -849,7 +870,7 @@ def generate_html(logo_b64):
               <div style="height: 60px;"></div>
               <div class="signature-name">M. Salomon TCHIBKERE</div>
               <div style="font-size: 10.5pt; color: #475569;">Ingénieur Concepteur Web</div>
-              <div style="font-size: 10.5pt; color: #475569;">Date : 06 / 10 / 2026</div>
+              <div style="font-size: 10.5pt; color: #475569;">Établi à Yaoundé, le 06 / 10 / 2026</div>
             </div>
           </div>
         </td>
@@ -862,7 +883,7 @@ def generate_html(logo_b64):
             <div>
               <div style="height: 60px;"></div>
               <div class="signature-name">Le Président National de l'AJTES</div>
-              <div style="font-size: 10.5pt; color: #475569;">Pour le Bureau Exécutif</div>
+              <div style="font-size: 10.5pt; color: #475569;">Pour le Bureau Exécutif (N'Djamena)</div>
               <div style="font-size: 10.5pt; color: #475569;">Date : ..... / ..... / 2026</div>
             </div>
           </div>
@@ -881,7 +902,7 @@ def generate_html(logo_b64):
     </table>
 
     <div class="page-footer-note">
-      Dossier Officiel de Livraison AJTES-LIV-ADM-2026-N°001 — Établi à N'Djamena, République du Tchad
+      Dossier Officiel de Livraison AJTES-LIV-ADM-2026-N°001 — Établi à Yaoundé pour transmission au siège de l'AJTES (N'Djamena, République du Tchad)
     </div>
   </div>
 

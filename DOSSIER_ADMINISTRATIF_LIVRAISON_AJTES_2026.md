@@ -19,8 +19,8 @@
 
 | Paramètre Administratif | Spécification Officielle |
 | :--- | :--- |
-| **Maître d’Ouvrage (Client) :** | **Association des Jeunes Tchadiens pour l’Éducation et la Solidarité (AJTES)**<br>Représentée par son Président et le Bureau Exécutif National<br>N'Djamena, République du Tchad |
-| **Maître d’Œuvre (Prestataire) :** | **M. Salomon TCHIBKERE**<br>Ingénieur Concepteur Logiciel & Chef de Projet Web<br>E-mail : `salomontchibkere@gmail.com`<br>Tél. : +235 66 43 95 02 / +235 68 90 23 47 |
+| **Maître d’Ouvrage (Client) :** | **Association des Jeunes Tchadiens pour l’Éducation et la Solidarité (AJTES)**<br>Représentée par son Président et le Bureau Exécutif National<br>Siège Social : N'Djamena, République du Tchad<br>**E-mail Officiel de l'Association :** `ajtes235@gmail.com`<br>Téléphones : +235 66 43 95 02 / +235 68 90 23 47 |
+| **Maître d’Œuvre (Prestataire) :** | **M. Salomon TCHIBKERE**<br>Ingénieur Concepteur Logiciel & Chef de Projet Web<br>Résidence & Établissement : Yaoundé, Cameroun<br>E-mail Développeur : `salomontchibkere@gmail.com`<br>Tél. : +237 655 13 68 24 |
 | **Nature de la Prestation :** | Conception, Développement, Sécurisation, Intégration Multilingue et Déploiement Cloud Haute Disponibilité de la Plateforme Numérique Officielle |
 | **Code Source & Dépôt Certifié :** | GitHub : `salomontchibkere/ASSOCIATION_JEUES_TCHADIENS_EDUCATION_SOLIDARITE` |
 | **Serveur CDN Déployé 1 :** | `https://ajtes-tchad.surge.sh` |
@@ -33,15 +33,17 @@
 **EXPÉDITEUR :**  
 M. Salomon TCHIBKERE  
 Ingénieur Développeur & Chef de Projet Web  
-N'Djamena, République du Tchad  
+Yaoundé, Cameroun  
 E-mail : `salomontchibkere@gmail.com`  
+Tél. : +237 655 13 68 24  
 
 **DESTINATAIRE :**  
 À l'attention de Monsieur le Président  
 et des Membres du Bureau Exécutif de l'AJTES  
 Siège National — N'Djamena, République du Tchad  
+E-mail Officiel : `ajtes235@gmail.com`  
 
-*Fait à N'Djamena, le 06 Octobre 2026*
+*Fait à Yaoundé, le 06 Octobre 2026*
 
 **OBJET :** Dépôt officiel du Dossier de Livraison et demande de signature du Procès-Verbal de Réception Définitive de la Plateforme Numérique AJTES Tchad.
 
@@ -59,7 +61,7 @@ En vous réitérant mon engagement constant aux côtés de l’AJTES pour l’é
 
 *(Signature et paraphe)*  
 **Salomon TCHIBKERE**  
-*Ingénieur Concepteur Logiciel*
+*Ingénieur Concepteur Logiciel (Yaoundé, Cameroun)*
 
 ---
 
@@ -143,8 +145,8 @@ M. Salomon TCHIBKERE cède à titre exclusif, irrévocable et pour la durée lé
 ### 5.2. Trousseau des Clés d'Accès Administrateurs
 | Service / Console | Compte Utilisateur | Rôle Attribué |
 | :--- | :--- | :--- |
-| **Administration Web AJTES** | `admin@ajtes.td` | Super-Administrateur |
-| **Hébergement CDN Surge** | `salomontchibkere@gmail.com` | Propriétaire du domaine `ajtes-tchad.surge.sh` |
+| **Administration Web AJTES** | `ajtes235@gmail.com` / `admin@ajtes.td` | Super-Administrateur de l'Association |
+| **Hébergement CDN Surge** | `salomontchibkere@gmail.com` | Compte Technique de Maintenance (Domaine `ajtes-tchad.surge.sh`) |
 | **Dépôt GitHub National** | `salomontchibkere` | Administrateur du code source |
 | **Base de Données Locale** | SQLite Prisma (`dev.db`) | Accès Direct |
 
@@ -165,7 +167,7 @@ En foi de quoi, le présent document a été dressé, approuvé et signé conjoi
 | :--- | :--- |
 | *« Lu, approuvé et certifié conforme pour livraison définitive »* | *« Bon pour réception définitive sans réserve et prise en charge »* |
 | &nbsp;<br>&nbsp;<br>&nbsp; | &nbsp;<br>&nbsp;<br>&nbsp; |
-| **M. Salomon TCHIBKERE**<br>Ingénieur Concepteur Logiciel<br>Date : 06 / 10 / 2026 | **Le Président National de l'AJTES**<br>Pour le Bureau Exécutif<br>Date : ..... / ..... / 2026 |
+| **M. Salomon TCHIBKERE**<br>Ingénieur Concepteur Logiciel<br>Établi à Yaoundé, le 06 / 10 / 2026 | **Le Président National de l'AJTES**<br>Pour le Bureau Exécutif (N'Djamena)<br>Date : ..... / ..... / 2026 |
 
 <br>
 
@@ -178,4 +180,4 @@ En foi de quoi, le présent document a été dressé, approuvé et signé conjoi
 +-----------------------------------------------------------------------+
 ```
 
-*Dossier Officiel de Livraison AJTES-LIV-ADM-2026-N°001 — Fait à N'Djamena, République du Tchad.*
+*Dossier Officiel de Livraison AJTES-LIV-ADM-2026-N°001 — Établi à Yaoundé pour transmission au siège de l'AJTES (N'Djamena, République du Tchad).*
